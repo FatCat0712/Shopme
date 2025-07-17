@@ -50,6 +50,27 @@ public class CustomerService{
         customerRepository.save(customer);
     }
 
+    public Customer update(Customer customer) throws CustomerNotFound {
+        Customer savedCustomer = customerRepository.findById(customer.getId()).orElseThrow(() -> new CustomerNotFound("Customer not found"));
+        if(savedCustomer.getAuthenticationType().equals(AuthenticationType.DATABASE)) {
+            String rawPassword = customer.getPassword();
+            if(rawPassword != null && !rawPassword.isEmpty()) {
+                customer.setPassword(passwordEncoder.encode(rawPassword));
+            }
+            else {
+                customer.setPassword(savedCustomer.getPassword());
+            }
+        }
+        else {
+            customer.setPassword(passwordEncoder.encode(savedCustomer.getPassword()));
+        }
+        customer.setCreatedTime(savedCustomer.getCreatedTime());
+        customer.setEnabled(savedCustomer.isEnabled());
+        customer.setAuthenticationType(savedCustomer.getAuthenticationType());
+
+        return customerRepository.save(customer);
+    }
+
     public Customer findCustomerByEmail(String email) {
         return customerRepository.findByEmail(email);
     }
@@ -76,14 +97,14 @@ public class CustomerService{
         }
     }
 
-    public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode) {
+    public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode, AuthenticationType authenticationType) {
         Customer customer = new Customer();
         customer.setEmail(email);
 
         setName(name, customer);
         customer.setEnabled(true);
         customer.setCreatedTime(new Date());
-        customer.setAuthenticationType(AuthenticationType.GOOGLE);
+        customer.setAuthenticationType(authenticationType);
         customer.setPassword("");
         customer.setAddressLine1("");
         customer.setCity("");
@@ -106,11 +127,10 @@ public class CustomerService{
             String firstName = nameArray[0];
             customer.setFirstName(firstName);
 
-            String lastName = name.replaceFirst(firstName, "");
+            String lastName = name.replaceFirst(firstName + " ", "");
             customer.setLastName(lastName);
 
         }
-
     }
 }
 

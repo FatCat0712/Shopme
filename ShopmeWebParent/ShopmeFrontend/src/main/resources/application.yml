@@ -15,7 +15,7 @@ spring:
         properties:
             hibernate:
                 format_sql: true
-        show-sql: true
+        show-sql: false
     output:
         ansi:
             enabled: ALWAYS
@@ -29,5 +29,12 @@ spring:
                       scope:
                           - email
                           - profile
+                  facebook:
+                      client-id: 2453986105064573
+                      client-secret: 795f6bc6fc16b28bf9bd5dc164e08b2f
+                      scope:
+                        - email
+                        - public_profile
+
 
 

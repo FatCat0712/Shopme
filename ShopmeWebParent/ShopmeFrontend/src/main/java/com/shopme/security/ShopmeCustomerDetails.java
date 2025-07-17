@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class ShopmeCustomerDetails implements UserDetails {
 
-    private final Customer customer;
+    private  Customer customer;
 
     public ShopmeCustomerDetails(Customer customer) {
         this.customer = customer;
@@ -35,10 +35,11 @@ public class ShopmeCustomerDetails implements UserDetails {
     }
 
     public String getFullName() {
-        return customer.getFirstName() + " " + customer.getLastName();
+        return  customer.getFirstName() + " " + customer.getLastName();
     }
 
     public Customer getCustomer() {
         return customer;
     }
+
 }

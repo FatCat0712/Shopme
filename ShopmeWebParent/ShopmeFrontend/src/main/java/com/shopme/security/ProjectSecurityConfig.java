@@ -28,7 +28,7 @@ public class ProjectSecurityConfig {
         public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(requests -> requests
                     .requestMatchers("/images/**", "/js/**" ,"/webjars/**").permitAll()
-                    .requestMatchers("/customer").authenticated()
+                    .requestMatchers("/account_details", "/update_account_details").authenticated()
                     .anyRequest().permitAll());
 
             http.formLogin(flc -> flc.loginPage("/login")

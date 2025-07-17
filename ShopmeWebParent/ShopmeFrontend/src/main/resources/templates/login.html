@@ -15,6 +15,10 @@ xmlns:th="http://www.thymeleaf.org"
                         <a class="btn btn-secondary btn-lg fab fa-google" th:href="@{/oauth2/authorization/google}">&nbsp;&nbsp;Continue with Google</a>
                 </div>
                 <div>&nbsp;</div>
+                <div>
+                        <a class="btn btn-secondary btn-lg fab fa-facebook" th:href="@{/oauth2/authorization/facebook}">&nbsp;&nbsp;Continue with Facebook</a>
+                </div>
+                <div>&nbsp;</div>
                 <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
                         <div class="border border-secondary rounded p-3">
                                 <div th:if="${param.error}">
