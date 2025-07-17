@@ -99,7 +99,7 @@ public class CustomerController {
         List<Country> listCountries = customerService.listAllCountries();
         model.addAttribute("customer", customer);
         model.addAttribute("listCountries", listCountries);
-        return "customers/account_form";
+        return "customer/account_form";
     }
 
     @PostMapping("/update_account_details")

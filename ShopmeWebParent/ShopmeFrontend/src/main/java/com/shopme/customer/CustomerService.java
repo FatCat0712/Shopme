@@ -67,6 +67,7 @@ public class CustomerService{
         customer.setCreatedTime(savedCustomer.getCreatedTime());
         customer.setEnabled(savedCustomer.isEnabled());
         customer.setAuthenticationType(savedCustomer.getAuthenticationType());
+        customer.setResetPasswordToken(savedCustomer.getResetPasswordToken());
 
         return customerRepository.save(customer);
     }
@@ -132,6 +133,40 @@ public class CustomerService{
 
         }
     }
+
+    public String updateResetPasswordToken(String email) throws CustomerNotFound {
+        Customer customer = customerRepository.findByEmail(email);
+        if(customer != null) {
+            String token = RandomString.make(30);
+            customer.setResetPasswordToken(token);
+            customerRepository.save(customer);
+            return token;
+        }
+        else {
+            throw new CustomerNotFound("Could not find any customer with the email: " + email);
+        }
+    }
+
+    public Customer getCustomerByResetPasswordToken(String token) {
+        return customerRepository.findByResetPasswordToken(token);
+    }
+
+    public void updatePassword(String token, String password) throws CustomerNotFound {
+        Customer customer = customerRepository.findByResetPasswordToken(token);
+        if(customer != null) {
+            if(!password.isEmpty()) {
+                customer.setPassword(password);
+                customer.setResetPasswordToken(null);
+                encodePassword(customer);
+                customerRepository.save(customer);
+            }
+        }else {
+            throw new CustomerNotFound("Customer not found. Invalid Token");
+        }
+
+    }
+
+
 }
 
 

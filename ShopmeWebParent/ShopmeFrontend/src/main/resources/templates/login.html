@@ -20,15 +20,14 @@ xmlns:th="http://www.thymeleaf.org"
                 </div>
                 <div>&nbsp;</div>
                 <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+                        <div th:if="${param.error}">
+                                <p class="alert alert-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                        </div>
+
+                        <div th:if="${param.logout}">
+                                <p class="alert alert-warning">You have been logged out</p>
+                        </div>
                         <div class="border border-secondary rounded p-3">
-                                <div th:if="${param.error}">
-                                        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-                                </div>
-
-                                <div th:if="${param.logout}">
-                                        <p class="text-warning">You have been logged out</p>
-                                </div>
-
                                 <p>
                                         <input type="email" class="form-control" placeholder="Email" name="email">
                                 </p>
@@ -43,6 +42,7 @@ xmlns:th="http://www.thymeleaf.org"
                                         <input type="submit" value="Login" class="btn btn-primary">
                                 </p>
                         </div>
+                        <p>or <span><a th:href="@{/forgot_password}">Forgot Password</a></span></p>
 
                 </form>
                 <div>&nbsp;</div>

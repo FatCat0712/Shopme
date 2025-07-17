@@ -76,6 +76,7 @@ public class CustomerService  {
         customer.setCreatedTime(savedCustomer.getCreatedTime());
         customer.setEnabled(savedCustomer.isEnabled());
         customer.setAuthenticationType(savedCustomer.getAuthenticationType());
+        customer.setResetPasswordToken(savedCustomer.getResetPasswordToken());
 
         return customerRepository.save(customer);
     }
