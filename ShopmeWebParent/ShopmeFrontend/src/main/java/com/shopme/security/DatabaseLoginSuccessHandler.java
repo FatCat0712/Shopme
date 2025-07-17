@@ -26,8 +26,8 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-            ShopmeCustomerDetails shopmeCustomerDetails = (ShopmeCustomerDetails) authentication.getPrincipal();
-            Customer customer = shopmeCustomerDetails.getCustomer();
+            CustomerDetails customerDetails = (CustomerDetails) authentication.getPrincipal();
+            Customer customer = customerDetails.getCustomer();
             customerService.updateAuthenticationType(customer, AuthenticationType.DATABASE);
 
             super.onAuthenticationSuccess(request, response, authentication);

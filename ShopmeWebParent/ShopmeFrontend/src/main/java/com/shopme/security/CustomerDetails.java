@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class ShopmeCustomerDetails implements UserDetails {
+public class CustomerDetails implements UserDetails {
 
     private  Customer customer;
 
-    public ShopmeCustomerDetails(Customer customer) {
+    public CustomerDetails(Customer customer) {
         this.customer = customer;
     }
 

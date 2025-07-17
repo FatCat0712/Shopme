@@ -3,7 +3,7 @@ package com.shopme.customer;
 import com.shopme.Utility;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
-import com.shopme.security.ShopmeCustomerDetails;
+import com.shopme.security.CustomerDetails;
 import com.shopme.security.oauth.CustomerOAuth2User;
 import com.shopme.setting.EmailSettingBag;
 import com.shopme.setting.SettingService;
@@ -133,7 +133,7 @@ public class CustomerController {
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
         Object principal = request.getUserPrincipal();
         if(principal instanceof UsernamePasswordAuthenticationToken || principal instanceof RememberMeAuthenticationToken){
-            ShopmeCustomerDetails customerDetails = getCustomerUserDetailsObject(principal);
+            CustomerDetails customerDetails = getCustomerUserDetailsObject(principal);
             Customer authenticatedCustomer = customerDetails.getCustomer();
             authenticatedCustomer.setFirstName(customer.getFirstName());
             authenticatedCustomer.setLastName(customer.getLastName());
@@ -146,13 +146,13 @@ public class CustomerController {
 
     }
 
-    private ShopmeCustomerDetails getCustomerUserDetailsObject(Object principal) {
-        ShopmeCustomerDetails shopmeCustomerDetails = null;
+    private CustomerDetails getCustomerUserDetailsObject(Object principal) {
+        CustomerDetails customerDetails = null;
         if(principal instanceof UsernamePasswordAuthenticationToken token) {
-            shopmeCustomerDetails = (ShopmeCustomerDetails)token.getPrincipal();
+            customerDetails = (CustomerDetails)token.getPrincipal();
         }else if(principal instanceof RememberMeAuthenticationToken token) {
-            shopmeCustomerDetails = (ShopmeCustomerDetails)token.getPrincipal();
+            customerDetails = (CustomerDetails)token.getPrincipal();
         }
-        return shopmeCustomerDetails;
+        return customerDetails;
     }
 }

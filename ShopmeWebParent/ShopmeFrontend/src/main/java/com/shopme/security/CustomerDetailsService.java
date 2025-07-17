@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ShopmeCustomerDetailsService implements UserDetailsService {
+public class CustomerDetailsService implements UserDetailsService {
     private final CustomerRepository customerRepository;
 
     @Autowired
-    public ShopmeCustomerDetailsService(CustomerRepository customerRepository) {
+    public CustomerDetailsService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -21,7 +21,7 @@ public class ShopmeCustomerDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Customer saveCustomer = customerRepository.findByEmail(email);
         if(saveCustomer != null) {
-            return new ShopmeCustomerDetails(saveCustomer);
+            return new CustomerDetails(saveCustomer);
         }
         else {
             throw  new UsernameNotFoundException("Could not find any customer with email: " + email);
