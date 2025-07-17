@@ -1,0 +1,107 @@
+package com.shopme.admin.setting;
+
+import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.currency.CurrencyRepository;
+import com.shopme.common.entity.Currency;
+import com.shopme.common.entity.Setting;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+@Controller
+public class SettingController {
+    @Autowired
+    private SettingService settingService;
+
+    @Autowired
+    private CurrencyRepository currencyRepository;
+
+    @GetMapping("/settings")
+    public String listAllSettings(Model model) {
+        List<Setting> listSettings = settingService.listAllSettings();
+        List<Currency> listCurrencies = currencyRepository.findAllByOrderByNameAsc();
+
+        model.addAttribute("listCurrencies", listCurrencies);
+        listSettings.forEach(setting -> model.addAttribute(setting.getKey(), setting.getValue()));
+
+        return "settings/settings";
+    }
+
+
+    @PostMapping("/settings/save_general")
+    public String saveGeneralSettings(@RequestParam("fileImage")MultipartFile multipartFile, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
+        GeneralSettingBag generalSettingBag = settingService.getGeneralSettingBag();
+         saveSiteLogo(multipartFile, generalSettingBag);
+         saveCurrencySymbol(request, generalSettingBag);
+         updateSettingValueFromForm(request, generalSettingBag.list());
+
+        redirectAttributes.addFlashAttribute("message", "General settings have been saved.");
+
+
+        return "redirect:/settings";
+    }
+
+    @PostMapping("/settings/save_mail_server")
+    public String saveMailServerSettings(HttpServletRequest request, RedirectAttributes ra) {
+           List<Setting> mailServerSettings =  settingService.getMailServerSettings();
+           updateSettingValueFromForm(request, mailServerSettings);
+           ra.addFlashAttribute("message", "Mail server settings have been saved");
+           return "redirect:/settings";
+    }
+
+    @PostMapping("/settings/save_mail_templates")
+    public String saveMailTemplatesSettings(HttpServletRequest request, RedirectAttributes ra) {
+        List<Setting> mailTemplateSettings =  settingService.getMailTemplatesSettings();
+        updateSettingValueFromForm(request, mailTemplateSettings);
+        ra.addFlashAttribute("message", "Mail templates settings have been saved");
+        return "redirect:/settings";
+    }
+
+
+    private void saveSiteLogo(MultipartFile multipartFile, GeneralSettingBag settingBag) throws IOException {
+        if(!multipartFile.isEmpty()) {
+            String fileName =  "/site-logo/" + StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            String uploadDir = "ShopmeWebParent/site-logo/";
+            settingBag.updateSiteLogo(fileName);
+
+            FileUploadUtil.cleanDir(uploadDir);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        }
+    }
+
+    private void saveCurrencySymbol(HttpServletRequest request, GeneralSettingBag generalSettingBag) {
+        Integer currencyId = Integer.parseInt(request.getParameter("CURRENCY_ID"));
+        Optional<Currency> findByIdResult = currencyRepository.findById(currencyId);
+
+        findByIdResult.ifPresent(currency -> {
+            String symbol = findByIdResult.get().getSymbol();
+            generalSettingBag.updateCurrencySymbol(symbol);
+        });
+    }
+
+    private void updateSettingValueFromForm(HttpServletRequest request, List<Setting> listSettings) {
+        for(Setting setting : listSettings) {
+            String value = request.getParameter(setting.getKey());
+            if( value != null) {
+                setting.setValue(value );
+            }
+        }
+
+        settingService.saveAll(listSettings);
+    }
+
+
+}

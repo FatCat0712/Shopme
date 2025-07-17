@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: page_head('Users - Shopme Admin', 'none')}">...</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="~{navigation :: menu}">...</div>
+    <div>
+        <h2>Manage Users</h2>
+        <a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark mr-2" title="Create New User"></a>
+        <a  th:replace="~{fragments :: export_link('csv')}"></a>
+        <a  th:replace="~{fragments :: export_link('excel')}"></a>
+        <a  th:replace="~{fragments :: export_link('pdf')}"></a>
+    </div>
+
+
+    <div th:replace="~{fragments :: search_form_and_message}"></div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="hideable-column">
+                        <th th:replace="~{fragments :: column_link('id', 'User ID', 'tag')}" ></th>
+                    </th>
+
+                    <th>Photos </th>
+                    <th class="hideable-column">
+                        <th  th:replace="~{fragments :: column_link('email', 'E-mail', 'tag')}" ></th>
+                    </th>
+
+                    <th  th:replace="~{fragments :: column_link('firstName', 'First Name', 'none')}"></th>
+                    <th  th:replace="~{fragments :: column_link('lastName', 'Last Name', 'none')}"></th>
+                    <th>Roles</th>
+                    <th th:replace="~{fragments :: column_link('enabled', 'Enabled', 'none')}"></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr th:each="user : ${listUsers}">
+                        <td class="hideable-column">[[${user.id}]]</td>
+                        <td>
+                            <div th:replace="~{fragments :: user_photos}"></div>
+                        </td>
+                        <td class="hideable-column">[[${user.email}]]</td>
+                        <td>[[${user.firstName}]]</td>
+                        <td>[[${user.lastName}]]</td>
+                        <td>[[${user.roles}]]</td>
+                        <td>
+                            <div th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}">...</div>
+                        </td>
+                        <td>
+                            <div th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}">...</div>
+                            &nbsp;
+                            <div th:replace="~{fragments :: delete('user', ${user.id} ,'/users/delete/' + ${user.id}, true)}">...</div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="less-details">
+           <div th:each="user : ${listUsers}" class="row m-1" >
+               <div class="col-4">
+                   <div th:replace="~{fragments :: user_photos}"></div>
+               </div>
+               <div class="col-8">
+                   <div>[[${user.fullName}]]</div>
+                   <div>[[${user.roles}]]</div>
+                   <div class="mt-2">
+                       <span th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}"></span>
+                       &nbsp;&nbsp;
+                       <span th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}">...</span>
+                       &nbsp;
+                       <span th:replace="~{fragments :: delete('user', ${user.id} , '/users/delete/' + ${user.id}, true)}">...</span>
+                   </div>
+               </div>
+
+           </div>
+
+    </div>
+
+   <div th:replace="~{fragments :: pagination('users')}">...</div>
+
+    <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
+
+
+    <div th:replace="~{fragments :: footer}">...</div>
+</div>
+
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/users}]]";
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+           e.preventDefault();
+
+           let link = $(this);
+          let entityName="user";
+          showDeleteConfirmModal(link, entityName);
+        });
+    });
+</script>
+
+
+</body>
+</html>
