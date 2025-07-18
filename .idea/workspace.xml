@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/CartItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/CartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/shoppingcart/CartItemShoppingRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/common_modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/quantity_control.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/cart/quantity_control.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/CustomerDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/CustomerDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +28,10 @@
         <option value="Exception" />
         <option value="AnnotationType" />
         <option value="Enum" />
-        <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -158,7 +156,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/projects/ShopmeProject",
+    "last_opened_file_path": "D:/projects/ShopmeProject/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -176,10 +174,10 @@
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\customers" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static" />
-      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -412,7 +410,7 @@
       <workItem from="1752799614670" duration="136000" />
       <workItem from="1752799769471" duration="210000" />
       <workItem from="1752802965942" duration="79000" />
-      <workItem from="1752803056751" duration="3727000" />
+      <workItem from="1752803056751" duration="5770000" />
     </task>
     <servers />
   </component>
