@@ -63,4 +63,11 @@ public class CartItem {
                 ", quantity=" + quantity +
                 '}';
     }
+
+    @Transient
+    public float getSubTotal() {
+        return product.getDiscountPrice() * quantity;
+    }
+
+
 }

@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/add_to_cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/cart/shopping_cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/Utility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerNotFound.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/customer/ForgotPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/CartItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_fragment.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +32,9 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="JavaScript File" />
         <option value="Exception" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -164,7 +159,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/projects/ShopmeProject/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js",
+    "last_opened_file_path": "D:/projects/ShopmeProject/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/cart",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -182,11 +177,11 @@
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\cart" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\customers" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static" />
-      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\static" />
@@ -418,7 +413,7 @@
       <workItem from="1752799614670" duration="136000" />
       <workItem from="1752799769471" duration="210000" />
       <workItem from="1752802965942" duration="79000" />
-      <workItem from="1752803056751" duration="13054000" />
+      <workItem from="1752803056751" duration="19369000" />
     </task>
     <servers />
   </component>
