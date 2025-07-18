@@ -27,18 +27,20 @@ public class ProjectSecurityConfig {
     @Bean
         public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(requests -> requests
-                    .requestMatchers("/images/**", "/js/**" ,"/webjars/**").permitAll()
                     .requestMatchers("/account_details", "/update_account_details").authenticated()
                     .anyRequest().permitAll());
 
             http.formLogin(flc -> flc.loginPage("/login")
                     .usernameParameter("email")
                     .successHandler(databaseLoginSuccessHandler)
-            );
+                    .permitAll());
+
+
 
             http.oauth2Login(o2lc -> o2lc.loginPage("/login")
                     .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(oAuth2Service))
-                    .successHandler(oAuth2LoginSuccessHandler)
+                    .successHandler(oAuth2LoginSuccessHandler).
+                    permitAll()
             );
 
             http.logout(LogoutConfigurer::permitAll);

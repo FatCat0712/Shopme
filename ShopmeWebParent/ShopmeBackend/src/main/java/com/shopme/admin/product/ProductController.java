@@ -129,19 +129,8 @@ public class ProductController {
 
                 deleteExtraImagesWereRemovedOnForm(product);
 
-                if(product.getId() == null) {
-                    int currentTotalItems = Integer.parseInt(session.getAttribute("totalItems").toString());
-                    if(savedProduct.getId() > currentTotalItems){
-                        int currentTotalPages =  Integer.parseInt(session.getAttribute("totalPages").toString());
-                        session.setAttribute("currentPage", currentTotalPages + 1);
-                    }
-                    else {
-                        session.setAttribute("currentPage", session.getAttribute("totalPages"));
-                    }
-
-                }
             }
-             return getRedirectURLtoAffectedProduct(session);
+             return "redirect:/products";
     }
 
 
@@ -151,12 +140,11 @@ public class ProductController {
         try {
             productService.updateStatus(id, status);
             redirectAttributes.addFlashAttribute("message", String.format("The product with id %d has been %s successfully",id , status ? "enabled" : "disabled"));
-            return getRedirectURLtoAffectedProduct(session);
-
         } catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/products";
+
         }
+        return "redirect:/products";
     }
 
     @GetMapping("/products/delete/{id}")
@@ -222,19 +210,7 @@ public class ProductController {
     }
 
 
-    public String getRedirectURLtoAffectedProduct(HttpSession session){
-        int pageNum = Integer.parseInt(session.getAttribute("currentPage").toString());
-        String sortField = session.getAttribute("sortField").toString();
-        String sortDir = session.getAttribute("sortDir").toString();
 
-        String keyword = null;
-        if(session.getAttribute("keyword") != null) {
-            keyword = session.getAttribute("keyword").toString();
-        }
-
-        int categoryId = Integer.parseInt(session.getAttribute("categoryId").toString());
-        return String.format("redirect:/products/page/%d?sortField=%s&sortDir=%s&keyword=%s&categoryId=%d",pageNum, sortField, sortDir, keyword != null ? keyword : "", categoryId);
-    }
 
 
 }

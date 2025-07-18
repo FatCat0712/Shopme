@@ -50,8 +50,8 @@ public class CustomerService{
         customerRepository.save(customer);
     }
 
-    public Customer update(Customer customer) throws CustomerNotFound {
-        Customer savedCustomer = customerRepository.findById(customer.getId()).orElseThrow(() -> new CustomerNotFound("Customer not found"));
+    public Customer update(Customer customer) throws CustomerNotFoundException {
+        Customer savedCustomer = customerRepository.findById(customer.getId()).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         if(savedCustomer.getAuthenticationType().equals(AuthenticationType.DATABASE)) {
             String rawPassword = customer.getPassword();
             if(rawPassword != null && !rawPassword.isEmpty()) {
@@ -134,7 +134,7 @@ public class CustomerService{
         }
     }
 
-    public String updateResetPasswordToken(String email) throws CustomerNotFound {
+    public String updateResetPasswordToken(String email) throws CustomerNotFoundException {
         Customer customer = customerRepository.findByEmail(email);
         if(customer != null) {
             String token = RandomString.make(30);
@@ -143,7 +143,7 @@ public class CustomerService{
             return token;
         }
         else {
-            throw new CustomerNotFound("Could not find any customer with the email: " + email);
+            throw new CustomerNotFoundException("Could not find any customer with the email: " + email);
         }
     }
 
@@ -151,7 +151,7 @@ public class CustomerService{
         return customerRepository.findByResetPasswordToken(token);
     }
 
-    public void updatePassword(String token, String password) throws CustomerNotFound {
+    public void updatePassword(String token, String password) throws CustomerNotFoundException {
         Customer customer = customerRepository.findByResetPasswordToken(token);
         if(customer != null) {
             if(!password.isEmpty()) {
@@ -161,7 +161,7 @@ public class CustomerService{
                 customerRepository.save(customer);
             }
         }else {
-            throw new CustomerNotFound("Customer not found. Invalid Token");
+            throw new CustomerNotFoundException("Customer not found. Invalid Token");
         }
 
     }

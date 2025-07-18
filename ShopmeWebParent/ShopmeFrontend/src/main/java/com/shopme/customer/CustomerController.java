@@ -94,7 +94,7 @@ public class CustomerController {
 
     @GetMapping("/account_details")
     public String viewAccount(Model model, HttpServletRequest request) {
-        String customerEmail = getEmailOfAuthenticatedCustomer(request);
+        String customerEmail = Utility.getEmailOfAuthenticatedCustomer(request);
         Customer customer = customerService.findCustomerByEmail(customerEmail);
         List<Country> listCountries = customerService.listAllCountries();
         model.addAttribute("customer", customer);
@@ -109,26 +109,14 @@ public class CustomerController {
             model.addAttribute("customer", updatedCustomer);
             updateNameForAuthenticatedCustomer(customer, request);
             ra.addFlashAttribute("message", "The account details have been updated successfully");
-        }catch (CustomerNotFound e) {
+        }catch (CustomerNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/account_details";
 
     }
 
-    private String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
-        Object principal = request.getUserPrincipal();
-        String customerEmail = null;
-        if(principal instanceof UsernamePasswordAuthenticationToken || principal instanceof RememberMeAuthenticationToken){
-            customerEmail = request.getUserPrincipal().getName();
-        }
-        else if(principal instanceof OAuth2AuthenticationToken oauth2Token) {
-            CustomerOAuth2User oAuth2User = (CustomerOAuth2User) oauth2Token.getPrincipal();
-            customerEmail = oAuth2User.getEmail();
-        }
 
-        return customerEmail;
-    }
 
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
         Object principal = request.getUserPrincipal();

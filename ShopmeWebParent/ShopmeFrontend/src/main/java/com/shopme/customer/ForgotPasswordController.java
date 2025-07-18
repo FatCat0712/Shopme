@@ -43,7 +43,7 @@ public class ForgotPasswordController {
             sendEmail(link, email);
             model.addAttribute("message", "We have sent a reset password link to your email. Please check");
         }
-        catch (MessagingException | UnsupportedEncodingException | CustomerNotFound e) {
+        catch (MessagingException | UnsupportedEncodingException | CustomerNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
         return "customer/forgot_password_form";
@@ -98,7 +98,7 @@ public class ForgotPasswordController {
             model.addAttribute("message", "You have changed your password successfully");
             model.addAttribute("title", "Reset Your Password");
             model.addAttribute("pageTitle", "Reset Your Password");
-        } catch (CustomerNotFound e) {
+        } catch (CustomerNotFoundException e) {
             model.addAttribute("pageTitle", "Invalid Token");
             model.addAttribute("errorMessage", e.getMessage());
         }
