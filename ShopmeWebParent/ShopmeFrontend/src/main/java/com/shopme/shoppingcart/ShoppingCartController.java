@@ -28,9 +28,7 @@ public class ShoppingCartController {
 
         Customer customer = getAuthenticatedCustomer(request);
         List<CartItem> cartItems = cartService.listCartItems(customer);
-        Float estimatedTotal = cartItems.stream()
-                .map(cartItem -> cartItem.getProduct().getDiscountPrice() * cartItem.getQuantity())
-                        .reduce(0F, Float::sum);
+        Float estimatedTotal = cartItems.stream().map(CartItem::getSubTotal).reduce(0F, Float::sum);
 
         model.addAttribute("estimatedTotal", estimatedTotal);
         model.addAttribute("listCartItems", cartItems);
