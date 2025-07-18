@@ -65,6 +65,10 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(Integer id) {
+        this.id = id;
+    }
+
     public Customer(Integer id, String email, String password, String firstName, String lastName) {
         this.id = id;
         this.email = email;
