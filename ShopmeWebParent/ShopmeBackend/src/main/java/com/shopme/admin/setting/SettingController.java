@@ -22,11 +22,14 @@ import java.util.Optional;
 
 @Controller
 public class SettingController {
-    @Autowired
-    private SettingService settingService;
+    private final SettingService settingService;
+    private final CurrencyRepository currencyRepository;
 
     @Autowired
-    private CurrencyRepository currencyRepository;
+    public SettingController(SettingService settingService, CurrencyRepository currencyRepository) {
+        this.settingService = settingService;
+        this.currencyRepository = currencyRepository;
+    }
 
     @GetMapping("/settings")
     public String listAllSettings(Model model) {
@@ -96,7 +99,7 @@ public class SettingController {
         for(Setting setting : listSettings) {
             String value = request.getParameter(setting.getKey());
             if( value != null) {
-                setting.setValue(value );
+                setting.setValue(value);
             }
         }
 

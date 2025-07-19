@@ -79,6 +79,11 @@ xmlns:th="http://www.thymeleaf.org"
         let contextPath = "[[@{/}]]";
         let csrfHeaderName = "[[${_csrf.headerName}]]";
         let csrfValue = "[[${_csrf.token}]]";
+
+        let decimalDigits = "[[${DECIMAL_DIGITS}]]";
+        let decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
+        let thousandsPointType= "[[${THOUSAND_POINT_TYPE}]]";
+
 </script>
 <script th:src="@{/js/jquery.number.min.js}"></script>
 <script th:src="@{/js/common_modal.js}"></script>        

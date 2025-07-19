@@ -11,8 +11,13 @@ import java.util.List;
 
 @Component
 public class SettingFilter implements Filter {
+    private final SettingService settingService;
+
     @Autowired
-    private SettingService settingService;
+    public SettingFilter(SettingService settingService) {
+        this.settingService = settingService;
+    }
+
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {

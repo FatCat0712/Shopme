@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-sm-8">
                         <select name="DECIMAL_DIGITS" class="form-control">
-                            <option th:value="${i}"  th:selected="(${DECIMAL_DIGITS} == i)" th:each="i : ${#numbers.sequence(0,4)}">[[${i}]]</option>
+                            <option th:value="${i}"  th:selected="(${DECIMAL_DIGITS} == ${i})" th:each="i : ${#numbers.sequence(0,4)}">[[${i}]]</option>
                         </select>
                     </div>
                 </div>

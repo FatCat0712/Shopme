@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/general.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/general.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/shopping_cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/shopping_cart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/cart/shopping_cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/cart/shopping_cart.html" afterDir="false" />
     </list>
@@ -53,7 +55,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.ShopmeBackend.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ShopmeBackend.executor&quot;: &quot;Debug&quot;,
     &quot;Application.ShopmeBackendApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.ShopmeFrontEnd.executor&quot;: &quot;Run&quot;,
     &quot;Application.ShopmeFrontendApplication.executor&quot;: &quot;Run&quot;,
@@ -66,7 +68,7 @@
     &quot;JUnit.BrandRepositoryTest.updateBrand.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BrandServiceTest.testCheckUniqueNewModeReturnDuplicate.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BrandServiceTest.testCheckUniqueNewModeReturnOK.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CartItemShoppingRepositoryTest.testDeleteByCustomerAndProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testDeleteByCustomerAndProduct.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.CartItemShoppingRepositoryTest.testFindByCustomer.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.CartItemShoppingRepositoryTest.testFindByCustomerAndProduct.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.CartItemShoppingRepositoryTest.testSaveItem.executor&quot;: &quot;Run&quot;,
@@ -413,6 +415,7 @@
       <workItem from="1752803056751" duration="23621000" />
       <workItem from="1752828353245" duration="4459000" />
       <workItem from="1752844501347" duration="3210000" />
+      <workItem from="1752892714374" duration="5490000" />
     </task>
     <servers />
   </component>
