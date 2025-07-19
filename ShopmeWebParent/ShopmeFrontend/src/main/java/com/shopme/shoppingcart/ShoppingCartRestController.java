@@ -54,8 +54,6 @@ public class ShoppingCartRestController {
         }
     }
 
-
-
     @DeleteMapping("/cart/remove/{productId}")
     public String removeProductFromCart(@PathVariable(name = "productId") Integer productId, HttpServletRequest request) {
         try {

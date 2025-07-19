@@ -14,11 +14,11 @@ xmlns:th="http://www.thymeleaf.org"
                 <div class="row m-1 mx-auto">
                         <div class="col-sm-8">
                                 <th:block th:each="item, status : ${listCartItems}">
-                                        <div class="row border rounded p-1" th:with="product = ${item.product}">
+                                        <div class="row border rounded p-1" th:with="product = ${item.product}" th:id="'row' +${status.count}">
                                                 <div class="col-1">
-                                                        <div>[[${status.count}]]</div>
+                                                        <div class="divCount">[[${status.count}]]</div>
                                                         <div>
-                                                                <a class="fas fa-trash link-remove icon-dark" th:href="@{'/cart/remove/' + ${product.id}}"></a>
+                                                                <a class="fas fa-trash link-remove icon-dark"  th:rowNumber="${status.count}"  th:href="@{'/cart/remove/' + ${product.id}}"></a>
                                                         </div>
                                                 </div>
                                                <div class="col-3">
@@ -46,10 +46,10 @@ xmlns:th="http://www.thymeleaf.org"
                                                         </div>
                                                 </div>
                                         </div>
-                                        <div class="row m-1">&nbsp;</div>
+                                        <div class="row m-1" th:id="'blankline' + ${status.count}">&nbsp;</div>
                                 </th:block>
                         </div>
-                        <div class="col-sm-4" th:unless="${#lists.isEmpty(listCartItems)}">
+                        <div class="col-sm-4" th:unless="${#lists.isEmpty(listCartItems)}" id="sectionTotal">
                                 <div>
                                         <span class="h3">Estimated Total:</span>
                                 </div>
@@ -66,7 +66,7 @@ xmlns:th="http://www.thymeleaf.org"
                         </div>
                 </div>
 
-                <div class="mt-3 text-center" th:if="${#lists.isEmpty(listCartItems)}">
+                <div id="sectionEmptyCartMessage" th:class="'mt-3 text-center' + ${#lists.isEmpty(listCartItems) ? '' : ' d-none'}">
                         <h3>You have not chosen any products yet.</h3>
                 </div>
 
