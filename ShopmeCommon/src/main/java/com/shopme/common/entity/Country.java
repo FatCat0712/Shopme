@@ -1,13 +1,17 @@
 package com.shopme.common.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "countries")
-public class Country {
+@Getter
+@Setter
+public class Country{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -43,31 +47,7 @@ public class Country {
         this.code = code;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-  /*  public Set<State> getStates() {
+    /*  public Set<State> getStates() {
         return states;
     }
 
@@ -75,8 +55,11 @@ public class Country {
         this.states = states;
     }*/
 
+
+
     @Override
     public String toString() {
-        return name;
+        return id + "";
     }
+
 }

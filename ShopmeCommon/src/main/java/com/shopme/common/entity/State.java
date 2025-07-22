@@ -9,7 +9,7 @@ public class State {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 46, nullable = false)
+    @Column(length = 46, unique = true ,nullable = false)
     private String name;
 
     @ManyToOne
@@ -18,6 +18,7 @@ public class State {
 
     public State() {
     }
+
 
     public State(String name) {
         this.name = name;

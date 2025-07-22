@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="cod_support" th:remove="tag">
+    <a th:if="${sr.codSupported == true}"
+       class="fas fa-hand-holding-dollar fa-2x icon-green"
+       th:href="@{'/shipping_rates/cod/'  + ${sr.id} + '/enabled/false'}"
+       title="'Disable this shipping rate">
+    </a>
+    <a th:if="${sr.codSupported == false}"
+       class="fas fa-hand-holding-dollar fa-2x icon-dark"
+       th:href="@{'/shipping_rates/cod/'  + ${sr.id}  +'/enabled/true'}"
+       title="'Enable this shipping rate">
+    </a>
+</div>
+
+</body>
+</html>

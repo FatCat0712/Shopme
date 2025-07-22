@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: page_head('Shipping Rates - Shopme Admin', 'none')}">...</head>
+<body>
+        <div class="container-fluid">
+            <div th:replace="~{navigation :: menu}">...</div>
+            <div>
+                <h2>Manage Shipping Rates</h2>
+                <a th:href="@{/shipping_rates/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2" title="Create New Shipping Rate"></a>
+            </div>
+
+
+            <div th:replace="~{fragments :: search_form_and_message}"></div>
+
+           <div class="full-details">
+               <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                   <thead class="thead-dark">
+                            <tr>
+                               <th class="hideable-column">
+                                    <th th:replace="~{fragments :: column_link('id', 'ID', 'tag')}">...</th>
+                               </th>
+
+                                <th th:replace="~{fragments :: column_link('country', 'Country', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('state', 'State', 'none')}">...</th>
+
+                                <th  class="hideable-column" >
+                                    <th th:replace="~{fragments :: column_link('rate', 'Rate', 'tag')}">...</th>
+                                </th>
+
+                                <th class="hideable-column" >
+                                    <th  th:replace="~{fragments :: column_link('days', 'Days', 'tag')}">...</th>
+                                </th>
+
+                                <th th:replace="~{fragments :: column_link('codSupported', 'COD Supported', 'none')}">...</th>
+                                <th>Action</th>
+                            </tr>
+                   </thead>
+                   <tbody>
+                        <tr th:each="sr : ${listShippingRates}">
+                            <td  class="hideable-column">[[${sr.id}]]</td>
+                            <td>[[${sr.country.name}]]</td>
+                            <td>[[${sr.state}]]</td>
+                            <td class="hideable-column">[[${sr.rate}]]</td>
+                            <td class="hideable-column">[[${sr.days}]]</td>
+                            <td class="fa-hand-holding-dollar ">
+                               <div th:replace="~{shipping_rates/shipping_rates_fragment :: cod_support}">...</div>
+                            </td>
+                            <td>
+                                <div th:replace="~{fragments :: edit('shipping_rate', '/shipping_rates/edit/' + ${sr.id})}">...</div>
+                                &nbsp;
+                                <div th:replace="~{fragments :: delete('shipping_rate', ${sr.id} ,'/shipping_rates/delete/' + ${sr.id}, true)}">...</div>
+                            </td>
+                        </tr>
+                   </tbody>
+               </table>
+           </div>
+
+
+            <div class="less-details">
+                <div th:each="sr : ${listShippingRates}" class="row m-4">
+                    <div class="col-5">
+                          <div><b>[[${sr.country.name}]]</b></div>
+                          <span>[[${sr.state}]]</span>
+                    </div>
+                    <div class="col-7">
+                        <span>
+                            <a th:if="${sr.codSupported == true}" class="fas fa-hand-holding-dollar fa-2x icon-green" th:href="@{'/shipping_rates/cod/'  +${sr.id} '/enabled/false'}" title="'Disable this shipping rate"></a>
+                            <a th:if="${sr.codSupported == false}" class="fas fa-hand-holding-dollar fa-2x icon-dark" th:href="@{'/shipping_rates/cod/'  +${sr.id} '/enabled/false'}" title="'Enable this shipping rate"></a>
+                        </span>
+                        &nbsp;
+                        <span>
+                               <div th:replace="~{fragments :: edit('shipping_rate', '/shipping_rates/edit/' + ${sr.id})}">...</div>
+                        </span>
+                        &nbsp;
+                        <span>
+                            <div th:replace="~{fragments :: delete('shipping_rate', ${sr.id} ,'/shipping_rates/delete/' + ${sr.id}, true)}">...</div>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div th:replace="~{fragments :: pagination('shipping_rates')}">...</div>
+
+
+            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
+
+            <div th:replace="~{fragments :: footer}">...</div>
+
+        </div>
+
+<script type="text/javascript">
+    moduleURL = "[[@{/shipping_rates}]]";
+   $(document).ready(function() {
+         $(".link-delete").on("click", function(e) {
+             e.preventDefault();
+
+             let link = $(this);
+             let entityName="shipping rate";
+             showDeleteConfirmModal(link, entityName);
+         });
+     });
+</script>
+<script type="text/javascript" th:src="@{/js/common_list.js}"></script>
+</body>
+</html>

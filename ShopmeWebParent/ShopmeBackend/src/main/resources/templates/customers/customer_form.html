@@ -176,23 +176,6 @@ xmlns:th="http://www.thymeleaf.org"
                 });
         }
 
-
-
-        function showModalDialog(title, message) {
-                $("#modalTitle").text(title);
-                $("#modalBody").text(message);
-                $("#modalDialog").modal();
-        }
-
-        function showErrorModal(message) {
-                showModalDialog("Error", message);
-        }
-
-        function showWarningModal(message) {
-                showModalDialog("Warning", message);
-        }
-
-
 </script>
 <script th:src="@{/js/common_form.js}"></script>
 </body>
