@@ -86,4 +86,21 @@ public class AddressRepositoryTest {
         Optional<Address> deletedAddress = addressRepository.findById(addressId);
         assertThat(deletedAddress).isNotPresent();
     }
+
+    @Test
+    public void testSetDefault() {
+        Integer addressId = 7;
+        addressRepository.setDefaultAddress(addressId);
+        Optional<Address> address = addressRepository.findById(addressId);
+        assertTrue(address.isPresent());
+        Address savedAddress = address.get();
+        assertThat(savedAddress.isDefaultForShipping()).isTrue();
+    }
+
+    @Test
+    public void testSetNonDefaultAddresses() {
+        Integer addressId = 7;
+        Integer customerId = 1;
+        addressRepository.setNonDefaultForOther(addressId, customerId);
+    }
 }

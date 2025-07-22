@@ -59,7 +59,7 @@ public class Address {
 
         if(!city.isEmpty()) address += ", " + city;
 
-        if(state != null && !state.isEmpty()) address += " " + state;
+        if(state != null && !state.isEmpty()) address += ", " + state;
 
         address += ", " + country.getName();
 
