@@ -14,29 +14,22 @@
                             <input type="hidden" th:field="*{id}" />
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label" for="dropDownCountries">Destination Country:</label>
+                                <label class="col-sm-4 col-form-label" for="country">Destination Country:</label>
                                 <div class="col-sm-8">
-                                        <select class="form-control" id="dropDownCountries" th:field="*{country}">
-                                            <option  th:each="c : ${listCountries}"  th:value="${c.id}" th:selected="${shippingRate.country != null && shippingRate.country.name == c.name}">[[${c.name}]]</option>
+                                        <select class="form-control" id="country" th:field="*{country}">
+                                            <option  th:each="c : ${listCountries}"  th:value="${c.id}">[[${c.name}]]</option>
                                         </select>
 
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label" for="dropDownStates">Destination State/Province:</label>
+                                <label class="col-sm-4 col-form-label">Destination State/Province:</label>
                                 <div class="col-sm-8">
-                                    <th:block th:if="${shippingRate.state == null}">
-                                        <select class="form-control" id="dropDownStates" th:field="*{state}"></select>
-                                    </th:block>
-                                    <th:block th:unless="${shippingRate.state == null}">
-                                        <input class="form-control" th:field="*{state}"></input>
-                                    </th:block>
-
+                                        <input  class="form-control" type="text" th:field="*{state}" minlength="3" maxlength="45" list="listStates">
+                                        <datalist id="listStates"></datalist>
                                 </div>
                             </div>
-
-
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Shipping Rate (per DIM weight):</label>
@@ -58,8 +51,6 @@
                                     <input type="checkbox" th:field="*{codSupported}">
                                 </div>
                             </div>
-
-
 
                             <div class="text-center">
                                 <input type="submit" value="Save" class="btn btn-primary m-3" />

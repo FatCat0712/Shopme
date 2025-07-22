@@ -118,23 +118,6 @@ xmlns:th="http://www.thymeleaf.org"
 <script type="text/javascript">
         let contextPath = "[[@{/}]]"
         let moduleURL = "[[@{/customers}]]"
-
-
-        let dropDownCountry;
-        let dataListStates;
-        let fieldState;
-
-        $(document).ready(function () {
-                dropDownCountry = $("#country");
-                dataListStates = $("#listStates");
-                fieldState = $("#state");
-
-                dropDownCountry.on("change", function () {
-                        loadStatesForCountry();
-                        fieldState.val('').focus();
-                })
-        });
-
         function checkEmailUnique(form) {
                 let url = contextPath + "customers/check_unique_email";
                 let customerEmail = $("#email").val();
@@ -160,23 +143,8 @@ xmlns:th="http://www.thymeleaf.org"
                 return false;
         }
 
-
-        function loadStatesForCountry() {
-                let selectedCountry = $("#country option:selected");
-                let selectedCountryId = selectedCountry.val();
-
-
-                let url = contextPath + "states/list_by_country/" + selectedCountryId;
-
-                $.get(url, function (response) {
-                        dataListStates.empty();
-                        $.each(response, function (index, state) {
-                             $("<option>").val(state.name).text(state.name).appendTo(dataListStates);
-                        })
-                });
-        }
-
 </script>
 <script th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/common_form_country_state.js}"></script>
 </body>
 </html>

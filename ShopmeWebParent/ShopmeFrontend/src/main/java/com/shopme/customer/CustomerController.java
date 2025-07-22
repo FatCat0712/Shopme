@@ -104,19 +104,26 @@ public class CustomerController {
 
     @PostMapping("/update_account_details")
     public String updateAccountDetails(Customer customer, HttpServletRequest request, RedirectAttributes ra, Model model) {
+        String redirectURL = null;
         try{
             Customer updatedCustomer = customerService.update(customer);
+            ra.addFlashAttribute("message", "Your account details have been updated");
             model.addAttribute("customer", updatedCustomer);
             updateNameForAuthenticatedCustomer(customer, request);
-            ra.addFlashAttribute("message", "The account details have been updated successfully");
+
+            String redirectOption = request.getParameter("redirect");
+            redirectURL = "redirect:/account_details";
+
+            if("address_book".equals(redirectOption)) {
+                redirectURL = "redirect:/address_book";
+            }
+
         }catch (CustomerNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "redirect:/account_details";
+        return redirectURL;
 
     }
-
-
 
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
         Object principal = request.getUserPrincipal();
