@@ -27,7 +27,7 @@ public class ProjectSecurityConfig {
     @Bean
         public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(requests -> requests
-                    .requestMatchers("/account_details", "/update_account_details", "/cart").authenticated()
+                    .requestMatchers("/account_details", "/update_account_details", "/cart", "/address_book/**").authenticated()
                     .anyRequest().permitAll());
 
             http.formLogin(flc -> flc.loginPage("/login")

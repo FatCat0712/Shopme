@@ -1,9 +1,13 @@
 package com.shopme.common.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -77,142 +81,6 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
-    public AuthenticationType getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(AuthenticationType authenticationType) {
-        this.authenticationType = authenticationType;
-    }
-
-    public String getResetPasswordToken() {
-        return resetPasswordToken;
-    }
-
-    public void setResetPasswordToken(String resetPasswordToken) {
-        this.resetPasswordToken = resetPasswordToken;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
@@ -235,6 +103,28 @@ public class Customer {
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    @Transient
+    public String getAddress() {
+        String address = firstName;
+        if(lastName != null && !lastName.isEmpty())  address += " " + lastName;
+
+        if(!addressLine1.isEmpty()) address += ", " + addressLine1;
+
+        if(addressLine2 != null && !addressLine2.isEmpty()) address += ", " + addressLine2;
+
+        if(!city.isEmpty()) address += ", " + city;
+
+        if(state != null && !state.isEmpty()) address += " " + state;
+
+        address += ", " + country.getName();
+
+        if(!postalCode.isEmpty()) address += ". Postal code: " + postalCode;
+
+        if(!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
+
+        return address;
     }
 
 }

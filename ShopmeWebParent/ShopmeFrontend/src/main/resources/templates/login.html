@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
 <body>
         <div class="container-fluid text-center">
@@ -42,13 +42,12 @@ xmlns:th="http://www.thymeleaf.org"
                                         <input type="submit" value="Login" class="btn btn-primary">
                                 </p>
                         </div>
-                        <p>or <span><a th:href="@{/forgot_password}">Forgot Password</a></span></p>
-
+                        or <span><a th:href="@{/forgot_password}">Forgot Password</a></span><br>
+                        Don't have an account ? <a th:href="@{/register}"><b>Sign up</b></a>
                 </form>
                 <div>&nbsp;</div>
-                <div>
-                        Don't have an account ? <a th:href="@{/register}"><b>Sign up</b></a>
-                </div>
+                <div>&nbsp;</div>
+
                 <div th:replace="~{navigation :: footer_menu}">...</div>
 
         </div>
