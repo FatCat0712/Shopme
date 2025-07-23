@@ -51,11 +51,21 @@ public class OrderService {
     public Order get(Integer orderId) throws OrderNotFoundException {
        Optional<Order> order =  orderRepository.findById(orderId);
        if(order.isEmpty()) {
-           throw new OrderNotFoundException("Could not found any order with ID " + orderId);
+           throw new OrderNotFoundException("Could not find any order with ID " + orderId);
        }
        else {
            return order.get();
        }
+    }
+
+    public void delete(Integer orderId) throws OrderNotFoundException {
+        Long countById = orderRepository.countById(orderId);
+        if(countById == 0) {
+            throw new OrderNotFoundException("Could not find any order with ID " + orderId);
+        }
+        else {
+            orderRepository.deleteById(orderId);
+        }
     }
 
 }

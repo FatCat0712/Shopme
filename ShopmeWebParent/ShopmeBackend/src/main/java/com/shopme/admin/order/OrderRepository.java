@@ -23,4 +23,6 @@ public interface OrderRepository extends SearchRepository<Order, Integer>, JpaRe
             "CONCAT(o.paymentMethod,'') LIKE ?1 OR " +
             "CONCAT(o.orderStatus,'') LIKE ?1 ")
     Page<Order> findAll(String keyword, Pageable pageable);
+
+    Long countById(Integer orderId);
 }
