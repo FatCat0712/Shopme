@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/OrderDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/OrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/PaymentMethod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderRepositoryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/address/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/address_book/addresses.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/address_book/addresses.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/address/AddressRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/address/AddressRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +28,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Enum" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="Exception" />
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -120,6 +120,12 @@
     "JUnit.CustomerRepositoryTests.testListCustomer.executor": "Debug",
     "JUnit.CustomerRepositoryTests.testUpdateAuthenticationType.executor": "Run",
     "JUnit.CustomerRepositoryTests.testUpdateCustomer.executor": "Run",
+    "JUnit.OrderRepositoryTests.testAddNewOrder.executor": "Run",
+    "JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts.executor": "Run",
+    "JUnit.OrderRepositoryTests.testDeleteOrder.executor": "Run",
+    "JUnit.OrderRepositoryTests.testGetOrder.executor": "Run",
+    "JUnit.OrderRepositoryTests.testListOrders.executor": "Run",
+    "JUnit.OrderRepositoryTests.testUpdateOrder.executor": "Run",
     "JUnit.PasswordEncoderTest.testEncodePassword.executor": "Run",
     "JUnit.ProductRepositoryTest.testCreateProduct.executor": "Run",
     "JUnit.ProductRepositoryTest.testDeleteById.executor": "Run",
@@ -226,7 +232,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AddressRepositoryTest.testAddNewAddress (1)">
+  <component name="RunManager" selected="JUnit.OrderRepositoryTests.testDeleteOrder">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -241,81 +247,81 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressRepositoryTest.testAddNewAddress (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.address.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.address" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.address.AddressRepositoryTest" />
-      <option name="METHOD_NAME" value="testAddNewAddress" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AddressRepositoryTest.testDeleteByIdAndCustomer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.address.*" />
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.address" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.address.AddressRepositoryTest" />
-      <option name="METHOD_NAME" value="testDeleteByIdAndCustomer" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testCreateNewOrderWithMultipleProducts" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressRepositoryTest.testSetDefault" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
+    <configuration name="OrderRepositoryTests.testDeleteOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.address.*" />
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.address" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.address.AddressRepositoryTest" />
-      <option name="METHOD_NAME" value="testSetDefault" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testDeleteOrder" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressRepositoryTest.testSetNonDefaultAddresses" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
+    <configuration name="OrderRepositoryTests.testGetOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.address.*" />
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.address" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.address.AddressRepositoryTest" />
-      <option name="METHOD_NAME" value="testSetNonDefaultAddresses" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testGetOrder" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressRepositoryTest.testUpdate (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
+    <configuration name="OrderRepositoryTests.testListOrders" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.address.*" />
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.address" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.address.AddressRepositoryTest" />
-      <option name="METHOD_NAME" value="testUpdate" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testListOrders" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderRepositoryTests.testUpdateOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testUpdateOrder" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -340,21 +346,21 @@
     <list>
       <item itemvalue="Application.ShopmeBackend" />
       <item itemvalue="Application.ShopmeFrontEnd" />
-      <item itemvalue="JUnit.AddressRepositoryTest.testAddNewAddress (1)" />
-      <item itemvalue="JUnit.AddressRepositoryTest.testDeleteByIdAndCustomer" />
-      <item itemvalue="JUnit.AddressRepositoryTest.testSetDefault" />
-      <item itemvalue="JUnit.AddressRepositoryTest.testSetNonDefaultAddresses" />
-      <item itemvalue="JUnit.AddressRepositoryTest.testUpdate (1)" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testDeleteOrder" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testGetOrder" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testListOrders" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrder" />
       <item itemvalue="Spring Boot.ShopmeBackendApplication" />
       <item itemvalue="Spring Boot.ShopmeFrontendApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AddressRepositoryTest.testAddNewAddress (1)" />
-        <item itemvalue="JUnit.AddressRepositoryTest.testSetNonDefaultAddresses" />
-        <item itemvalue="JUnit.AddressRepositoryTest.testSetDefault" />
-        <item itemvalue="JUnit.AddressRepositoryTest.testUpdate (1)" />
-        <item itemvalue="JUnit.AddressRepositoryTest.testDeleteByIdAndCustomer" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testDeleteOrder" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testGetOrder" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrder" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testListOrders" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
       </list>
     </recent_temporary>
   </component>
@@ -436,7 +442,8 @@
       <workItem from="1752942714829" duration="21000" />
       <workItem from="1753063600308" duration="13423000" />
       <workItem from="1753087583536" duration="18462000" />
-      <workItem from="1753153099335" duration="25524000" />
+      <workItem from="1753153099335" duration="26223000" />
+      <workItem from="1753202240672" duration="6759000" />
     </task>
     <servers />
   </component>
