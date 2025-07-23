@@ -1,11 +1,15 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.setting;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "settings")
+@Getter
+@Setter
 public class Setting {
     @Id
     @Column(name="`key`", nullable = false, length = 128)
@@ -31,29 +35,6 @@ public class Setting {
         this.category = category;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public SettingCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(SettingCategory category) {
-        this.category = category;
-    }
 
     @Override
     public boolean equals(Object o) {

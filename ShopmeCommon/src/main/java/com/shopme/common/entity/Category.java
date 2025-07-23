@@ -1,17 +1,17 @@
 package com.shopme.common.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "categories")
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+@Getter
+@Setter
+public class Category extends IdBasedEntity{
     @Column(length = 128, nullable = false, unique = true)
     private String name;
 
@@ -89,80 +89,6 @@ public class Category {
     public Category(String name, Category parent) {
         this(name);
         this.parent = parent;
-    }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
-    public Set<Category> getChildren() {
-        return children;
-    }
-
-    public void setChildren(Set<Category> children) {
-        this.children = children;
-    }
-
-    public String getAllParentIDs() {
-        return allParentIDs;
-    }
-
-    public void setAllParentIDs(String allParentIDs) {
-        this.allParentIDs = allParentIDs;
-    }
-
-    public boolean isHasChildren() {
-        return hasChildren;
-    }
-
-    public void setHasChildren(boolean hasChildren) {
-        this.hasChildren = hasChildren;
     }
 
     @Transient

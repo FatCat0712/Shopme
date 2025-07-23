@@ -2,10 +2,11 @@
 <html lang="en"
 xmlns:th="http://www.thymeleaf.org"
 >
-<head th:replace="~{fragments :: page_head('Account Details', 'none')}">...</head>
+<div th:replace="~{fragments :: page_head('Account Details', 'none')}">...</div>
 <body>
         <div class="container-fluid">
                 <div th:replace="~{navigation :: header_menu}">...</div>
+                <div th:replace="~{navigation :: search_nav}">...</div>
                 <div>&nbsp;</div>
                 <div class="text-center">
                         <h2>Your Account Details</h2>

@@ -10,11 +10,7 @@ import java.util.Objects;
 @Table(name = "shipping_rates")
 @Getter
 @Setter
-public class ShippingRate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class ShippingRate extends IdBasedEntity{
     @Column(nullable = false)
     private Float rate;
 

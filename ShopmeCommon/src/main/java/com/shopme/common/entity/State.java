@@ -1,14 +1,14 @@
 package com.shopme.common.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "states")
-public class State {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+@Getter
+@Setter
+public class State extends IdBasedEntity {
     @Column(length = 46, unique = true ,nullable = false)
     private String name;
 
@@ -35,29 +35,7 @@ public class State {
         this.country = country;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
 
     @Override
     public String toString() {

@@ -11,10 +11,7 @@ import java.util.Set;
 @Table(name = "countries")
 @Getter
 @Setter
-public class Country{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Country extends IdBasedEntity{
 
     @Column(length = 46, nullable = false, unique = true)
     private String name;

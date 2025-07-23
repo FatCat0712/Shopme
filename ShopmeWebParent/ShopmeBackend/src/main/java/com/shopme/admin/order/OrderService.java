@@ -1,7 +1,7 @@
 package com.shopme.admin.order;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
-import com.shopme.common.entity.Order;
+import com.shopme.common.entity.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

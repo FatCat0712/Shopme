@@ -3,7 +3,7 @@ package com.shopme.admin.setting;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.currency.CurrencyRepository;
 import com.shopme.common.entity.Currency;
-import com.shopme.common.entity.Setting;
+import com.shopme.common.entity.setting.Setting;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
