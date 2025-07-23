@@ -116,7 +116,21 @@
     </div>
 
 
+    <div th:fragment="format_currency(amount)" th:remove="tag">
+        <span th:if="${CURRENCY_SYMBOL_POSITION == 'before'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(amount,1, THOUSAND_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'after'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+    </div>
 
+    <div th:fragment="format_time(dateTime, format)" th:remove="tag">
+        [[${#dates.format(dateTime, format)}]]
+    </div>
+
+    <div th:fragment="currency_input(amount)" th:remove="tag">
+        <th:block th:with="formattedAmount = ${#numbers.formatDecimal(amount,1, THOUSAND_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}">
+            <input  type="text" class="form-control"
+                    th:value="${CURRENCY_SYMBOL_POSITION == 'before' ? CURRENCY_SYMBOL +'' + formattedAmount : formattedAmount + '' +  CURRENCY_SYMBOL}"
+                    readonly/>
+        </th:block>
+    </div>
 
 
 

@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_fragment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/orders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_details_modal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_overview_readonly.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_products_readonly.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_shipping_readonly.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/SettingBag.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/SettingBag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/paging/PagingAndSortingHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/paging/PagingAndSortingHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/customers/customer_address_readonly.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/customers/customer_address_readonly.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderRepositoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderRepositoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/order_fragment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/orders/orders.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +33,10 @@
       <list>
         <option value="AnnotationType" />
         <option value="JavaScript File" />
-        <option value="Exception" />
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Exception" />
         <option value="HTML File" />
       </list>
     </option>
@@ -241,7 +237,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct">
+  <component name="RunManager" selected="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -252,6 +248,22 @@
     <configuration name="ShopmeFrontEnd" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontendApplication" />
       <module name="ShopmeFrontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testCreateNewOrderWithMultipleProducts" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -304,22 +316,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderRepositoryTests.testListOrders" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.admin.order.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
-      <option name="METHOD_NAME" value="testListOrders" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderRepositoryTests.testUpdateOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
@@ -356,20 +352,20 @@
       <item itemvalue="Application.ShopmeBackend" />
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
       <item itemvalue="JUnit.OrderRepositoryTests.testDeleteOrder" />
       <item itemvalue="JUnit.OrderRepositoryTests.testGetOrder" />
-      <item itemvalue="JUnit.OrderRepositoryTests.testListOrders" />
       <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrder" />
       <item itemvalue="Spring Boot.ShopmeBackendApplication" />
       <item itemvalue="Spring Boot.ShopmeFrontendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
         <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct" />
         <item itemvalue="JUnit.OrderRepositoryTests.testDeleteOrder" />
         <item itemvalue="JUnit.OrderRepositoryTests.testGetOrder" />
         <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrder" />
-        <item itemvalue="JUnit.OrderRepositoryTests.testListOrders" />
       </list>
     </recent_temporary>
   </component>
@@ -454,7 +450,7 @@
       <workItem from="1753153099335" duration="26223000" />
       <workItem from="1753202240672" duration="6759000" />
       <workItem from="1753237796773" duration="4053000" />
-      <workItem from="1753241897787" duration="8820000" />
+      <workItem from="1753241897787" duration="17930000" />
     </task>
     <servers />
   </component>

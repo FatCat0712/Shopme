@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderService {
     public final static int ORDER_PER_PAGE = 10;
@@ -44,6 +46,16 @@ public class OrderService {
         }
 
         helper.updateModelAttribute(pageNum, page);
+    }
+
+    public Order get(Integer orderId) throws OrderNotFoundException {
+       Optional<Order> order =  orderRepository.findById(orderId);
+       if(order.isEmpty()) {
+           throw new OrderNotFoundException("Could not found any order with ID " + orderId);
+       }
+       else {
+           return order.get();
+       }
     }
 
 }

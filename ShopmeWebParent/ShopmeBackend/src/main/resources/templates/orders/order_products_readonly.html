@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+        <div th:fragment="content" th:remove="tag">
+              <div class="row m-1" th:each="od,status : ${order.orderDetails}"  th:with="product = ${od.product}">
+                  <div class="col-sm-1">
+                      [[${status.count}]]
+                  </div>
+                  <div class="col-sm-3">
+                      <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" class="img-fluid"/>
+                  </div>
+                  <div class="col-sm-8">
+                      <b>[[${product.name}]]</b>
+                      <div>Product Cost:<span th:replace="~{fragments :: format_currency(${od.productCost})}"></span></div>
+                      <div>Subtotal: [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subTotal})}"></span>
+                      </div>
+                      <div>Shipping Cost: <span th:replace="~{fragments :: format_currency(${od.shippingCost})}"></span></div>
+                  </div>
+
+
+              </div>
+        </div>
+</body>
+</html>
