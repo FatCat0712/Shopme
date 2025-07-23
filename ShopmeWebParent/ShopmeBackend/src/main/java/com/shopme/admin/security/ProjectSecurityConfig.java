@@ -17,12 +17,12 @@ public class ProjectSecurityConfig {
             http.authorizeHttpRequests(requests -> requests
                     .requestMatchers("/images/**", "/js/**", "/webjars/**", "/fontawesome/**").permitAll()
                     .requestMatchers("/users/**","/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
-                    .requestMatchers("/customers/**").hasAuthority("Admin")
-                    .requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
-                    .requestMatchers("/brands/**").hasAnyAuthority("Admin", "Editor")
+                    .requestMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
                     .requestMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
                     .requestMatchers("/products/edit/**", "/products/save" , "/products/check_unique").hasAnyAuthority("Admin", "Editor", "Salesperson")
                     .requestMatchers("/products", "/products/", "/products/detail/**", "/products/page/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+                    .requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
+                    .requestMatchers("/customers/**", "/orders/**").hasAnyAuthority("Admin", "Salesperson")
                     .anyRequest().authenticated()
             );
 

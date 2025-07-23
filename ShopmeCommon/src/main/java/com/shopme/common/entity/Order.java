@@ -94,4 +94,11 @@ public class Order {
                 ", paymentMethod=" + paymentMethod +
                 '}';
     }
+
+    @Transient
+    public String getDestination() {
+        return String.format("%s, %s, %s", city, state, country);
+    }
+
 }
+

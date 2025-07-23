@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments :: page_head('Orders - Shopme Admin', 'none')}">...</div>
+<body>
+        <div class="container-fluid">
+            <div th:replace="~{navigation :: menu}">...</div>
+            <div>
+                <h2>Manage Orders</h2>
+            </div>
+
+
+            <div th:replace="~{fragments :: search_form_and_message}"></div>
+
+           <div class="full-details">
+               <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                   <thead class="thead-dark">
+                            <tr>
+                               <th class="hideable-column" >
+                                   <div th:replace="~{fragments :: column_link('id', 'ID', 'tag')}">...</div>
+                               </th>
+                               <th th:replace="~{fragments :: column_link('customer', 'Customer', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('total', 'Total', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('orderTime', 'Order Time', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('destination', 'Destination', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('paymentMethod', 'Payment Method', 'none')}">...</th>
+                                <th th:replace="~{fragments :: column_link('orderStatus', 'Status', 'none')}">...</th>
+                                <th>Action</th>
+                            </tr>
+                   </thead>
+                   <tbody>
+                        <tr th:each="order : ${listOrders}">
+                                <td>[[${order.id}]]</td>
+                                <td><a class="link-detail" th:href="@{'/customers/detail/' + ${order.customer.id}}" title="View details of this customer">[[${order.customer.fullName}]]</a></td>
+                                <td>
+                                    <div th:replace="~{orders/order_fragment :: format_currency(${order.total})}">...</div>
+                                </td>
+                                <td>
+                                    <div th:replace="~{orders/order_fragment :: format_time(${order.orderTime})}">...</div>
+                                </td>
+                                <td>[[${order.destination}]]</td>
+                                <td>[[${order.paymentMethod}]]</td>
+                                <td>[[${order.orderStatus}]]</td>
+                                <td>
+                                    <a class="fas fa-file-alt fa-2x icon-green link-detail" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
+                                    &nbsp;
+                                    <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
+                                    &nbsp;
+                                    <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delelet' + ${order.id}, true)}"></div>
+                                </td>
+                        </tr>
+                   </tbody>
+               </table>
+           </div>
+
+
+            <div th:replace="~{fragments :: pagination('orders')}">...</div>
+
+
+            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
+
+            <div th:replace="~{fragments :: footer}">...</div>
+
+            <div class="modal fade" id="detailModal">
+                <div class="modal-dialog modal-l">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+<script type="text/javascript">
+    let moduleURL = "[[@{/orders}]]";
+
+    $(".link-detail").on("click" ,function (e) {
+        e.preventDefault();
+        let linkDetailURL = $(this).attr("href");
+        $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    })
+</script>
+<script type="text/javascript" th:src="@{/js/common_list.js}"></script>
+</body>
+</html>

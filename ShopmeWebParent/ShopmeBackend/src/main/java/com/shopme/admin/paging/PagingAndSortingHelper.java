@@ -1,5 +1,6 @@
 package com.shopme.admin.paging;
 
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.util.List;
 
+@Getter
 public class PagingAndSortingHelper {
     private final ModelAndViewContainer model;
     private final String listName;
@@ -47,7 +49,6 @@ public class PagingAndSortingHelper {
 
     public void listEntities(int pageNum, int pageSize, SearchRepository<?, Integer> repo) {
         Sort sort = Sort.by(sortField);
-
         if(sortDir == null || sortDir.isEmpty()) sort = sort.ascending();
         else if(sortDir.equals("asc")) sort = sort.ascending();
         else if(sortDir.equals("desc"))  sort = sort.descending();
@@ -72,15 +73,4 @@ public class PagingAndSortingHelper {
         return PageRequest.of(pageNum -1, pageSize, sort);
     }
 
-    public String getSortDir() {
-        return sortDir;
-    }
-
-    public String getSortField() {
-        return sortField;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
 }
