@@ -14,6 +14,9 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#track" role="tab">Track</a>
+        </li>
     </ul>
 
 <!--     Tab panes -->
@@ -26,6 +29,9 @@
         </div>
         <div class="tab-pane p-3" id="shipping" role="tabpanel">
             <div th:replace="~{orders/order_shipping_readonly :: content}">...</div>
+        </div>
+        <div class="tab-pane p-3" id="track" role="tabpanel">
+            <div th:replace="~{orders/order_track_readonly :: content}">...</div>
         </div>
 
 

@@ -157,7 +157,7 @@ public class OrderRepositoryTests {
 
     @Test
     public void testUpdateOrderTracks() {
-        Integer orderId = 2;
+        Integer orderId = 19;
         Optional<Order> orderById = orderRepository.findById(orderId);
         assertTrue(orderById.isPresent());
         Order order = orderById.get();
@@ -165,14 +165,14 @@ public class OrderRepositoryTests {
         OrderTrack newTrack = new OrderTrack();
         newTrack.setOrder(order);
         newTrack.setUpdatedTime(new Date());
-        newTrack.setStatus(OrderStatus.NEW);
-        newTrack.setNotes(OrderStatus.NEW.defaultDescription());
+        newTrack.setStatus(OrderStatus.PICKED);
+        newTrack.setNotes(OrderStatus.PICKED.defaultDescription());
 
         OrderTrack processingTrack = new OrderTrack();
         processingTrack.setOrder(order);
         processingTrack.setUpdatedTime(new Date());
-        processingTrack.setStatus(OrderStatus.PROCESSING);
-        processingTrack.setNotes(OrderStatus.PROCESSING.defaultDescription());
+        processingTrack.setStatus(OrderStatus.PACKAGED);
+        processingTrack.setNotes(OrderStatus.PACKAGED.defaultDescription());
 
         List<OrderTrack> orderTracks = order.getOrderTracks();
         orderTracks.add(newTrack);
