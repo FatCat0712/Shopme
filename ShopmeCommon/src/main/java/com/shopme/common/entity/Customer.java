@@ -18,8 +18,6 @@ public class Customer extends AbstractAddressWithCountry{
     @Column(length = 64, nullable = false)
     private String password;
 
-
-
     @Enumerated(EnumType.STRING)
     @Column(name = "authentication_type", length = 10)
     private AuthenticationType authenticationType;

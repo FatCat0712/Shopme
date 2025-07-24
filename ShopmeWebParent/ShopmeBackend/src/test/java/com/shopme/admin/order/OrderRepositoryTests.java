@@ -1,10 +1,7 @@
 package com.shopme.admin.order;
 
-import com.shopme.common.entity.*;
-import com.shopme.common.entity.order.Order;
-import com.shopme.common.entity.order.OrderDetail;
-import com.shopme.common.entity.order.OrderStatus;
-import com.shopme.common.entity.order.PaymentMethod;
+import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.order.*;
 import com.shopme.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,54 +25,46 @@ public class OrderRepositoryTests {
     private final TestEntityManager entityManager;
 
     @Autowired
-    public OrderRepositoryTests(OrderRepository orderRepository, TestEntityManager testEntityManager) {
+    public OrderRepositoryTests(OrderRepository orderRepository, TestEntityManager entityManager) {
         this.orderRepository = orderRepository;
-        this.entityManager = testEntityManager;
+        this.entityManager = entityManager;
     }
 
     @Test
     public void testCreateNewOrderWithSingleProduct() {
+        Customer customer = entityManager.find(Customer.class, 2);
+        Product product1 = entityManager.find(Product.class,3);
 
-            Random random = new Random();
-            for(int i = 1; i <= 20; i++) {
-                Integer customerId = random.nextInt(1, 43);
-                Integer productId = random.nextInt(1, 109);
-                Customer customer = entityManager.find(Customer.class, customerId);
-                Product product = entityManager.find(Product.class, productId);
-                System.out.println(product);
+        Order mainOrder = new Order();
+        mainOrder.setOrderTime(new Date());
+        mainOrder.setCustomer(customer);
+        mainOrder.copyAddressFromCustomer();
 
-                Order mainOrder = new Order();
+        OrderDetail orderDetail1 = new OrderDetail();
+        orderDetail1.setProduct(product1);
+        orderDetail1.setOrder(mainOrder);
+        orderDetail1.setProductCost(product1.getCost());
+        orderDetail1.setShippingCost(10);
+        orderDetail1.setQuantity(1);
+        orderDetail1.setSubTotal(product1.getPrice());
+        orderDetail1.setUnitPrice(product1.getPrice());
 
-                mainOrder.setOrderTime(new Date());
-                mainOrder.setCustomer(customer);
-                mainOrder.copyAddressFromCustomer();
 
-                mainOrder.setShippingCost(10);
-                mainOrder.setProductCost(product.getCost());
-                mainOrder.setTax(0);
-                mainOrder.setSubTotal(product.getPrice());
-                mainOrder.setTotal(product.getPrice() + 10);
+        mainOrder.getOrderDetails().add(orderDetail1);
+        mainOrder.setShippingCost(30);
+        mainOrder.setProductCost(product1.getCost());
+        mainOrder.setTax(0);
+        float subTotal = product1.getPrice();
+        mainOrder.setSubTotal(subTotal);
+        mainOrder.setTotal(subTotal);
 
-                mainOrder.setPaymentMethod(PaymentMethod.COD);
-                mainOrder.setOrderStatus(OrderStatus.NEW);
-                mainOrder.setDeliverDate(new Date());
-                mainOrder.setDeliverDays(1);
+        mainOrder.setPaymentMethod(PaymentMethod.COD);
+        mainOrder.setOrderStatus(OrderStatus.PROCESSING);
+        mainOrder.setDeliverDate(new Date());
+        mainOrder.setDeliverDays(3);
 
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setProduct(product);
-                orderDetail.setOrder(mainOrder);
-                orderDetail.setProductCost(product.getCost());
-                orderDetail.setShippingCost(10);
-                orderDetail.setQuantity(1);
-                orderDetail.setSubTotal(product.getPrice());
-                orderDetail.setUnitPrice(product.getPrice());
-
-                mainOrder.getOrderDetails().add(orderDetail);
-
-                Order savedOrder = orderRepository.save(mainOrder);
-            }
-
-//        assertThat(savedOrder.getId()).isGreaterThan(0);
+        Order savedOrder = orderRepository.save(mainOrder);
+        assertThat(savedOrder.getId()).isGreaterThan(0);
     }
 
     @Test
@@ -164,6 +153,34 @@ public class OrderRepositoryTests {
         orderRepository.deleteById(orderId);
         Optional<Order> order = orderRepository.findById(orderId);
         assertThat(order.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void testUpdateOrderTracks() {
+        Integer orderId = 2;
+        Optional<Order> orderById = orderRepository.findById(orderId);
+        assertTrue(orderById.isPresent());
+        Order order = orderById.get();
+
+        OrderTrack newTrack = new OrderTrack();
+        newTrack.setOrder(order);
+        newTrack.setUpdatedTime(new Date());
+        newTrack.setStatus(OrderStatus.NEW);
+        newTrack.setNotes(OrderStatus.NEW.defaultDescription());
+
+        OrderTrack processingTrack = new OrderTrack();
+        processingTrack.setOrder(order);
+        processingTrack.setUpdatedTime(new Date());
+        processingTrack.setStatus(OrderStatus.PROCESSING);
+        processingTrack.setNotes(OrderStatus.PROCESSING.defaultDescription());
+
+        List<OrderTrack> orderTracks = order.getOrderTracks();
+        orderTracks.add(newTrack);
+        orderTracks.add(processingTrack);
+
+        Order updatedOrder = orderRepository.save(order);
+        assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
+
     }
 
 
