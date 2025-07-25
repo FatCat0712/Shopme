@@ -62,7 +62,9 @@ xmlns:th="http://www.thymeleaf.org"
                                 </div>
                                 <div class="mt-2">
                                         <div th:if="${shippingSupported == true}">
-                                                <button class="btn btn-danger p-2">Check Out</button>
+                                                <form th:action="@{/checkout}">
+                                                        <button type="submit" class="btn btn-danger p-2">Check Out</button>
+                                                </form>
                                         </div>
                                         <div th:if="${shippingSupported == false}" >
                                                 <div class="alert alert-warning" style="max-width: 400px">
