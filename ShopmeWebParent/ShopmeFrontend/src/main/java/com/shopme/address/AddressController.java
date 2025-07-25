@@ -94,6 +94,11 @@ public class AddressController {
     public String setDefaultAddress(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
         Customer authenticatedCustomer = getAuthenticatedCustomer(request);
         addressService.setDefaultAddress(id, authenticatedCustomer.getId());
-        return "redirect:/address_book";
+        String redirectOption = request.getParameter("redirect");
+        String redirectURL = "redirect:/address_book";
+        if(redirectOption.equals("cart")) {
+            redirectURL = "redirect:/cart";
+        }
+        return redirectURL;
     }
 }

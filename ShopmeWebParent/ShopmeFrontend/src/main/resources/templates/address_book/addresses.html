@@ -29,7 +29,7 @@ xmlns:th="http://www.thymeleaf.org"
                                                         <div class="col">
                                                                 <b>Your Primary Address</b>
                                                                 <a th:if="${usePrimaryAddressAsDefault}" class="text-danger"><b>[Default]</b></a>
-                                                                <a th:unless="${usePrimaryAddressAsDefault}" th:href="@{/address_book/default/0}" class="text-success"><b>[Set as default]</b></a>
+                                                                <a th:unless="${usePrimaryAddressAsDefault}" th:href="@{/address_book/default/0(redirect=${param.redirect})}" class="text-success"><b>[Set as default]</b></a>
                                                         </div>
                                                         <div class="ml-auto mr-2">
                                                                 <a th:href="@{/account_details(redirect=address_book)}" class="fas fa-edit fa-1x icon-dark"></a>
@@ -49,7 +49,7 @@ xmlns:th="http://www.thymeleaf.org"
                                                                 <div class="col">
                                                                         <b>Address #[[${status.count + 1}]]</b>
                                                                         <a th:if="${address.defaultForShipping}" class="text-danger"><b>[Default]</b></a>
-                                                                        <a th:unless="${address.defaultForShipping}" th:href="@{'/address_book/default/' + ${address.id}}" class="text-success"><b>[Set as default]</b></a>
+                                                                        <a th:unless="${address.defaultForShipping}" th:href="@{'/address_book/default/' + ${address.id}(redirect=${param.redirect})}" class="text-success"><b>[Set as default]</b></a>
                                                                 </div>
                                                                 <div class="ml-auto mr-2">
                                                                         <a th:href="@{'/address_book/edit/' + ${address.id}}" class="fas fa-edit fa-1x icon-dark"></a>

@@ -49,5 +49,10 @@ public class AddressService {
         addressRepository.setNonDefaultForOther(defaultAddressId, customerId);
     }
 
+    public Address getDefaultAddress(Customer customer) {
+        return addressRepository.findByDefaultCustomer(customer.getId());
+    }
+
+
 
 }

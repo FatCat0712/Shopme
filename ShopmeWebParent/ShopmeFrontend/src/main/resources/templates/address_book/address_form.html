@@ -8,7 +8,7 @@ xmlns:th="http://www.thymeleaf.org"
                 <div th:replace="~{navigation :: header_menu}">...</div>
                 <div>&nbsp;</div>
                 <div class="text-center">
-                        <h2>Add New Address | [[${pageTitle}]]</h2>
+                        <h2>Add New Address</h2>
                 </div>
                 <form th:action="@{/address_book/save}" method="post" th:object="${address}" style="max-width: 600px; margin: 0 auto 50px auto">
                         <input type="hidden" th:field="*{id}">
