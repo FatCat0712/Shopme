@@ -120,6 +120,9 @@ public class CustomerController {
             else if(redirectOption.equals("cart")) {
                 redirectURL = "redirect:/cart";
             }
+            else if(redirectOption.equals("checkout")) {
+                redirectURL = "redirect:/address_book?redirect=checkout";
+            }
 
         }catch (CustomerNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
