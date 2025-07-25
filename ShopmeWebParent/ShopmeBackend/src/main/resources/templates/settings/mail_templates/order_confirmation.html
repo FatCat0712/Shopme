@@ -10,16 +10,16 @@
                             <label>E-mail Subject:</label>
                     </div>
                     <div class="col-sm-10">
-                            <input type="text" class="form-control" name="CUSTOMER_VERIFY_SUBJECT" th:value="${CUSTOMER_VERIFY_SUBJECT}" required>
+                            <input type="text" class="form-control" name="ORDER_CONFIRMATION_SUBJECT" th:value="${ORDER_CONFIRMATION_SUBJECT}" required>
                     </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-2 col-form-label">
-                    <label for="customerVerificationContent">E-mail Content:</label>
+                    <label for="orderConfirmationContent">E-mail Content:</label>
                 </div>
                 <div class="col-sm-10">
-                    <textarea rows="5" name="CUSTOMER_VERIFY_CONTENT"  id="customerVerificationContent" >[[${CUSTOMER_VERIFY_CONTENT}]]</textarea>
+                    <textarea rows="5" name="ORDER_CONFIRMATION_CONTENT"  id="orderConfirmationContent" >[[${ORDER_CONFIRMATION_CONTENT}]]</textarea>
                 </div>
             </div>
 
