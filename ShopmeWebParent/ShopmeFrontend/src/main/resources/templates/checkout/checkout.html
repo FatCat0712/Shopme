@@ -39,13 +39,15 @@ xmlns:th="http://www.thymeleaf.org"
                                         </div>
                                         <div class="card-body">
                                                 <div th:if="${checkoutInfo.codSupported}" class="d-flex align-items-center">
-                                                      <span>
-                                                              <input type="radio" class="me-2"/>
-                                                              <span>Cash on Delivery (COD)</span>
-                                                      </span>
-                                                         &nbsp;
-                                                        &nbsp;
-                                                        <button class="btn btn-primary">Place Order with COD</button>
+                                                        <form th:action="@{/place_order}" method="post">
+                                                              <span>
+                                                                      <input type="radio" class="me-2" id="radioCOD" name="paymentMethod" value="COD"/>
+                                                                      <span>Cash on Delivery (COD)</span>
+                                                              </span>
+                                                                 &nbsp;
+                                                                &nbsp;
+                                                                <button class="btn btn-primary d-none" id="buttonSubmit" type="submit">Place Order with COD</button>
+                                                        </form>
                                                 </div>
                                         </div>
                                 </div>
@@ -110,6 +112,12 @@ xmlns:th="http://www.thymeleaf.org"
         let decimalDigits = "[[${DECIMAL_DIGITS}]]";
         let decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
         let thousandsPointType= "[[${THOUSAND_POINT_TYPE}]]";
+
+        $(document).ready(function () {
+                $("#radioCOD").on("click", function () {
+                        $("#buttonSubmit").removeClass("d-none");
+                });
+        })
 
 </script>
 <script th:src="@{/js/jquery.number.min.js}"></script>

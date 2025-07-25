@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates/order_confirmation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/payment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/CurrencySettingBag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/order_completed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates/customer_verification.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates/customer_verification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates/mail_templates.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates/mail_templates.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/EmailSettingBag.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/EmailSettingBag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/shoppingcart/ShoppingCartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/checkout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,9 +39,9 @@
         <option value="JavaScript File" />
         <option value="Enum" />
         <option value="Exception" />
+        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -54,156 +61,157 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ShopmeBackend.executor": "Run",
-    "Application.ShopmeBackendApplication.executor": "Run",
-    "Application.ShopmeFrontEnd.executor": "Run",
-    "Application.ShopmeFrontendApplication.executor": "Run",
-    "Application.com.shopme.site.admin.ShopmeBackendApplication.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JUnit.AddressRepositoryTest.testAddNewAddress (1).executor": "Run",
-    "JUnit.AddressRepositoryTest.testAddNewAddress.executor": "Run",
-    "JUnit.AddressRepositoryTest.testDeleteByIdAndCustomer.executor": "Run",
-    "JUnit.AddressRepositoryTest.testFindByCustomer.executor": "Run",
-    "JUnit.AddressRepositoryTest.testFindByIdAndCustomer.executor": "Run",
-    "JUnit.AddressRepositoryTest.testGetDefault.executor": "Run",
-    "JUnit.AddressRepositoryTest.testSetDefault.executor": "Run",
-    "JUnit.AddressRepositoryTest.testSetNonDefaultAddresses.executor": "Run",
-    "JUnit.AddressRepositoryTest.testUpdate (1).executor": "Run",
-    "JUnit.AddressRepositoryTest.testUpdate.executor": "Run",
-    "JUnit.BrandRepositoryTest.createBrands.executor": "Run",
-    "JUnit.BrandRepositoryTest.deleteBrand.executor": "Run",
-    "JUnit.BrandRepositoryTest.findAllBrands.executor": "Run",
-    "JUnit.BrandRepositoryTest.getById.executor": "Run",
-    "JUnit.BrandRepositoryTest.updateBrand.executor": "Run",
-    "JUnit.BrandServiceTest.testCheckUniqueNewModeReturnDuplicate.executor": "Run",
-    "JUnit.BrandServiceTest.testCheckUniqueNewModeReturnOK.executor": "Run",
-    "JUnit.CartItemShoppingRepositoryTest.testDeleteByCustomerAndProduct.executor": "Debug",
-    "JUnit.CartItemShoppingRepositoryTest.testFindByCustomer.executor": "Run",
-    "JUnit.CartItemShoppingRepositoryTest.testFindByCustomerAndProduct.executor": "Run",
-    "JUnit.CartItemShoppingRepositoryTest.testSaveItem.executor": "Run",
-    "JUnit.CartItemShoppingRepositoryTest.testSaveTwoItems.executor": "Run",
-    "JUnit.CartItemShoppingRepositoryTest.testUpdateQuantity.executor": "Run",
-    "JUnit.CategoryRepositoryTest.findByAlias.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testCreateRootCategory.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testCreateSubCategory.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testFindByName.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testFindCategoryByAlias.executor": "Debug",
-    "JUnit.CategoryRepositoryTest.testGetCategory.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testListEnabledCategories.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testListRootCategories.executor": "Run",
-    "JUnit.CategoryRepositoryTest.testPrintHierarchicalCategories.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateAlias.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateName.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateOK.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnOK.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateAlias.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateName.executor": "Run",
-    "JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateOK.executor": "Run",
-    "JUnit.CountryRepositoryTest.testCreateCountry.executor": "Run",
-    "JUnit.CountryRepositoryTest.testDeleteCountry.executor": "Run",
-    "JUnit.CountryRepositoryTest.testGetCountry.executor": "Run",
-    "JUnit.CountryRepositoryTest.testListCountries.executor": "Run",
-    "JUnit.CountryRepositoryTest.testUpdateCountry.executor": "Run",
-    "JUnit.CountryRestControllerTest.testCreateCountry.executor": "Run",
-    "JUnit.CountryRestControllerTest.testDeleteCountry.executor": "Run",
-    "JUnit.CountryRestControllerTest.testListCountries (1).executor": "Run",
-    "JUnit.CountryRestControllerTest.testListCountries.executor": "Run",
-    "JUnit.CountryRestControllerTest.testUpdateCountry.executor": "Run",
-    "JUnit.CurrencyRepositoryTest.testCreateCurrencies.executor": "Run",
-    "JUnit.CurrencyRepositoryTest.testListAllOrderByNameAsc.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testCreateCustomer.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testDeleteCustomer.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testEnabledCustomer.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testFindByEmail.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testFindByVerificationCode.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testGetCustomer.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testListCustomer.executor": "Debug",
-    "JUnit.CustomerRepositoryTests.testUpdateAuthenticationType.executor": "Run",
-    "JUnit.CustomerRepositoryTests.testUpdateCustomer.executor": "Run",
-    "JUnit.OrderRepositoryTests.testAddNewOrder.executor": "Run",
-    "JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts.executor": "Run",
-    "JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct.executor": "Run",
-    "JUnit.OrderRepositoryTests.testDeleteOrder.executor": "Run",
-    "JUnit.OrderRepositoryTests.testGetOrder.executor": "Run",
-    "JUnit.OrderRepositoryTests.testListOrders.executor": "Run",
-    "JUnit.OrderRepositoryTests.testUpdateOrder.executor": "Run",
-    "JUnit.OrderRepositoryTests.testUpdateOrderTracks.executor": "Run",
-    "JUnit.PasswordEncoderTest.testEncodePassword.executor": "Run",
-    "JUnit.ProductRepositoryTest.testCreateProduct.executor": "Run",
-    "JUnit.ProductRepositoryTest.testDeleteById.executor": "Run",
-    "JUnit.ProductRepositoryTest.testFindByAlias.executor": "Run",
-    "JUnit.ProductRepositoryTest.testGetProduct.executor": "Run",
-    "JUnit.ProductRepositoryTest.testListAllProducts.executor": "Run",
-    "JUnit.ProductRepositoryTest.testSaveProductWithDetails.executor": "Run",
-    "JUnit.ProductRepositoryTest.testSaveProductWithImages.executor": "Run",
-    "JUnit.ProductRepositoryTest.testUpdateProduct.executor": "Run",
-    "JUnit.RoleRepositoryTests.testCreateFirstRole.executor": "Run",
-    "JUnit.RoleRepositoryTests.testCreateRestRoles.executor": "Run",
-    "JUnit.SettingRepositoryTest.testCreateCurrencySettings.executor": "Run",
-    "JUnit.SettingRepositoryTest.testCreateGeneralSettings.executor": "Run",
-    "JUnit.SettingRepositoryTest.testFindByTwoCategories.executor": "Run",
-    "JUnit.SettingRepositoryTest.testListSettingsByCategory.executor": "Debug",
-    "JUnit.ShippingRateRepositoryTest.testCreateNew.executor": "Run",
-    "JUnit.ShippingRateRepositoryTest.testDelete.executor": "Run",
-    "JUnit.ShippingRateRepositoryTest.testFindAll.executor": "Run",
-    "JUnit.ShippingRateRepositoryTest.testFindByCountryAndState.executor": "Run",
-    "JUnit.ShippingRateRepositoryTest.testUpdate.executor": "Run",
-    "JUnit.ShippingRateRepositoryTest.testUpdateCODSupport.executor": "Debug",
-    "JUnit.ShippingRateRepositoryTests.testFindByCountryAndState.executor": "Run",
-    "JUnit.StateRepositoryTests.testCreateState.executor": "Run",
-    "JUnit.StateRepositoryTests.testDeleteState.executor": "Run",
-    "JUnit.StateRepositoryTests.testGetState.executor": "Run",
-    "JUnit.StateRepositoryTests.testListStatesByCountry.executor": "Run",
-    "JUnit.StateRepositoryTests.testUpdateState.executor": "Run",
-    "JUnit.StateRestControllerTests.testCreateState.executor": "Run",
-    "JUnit.StateRestControllerTests.testDeleteState.executor": "Run",
-    "JUnit.StateRestControllerTests.testListByCountries.executor": "Run",
-    "JUnit.StateRestControllerTests.testUpdateState.executor": "Run",
-    "JUnit.UserRepositoryTests.testCountById.executor": "Run",
-    "JUnit.UserRepositoryTests.testCreateNewUserWithTwoRoles.executor": "Run",
-    "JUnit.UserRepositoryTests.testCreateUser.executor": "Run",
-    "JUnit.UserRepositoryTests.testDeleteUser.executor": "Run",
-    "JUnit.UserRepositoryTests.testDisableUser.executor": "Run",
-    "JUnit.UserRepositoryTests.testEnableUser.executor": "Run",
-    "JUnit.UserRepositoryTests.testGetUserByEmail.executor": "Run",
-    "JUnit.UserRepositoryTests.testGetUserById.executor": "Run",
-    "JUnit.UserRepositoryTests.testListAllUsers.executor": "Run",
-    "JUnit.UserRepositoryTests.testListFirstPage.executor": "Run",
-    "JUnit.UserRepositoryTests.testSearchUsers.executor": "Run",
-    "JUnit.UserRepositoryTests.testUpdateUserDetails.executor": "Run",
-    "JUnit.UserRepositoryTests.testUpdateUserRoles.executor": "Run",
-    "JUnit.com.shopme.admin.product in ShopmeBackend.executor": "Run",
-    "Maven.ShopmeProject [install].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "Database connection parameters found",
-    "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/projects/ShopmeProject/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/settings/mail_templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ShopmeBackend.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ShopmeBackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ShopmeFrontEnd.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ShopmeFrontendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Utility.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.shopme.site.admin.ShopmeBackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JUnit.AddressRepositoryTest.testAddNewAddress (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testAddNewAddress.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testDeleteByIdAndCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testFindByCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testFindByIdAndCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testGetDefault.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testSetDefault.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testSetNonDefaultAddresses.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testUpdate (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AddressRepositoryTest.testUpdate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandRepositoryTest.createBrands.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandRepositoryTest.deleteBrand.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandRepositoryTest.findAllBrands.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandRepositoryTest.getById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandRepositoryTest.updateBrand.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandServiceTest.testCheckUniqueNewModeReturnDuplicate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BrandServiceTest.testCheckUniqueNewModeReturnOK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testDeleteByCustomerAndProduct.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testFindByCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testFindByCustomerAndProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testSaveItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testSaveTwoItems.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CartItemShoppingRepositoryTest.testUpdateQuantity.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.findByAlias.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testCreateRootCategory.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testCreateSubCategory.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testFindByName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testFindCategoryByAlias.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testGetCategory.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testListEnabledCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testListRootCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryRepositoryTest.testPrintHierarchicalCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateAlias.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnDuplicateOK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInEditModeReturnOK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateAlias.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CategoryServiceTest.testCheckUniqueInNewModeReturnDuplicateOK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRepositoryTest.testCreateCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRepositoryTest.testDeleteCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRepositoryTest.testGetCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRepositoryTest.testListCountries.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRepositoryTest.testUpdateCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRestControllerTest.testCreateCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRestControllerTest.testDeleteCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRestControllerTest.testListCountries (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRestControllerTest.testListCountries.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CountryRestControllerTest.testUpdateCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CurrencyRepositoryTest.testCreateCurrencies.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CurrencyRepositoryTest.testListAllOrderByNameAsc.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testCreateCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testDeleteCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testEnabledCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testFindByEmail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testFindByVerificationCode.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testGetCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testListCustomer.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testUpdateAuthenticationType.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CustomerRepositoryTests.testUpdateCustomer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testAddNewOrder.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testDeleteOrder.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testGetOrder.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testListOrders.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testUpdateOrder.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OrderRepositoryTests.testUpdateOrderTracks.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordEncoderTest.testEncodePassword.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testCreateProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testDeleteById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testFindByAlias.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testGetProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testListAllProducts.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testSaveProductWithDetails.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testSaveProductWithImages.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductRepositoryTest.testUpdateProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RoleRepositoryTests.testCreateFirstRole.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RoleRepositoryTests.testCreateRestRoles.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SettingRepositoryTest.testCreateCurrencySettings.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SettingRepositoryTest.testCreateGeneralSettings.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SettingRepositoryTest.testFindByTwoCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SettingRepositoryTest.testListSettingsByCategory.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testCreateNew.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testDelete.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testFindAll.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testFindByCountryAndState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testUpdate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShippingRateRepositoryTest.testUpdateCODSupport.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ShippingRateRepositoryTests.testFindByCountryAndState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRepositoryTests.testCreateState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRepositoryTests.testDeleteState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRepositoryTests.testGetState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRepositoryTests.testListStatesByCountry.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRepositoryTests.testUpdateState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRestControllerTests.testCreateState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRestControllerTests.testDeleteState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRestControllerTests.testListByCountries.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StateRestControllerTests.testUpdateState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testCountById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testCreateNewUserWithTwoRoles.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testCreateUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testDeleteUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testDisableUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testEnableUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testGetUserByEmail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testGetUserById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testListAllUsers.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testListFirstPage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testSearchUsers.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testUpdateUserDetails.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTests.testUpdateUserRoles.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.com.shopme.admin.product in ShopmeBackend.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ShopmeProject [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;Database connection parameters found&quot;,
+    &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projects/ShopmeProject/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\settings\mail_templates" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\checkout" />
+      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\settings\mail_templates" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\orders" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\order" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\order" />
@@ -237,7 +245,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ShippingRateRepositoryTests.testFindByCountryAndState">
+  <component name="RunManager" selected="Application.Utility">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -248,6 +256,19 @@
     <configuration name="ShopmeFrontEnd" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontendApplication" />
       <module name="ShopmeFrontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Utility" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.shopme.Utility" />
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -279,22 +300,6 @@
       <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
       <option name="METHOD_NAME" value="testCreateNewOrderWithMultipleProducts" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderRepositoryTests.testCreateNewOrderWithSingleProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.admin.order.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
-      <option name="METHOD_NAME" value="testCreateNewOrderWithSingleProduct" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -351,21 +356,21 @@
     <list>
       <item itemvalue="Application.ShopmeBackend" />
       <item itemvalue="Application.ShopmeFrontEnd" />
+      <item itemvalue="Application.Utility" />
       <item itemvalue="JUnit.AddressRepositoryTest.testGetDefault" />
       <item itemvalue="JUnit.ShippingRateRepositoryTests.testFindByCountryAndState" />
       <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrderTracks" />
-      <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct" />
       <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
       <item itemvalue="Spring Boot.ShopmeBackendApplication" />
       <item itemvalue="Spring Boot.ShopmeFrontendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Utility" />
         <item itemvalue="JUnit.ShippingRateRepositoryTests.testFindByCountryAndState" />
         <item itemvalue="JUnit.AddressRepositoryTest.testGetDefault" />
         <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrderTracks" />
         <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
-        <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct" />
       </list>
     </recent_temporary>
   </component>
@@ -454,7 +459,7 @@
       <workItem from="1753322495184" duration="7245000" />
       <workItem from="1753374879235" duration="2534000" />
       <workItem from="1753406518122" duration="14705000" />
-      <workItem from="1753423245284" duration="8751000" />
+      <workItem from="1753423245284" duration="18275000" />
     </task>
     <servers />
   </component>

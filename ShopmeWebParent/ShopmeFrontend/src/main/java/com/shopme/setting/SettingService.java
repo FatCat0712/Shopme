@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class SettingService {
+    private final SettingRepository settingRepository;
+
     @Autowired
-    private SettingRepository settingRepository;
+    public SettingService(SettingRepository settingRepository) {
+        this.settingRepository = settingRepository;
+    }
 
     public List<Setting> getGeneralSettings() {
          return settingRepository.findByTwoCategories(SettingCategory.GENERAL, SettingCategory.CURRENCY);
@@ -23,4 +27,10 @@ public class SettingService {
     public EmailSettingBag getEmailSettings() {
         return new EmailSettingBag(settingRepository.findByTwoCategories(SettingCategory.MAIL_SERVER, SettingCategory.MAIL_TEMPLATES));
     }
+
+    public CurrencySettingBag getCurrencySettings() {
+        return new CurrencySettingBag(settingRepository.findByCategory(SettingCategory.CURRENCY));
+    }
+
+
 }

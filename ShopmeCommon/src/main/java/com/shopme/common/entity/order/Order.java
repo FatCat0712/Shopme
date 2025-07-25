@@ -1,6 +1,7 @@
 package com.shopme.common.entity.order;
 
 import com.shopme.common.entity.AbstractAddress;
+import com.shopme.common.entity.Address;
 import com.shopme.common.entity.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -60,6 +61,18 @@ public class Order extends AbstractAddress {
         this.setState(customer.getState());
     }
 
+    public void copyShippingAddressFromAddress(Address address) {
+        this.setFirstName(address.getFirstName());
+        this.setLastName(address.getLastName());
+        this.setPhoneNumber(address.getPhoneNumber());
+        this.setAddressLine1(address.getAddressLine1());
+        this.setAddressLine2(address.getAddressLine2());
+        this.setCity(address.getCity());
+        this.setCountry(address.getCountry().getName());
+        this.setPostalCode(address.getPostalCode());
+        this.setState(address.getState());
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -75,6 +88,30 @@ public class Order extends AbstractAddress {
     public String getDestination() {
         return String.format("%s, %s, %s", city, state, country);
     }
+
+
+    @Transient
+    public String getShippingAddress() {
+        String address = firstName;
+        if(lastName != null && !lastName.isEmpty())  address += " " + lastName;
+
+        if(!addressLine1.isEmpty()) address += ", " + addressLine1;
+
+        if(addressLine2 != null && !addressLine2.isEmpty()) address += ", " + addressLine2;
+
+        if(!city.isEmpty()) address += ", " + city;
+
+        if(state != null && !state.isEmpty()) address += ", " + state;
+
+        address += ", " + country;
+
+        if(!postalCode.isEmpty()) address += ". Postal code: " + postalCode;
+
+        if(!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
+
+        return address;
+    }
+
 
 }
 
