@@ -107,7 +107,7 @@ public class AddressRepositoryTest {
     @Test
     public void testGetDefault() {
         Integer customerId = 5;
-        Address address = addressRepository.findByDefaultCustomer(customerId);
+        Address address = addressRepository.findDefaultByCustomer(customerId);
         assertThat(address).isNotNull();
         System.out.println(address);
     }

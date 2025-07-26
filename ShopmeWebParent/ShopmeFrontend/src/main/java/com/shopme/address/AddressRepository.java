@@ -29,5 +29,5 @@ public interface AddressRepository extends CrudRepository<Address, Integer> {
     void setNonDefaultForOther(Integer defaultAddressId, Integer customerId);
 
     @Query("SELECT a FROM Address a WHERE a.customer.id = ?1 AND a.defaultForShipping = TRUE")
-    Address findByDefaultCustomer(Integer customerId);
+    Address findDefaultByCustomer(Integer customerId);
 }

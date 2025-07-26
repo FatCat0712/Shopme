@@ -39,50 +39,56 @@
         </nav>
     </div>
 
-    <div th:fragment="search_nav" class="row">
+    <div th:fragment="search_bar" class="container my-3">
+        <form class="row justify-content-center align-items-center gx-2 gy-2" th:action="@{/search}" method="get">
+            <div class="col-12 col-md-6">
+                <input type="search" name="keyword" class="form-control px-3" placeholder="Search for products" required th:value="${keyword}"/>
+            </div>
+            <div  class="col-12 col-md-auto">
+                <input type="submit" class="btn w-100 w-md-auto px-5" value="Search" style="background-color: #4A90E2; color: white" >
+            </div>
+        </form>
+    </div>
+
+    <div th:fragment="quick_links" class="row">
          <div class="col-md">
              <th:block sec:authorize="isAuthenticated()">
                  <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
                      <input type="submit" />
                  </form>
              </th:block>
-             <nav class="navbar navbar-expand-sm bg-light">
-                 <div class="collapse navbar-collapse" id="searchNavbar">
-                        <form class="form-inline" th:action="@{/search}" method="get">
-                            <input type="search" name="keyword" class="form-control mr-sm-2" placeholder="keyword" required th:value="${keyword}"/>
-                            <input type="submit" class="btn btn-outline-success mr-sm-3" value="Search ">
-                        </form>
-                        <ul class="navbar-nav">
-                            <th:block sec:authorize="isAuthenticated()">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/account_details}" sec:authentication="principal.fullName" style="font-weight: 700"></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/address_book}">Address Book</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Questions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Reviews</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Orders</a>
-                                </li>
-                               <li class="nav-item">
-                                   <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
-                               </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="logoutLink" href="javascript: document.logoutForm.submit()">Logout</a>
-                                </li>
-                            </th:block>
+             <div>
+                     <nav class="navbar navbar-expand-sm bg-light">
+                         <div class="collapse navbar-collapse  justify-content-center" id="searchNavbar">
 
-                        </ul>
-
-                 </div>
-
-             </nav>
-
+                                <ul class="navbar-nav">
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" th:href="@{/account_details}" sec:authentication="principal.fullName" style="font-weight: 700"></a>
+                                        </li>
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" th:href="@{/address_book}">Address Book</a>
+                                        </li>
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" href="">Questions</a>
+                                        </li>
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" href="">Reviews</a>
+                                        </li>
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" href="">Orders</a>
+                                        </li>
+                                       <li class="nav-item mx-2">
+                                           <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
+                                       </li>
+                                        <li class="nav-item mx-2">
+                                            <a class="nav-link" id="logoutLink" href="javascript: document.logoutForm.submit()">Logout</a>
+                                        </li>
+                                    </th:block>
+                                </ul>
+                         </div>
+                 </nav>
+             </div>
          </div>
     </div>
 

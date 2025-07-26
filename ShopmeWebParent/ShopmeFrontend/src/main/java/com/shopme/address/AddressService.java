@@ -50,7 +50,7 @@ public class AddressService {
     }
 
     public Address getDefaultAddress(Customer customer) {
-        return addressRepository.findByDefaultCustomer(customer.getId());
+        return addressRepository.findDefaultByCustomer(customer.getId());
     }
 
 

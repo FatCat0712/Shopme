@@ -36,8 +36,8 @@ public class CheckoutController {
     private final CheckoutService checkoutService;
     private final CustomerService customerService;
     private final AddressService addressService;
-    private final ShippingRateService shippingRateService;
-    private final ShoppingCartService shoppingCartService;
+    private final ShippingRateService shipService;
+    private final ShoppingCartService cartService;
     private  final OrderService orderService;
     private final SettingService settingService;
 
@@ -45,36 +45,41 @@ public class CheckoutController {
     @Autowired
     public CheckoutController(
             CheckoutService checkoutService, CustomerService customerService, AddressService addressService,
-            ShippingRateService shippingRateService, ShoppingCartService shoppingCartService, OrderService orderService, SettingService settingService) {
+            ShippingRateService shipService, ShoppingCartService cartService, OrderService orderService, SettingService settingService) {
         this.checkoutService = checkoutService;
         this.customerService = customerService;
         this.addressService = addressService;
-        this.shippingRateService = shippingRateService;
-        this.shoppingCartService = shoppingCartService;
+        this.shipService = shipService;
+        this.cartService = cartService;
         this.orderService = orderService;
         this.settingService = settingService;
+    }
+
+    private Customer getAuthenticatedCustomer(HttpServletRequest request){
+        String email = Utility.getEmailOfAuthenticatedCustomer(request);
+        return customerService.findCustomerByEmail(email);
     }
 
     @GetMapping("/checkout")
     private String showCheckoutPage(Model model, HttpServletRequest request) {
         Customer customer = getAuthenticatedCustomer(request);
-
         Address defaultAddress = addressService.getDefaultAddress(customer);
         ShippingRate shippingRate = null;
+
         if(defaultAddress != null) {
             model.addAttribute("shippingAddress", defaultAddress.toString());
-            shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
+            shippingRate = shipService.getShippingRateForAddress(defaultAddress);
         }
         else {
             model.addAttribute("shippingAddress", customer.toString());
-            shippingRate = shippingRateService.getShippingRateForCustomer(customer);
+            shippingRate = shipService.getShippingRateForCustomer(customer);
         }
 
         if(shippingRate == null) {
             return "redirect:/cart";
         }
 
-        List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+        List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
 
@@ -82,11 +87,6 @@ public class CheckoutController {
         model.addAttribute("cartItems", cartItems);
 
         return "checkout/checkout";
-    }
-
-    private Customer getAuthenticatedCustomer(HttpServletRequest request){
-        String email = Utility.getEmailOfAuthenticatedCustomer(request);
-        return customerService.findCustomerByEmail(email);
     }
 
     @PostMapping("/place_order")
@@ -99,19 +99,19 @@ public class CheckoutController {
         Address defaultAddress = addressService.getDefaultAddress(customer);
         ShippingRate shippingRate = null;
         if(defaultAddress != null) {
-            shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
+            shippingRate = shipService.getShippingRateForAddress(defaultAddress);
         }
         else {
-            shippingRate = shippingRateService.getShippingRateForCustomer(customer);
+            shippingRate = shipService.getShippingRateForCustomer(customer);
         }
 
-        List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+        List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
 
         Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
 
-        shoppingCartService.deleteByCustomer(customer);
+        cartService.deleteByCustomer(customer);
 
         sendOrderConfirmationEmail(request, createdOrder);
 

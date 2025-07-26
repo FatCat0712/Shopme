@@ -7,20 +7,21 @@ xmlns:th="http://www.thymeleaf.org"
 <body>
         <div class="container-fluid">
                 <div th:replace="~{navigation :: header_menu}">...</div>
-                <div th:replace="~{navigation :: search_nav}">...</div>
+                <div th:replace="~{navigation :: search_bar}">...</div>
+                <div th:replace="~{navigation :: quick_links}">...</div>
                 <div>
-                        <h1>Shopping by Categories</h1>
+                        <div style="font-size: 32px; font-weight: 600">Shopping by Categories</div>
                 </div>
 
                 <div class="row">
-                        <div class="col-sm-2" th:each="cat : ${listCategories}">
+                        <a class="col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none" th:each="cat : ${listCategories}"  th:href="@{'/c/' + ${cat.alias}}">
                                 <div>
-                                        <img th:src="@{${cat.imagePath}}" style="width: 80px"/>
+                                        <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;"/>
                                 </div>
                                 <div>
-                                        <a th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+                                        <p>[[${cat.name}]]</p>
                                 </div>
-                        </div>
+                        </a>
                 </div>
                 <div th:replace="~{navigation :: footer_menu}"></div>
         </div>

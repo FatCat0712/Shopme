@@ -5,7 +5,8 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
             <div class="container-fluid">
                 <div th:replace="~{navigation :: header_menu}">...</div>
-                <div th:replace="~{navigation :: search_nav}">...</div>
+                <div th:replace="~{navigation :: search_bar}">...</div>
+                <div th:replace="~{navigation :: quick_links}">...</div>
                 <div th:replace="~{breadcrumb :: content}">...</div>
 
               <div class="row">
@@ -51,6 +52,7 @@ xmlns:th="http://www.thymeleaf.org">
                       </div>
                       <div>&nbsp;</div>
                       <div th:utext="${product.shortDescription}"></div>
+
                   </div>
 
                   <div class="col-sm-2">
@@ -73,9 +75,9 @@ xmlns:th="http://www.thymeleaf.org">
                     <div class="col-12">
                         <div><hr/></div>
                         <div>
-                            <h3>Product Description:</h3>
+                            <h3 class="mb-3 fw-semibold">Product Description:</h3>
                         </div>
-                        <div th:utext="${product.fullDescription}"></div>
+                        <div class="ps-3" th:utext="${product.fullDescription}" style="line-height: 1.7; font-size: 1.05rem;"></div>
                     </div>
                 </div>
 
@@ -85,12 +87,16 @@ xmlns:th="http://www.thymeleaf.org">
                         <div>
                             <h3>Product Details:</h3>
                         </div>
-                       <th:block th:each="detail : ${product.details}">
-                           <div>
-                               <b>[[${detail.name}]]</b>:
-                               <span>[[${detail.value}]]</span>
-                           </div>
-                       </th:block>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle">
+                                <tbody>
+                                <tr th:each="detail : ${product.details}">
+                                    <th class="w-25">[[${detail.name}]]</th>
+                                    <td>[[${detail.value}]]</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

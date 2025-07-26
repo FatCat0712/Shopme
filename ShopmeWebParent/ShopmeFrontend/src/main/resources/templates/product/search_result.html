@@ -7,7 +7,8 @@
 <body>
 <div class="container-fluid">
     <div th:replace="~{navigation :: header_menu}">...</div>
-    <div th:replace="~{navigation :: search_nav}">...</div>
+    <div th:replace="~{navigation :: search_bar}">...</div>
+    <div th:replace="~{navigation :: quick_links}">...</div>
 
     <div th:if="${totalItems} > 0">
         <h2>Search Results for '[[${keyword}]]'</h2>

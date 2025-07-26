@@ -42,7 +42,6 @@ public class ShoppingCartController {
         ShippingRate shippingRate = null;
         boolean usePrimaryAddressAsDefault = false;
 
-
         if(defaultAddress != null) {
             shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
         }

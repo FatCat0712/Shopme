@@ -7,7 +7,7 @@ xmlns:th="http://www.thymeleaf.org"
 <body>
         <div class="container-fluid">
                 <div th:replace="~{navigation :: header_menu}">...</div>
-                <div th:replace="~{navigation :: search_nav}">...</div>
+                <div th:replace="~{navigation :: quick_links}">...</div>
                 <div class="text-center">
                         <h2 th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? 'Choose a Shipping Address' : 'Your Address Book'}"></h2>
                         <h4>
@@ -48,8 +48,8 @@ xmlns:th="http://www.thymeleaf.org"
                                                                 </b>
                                                         </div>
                                                         <div class="ml-auto mr-2">
-                                                                <a th:unless="${param.redirect}" th:href="@{/account_details(redirect=address_book)}" class="fas fa-edit fa-1x icon-dark"></a>
-                                                                <a th:if="${param.redirect!=null && param.redirect[0] == 'checkout'}" th:href="@{/account_details(redirect=checkout)}" class="fas fa-edit fa-1x icon-dark"></a>
+                                                                <a th:unless="${param.redirect}" th:href="@{/account_details(redirect=address_book)}" class="fas fa-edit fa-1x icon-dark" title="Edit this address"></a>
+                                                                <a th:if="${param.redirect!=null && param.redirect[0] == 'checkout'}" th:href="@{/account_details(redirect=checkout)}" class="fas fa-edit fa-1x icon-dark" title="Edit this address"></a>
                                                         </div>
                                                 </div>
                                         </div>
