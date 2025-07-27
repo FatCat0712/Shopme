@@ -61,7 +61,7 @@ public class UserController {
 
     @PostMapping("/users/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam(value = "image", required = false) MultipartFile multipartFile) throws IOException {
-        redirectAttributes.addFlashAttribute("message", String.format("The brand has been %s successfully", user.getId() == null ? "created" : "updated"));
+        redirectAttributes.addFlashAttribute("message", String.format("The user has been %s", user.getId() == null ? "created" : "updated"));
         if(!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             user.setPhotos(fileName);

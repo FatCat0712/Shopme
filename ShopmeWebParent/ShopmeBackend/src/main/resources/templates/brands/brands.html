@@ -43,23 +43,26 @@
                </table>
            </div>
 
-            <div class="less-details text-center">
-                 <div th:each="brand : ${listBrands}" class="row m-4">
-                     <div class="col-5">
-                          <span>
-                              <img th:src="@{${brand.logoPath}}" style="width: 120px"/>
-                          </span>
-                     </div>
-                     <div class="col-7">
-                         <div>[[${brand.name}]]</div>
-                         <div class="mt-2">
-                             <div th:replace="~{fragments :: edit('brand', '/brands/edit/' + ${brand.id})}">...</div>
-                             &nbsp;
-                             <div th:replace="~{fragments :: delete('brand', ${brand.id} ,'/brands/delete/' + ${brand.id}, true)}">...</div>
-                         </div>
+            <div class="less-details">
+                <div th:each="brand : ${listBrands}" class="card mb-3 shadow-sm p-3">
+                    <div  class="row align-items-center g-3">
+                        <div class="col-auto">
+                            <img  th:src="@{${brand.logoPath}}" th:alt="${brand.name}"
+                                  class="img-thumbnail" style="width: 120px">
+                        </div>
 
-                     </div>
-                 </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                <div>[[${brand.name}]]</div>
+                                <div class="mt-2 mt-md-0">
+                                    <div th:replace="~{fragments :: edit('brand', '/brands/edit/' + ${brand.id})}">...</div>
+                                    &nbsp;
+                                    <div th:replace="~{fragments :: delete('brand', ${brand.id} ,'/brands/delete/' + ${brand.id}, true)}">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

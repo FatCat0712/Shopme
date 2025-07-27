@@ -69,14 +69,13 @@ public class UserService {
        User userByEmail =  userRepository.getUserByEmail(email);
 
        if(userByEmail == null) return true;
-
        boolean isCreatingNew = (id == null);
 
        if(isCreatingNew) {
            return false;
        }
        else {
-           return !userByEmail.getId().equals(id);
+           return userByEmail.getId().equals(id);
        }
     }
 

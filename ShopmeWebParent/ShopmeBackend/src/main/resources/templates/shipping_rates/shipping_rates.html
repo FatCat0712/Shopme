@@ -12,8 +12,8 @@
 
             <div th:replace="~{fragments :: search_form_and_message}"></div>
 
-           <div class="full-details">
-               <table class="table table-bordered table-striped table-hover table-responsive-xl">
+           <div class="full-details table-responsive-xl">
+               <table class="table table-bordered table-striped table-hover">
                    <thead class="thead-dark">
                             <tr>
                                <th class="hideable-column">
@@ -57,7 +57,7 @@
 
 
             <div class="less-details">
-                <div th:each="sr : ${listShippingRates}" class="row m-4">
+                <div th:each="sr : ${listShippingRates}" class="card flex-row mb-3 p-3">
                     <div class="col-5">
                           <div><b>[[${sr.country.name}]]</b></div>
                           <span>[[${sr.state}]]</span>

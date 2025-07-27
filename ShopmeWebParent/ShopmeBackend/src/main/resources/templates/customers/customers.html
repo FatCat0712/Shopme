@@ -64,12 +64,12 @@
         </div>
 
         <div class="less-details">
-            <div th:each="customer : ${listCustomers}" class="row m-3">
-                    <div class="col-4">
+            <div th:each="customer : ${listCustomers}" class="card flex-row p-3 mb-3">
+                    <div class="col-6">
                             <b>[[${customer.fullName}]]</b>
+                            <div>[[${customer.country.name}]]</div>
                     </div>
-                    <div class="col-8 mb-2">
-                        <div class="mb-2">[[${customer.country.name}]]</div>
+                    <div class="col-6">
                         <div>
                             <div th:replace="~{fragments :: enable_link(${customer.isEnabled}, 'customer', '/customers/' + ${customer.id})}">...</div>
                             &nbsp;

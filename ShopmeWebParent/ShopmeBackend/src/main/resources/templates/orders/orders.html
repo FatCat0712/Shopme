@@ -62,20 +62,23 @@
            </div>
 
             <div class="less-details">
-                <div class="row m-1" th:each="order : ${listOrders}">
-                    <div class="col-sm-1">
+                <div class="card mb-3 flex-row p-3" th:each="order : ${listOrders}">
+                    <div class="col-sm-2">
                         [[${order.id}]]
                     </div>
-                    <div class="col-sm-1111 mr-auto">
+                    <div class="col-sm-5">
                         <b>[[${order.customer.fullName}]], [[${order.country}]]</b>
-                        <p>[[${order.orderTime}]] - [[${order.orderStatus}]] - <span th:replace="~{fragments :: format_currency(${order.total})}"></span> - [[${order.paymentMethod}]]</p>
-                        <p>
-                            <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
+                        <div>[[${order.orderTime}]]</div>
+                        <div class="my-1"><span th:replace="~{fragments :: format_currency(${order.total})}"></span></div>
+                        <span class="badge bg-warning text-dark"> [[${order.orderStatus}]]</span>
+                        <span class="badge bg-info text-dark">[[${order.paymentMethod}]]</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
                             &nbsp;
-                            <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
-                            &nbsp;
-                            <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
-                        </p>
+                        <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
+                        &nbsp;
+                        <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
                     </div>
                 </div>
             </div>

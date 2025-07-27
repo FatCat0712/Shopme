@@ -28,43 +28,45 @@
                     <input type="hidden" name="sortField" th:value="${sortField}">
                     <input type="hidden" name="sortDir" th:value="${sortDir}">
 
-                    Category:&nbsp;
-                    <select class="form-control" name="categoryId" id="dropdownCategory">
+                    <div class="input-group">
+                        <label class="col-form-label d-none d-md-inline-block" for="dropdownCategory">Category:</label>
+                        &nbsp;
+                        <select class="form-control" name="categoryId" id="dropdownCategory">
                             <option value="0" th:selected="${categoryId == 0}">All categories</option>
-                            <th:block th:each="cat : ${listCategories}">
-                                  <option th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]</option>
-                            </th:block>
-                    </select>
-                    &nbsp;
-                    &nbsp;
+                            <option  th:each="cat : ${listCategories}" th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]</option>
+                        </select>
+                        &nbsp;
+                        &nbsp;
+                        <label class="col-form-label d-none d-md-inline-block" for="search">Filter:</label>
+                        &nbsp;
+                        <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" placeholder="Search..." required>
+                        &nbsp; &nbsp;
+                        <button type="submit" value="Search" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        &nbsp; &nbsp;
+                        <button type="button" class="btn btn-secondary" onclick="clearFilter()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
 
-                    Filter: &nbsp;
-                    <input type="search" name="keyword" class="form-control" th:value="${keyword}" required>
-                    &nbsp; &nbsp;
-                    <button type="submit" value="Search" class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    &nbsp; &nbsp;
-                    <button type="button" class="btn btn-secondary" onclick="clearFilter()">
-                        <i class="fas fa-eraser"></i>
-                    </button>
                 </form>
             </div>
 
-           <div class="full-details">
-               <table class="table table-bordered table-striped table-hover table-responsive-xl">
+           <div class="full-details table-responsive-xl">
+               <table class="table table-bordered table-striped table-hover">
                    <thead class="thead-dark">
                             <tr>
                                 <th class="hideable-column">
-                                    <th th:replace="~{fragments :: column_link( 'id', 'ID', 'tag')}">...</th>
+                                    <div th:replace="~{fragments :: column_link( 'id', 'ID', 'tag')}">...</div>
                                 </th>
                                <th>Main Image</th>
                                 <th  th:replace="~{fragments :: column_link( 'name', 'Product Name', 'none')}">...</th>
                                 <th class="hideable-column">
-                                    <th  th:replace="~{fragments :: column_link( 'brand', 'Brand ', 'tag')}">...</th>
+                                    <div  th:replace="~{fragments :: column_link( 'brand', 'Brand ', 'tag')}">...</div>
                                 </th>
                                 <th class="hideable-column">
-                                     <th th:replace="~{fragments :: column_link( 'category', 'Category ', 'tag')}">...</th>
+                                     <div th:replace="~{fragments :: column_link( 'category', 'Category ', 'tag')}">...</div>
                                 </th>
                                 <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                                     <th>Enabled</th>
@@ -110,15 +112,14 @@
            </div>
 
             <div class="less-details">
-                <div th:each="product : ${listProducts}" class="row m-3">
+                <div th:each="product : ${listProducts}" class="card mb-3 flex-row p-3 align-items-center">
                     <div class="col-4">
-                        <img th:if="${product.mainImage != null}"th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid"/>
+                        <img th:if="${product.mainImage != null}" th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid" th:alt="${product.name}"/>
                     </div>
                     <div class="col-8">
                         <div class="mb-2">
                             <a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}">[[${product.shortName}]]</a>
                         </div>
-
                         <div>
                             <a class="fas fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}"></a>
                             &nbsp;
@@ -133,7 +134,6 @@
 
                     </div>
                 </div>
-            </div>
 
 
             <div th:replace="~{fragments :: pagination('products')}"></div>

@@ -29,7 +29,7 @@
 
     <div th:fragment="user_photos">
         <span th:if="${user.photos == null}" class="fas fa-portrait fa-3x icon-silver" ></span>
-        <img th:if="${user.photos != null}" th:src="@{${user. photosImagePath}}" style="width: 100px"/>
+        <img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width: 100px"/>
     </div>
 
     <div th:fragment="enable_link(enabled, entityName, entityURL)" th:remove="tag">
@@ -59,7 +59,7 @@
 
     <div th:fragment="pagination(entityName)" th:remove="tag">
                         <div class="text-center m-1" th:if="${totalItems > 0}">
-                            <span>Showing [[${entityName}]] #[[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+                            <span>Showing [[${entityName}]] <strong>[[${startCount}]]</strong> to <strong>[[${endCount}]]</strong> of <strong>[[${totalItems}]]</strong></span>
                         </div>
 
                         <div class="text-center m-1" th:unless="${totalItems > 0}">
@@ -91,20 +91,25 @@
     </div>
 
     <div th:fragment="search_form_and_message">
-        <form th:action="@{${moduleURL} + '/page/1'} " class="form-inline m-3">
-            <input type="hidden" name="sortField" th:value="${sortField}">
-            <input type="hidden" name="sortDir" th:value="${sortDir}">
-            Filter: &nbsp;
-            <input type="search" name="keyword" class="form-control" th:value="${keyword}" required>
-            &nbsp; &nbsp;
-            <button type="submit" value="Search" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-            </button>
-            &nbsp; &nbsp;
-            <button type="button" class="btn btn-secondary" onclick="clearFilter()">
-                <i class="fas fa-eraser"></i>
-            </button>
-        </form>
+                <form th:action="@{${moduleURL} + '/page/1'} " class="form-inline m-3">
+                    <input type="hidden" name="sortField" th:value="${sortField}">
+                    <input type="hidden" name="sortDir" th:value="${sortDir}">
+                    <div class="input-group">
+                        <label class="col-form-label d-none d-sm-inline-block" for="search" >Filter:</label>
+                        <div class="col-auto">
+                            <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
+                        </div>
+                        <button type="submit" value="Search" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-secondary" onclick="clearFilter()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+
+
+                </form>
 
         <div th:if="${message != null}" class="alert alert-success text-center">
             [[${message}]]

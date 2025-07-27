@@ -108,11 +108,13 @@ public class CheckoutController {
         List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
-
+//        store order information into database
         Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
 
+//        remove all items in shopping cart
         cartService.deleteByCustomer(customer);
 
+//        send order confirmation email
         sendOrderConfirmationEmail(request, createdOrder);
 
         return "checkout/order_completed";
@@ -122,7 +124,6 @@ public class CheckoutController {
         EmailSettingBag emailSettings = settingService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
         mailSender.setDefaultEncoding("utf-8");
-
 
         String toAddress = createdOrder.getCustomer().getEmail();
         String subject = emailSettings.getOrderConfirmationSubject();
@@ -144,6 +145,8 @@ public class CheckoutController {
         String orderTime = dateFormat.format(createdOrder.getOrderTime());
 
         CurrencySettingBag currencySettings = settingService.getCurrencySettings();
+
+//        format currency for total amount in email based on currency settings
         String totalAmount = Utility.formatCurrency(createdOrder.getTotal(), currencySettings);
 
         content = content.replace("[[name]]", createdOrder.getCustomer().getFullName());

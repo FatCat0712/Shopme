@@ -14,8 +14,8 @@
 
             <div th:replace="~{fragments :: search_form_and_message}"></div>
 
-           <div class="full-details">
-               <table class="table table-bordered table-striped table-hover table-responsive-xl">
+           <div class="full-details  table-responsive-xl">
+               <table class="table table-bordered table-striped table-hover">
                    <thead class="thead-dark">
                             <tr>
                                <th>ID</th>
@@ -49,26 +49,29 @@
            </div>
 
             <div class="less-details">
-                    <div th:each="category : ${listCategories}" class="row m-1" >
-                        <div class="col-4">
-                            <img th:if="${category.image != null}" th:src="@{${category.imagePath}}" style="width: 100px"/>
-                        </div>
-                        <div class="col-8">
-                            <div>[[${category.name}]]</div>
-                            <div class="mt-2">
-                                <div th:replace="~{fragments::enable_link(${category.enabled}, 'category', '/categories/' + ${category.id})}">...</div>
-                                &nbsp;
-                                <div th:replace="~{fragments :: edit('category', '/categories/edit/' + ${category.id})}">...</div>
-                                &nbsp;
-                                <div th:replace=" ~{fragments :: delete('category', ${category.id} ,'/categories/delete/' + ${category.id}, ${category.hasChildren})}">...</div>
+                    <div th:each="category : ${listCategories}" class="card mb-3 shadow-sm p-3">
+                        <div  class="row align-items-center g-3">
+                            <div class="col-auto">
+                                <img  th:if="${category.image != null}" th:src="@{${category.imagePath}}" th:alt="${category.name}"
+                                      class="img-thumbnail rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                            </div>
 
+                            <div class="col">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                    <div>[[${category.name}]]</div>
+                                    <div class="mt-2 mt-md-0">
+                                        <div th:replace="~{fragments::enable_link(${category.enabled}, 'category', '/categories/' + ${category.id})}">...</div>
+                                        &nbsp;
+                                        <div th:replace="~{fragments :: edit('category', '/categories/edit/' + ${category.id})}">...</div>
+                                        &nbsp;
+                                        <div th:replace=" ~{fragments :: delete('category', ${category.id} ,'/categories/delete/' + ${category.id}, ${category.hasChildren})}">...</div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
             </div>
-
-
 
 
             <div th:if="${keyword != null}" class="text-center">
