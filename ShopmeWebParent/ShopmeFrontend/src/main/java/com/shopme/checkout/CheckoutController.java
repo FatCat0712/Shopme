@@ -12,6 +12,7 @@ import com.shopme.customer.CustomerService;
 import com.shopme.order.OrderService;
 import com.shopme.setting.CurrencySettingBag;
 import com.shopme.setting.EmailSettingBag;
+import com.shopme.setting.PaymentSettingBag;
 import com.shopme.setting.SettingService;
 import com.shopme.shippingrate.ShippingRateService;
 import com.shopme.shoppingcart.ShoppingCartService;
@@ -81,8 +82,15 @@ public class CheckoutController {
 
         List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
+        String currencyCode = settingService.getCurrencyCode();
+        PaymentSettingBag paymentSettingBag = settingService.getPaymentSettings();
+
+        String paypalClientId = paymentSettingBag.getClientID();
 
 
+        model.addAttribute("paypalClientId", paypalClientId);
+        model.addAttribute("customer", customer);
+        model.addAttribute("currencyCode", currencyCode);
         model.addAttribute("checkoutInfo", checkoutInfo);
         model.addAttribute("cartItems", cartItems);
 

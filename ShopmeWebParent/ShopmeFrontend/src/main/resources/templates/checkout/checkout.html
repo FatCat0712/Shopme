@@ -40,7 +40,7 @@ xmlns:th="http://www.thymeleaf.org"
                                                         <h5>Payment method</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                        <div th:if="${checkoutInfo.codSupported}" class="d-flex align-items-center">
+                                                        <div th:if="${checkoutInfo.codSupported}" class="mb-3">
                                                                 <form th:action="@{/place_order}" method="post">
                                                               <span>
                                                                       <input type="radio" class="me-2" id="radioCOD" name="paymentMethod" value="COD"/>
@@ -50,6 +50,9 @@ xmlns:th="http://www.thymeleaf.org"
                                                                         &nbsp;
                                                                         <button class="btn btn-primary d-none" id="buttonSubmit" type="submit">Place Order with COD</button>
                                                                 </form>
+                                                        </div>
+                                                        <div id="paypal-button-container">
+
                                                         </div>
                                                 </div>
                                         </div>
@@ -108,6 +111,7 @@ xmlns:th="http://www.thymeleaf.org"
                 <div th:replace="~{navigation :: footer_menu}"></div>
         </div>
 
+<script th:src="@{https://www.paypal.com/sdk/js(client-id=${paypalClientId}, currency=${currencyCode})}"></script>
 <script type="text/javascript">
         let contextPath = "[[@{/}]]";
         let csrfHeaderName = "[[${_csrf.headerName}]]";
@@ -122,6 +126,64 @@ xmlns:th="http://www.thymeleaf.org"
                         $("#buttonSubmit").removeClass("d-none");
                 });
         })
+
+        paypal.Buttons({
+                enableStandardCardFields: true,
+                createOrder: function(data, actions) {
+                //          setup a transaction
+                        return actions.order.create({
+                                intent: 'CAPTURE', // make payment immediately
+                                payer: {
+                                        name: {
+                                                given_name: "[[${customer.firstName}]]",
+                                                surname: "[[${customer.lastName}]]"
+                                        },
+                                        address: {
+                                                address_line_1: "[[${customer.addressLine1}]]",
+                                                address_line_2: "[[${customer.addressLine2}]]",
+                                                admin_area_1: "[[${customer.state}]]",
+                                                admin_area_2: "[[${customer.city}]]",
+                                                postal_code: "[[${customer.postalCode}]]",
+                                                country_code: "[[${customer.country.code}]]"
+                                        },
+                                        email_address: "[[${customer.email}]]",
+                                        phone: {
+                                                phone_type: "MOBILE",
+                                                phone_number: {
+                                                        national_number: "[[${customer.phoneNumber}]]"
+                                                }
+                                        }
+                                },
+                                purchase_units: [{
+                                        amount: {
+                                                value: "[[${checkoutInfo.paymentTotal4Paypal}]]",
+                                                currency_code: "[[${currencyCode}]]"
+                                        }
+                                }],
+
+                                application_context: {
+                                        shipping_preference: "NO_SHIPPING"
+                                }
+                        });
+                },
+                onApprove: function (data, actions) {
+                //         buyer approved payment
+                        return actions.order.capture().then(function(details) {
+                           console.log(details);
+                           let orderId = details.id;
+                           let totalAmount = details.purchase_units[0].amount.value;
+                           alert("Transaction completed. Order ID: " + orderId + ". Amount paid: " + totalAmount);
+                        });
+                },
+                onCancel: function(data) {
+                //         buyer cancelled payment
+                        alert('Payment cancelled by the buyer');
+                },
+                onError: function(err) {
+                //         error that prevents buyer from doing checkout
+                        alert('Something wrong happened');
+                }
+        }).render("#paypal-button-container");
 
 </script>
 <script th:src="@{/js/jquery.number.min.js}"></script>

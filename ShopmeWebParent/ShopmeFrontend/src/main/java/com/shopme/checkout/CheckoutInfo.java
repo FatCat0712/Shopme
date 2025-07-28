@@ -3,6 +3,7 @@ package com.shopme.checkout;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,5 +22,10 @@ public class CheckoutInfo {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, deliverDays);
         return calendar.getTime();
+    }
+
+    public String getPaymentTotal4Paypal() {
+        DecimalFormat formatter = new DecimalFormat("###,###.##");
+        return formatter.format(paymentTotal);
     }
 }
