@@ -35,6 +35,9 @@ spring:
                       scope:
                         - email
                         - public_profile
+paypal:
+    client-id: AZb9q-xIQxAKTQS1XOuhecvxCXIHaqa08KlJWmvf1rnTdKjiTeSnyqEAa7mx00q1vr_h5Nx7p1hJqX7B
+    client-secret: EETu6ZHLXtONwP_HqbSyVsAjqORKQscokK0S0fczPP-yEgvyigHN0sWcXpFZ64bK0Z4hyS-Ls8OlWQnl
 
 
 
