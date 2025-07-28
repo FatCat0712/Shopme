@@ -5,6 +5,8 @@ import com.shopme.common.entity.Category;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,13 @@ public class ProductController {
     public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
         try {
             Product product = productService.getProduct(alias);
+
+            String cleanedShortDescription = Jsoup.clean(product.getShortDescription(), Safelist.relaxed());
+            String cleanedFullDescription = Jsoup.clean(product.getFullDescription(), Safelist.relaxed());
+
+            product.setShortDescription(cleanedShortDescription);
+            product.setFullDescription(cleanedFullDescription);
+
             List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
             model.addAttribute("listCategoryParents", listByCategoryParents);
             model.addAttribute("product", product);

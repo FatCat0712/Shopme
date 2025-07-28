@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -43,7 +44,10 @@ public class ProjectSecurityConfig {
 
             http.logout(LogoutConfigurer::permitAll);
 
+
             http.rememberMe(rm -> rm.key("]4v5-Tq,y=N5S?0];En.(:;1LQQq(L").tokenValiditySeconds(7 * 24 * 60 * 60));
+
+            http.sessionManagement(ssmc -> ssmc.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 
 
             return http.build();
