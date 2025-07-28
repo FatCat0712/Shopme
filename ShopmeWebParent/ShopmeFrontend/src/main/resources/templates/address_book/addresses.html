@@ -5,15 +5,15 @@ xmlns:th="http://www.thymeleaf.org"
 
 <div th:replace="~{fragments :: page_head('Your Address Book', 'none')}">...</div>
 <body  class="d-flex flex-column min-vh-100">
-        <div class="container-fluid d-flex flex-column flex-grow-1">
+        <div class="container-fluid d-flex flex-column flex-grow-1" th:with="redirectedFromCheckoutPage = ${param.redirect != null && param.redirect[0] == 'checkout'}">
                 <div th:replace="~{navigation :: header_menu}">...</div>
                 <div th:replace="~{navigation :: quick_links}">...</div>
                 <main class="flex-fill">
                         <div class="text-center">
-                                <h2 th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? 'Choose a Shipping Address' : 'Your Address Book'}"></h2>
+                                <h2 th:text="${redirectedFromCheckoutPage ? 'Choose a Shipping Address' : 'Your Address Book'}"></h2>
                                 <h4>
                                         <a th:unless="${param.redirect}" th:href="@{/address_book/new}">Add New Address</a>
-                                        <a th:if="${param.redirect != null && param.redirect[0] == 'checkout'}" th:href="@{/address_book/new(redirect=checkout)}">Add New Address</a>
+                                        <a th:if="${redirectedFromCheckoutPage}" th:href="@{/address_book/new(redirect=checkout)}">Add New Address</a>
                                 </h4>
                         </div>
 
@@ -35,7 +35,7 @@ xmlns:th="http://www.thymeleaf.org"
                                                                         <b>
                                                                         <span
                                                                                 th:if="${usePrimaryAddressAsDefault}"
-                                                                                class="text-danger" th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? '[Currently Selected]' : '[Default]'}">
+                                                                                class="text-danger" th:text="${redirectedFromCheckoutPage ? '[Currently Selected]' : '[Default]'}">
                                                                         </span>
                                                                         </b>
                                                                         <b>
@@ -43,7 +43,7 @@ xmlns:th="http://www.thymeleaf.org"
                                                                                         th:unless="${usePrimaryAddressAsDefault}"
                                                                                         th:href="@{/address_book/default/0(redirect=${param.redirect})}"
                                                                                         class="text-success"
-                                                                                        th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? '[Choose]' : '[Set As Default]'}"
+                                                                                        th:text="${redirectedFromCheckoutPage ? '[Choose]' : '[Set As Default]'}"
                                                                                 >
                                                                                 </a>
                                                                         </b>
@@ -66,13 +66,13 @@ xmlns:th="http://www.thymeleaf.org"
                                                                 <div class="row">
                                                                         <div class="col">
                                                                                 <b>Address #[[${status.count + 1}]]</b>
-                                                                                <b><a th:if="${address.defaultForShipping}" class="text-danger"  th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? '[Currently Selected]' : '[Default]'}"></a></b>
+                                                                                <b><a th:if="${address.defaultForShipping}" class="text-danger"  th:text="${redirectedFromCheckoutPage ? '[Currently Selected]' : '[Default]'}"></a></b>
                                                                                 <b>
                                                                                         <a
                                                                                                 th:unless="${address.defaultForShipping}"
                                                                                                 th:href="@{'/address_book/default/' + ${address.id}(redirect=${param.redirect})}"
                                                                                                 class="text-success"
-                                                                                                th:text="${param.redirect != null && param.redirect[0] == 'checkout' ? '[Choose]' : '[Set As Default]'}"
+                                                                                                th:text="${redirectedFromCheckoutPage ? '[Choose]' : '[Set As Default]'}"
                                                                                         >
                                                                                         </a>
                                                                                 </b>
