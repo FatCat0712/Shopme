@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/CurrencyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/PaymentSettingBag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/paypal/PayPalApiException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/paypal/PaypalOrderResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/paypal/PaypalService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/checkout/paypal/PayPalApiTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/PaymentMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/PaymentMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/checkout/CheckoutInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/setting/SettingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/order_completed.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout/order_completed.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +34,10 @@
         <option value="AnnotationType" />
         <option value="JavaScript File" />
         <option value="Enum" />
-        <option value="Exception" />
         <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -132,6 +135,8 @@
     &quot;JUnit.OrderRepositoryTests.testUpdateOrder.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.OrderRepositoryTests.testUpdateOrderTracks.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.PasswordEncoderTest.testEncodePassword.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PayPalApiTests.testGetOrderDetails.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PayPalApiTests.testGetOrderDetails2.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testCreateProduct.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testDeleteById.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testFindByAlias.executor&quot;: &quot;Run&quot;,
@@ -183,6 +188,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/projects/ShopmeProject/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/checkout&quot;,
@@ -217,11 +223,11 @@
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\countries" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.shopme.checkout.paypal" />
       <recent name="com.shopme.admin.shippingrate" />
       <recent name="com.shopme.admin.state" />
       <recent name="com.shopme.admin.country" />
       <recent name="com.shopme.admin" />
-      <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.shopme.customer" />
@@ -238,7 +244,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ShopmeBackend">
+  <component name="RunManager" selected="JUnit.PayPalApiTests.testGetOrderDetails">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -269,22 +275,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.admin.order.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
-      <option name="METHOD_NAME" value="testCreateNewOrderWithMultipleProducts" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderRepositoryTests.testUpdateOrderTracks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
@@ -296,6 +286,38 @@
       <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
       <option name="METHOD_NAME" value="testUpdateOrderTracks" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PayPalApiTests.testGetOrderDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.checkout.paypal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
+      <option name="METHOD_NAME" value="testGetOrderDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PayPalApiTests.testGetOrderDetails2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.checkout.paypal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
+      <option name="METHOD_NAME" value="testGetOrderDetails2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -336,19 +358,21 @@
     <list>
       <item itemvalue="Application.ShopmeBackend" />
       <item itemvalue="Application.ShopmeFrontEnd" />
+      <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
+      <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails2" />
       <item itemvalue="JUnit.AddressRepositoryTest.testGetDefault" />
       <item itemvalue="JUnit.ShippingRateRepositoryTests.testFindByCountryAndState" />
       <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrderTracks" />
-      <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
       <item itemvalue="Spring Boot.ShopmeBackendApplication" />
       <item itemvalue="Spring Boot.ShopmeFrontendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
+        <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails2" />
         <item itemvalue="JUnit.ShippingRateRepositoryTests.testFindByCountryAndState" />
         <item itemvalue="JUnit.AddressRepositoryTest.testGetDefault" />
         <item itemvalue="JUnit.OrderRepositoryTests.testUpdateOrderTracks" />
-        <item itemvalue="JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts" />
       </list>
     </recent_temporary>
   </component>
@@ -443,7 +467,8 @@
       <workItem from="1753517067034" duration="5422000" />
       <workItem from="1753544052476" duration="4667000" />
       <workItem from="1753577004290" duration="10938000" />
-      <workItem from="1753672406601" duration="5093000" />
+      <workItem from="1753672406601" duration="14537000" />
+      <workItem from="1753694931511" duration="1776000" />
     </task>
     <servers />
   </component>

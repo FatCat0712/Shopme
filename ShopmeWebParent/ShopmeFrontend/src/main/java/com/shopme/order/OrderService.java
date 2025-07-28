@@ -9,6 +9,7 @@ import com.shopme.common.entity.order.OrderDetail;
 import com.shopme.common.entity.order.OrderStatus;
 import com.shopme.common.entity.order.PaymentMethod;
 import com.shopme.common.entity.product.Product;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class OrderService {
     private final OrderRepository orderRepository;
 
@@ -25,11 +27,18 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
+
     public Order createOrder(Customer customer, Address address, List<CartItem> cartItems, PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
             Order newOrder = new Order();
 
             newOrder.setOrderTime(new Date());
-            newOrder.setOrderStatus(OrderStatus.NEW);
+
+            if(paymentMethod.equals(PaymentMethod.PAYPAL)) {
+                newOrder.setOrderStatus(OrderStatus.PAID);
+            }else {
+                newOrder.setOrderStatus(OrderStatus.NEW);
+            }
+
             newOrder.setCustomer(customer);
             newOrder.setProductCost(checkoutInfo.getProductCost());
             newOrder.setSubTotal(checkoutInfo.getProductTotal());

@@ -52,7 +52,10 @@ xmlns:th="http://www.thymeleaf.org"
                                                                 </form>
                                                         </div>
                                                         <div id="paypal-button-container">
-
+                                                                <form th:action="@{/process_paypal_order}" method="post" id="paypalForm">
+                                                                        <input type="hidden" name="orderId" id="orderId" />
+                                                                        <input type="hidden" name="paymentMethod" value="PAYPAL">
+                                                                </form>
                                                         </div>
                                                 </div>
                                         </div>
@@ -127,6 +130,11 @@ xmlns:th="http://www.thymeleaf.org"
                 });
         })
 
+        function validateOrder(orderId) {
+                $("#orderId").val(orderId);
+                $("#paypalForm").submit();
+        }
+
         paypal.Buttons({
                 enableStandardCardFields: true,
                 createOrder: function(data, actions) {
@@ -169,10 +177,8 @@ xmlns:th="http://www.thymeleaf.org"
                 onApprove: function (data, actions) {
                 //         buyer approved payment
                         return actions.order.capture().then(function(details) {
-                           console.log(details);
                            let orderId = details.id;
-                           let totalAmount = details.purchase_units[0].amount.value;
-                           alert("Transaction completed. Order ID: " + orderId + ". Amount paid: " + totalAmount);
+                           validateOrder(orderId);
                         });
                 },
                 onCancel: function(data) {

@@ -2,6 +2,8 @@ package com.shopme.checkout;
 
 import com.shopme.Utility;
 import com.shopme.address.AddressService;
+import com.shopme.checkout.paypal.PayPalApiException;
+import com.shopme.checkout.paypal.PaypalService;
 import com.shopme.common.entity.Address;
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
@@ -41,12 +43,15 @@ public class CheckoutController {
     private final ShoppingCartService cartService;
     private  final OrderService orderService;
     private final SettingService settingService;
+    private final PaypalService paypalService;
 
 
     @Autowired
     public CheckoutController(
             CheckoutService checkoutService, CustomerService customerService, AddressService addressService,
-            ShippingRateService shipService, ShoppingCartService cartService, OrderService orderService, SettingService settingService) {
+            ShippingRateService shipService, ShoppingCartService cartService, OrderService orderService,
+            SettingService settingService, PaypalService paypalService
+    ) {
         this.checkoutService = checkoutService;
         this.customerService = customerService;
         this.addressService = addressService;
@@ -54,6 +59,7 @@ public class CheckoutController {
         this.cartService = cartService;
         this.orderService = orderService;
         this.settingService = settingService;
+        this.paypalService = paypalService;
     }
 
     private Customer getAuthenticatedCustomer(HttpServletRequest request){
@@ -170,6 +176,29 @@ public class CheckoutController {
 
 
 
+    }
+
+    @PostMapping("/process_paypal_order")
+    public String processPayPalOrder(HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException {
+        String orderId = request.getParameter("orderId");
+        String pageTitle;
+        String message;
+        try {
+            if(paypalService.validateOrder(orderId)) {
+                return placeOrder(request);
+            }
+            else {
+                pageTitle = "Checkout Failure";
+                message = "ERROR: Transaction could not be completed because order information is invalid";
+            }
+        } catch (PayPalApiException e) {
+            pageTitle = "Checkout Failure";
+            message = "ERROR: Transaction failed due to error: " + e.getMessage();
+        }
+
+        model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("message", message);
+        return "message";
     }
 
 
