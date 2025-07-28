@@ -20,15 +20,23 @@
          </table>
     </div>
 
-    <div class="less-details">
-        <div class="row p-3" th:each="track : ${order.orderTracks}">
-            <div class="col-sm-12 mr-auto">
-                <span th:replace="~{fragments :: format_time(${track.updatedTime}, 'yyyy-MM-dd HH:mm:ss')}">...</span>
-            </div>
-            <div class="col-sm-12 ml-5">
-                    <span><b>[[${track.status}]]:</b></span>
-                    <span>[[${track.notes}]]</span>
-            </div>
-        </div>
+    <div class="less-details timeline">
+        <ul class="timeline pl-0">
+            <li th:each="track : ${order.orderTracks}"
+                th:class="'timeline-item ' +
+                  (${track.status.name()} == 'NEW' ? 'status-new' :
+                  (${track.status.name()} == 'PROCESSING' ? 'status-processing' :
+                  (${track.status.name()} == 'DELIVERED' ? 'status-delivered' : 'status-cancelled')))">
+                <span class="time" th:text="${track.updatedTime}"></span>
+                <span class="badge" th:text="${track.status.name()}"
+                      th:classappend="' badge-' + (${track.status.name()} == 'NEW' ? 'primary' :
+                                           (${track.status.name()} == 'PROCESSING' ? 'warning' :
+                                           (${track.status.name()} == 'DELIVERED' ? 'success' : 'danger')))">
+        </span>
+                <p th:text="${track.notes}"></p>
+            </li>
+        </ul>
+
+
     </div>
 </div>
