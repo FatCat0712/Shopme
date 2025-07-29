@@ -23,10 +23,7 @@ function loadStatesByCountry() {
     $.get(url, function (response) {
         $.each(response, function (index, state) {
             $("<option>").val(state.name).text(state.name).appendTo(dataListStates);
-        }).fail(function() {
-            showErrorModal("Error loading states/provinces for the selected country.");
         })
     });
-
 
 }
