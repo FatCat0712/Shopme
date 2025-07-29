@@ -1,9 +1,11 @@
 package com.shopme.admin.shippingrate;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.product.ProductRepository;
 import com.shopme.admin.setting.country.CountryRepository;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.ShippingRate;
+import com.shopme.common.entity.product.Product;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,19 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ShippingRateService {
-    public final int SHIPPING_RATE_PER_PAGE = 10;
+    public static final int SHIPPING_RATE_PER_PAGE = 10;
+    public static final int DIM_DIVISOR = 139;
     private final ShippingRateRepository shippingRateRepository;
     private final CountryRepository countryRepository;
+    private final ProductRepository productRepository;
+
+
 
     @Autowired
-    public ShippingRateService(ShippingRateRepository shippingRateRepository, CountryRepository countryRepository) {
+    public ShippingRateService(ShippingRateRepository shippingRateRepository, CountryRepository countryRepository, ProductRepository productRepository) {
         this.shippingRateRepository = shippingRateRepository;
         this.countryRepository = countryRepository;
+        this.productRepository = productRepository;
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
@@ -72,6 +79,21 @@ public class ShippingRateService {
         if(shippingRate != null && !shippingRate.getId().equals(id)) {
             throw new ShippingRateAlreadyExistsException(String.format("There's already a rate for destination %s, %s", country.getName(), state));
         }
+    }
+
+    public float calculateShippingCost(Integer productId, Integer countryId, String state) throws ShippingRateNotFoundException {
+        ShippingRate shippingRate = shippingRateRepository.findByCountryAndState(countryId, state);
+        if(shippingRate == null) {
+            throw new ShippingRateNotFoundException("No shipping rate found for the given destination. You have to enter the shipping cost manually");
+        }
+
+        Product product = productRepository.findById(productId).get();
+
+        float dimWeight = (product.getLength() * product.getWidth() * product.getHeight()) / DIM_DIVISOR;
+        float finalWeight = Math.max(product.getWeight(), dimWeight);
+
+
+        return finalWeight * shippingRate.getRate();
     }
 
 
