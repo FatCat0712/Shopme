@@ -9,19 +9,24 @@ $(document).ready(function () {
 
     dropDownCountry.on("change", function () {
         loadStatesByCountry();
+        $("#state").val("").focus();
     })
+    loadStatesByCountry();
 })
 
 function loadStatesByCountry() {
     let selectedCountry = $("#country option:selected");
     let selectedCountryId = selectedCountry.val();
-    console.log(selectedCountryId);
 
     let url = contextPath + "states/list_by_country/" + selectedCountryId;
 
     $.get(url, function (response) {
         $.each(response, function (index, state) {
             $("<option>").val(state.name).text(state.name).appendTo(dataListStates);
-        });
+        }).fail(function() {
+            showErrorModal("Error loading states/provinces for the selected country.");
+        })
     });
+
+
 }

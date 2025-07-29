@@ -3,6 +3,7 @@ package com.shopme.admin.order;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.setting.SettingService;
+import com.shopme.common.entity.Country;
 import com.shopme.common.entity.order.Order;
 import com.shopme.common.entity.setting.Setting;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,6 +72,21 @@ public class OrderController {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultRedirectURL;
+    }
+
+    @GetMapping("/orders/edit/{id}")
+    public String editOrder(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes ra) {
+        try {
+            Order order = orderService.get(id);
+            List<Country> listCountries = orderService.listAllCountries();
+            model.addAttribute("pageTitle", String.format("Edit Order (ID: %d)", order.getId()));
+            model.addAttribute("order", order);
+            model.addAttribute("listCountries", listCountries);
+            return "orders/order_form";
+        } catch (OrderNotFoundException e) {
+            ra.addFlashAttribute("errorMessage", e.getMessage());
+            return defaultRedirectURL;
+        }
     }
 
 

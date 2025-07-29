@@ -1,6 +1,8 @@
 package com.shopme.admin.order;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.setting.country.CountryRepository;
+import com.shopme.common.entity.Country;
 import com.shopme.common.entity.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,10 +19,13 @@ public class OrderService {
     public final static int ORDER_PER_PAGE = 10;
 
     private final OrderRepository orderRepository;
+    private final CountryRepository countryRepository;
 
-    @Autowired
-    public OrderService(OrderRepository orderRepository) {
+
+   @Autowired
+    public OrderService(OrderRepository orderRepository, CountryRepository countryRepository) {
         this.orderRepository = orderRepository;
+        this.countryRepository = countryRepository;
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
@@ -58,6 +64,10 @@ public class OrderService {
        }
     }
 
+    public List<Country> listAllCountries() {
+       return countryRepository.findAllByOrderByNameAsc();
+    }
+
     public void delete(Integer orderId) throws OrderNotFoundException {
         Long countById = orderRepository.countById(orderId);
         if(countById == 0) {
@@ -67,5 +77,7 @@ public class OrderService {
             orderRepository.deleteById(orderId);
         }
     }
+
+
 
 }

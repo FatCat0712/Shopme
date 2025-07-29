@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<div th:replace="~{fragments :: page_head(${pageTitle}, 'tag')}">...</div>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="~{navigation :: menu}">...</div>
+    <div>
+        <h2>Manage Products | [[${pageTitle}]]</h2>
+    </div>
+
+    <form th:action="@{/orders/save}" method="post" th:object="${order}">
+        <input type="hidden" th:field="*{id}">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  data-toggle="tab" href="#products" role="tab">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#track" role="tab">Track</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active p-3" id="overview" role="tabpanel">
+                <div th:replace="~{orders/order_overview :: content}">...</div>
+            </div>
+            <div class="tab-pane  p-3" id="products" role="tabpanel">
+                <div th:replace="~{orders/order_products :: content}">...</div>
+            </div>
+            <div class="tab-pane  p-3" id="shipping" role="tabpanel">
+                <div th:replace="~{orders/order_shipping :: content}">...</div>
+            </div>
+            <div class="tab-pane  p-3" id="track" role="tabpanel">
+               <h2>Order Order Tracking</h2>
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <input type="submit" value="Save" class="btn btn-primary m-3" />
+            <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+        </div>
+
+
+    </form>
+
+
+    <div th:replace="~{modal_fragments :: modal_dialog}">...</div>
+
+    <div th:replace="~{fragments :: footer}">...</div>
+
+</div>
+
+<script>
+    let contextPath = "[[@{/}]]";
+</script>
+<script th:src="@{/js/common_form_country_state.js}"></script>
+<script th:src="@{/js/common_form.js}"></script>
+</body>
+</html>

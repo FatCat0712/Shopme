@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -46,7 +48,7 @@ public class Order extends AbstractAddress {
     private Set<OrderDetail> orderDetails = new HashSet<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @OrderBy("updatedTime")
+    @OrderBy("updatedTime ASC")
     private List<OrderTrack> orderTracks = new ArrayList<>();
 
     public void copyAddressFromCustomer() {
@@ -110,6 +112,12 @@ public class Order extends AbstractAddress {
         if(!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
 
         return address;
+    }
+
+    @Transient
+    public String getDeliverDateOnForm() {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormatter.format(this.deliverDate);
     }
 
 
