@@ -33,16 +33,16 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active p-3" id="overview" role="tabpanel">
-                <div th:replace="~{orders/order_overview :: content}">...</div>
+                <div th:replace="~{orders/order_form_overview :: content}">...</div>
             </div>
             <div class="tab-pane  p-3" id="products" role="tabpanel">
-                <div th:replace="~{orders/order_products :: content}">...</div>
+                <div th:replace="~{orders/order_form_products :: content}">...</div>
             </div>
             <div class="tab-pane  p-3" id="shipping" role="tabpanel">
-                <div th:replace="~{orders/order_shipping :: content}">...</div>
+                <div th:replace="~{orders/order_form_shipping :: content}">...</div>
             </div>
             <div class="tab-pane  p-3" id="track" role="tabpanel">
-               <h2>Order Order Tracking</h2>
+                <div th:replace="~{orders/order_form_tracks :: content}"></div>
             </div>
         </div>
 
@@ -78,6 +78,7 @@
 <script th:src="@{/js/order_form_overview_products.js}"></script>
 <script th:src="@{/js/order_form_add_product.js}"></script>
 <script th:src="@{/js/order_form_remove_product.js}"></script>
+<script th:src="@{/js/order_form_tracks.js}"></script>
 
 </body>
 </html>

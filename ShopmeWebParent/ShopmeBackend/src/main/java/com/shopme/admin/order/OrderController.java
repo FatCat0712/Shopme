@@ -5,6 +5,7 @@ import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.setting.SettingService;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.order.Order;
+import com.shopme.common.entity.order.OrderTrack;
 import com.shopme.common.entity.setting.Setting;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -78,6 +80,7 @@ public class OrderController {
     public String editOrder(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes ra) {
         try {
             Order order = orderService.get(id);
+            order.getOrderTracks().sort(Comparator.comparing(OrderTrack::getUpdatedTime));
             List<Country> listCountries = orderService.listAllCountries();
             model.addAttribute("pageTitle", String.format("Edit Order (ID: %d)", order.getId()));
             model.addAttribute("order", order);
