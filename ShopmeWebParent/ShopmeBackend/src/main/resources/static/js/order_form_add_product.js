@@ -65,6 +65,8 @@ function getProductInfo(productId, shippingCost) {
         let productPrice = $.number(product.price,2);
         let htmlCode = generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost)
         $("#productList").append(htmlCode);
+
+        updateOrderAmounts();
     }).fail(function (err) {
         showWarningModal(err.reponseJSON.message);
     })
@@ -75,12 +77,16 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
     let quantityId = "quantity" + nextCount;
     let priceId = "price" + nextCount;
     let subTotalId = "subTotal" + nextCount;
+    let rowId = "row" + nextCount;
+    let blankLineId = "blankLine" + nextCount;
     let htmlCode = `
-                                <div class="border rounded p-2">
+    <div id="${rowId}" class="product-box">
+            <div class="border rounded p-2">
                                  <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />
                                     <div class="row">
                                         <div class="col-1">
-                                            <div>${nextCount}</div>
+                                            <div class="divCount">${nextCount}</div>
+                                              <div><a class="fas fa-trash icon-dark link-remove" href="" rowNumber="${nextCount}"></a> </div>
                                         </div>
                                         <div class="col-3">
                                             <img src="${mainImagePath}" class="img-fluid" alt=""/>
@@ -134,7 +140,8 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row">&nbsp;</div>
+                                <div id="${blankLineId}" class="row">&nbsp;</div>
+    </div>
     `
     return htmlCode;
 }
