@@ -21,6 +21,7 @@ function loadStatesByCountry() {
     let url = contextPath + "states/list_by_country/" + selectedCountryId;
 
     $.get(url, function (response) {
+        dataListStates.empty();
         $.each(response, function (index, state) {
             $("<option>").val(state.name).text(state.name).appendTo(dataListStates);
         })

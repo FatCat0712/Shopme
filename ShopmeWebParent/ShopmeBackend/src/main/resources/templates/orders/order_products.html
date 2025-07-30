@@ -5,9 +5,11 @@
                 <div id="productList">
                         <div th:each="detail,status : ${order.orderDetails}">
                                 <div class="border rounded p-2" th:with="product = ${detail.product}">
+                                    <input type="hidden" name="productId" th:value="${detail.product.id}" class="hiddenProductId" />
                                     <div class="row">
                                         <div class="col-1">
                                             <div>[[${status.count}]]</div>
+                                            <div><a class="fas fa-trash icon-dark" href="" th:rowNumber="${status.count}"></a> </div>
                                         </div>
                                         <div class="col-3">
                                             <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" class="img-fluid"/>
@@ -65,6 +67,8 @@
                         </div>
 
                 </div>
+            <a th:href="@{/orders/search_product}" id="linkAddProduct" class="btn btn-success">Add a Product</a>
         </div>
+
 </body>
 </html>

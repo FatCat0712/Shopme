@@ -16,8 +16,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
     @Query("UPDATE Product p SET p.enabled = ?2 WHERE p.id = ?1")
     @Modifying
     void updateProductStatus(Integer id, Boolean status);
-
-    public Long countById(Integer id);
+    Long countById(Integer id);
 
     @Query("SELECT p FROM Product p WHERE p.name LIKE %?1%" +
             "OR p.shortDescription LIKE %?1%" +
@@ -25,12 +24,12 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
             "OR p.brand.name LIKE %?1%" +
             "OR p.category.name LIKE %?1%"
     )
-    public Page<Product> findAll(String keyword, Pageable pageable);
+    Page<Product> findAll(String keyword, Pageable pageable);
 
     @Query("SELECT p FROM Product p " +
             "WHERE  p.category.id = ?1 " +
             "OR p.category.allParentIDs LIKE %?2%")
-    public Page<Product> findAllInCategory(Integer categoryId, String categoryIdMatch, Pageable pageable);
+    Page<Product> findAllInCategory(Integer categoryId, String categoryIdMatch, Pageable pageable);
 
     @Query("SELECT p FROM Product p WHERE (p.category.id = ?1 OR p.category.allParentIDs LIKE %?2%)" +
             "AND" +
@@ -40,7 +39,12 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
             "   p.brand.name LIKE %?3% OR " +
             "   p.category.name LIKE %?3%)"
     )
-    public Page<Product> searchInCategory(Integer categoryId, String categoryIdMatch,String keyword ,Pageable pageable);
+    Page<Product> searchInCategory(Integer categoryId, String categoryIdMatch,String keyword ,Pageable pageable);
+
+    @Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
+    Page<Product> searchProductsByName(String keyword, Pageable pageable);
+
+
 
 
 
