@@ -11,10 +11,17 @@
                   </div>
                   <div class="col-sm-8">
                       <b>[[${product.name}]]</b>
-                      <div>Product Cost:<span th:replace="~{fragments :: format_currency(${od.productCost})}"></span></div>
-                      <div>Subtotal: [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subTotal})}"></span>
+                      <div th:if="${isVisibleForAdminOrSalesperson}">
+                          <div>
+                              Product Cost:<span th:replace="~{fragments :: format_currency(${od.productCost})}"></span>
+                          </div>
+                          <div>
+                              Subtotal: [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subTotal})}"></span>
+                          </div>
+                          <div>
+                              Shipping Cost: <span th:replace="~{fragments :: format_currency(${od.shippingCost})}"></span>
+                          </div>
                       </div>
-                      <div>Shipping Cost: <span th:replace="~{fragments :: format_currency(${od.shippingCost})}"></span></div>
                   </div>
 
 

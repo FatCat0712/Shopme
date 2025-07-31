@@ -60,9 +60,7 @@
     <div class="form-group row">
         <label  class="col-sm-2 form-label" for="orderStatus">Order Status:</label>
         <div class="col-sm-2">
-            <select th:field="*{orderStatus}" id="orderStatus" class="form-control">
-                <option th:each="os : ${T(com.shopme.common.entity.order.OrderStatus).values()}" th:value="${os}" th:text="${os}"></option>
-            </select>
+            <input th:field="*{orderStatus}" id="orderStatus" class="form-control" readonly="readonly"/>
         </div>
     </div>
 

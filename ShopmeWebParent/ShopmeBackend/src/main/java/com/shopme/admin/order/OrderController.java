@@ -2,6 +2,7 @@ package com.shopme.admin.order;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
+import com.shopme.admin.security.ShopmeUserDetails;
 import com.shopme.admin.setting.SettingService;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.order.Order;
@@ -12,6 +13,7 @@ import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.setting.Setting;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +50,16 @@ public class OrderController {
     public String listByPage(
             @PagingAndSortingParam(moduleURL = "/orders", listName = "listOrders") PagingAndSortingHelper helper,
             @PathVariable(name = "pageNum") Integer pageNum,
-            HttpServletRequest request
-    ) {
+            HttpServletRequest request,
+            @AuthenticationPrincipal ShopmeUserDetails loggedUser
+            ) {
         orderService.listByPage(pageNum, helper);
         loadCurrencySettings(request);
+
+        if(!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Salesperson") && loggedUser.hasRole("Shipper")) {
+            return "orders/orders_shipper";
+        }
+
         return "orders/orders";
     }
 
@@ -61,10 +69,23 @@ public class OrderController {
     }
 
     @GetMapping("/orders/detail/{id}")
-    public String viewOrderDetails(@PathVariable(name = "id") Integer id, HttpServletRequest request, Model model, RedirectAttributes ra) {
+    public String viewOrderDetails(
+            @PathVariable(name = "id") Integer id,
+            HttpServletRequest request,
+            Model model, RedirectAttributes ra,
+            @AuthenticationPrincipal ShopmeUserDetails loggedUser
+    ) {
          try {
              Order order =orderService.get(id);
              loadCurrencySettings(request);
+
+             boolean isVisibleForAdminOrSalesperson = false;
+
+             if(loggedUser.hasRole("Admin") || loggedUser.hasRole("Salesperson")) {
+                 isVisibleForAdminOrSalesperson = true;
+             }
+
+             model.addAttribute("isVisibleForAdminOrSalesperson", isVisibleForAdminOrSalesperson);
              model.addAttribute("order", order);
              return "orders/order_details_modal";
          }catch (OrderNotFoundException e) {
@@ -102,6 +123,7 @@ public class OrderController {
 
     @PostMapping("/orders/save")
     public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes ra) {
+        System.out.println(order.getOrderStatus());
         updateProductDetails(order, request);
         updateOrderTracks(order, request);
         orderService.save(order);
