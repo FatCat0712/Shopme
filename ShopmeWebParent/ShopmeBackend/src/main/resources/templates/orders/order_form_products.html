@@ -4,6 +4,7 @@
         <div th:fragment="content" th:remove="tag">
                 <div id="productList">
                         <div th:each="detail,status : ${order.orderDetails}" th:id="'row' + ${status.count}" class="product-box">
+                            <input type="hidden" name="detailId" th:value="${detail.id}" />
                                 <div class="border rounded p-2" th:with="product = ${detail.product}">
                                     <input type="hidden" name="productId" th:value="${product.id}" class="hiddenProductId" />
                                     <div class="row">
@@ -23,7 +24,10 @@
                                             <tr>
                                                 <td>Product Cost:</td>
                                                 <td>
-                                                    <input type="text" required class="form-control cost-input m-1" th:value="${detail.productCost}" style="max-width: 140px" th:rowNumber="${status.count}"/>
+                                                    <input type="text"
+                                                           name="productDetailCost" required
+                                                           class="form-control cost-input m-1"
+                                                           th:value="${detail.productCost}" style="max-width: 140px" th:rowNumber="${status.count}"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -31,6 +35,7 @@
                                                 <td>
                                                     <input type="number" step="1" min="1" max="5" required
                                                            class="form-control m-1 quantity-input"
+                                                           name="quantity"
                                                            th:id="'quantity' + ${status.count}"
                                                            th:value="${detail.quantity}" style="max-width: 140px"
                                                            th:rowNumber="${status.count}"
@@ -42,6 +47,7 @@
                                                 <td>
                                                     <input type="text"
                                                            class="form-control price-input m-1"
+                                                           name="productPrice"
                                                            th:value="${detail.unitPrice}" style="max-width: 140px"
                                                            th:id="'price' + ${status.count}"
                                                            th:rowNumber="${status.count}"
@@ -51,13 +57,25 @@
                                             <tr>
                                                 <td>Subtotal:</td>
                                                 <td>
-                                                    <input type="text"  required class="form-control subtotal-output m-1" th:value="${detail.subTotal}" style="max-width: 140px" th:id="'subTotal' + ${status.count}" readonly/>
+                                                    <input type="text"
+                                                           class="form-control subtotal-output m-1"
+                                                           name="productSubtotal"
+                                                           th:value="${detail.subTotal}" style="max-width: 140px"
+                                                           th:id="'subTotal' + ${status.count}"
+                                                           required
+                                                           readonly/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping Cost:</td>
                                                 <td>
-                                                    <input type="text"  required class="form-control ship-input m-1" th:value="${detail.shippingCost}" style="max-width: 140px"/>
+                                                    <input
+                                                            type="text"
+                                                            class="form-control ship-input m-1"
+                                                            th:value="${detail.shippingCost}"
+                                                            name="shippingCost"
+                                                            style="max-width: 140px"
+                                                            required />
                                                 </td>
                                             </tr>
                                         </table>

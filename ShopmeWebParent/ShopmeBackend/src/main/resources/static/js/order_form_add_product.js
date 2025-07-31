@@ -44,7 +44,6 @@ function getShippingCost(productId) {
         },
         data: params
     }).done(function (shippingCost) {
-       console.log("Shipping cost = " + shippingCost)
         getProductInfo(productId, shippingCost);
 
     }).fail(function (err) {
@@ -81,6 +80,7 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
     let blankLineId = "blankLine" + nextCount;
     let htmlCode = `
     <div id="${rowId}" class="product-box">
+            <input type="hidden" name="detailId" value="0"/>
             <div class="border rounded p-2">
                                  <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />
                                     <div class="row">
@@ -100,17 +100,24 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
                                             <tr>
                                                 <td>Product Cost:</td>
                                                 <td>
-                                                    <input type="text" required class="form-control cost-input m-1" value="${productCost}" style="max-width: 140px" rowNumber="${nextCount}"/>
+                                                    <input type="text"  
+                                                    class="form-control cost-input m-1" 
+                                                    name="productDetailCost"
+                                                    value="${productCost}" 
+                                                    style="max-width: 140px" 
+                                                    rowNumber="${nextCount}"/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Quantity:</td>
                                                 <td>
-                                                    <input type="number" step="1" min="1" max="5" required
+                                                    <input type="number" step="1" min="1" max="5"
                                                            class="form-control m-1 quantity-input"
+                                                            name="quantity"
                                                            id="${quantityId}"
                                                           value="1" style="max-width: 140px"
                                                            rowNumber="${nextCount}"
+                                                            required
                                                     />
                                                 </td>
                                             </tr>
@@ -119,6 +126,7 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
                                                 <td>
                                                     <input type="text"
                                                            class="form-control price-input m-1"
+                                                           name="productPrice"
                                                             value="${productPrice}" style="max-width: 140px"
                                                            id="${priceId}"
                                                             rowNumber="${nextCount}"
@@ -128,13 +136,23 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
                                             <tr>
                                                 <td>Subtotal:</td>
                                                 <td>
-                                                    <input type="text"  required class="form-control subtotal-output m-1" value="${productPrice}" style="max-width: 140px" id="${subTotalId}" readonly/>
+                                                    <input type="text"  
+                                                    class="form-control subtotal-output m-1" 
+                                                    name="productSubtotal"
+                                                    value="${productPrice}" 
+                                                    style="max-width: 140px" 
+                                                    id="${subTotalId}" 
+                                                    readonly/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping Cost:</td>
                                                 <td>
-                                                    <input type="text"  required class="form-control ship-input m-1" value="${shippingCost}" style="max-width: 140px"/>
+                                                    <input type="text"  
+                                                    name="shippingCost"
+                                                    class="form-control ship-input m-1" 
+                                                    value="${shippingCost}" style="max-width: 140px"  
+                                                    required/>
                                                 </td>
                                             </tr>
                                         </table>

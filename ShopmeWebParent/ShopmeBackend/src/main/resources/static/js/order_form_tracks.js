@@ -64,7 +64,7 @@ function formatCurrentDateTime() {
 }
 
 function  updateOrderTrackNotesByStatus(orderStatusList ,rowNumber) {
-    $("#notes" + rowNumber).text(orderStatusList.val());
+    $("#notes" + rowNumber).text(orderStatusList.val().split("|")[0]);
 }
 
 function generateTrackHtmlCode() {
@@ -73,7 +73,7 @@ function generateTrackHtmlCode() {
 
     return htmlCode = `
           <div class="row border-bottom track-box" style="margin-bottom: 40px" id="rowTrack${nextCount}">
-                    <input type="hidden" class="hiddenTrackId">
+                    <input type="hidden"  name="trackId" class="hiddenTrackId" value="0">
                     <div class="col-sm-2">
                         <div class="track-count">${nextCount}</div>
                         <div><a class="fas fa-trash icon-dark link-delete-track" href="" rowNumber="${nextCount}"></a></div>
@@ -85,7 +85,7 @@ function generateTrackHtmlCode() {
                                 <label class="col-form-label" for="time">Time:</label>
                             </div>
                             <div  class="col-sm-10">
-                                <input type="datetime-local" id="time" class="form-control" value="${formatCurrentDateTime()}"  style="max-width: 300px"/>
+                                <input type="datetime-local" name="trackDate" id="time" class="form-control" value="${formatCurrentDateTime()}"  style="max-width: 300px"/>
                             </div>
 
                         </div>
@@ -94,17 +94,17 @@ function generateTrackHtmlCode() {
                                 <label class="col-form-label" >Status:</label>
                             </div>
                             <div  class="col-sm-10">
-                                <select class="form-control order-status" rowNumber="${nextCount}" style="max-width: 150px">
-                                    <option value="Order was placed by the customer">NEW</option>
-                                    <option value="Order was cancelled">CANCELLED</option>
-                                    <option value="Order is being processing">PROCESSING</option>
-                                    <option value="Products were packaged">PACKAGED</option>
-                                    <option value="Shipper picked the package">PICKED</option>
-                                    <option value="Shipper is delivering the package">SHIPPING</option>
-                                    <option value="Customer received products">DELIVERED</option>
-                                    <option value="Products were returned!">RETURNED</option>
-                                    <option value="Customer has paid the order">PAID</option>
-                                    <option value="Customer has been refunded">REFUND</option>
+                                <select class="form-control order-status" rowNumber="${nextCount}" style="max-width: 150px" name="trackStatus">
+                                    <option value="Order was placed by the customer|NEW">NEW</option>
+                                    <option value="Order was cancelled|CANCELLED">CANCELLED</option>
+                                    <option value="Order is being processing|PROCESSING">PROCESSING</option>
+                                    <option value="Products were packaged|PACKAGED">PACKAGED</option>
+                                    <option value="Shipper picked the package|PICKED">PICKED</option>
+                                    <option value="Shipper is delivering the package|SHIPPING">SHIPPING</option>
+                                    <option value="Customer received products|DELIVERED">DELIVERED</option>
+                                    <option value="Products were returned|RETURNED">RETURNED</option>
+                                    <option value="Customer has paid the order|PAID">PAID</option>
+                                    <option value="Customer has been refunded|REFUND">REFUND</option>
                                 </select>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ function generateTrackHtmlCode() {
                                 <label class="col-form-label">Notes:</label>
                             </div>
                             <div  class="col-sm-10">
-                                <textarea id="notes${nextCount}" class="form-control" style="max-width: 300px"></textarea>
+                                <textarea id="notes${nextCount}" class="form-control" style="max-width: 300px" name="trackNotes"></textarea>
                             </div>
                         </div>
                 </div>
