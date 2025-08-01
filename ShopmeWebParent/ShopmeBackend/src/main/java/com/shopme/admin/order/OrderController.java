@@ -123,7 +123,6 @@ public class OrderController {
 
     @PostMapping("/orders/save")
     public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes ra) {
-        System.out.println(order.getOrderStatus());
         updateProductDetails(order, request);
         updateOrderTracks(order, request);
         orderService.save(order);
@@ -162,15 +161,14 @@ public class OrderController {
 
     }
 
-    private void updateOrderTracks(Order order, HttpServletRequest request) {
+    private void updateOrderTracks(Order order, HttpServletRequest request)  {
         String[] trackIds = request.getParameterValues("trackId");
         String[] trackDates = request.getParameterValues("trackDate");
         String[] trackStatus = request.getParameterValues("trackStatus");
-        String[] trackNotes = request.getParameterValues("trackNotes");
+        String[] trackNotes = request.getParameterValues("trackNote");
 
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         List<OrderTrack> orderTracks = order.getOrderTracks();
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
-
         for(int i = 0; i < trackIds.length; i++) {
             OrderTrack orderTrack = new OrderTrack();
             int trackId = Integer.parseInt(trackIds[i]);
@@ -186,8 +184,8 @@ public class OrderController {
                 throw new RuntimeException(e);
             }
             orderTracks.add(orderTrack);
-        }
 
+        }
         order.setOrderStatus(orderTracks.getLast().getStatus());
         order.setOrderTracks(orderTracks);
 
