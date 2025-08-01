@@ -1,9 +1,22 @@
 package com.shopme.order;
 
 import com.shopme.common.entity.order.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
+    @Query("SELECT o FROM Order o WHERE o.customer.id = ?1")
+    Page<Order> findAll(Integer customerId, Pageable pageable);
+
+    @Query("SELECT o FROM Order o " +
+            "JOIN OrderDetail od " +
+            "JOIN od.product p " +
+            "WHERE o.customer.id = ?2 " +
+            "AND (CONCAT(o.orderStatus,'') LIKE %?1% " +
+            "OR p.name LIKE %?1%)")
+    Page<Order> findAll(String keyword, Integer customerId, Pageable pageable);
 }

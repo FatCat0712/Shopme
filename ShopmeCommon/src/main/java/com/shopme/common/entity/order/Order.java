@@ -131,6 +131,12 @@ public class Order extends AbstractAddress {
     }
 
     @Transient
+    public String getOrderTimeOnForm() {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormatter.format(this.orderTime);
+    }
+
+    @Transient
     public String getRecipientName() {
         String name = firstName;
         if(lastName != null && !lastName.isEmpty())  name += " " + lastName;
@@ -179,8 +185,6 @@ public class Order extends AbstractAddress {
     }
 
 
-
-
     public boolean hasStatus(OrderStatus status) {
         for(OrderTrack aTrack: orderTracks) {
             if(aTrack.getStatus().equals(status)) {
@@ -188,6 +192,10 @@ public class Order extends AbstractAddress {
             }
         }
         return false;
+    }
+
+    public boolean isReturnRequested() {
+        return orderTracks.stream().map(OrderTrack::getStatus).anyMatch(status -> status.equals(OrderStatus.RETURNED));
     }
 
 

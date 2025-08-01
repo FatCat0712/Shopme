@@ -8,6 +8,10 @@ import com.shopme.common.entity.order.*;
 import com.shopme.common.entity.product.Product;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,6 +22,8 @@ import java.util.Set;
 @Transactional
 public class OrderService {
     private final OrderRepository orderRepository;
+
+    public static int ORDER_PER_PAGE  = 5;
 
     @Autowired
     public OrderService(OrderRepository orderRepository) {
@@ -77,10 +83,26 @@ public class OrderService {
             orderTracks.add(orderTrack);
 
             newOrder.setOrderTracks(orderTracks);
-
-
             return orderRepository.save(newOrder);
 
+    }
+
+    public Page<Order> listForCustomerByPage(Customer customer, int pageNum, String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+        if(sortDir.equals("asc")) sort = sort.ascending();
+        else if(sortDir.equals("desc")) sort =  sort.descending();
+
+         Pageable pageable = PageRequest.of(pageNum - 1, ORDER_PER_PAGE, sort);
+         Page<Order> page = null;
+         int customerId = customer.getId();
+         if(keyword != null) {
+             page  = orderRepository.findAll(keyword, customerId, pageable);
+         }
+         else {
+             page = orderRepository.findAll(customerId, pageable);
+         }
+
+         return page;
     }
 
 

@@ -15,6 +15,14 @@
         <p>Shopme Control Panel - Copyright &copy; Shopme</p>
     </footer>
 
+    <th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
+        <a
+                class="text-white"
+                th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ? sortDir : reversedSortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}"
+        >[[${columnLabel}]] </a>
+        <span th:if="${sortField == fieldName}" th:class="${sortDir == 'asc' ?  'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+    </th>
+
     <div th:fragment="modal_dialog" class="modal fade text-center" id="modalDialog">
         <div class="modal-dialog">
             <div class="modal-content">
