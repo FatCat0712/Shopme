@@ -4,6 +4,8 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.order.Order;
+import com.shopme.common.entity.order.OrderStatus;
+import com.shopme.common.entity.order.OrderTrack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,5 +88,26 @@ public class OrderService {
         orderInForm.setCustomer(order.getCustomer());
         orderRepository.save(orderInForm);
 
+    }
+
+    public void updateStatus(Integer orderId, String status) {
+       Order orderIdDB = orderRepository.findById(orderId).get();
+        OrderStatus statusToUpdate = OrderStatus.valueOf(status);
+        if(!orderIdDB.hasStatus(statusToUpdate)) {
+            List<OrderTrack> orderTracks = orderIdDB.getOrderTracks();
+            OrderTrack track = new OrderTrack();
+
+            track.setStatus(statusToUpdate);
+            track.setUpdatedTime(new Date());
+            track.setNotes(statusToUpdate.defaultDescription());
+            track.setOrder(orderIdDB);
+
+
+            orderTracks.add(track);
+            orderIdDB.setOrderStatus(statusToUpdate);
+
+            orderRepository.save(orderIdDB);
+
+        }
     }
 }
