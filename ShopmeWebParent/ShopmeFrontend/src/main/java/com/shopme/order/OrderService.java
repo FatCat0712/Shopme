@@ -89,8 +89,8 @@ public class OrderService {
 
     public Page<Order> listForCustomerByPage(Customer customer, int pageNum, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
-        if(sortDir.equals("asc")) sort = sort.ascending();
-        else if(sortDir.equals("desc")) sort =  sort.descending();
+
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
 
          Pageable pageable = PageRequest.of(pageNum - 1, ORDER_PER_PAGE, sort);
          Page<Order> page = null;
@@ -103,6 +103,16 @@ public class OrderService {
          }
 
          return page;
+    }
+
+    public Order getOrder(int orderId, Customer customer) throws OrderNotFoundException {
+        Order order =  orderRepository.findByIdAndCustomer(orderId, customer);
+        if(order == null) {
+            throw new OrderNotFoundException("Could not find any order with ID " + orderId);
+        }
+        else {
+            return order;
+        }
     }
 
 

@@ -171,7 +171,7 @@ public class Order extends AbstractAddress {
 
     @Transient
     public boolean isShipping() {
-        return hasStatus(OrderStatus.PICKED);
+        return hasStatus(OrderStatus.SHIPPING);
     }
 
     @Transient
@@ -194,8 +194,31 @@ public class Order extends AbstractAddress {
         return false;
     }
 
+    @Transient
     public boolean isReturnRequested() {
-        return orderTracks.stream().map(OrderTrack::getStatus).anyMatch(status -> status.equals(OrderStatus.RETURNED));
+        return hasStatus(OrderStatus.RETURNED);
+    }
+
+    @Transient
+    public boolean isProcessing() {
+        return hasStatus(OrderStatus.PROCESSING);
+    }
+
+
+    @Transient
+    public String getProductNames() {
+        String productNames = "";
+
+        productNames = "<ul>";
+
+        for(OrderDetail detail : orderDetails) {
+            productNames += "<li>" + detail.getProduct().getShortName() + "</li>";
+        }
+
+        productNames += "</ul>";
+
+        return productNames;
+
     }
 
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="content(statusVar, statusName ,iconName)" class="text-center">
+        <div th:if="${statusVar}">
+            <i th:class="'fas ' + ${iconName}  +' fa-2x icon-green'"></i>
+        </div>
+        <div th:unless="${statusVar}">
+            <i th:class="'fas ' + ${iconName} + ' fa-2x icon-dark'"></i>
+        </div>
+        <div class="mt-1">
+            [[${statusName}]]
+        </div>
+
+</div>
+

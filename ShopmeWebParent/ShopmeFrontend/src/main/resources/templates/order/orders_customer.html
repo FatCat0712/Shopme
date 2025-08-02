@@ -14,7 +14,7 @@
             <div class="input-group">
                 <label class="col-form-label d-none d-sm-inline-block" for="search" >Filter orders:</label>
                 <div class="col-auto">
-                    <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
+                    <input type="search" name="orderKeyword" class="form-control" th:value="${orderKeyword}" id="search" th:placeholder="Search..." required>
                 </div>
                 <button type="submit" value="Search" class="btn btn-primary">
                     <i class="fas fa-search"></i>
@@ -56,20 +56,22 @@
                                 <td class="hideable-column">[[${order.id}]]</td>
                                 <td>[[${order.orderTimeOnForm}]]</td>
                                 <td>
-                                    <th:block th:each="od : ${order.orderDetails}">
-                                        <div>[[${od.product.shortName}]]</div>
-                                    </th:block>
+                                    <ul>
+                                        <li th:each="od : ${order.orderDetails}">
+                                            [[${od.product.shortName}]]
+                                        </li>
+                                    </ul>
                                 </td>
                                 <td>[[${order.total}]]</td>
                                 <td>[[${order.orderStatus}]]</td>
 
                                 <td>
                                     <span>
-                                        <a class="fas fa-file-alt fa-2x icon-green" href=""></a>
+                                        <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/details/' + ${order.id}}"></a>
                                     </span>
                                     &nbsp;
                                     &nbsp;
-                                    <span th:if="${order.isReturnRequested()}">
+                                    <span th:unless="${order.isReturnRequested()}">
                                         <a class="fas fa-undo fa-2x icon-dark" href=""></a>
                                     </span>
                                 </td>
@@ -79,26 +81,29 @@
             </div>
 
             <div class="less-details">
-                <div th:each="order : ${listOrders}" class="card mb-3 shadow-sm">
+                <div th:each=" order : ${listOrders}" class="card mb-3 shadow-sm">
                     <div class="card-header">
                         <span>
                             Order ID #[[${order.id}]]
                         </span>
                         <span class="float-right">
                              <span>
-                                        <a class="fas fa-file-alt fa-2x icon-green" href=""></a>
-                                    </span>
+                                    <a class="fas fa-file-alt fa-2x icon-green link-detail--order" href="" th:href="@{'/orders/details/' + ${order.id}}" title="View details of this order"></a>
+                             </span>
                             &nbsp;
                             &nbsp;
-                            <span th:if="${order.isReturnRequested()}">
-                                        <a class="fas fa-undo fa-2x icon-dark" href=""></a>
+                                <span th:unless="${order.isReturnRequested()}">
+                                        <a class="fas fa-undo fa-2x icon-dark" href="" title="Return this order"></a>
                                 </span>
                         </span>
                     </div>
                     <div class="card-body">
-                            <ul>
-                                <li th:each="od : ${order.orderDetails}">[[${od.product.shortName}]]</li>
-                            </ul>
+                        <ul>
+                            <li th:each="od : ${order.orderDetails}">
+                                [[${od.product.shortName}]]
+                            </li>
+                        </ul>
+
                     </div>
                     <div class="card-footer">
                         <div>
@@ -113,7 +118,12 @@
 
 
 
-            <div th:replace="~{fragments :: modal_dialog}"></div>
+        <div class="modal fade" id="orderDetailModal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
 
         <div th:replace="~{fragments :: pagination('/orders' ,'order')}"></div>
 
@@ -123,11 +133,21 @@
 </body>
 <script type="text/javascript">
     let moduleURL = "[[@{/orders}]]"
-
-
     function clearFilter() {
         window.location = moduleURL;
     }
+
+    $(".link-detail--order").on("click" ,function (e) {
+        e.preventDefault();
+        let linkDetailURL = $(this).attr("href");
+        $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    })
+
+    function formatCurrency(amount) {
+        return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
+    }
+
+
 
 
 </script>

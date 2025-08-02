@@ -1,0 +1,58 @@
+<div th:fragment="content" th:remove="tag">
+    <div class="row justify-content-around mt-1 my-4">
+        <div th:replace="~{order/order_status_fragment :: content(${order.processing}, 'processing' ,'fa-spinner')}"></div>
+        <div th:replace="~{order/order_status_fragment :: content(${order.picked}, 'picked' ,'fa-people-carry')}"></div>
+        <div th:replace="~{order/order_status_fragment :: content(${order.shipping}, 'shipping' ,'fa-shipping-fast')}"></div>
+        <div th:replace="~{order/order_status_fragment :: content(${order.delivered}, 'delivered' ,'fa-box-open')}"></div>
+
+
+        <div th:if="${order.returned}">
+            <div th:replace="~{order/order_status_fragment :: content(${order.returned}, 'returned' ,'fa-undo')}"></div>
+        </div>
+
+
+
+
+
+    </div>
+    <div class="full-details table-responsive">
+         <table class="table-bordered table-striped table">
+             <thead class="table-header thead-dark">
+                 <tr>
+                     <th>Time</th>
+                     <th>Status</th>
+                     <th>Notes</th>
+                 </tr>
+             </thead>
+             <tbody>
+                    <tr th:each="track : ${order.orderTracks}">
+                        <td>
+                            <div th:replace="~{fragments :: format_time(${track.updatedTime}, 'yyyy-MM-dd HH:mm:ss')}">...</div>
+                        </td>
+                        <td>[[${track.status}]]</td>
+                        <td>[[${track.notes}]]</td>
+                    </tr>
+             </tbody>
+         </table>
+    </div>
+
+    <div class="less-details timeline">
+        <ul class="timeline pl-0">
+            <li th:each="track : ${order.orderTracks}"
+                th:class="'timeline-item ' +
+                  (${track.status.name()} == 'NEW' ? 'status-new' :
+                  (${track.status.name()} == 'PROCESSING' ? 'status-processing' :
+                  (${track.status.name()} == 'DELIVERED' ? 'status-delivered' : 'status-cancelled')))">
+                <span class="time" th:text="${track.updatedTime}"></span>
+                <span class="badge" th:text="${track.status.name()}"
+                      th:classappend="' badge-' + (${track.status.name()} == 'NEW' ? 'primary' :
+                                           (${track.status.name()} == 'PROCESSING' ? 'warning' :
+                                           (${track.status.name()} == 'DELIVERED' ? 'success' : 'danger')))">
+        </span>
+                <p th:text="${track.notes}"></p>
+            </li>
+        </ul>
+
+
+    </div>
+</div>

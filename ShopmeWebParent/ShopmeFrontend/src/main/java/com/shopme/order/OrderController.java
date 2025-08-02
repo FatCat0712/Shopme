@@ -3,18 +3,19 @@ package com.shopme.order;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.Order;
 import com.shopme.customer.CustomerService;
-import com.shopme.security.CustomerDetails;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+import static com.shopme.Utility.getEmailOfAuthenticatedCustomer;
 import static com.shopme.order.OrderService.ORDER_PER_PAGE;
 
 @Controller
@@ -29,20 +30,20 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public String listFirstPage() {
-        return "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
+    public String listFirstPage(HttpServletRequest request, Model model) {
+        return listByPage(request, 1, "orderTime", "desc", null, model);
     }
 
     @GetMapping("/orders/page/{pageNum}")
     public String listByPage(
-            @AuthenticationPrincipal CustomerDetails customerDetails,
+            HttpServletRequest request,
             @PathVariable("pageNum") Integer pageNum,
             @RequestParam(name = "sortField") String sortField,
             @RequestParam(name = "sortDir") String sortDir,
-            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "orderKeyword", required = false) String keyword,
             Model model
-    ) {
-        String customerEmail = customerDetails.getUsername();
+    ) {;
+        String customerEmail  =  getEmailOfAuthenticatedCustomer(request);
         Customer customer = customerService.findCustomerByEmail(customerEmail);
         Page<Order> page = orderService.listForCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
 
@@ -69,4 +70,26 @@ public class OrderController {
 
         return "order/orders_customer";
     }
+
+
+    @GetMapping("/orders/details/{id}")
+    public String viewOrderDetails(
+            @PathVariable(name = "id") Integer id,
+            HttpServletRequest request,
+            Model model, RedirectAttributes ra
+    ) {
+        try {
+            String customerEmail  =  getEmailOfAuthenticatedCustomer(request);
+            Customer customer = customerService.findCustomerByEmail(customerEmail);
+            Order order =orderService.getOrder(id, customer);
+            model.addAttribute("order", order);
+            return "order/order_details_modal";
+        }catch (OrderNotFoundException e) {
+            ra.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/orders";
+        }
+    }
+
 }
+
+
