@@ -2,6 +2,7 @@ package com.shopme.order;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.Order;
+import com.shopme.common.exception.OrderNotFoundException;
 import com.shopme.customer.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

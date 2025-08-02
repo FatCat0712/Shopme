@@ -196,7 +196,7 @@ public class Order extends AbstractAddress {
 
     @Transient
     public boolean isReturnRequested() {
-        return hasStatus(OrderStatus.RETURNED);
+        return hasStatus(OrderStatus.RETURN_REQUESTED);
     }
 
     @Transient

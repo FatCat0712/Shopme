@@ -63,7 +63,9 @@
                                     </ul>
                                 </td>
                                 <td>[[${order.total}]]</td>
-                                <td>[[${order.orderStatus}]]</td>
+                                <td>
+                                    <span th:class="'textOrderStatus' + ${order.id}">[[${order.orderStatus}]]</span>
+                                </td>
 
                                 <td>
                                     <span>
@@ -71,8 +73,8 @@
                                     </span>
                                     &nbsp;
                                     &nbsp;
-                                    <span th:unless="${order.isReturnRequested()}">
-                                        <a class="fas fa-undo fa-2x icon-dark" href=""></a>
+                                    <span th:if="${order.delivered == true && order.returnRequested == false && order.returned == false}">
+                                        <a class="fas fa-undo fa-2x icon-dark linkReturnOrder" th:classappend="'linkReturn' + ${order.id}" href="" th:orderId="${order.id}" title="Return this order"></a>
                                     </span>
                                 </td>
                         </tr>
@@ -92,8 +94,8 @@
                              </span>
                             &nbsp;
                             &nbsp;
-                                <span th:unless="${order.isReturnRequested()}">
-                                        <a class="fas fa-undo fa-2x icon-dark" href="" title="Return this order"></a>
+                                <span  th:if="${order.delivered == true && order.returnRequested == false && order.returned == false}">
+                                        <a class="fas fa-undo fa-2x icon-dark linkReturnOrder" th:classappend="'linkReturn' + ${order.id}" href=""  th:orderId="${order.id}" title="Return this order"></a>
                                 </span>
                         </span>
                     </div>
@@ -108,7 +110,7 @@
                     <div class="card-footer">
                         <div>
                             <span th:replace="~{fragments :: format_currency(${order.total})}"></span>
-                            <span class="float-right">[[${order.orderStatus}]]</span>
+                            <span th:class="'float-right textOrderStatus' + ${order.id}">[[${order.orderStatus}]]</span>
                         </div>
                        <small>[[${order.orderTimeOnForm}]]</small>
                     </div>
@@ -116,7 +118,7 @@
             </div>
         </main>
 
-
+        <div th:replace="~{order/return_order_modal :: content}"></div>
 
         <div class="modal fade" id="orderDetailModal">
             <div class="modal-dialog modal-xl">
@@ -133,6 +135,10 @@
 </body>
 <script type="text/javascript">
     let moduleURL = "[[@{/orders}]]"
+    let contextPath = "[[@{/}]]";
+    let csrfHeaderName = "[[${_csrf.headerName}]]";
+    let csrfValue = "[[${_csrf.token}]]";
+
     function clearFilter() {
         window.location = moduleURL;
     }
@@ -143,12 +149,7 @@
         $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
     })
 
-    function formatCurrency(amount) {
-        return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
-    }
-
-
-
 
 </script>
+<script th:src="@{/js/return_order.js}"></script>
 </html>

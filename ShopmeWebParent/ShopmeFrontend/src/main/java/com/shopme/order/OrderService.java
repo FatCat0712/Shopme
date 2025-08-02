@@ -6,6 +6,7 @@ import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.*;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.exception.OrderNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -113,6 +114,34 @@ public class OrderService {
         else {
             return order;
         }
+    }
+
+    public void setOrderReturnRequest(OrderReturnRequest request, Customer customer) throws OrderNotFoundException {
+        Order order = orderRepository.findByIdAndCustomer(request.getOrderId(), customer);
+
+        if(order == null) {
+            throw new OrderNotFoundException("Could not find any order with ID " + request.getOrderId());
+        }
+
+        if(order.isReturnRequested()) return;
+
+        OrderTrack track = new OrderTrack();
+        track.setOrder(order);
+        track.setUpdatedTime(new Date());
+        track.setStatus(OrderStatus.RETURN_REQUESTED);
+
+        String notes = "Reason: " + request.getReason();
+        if(!"".equals(request.getNote())) {
+            notes += ". " + request.getNote();
+        }
+
+        track.setNotes(notes);
+
+        order.getOrderTracks().add(track);
+        order.setOrderStatus(OrderStatus.RETURN_REQUESTED);
+
+        orderRepository.save(order);
+
     }
 
 
