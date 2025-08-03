@@ -32,6 +32,7 @@ public class ProductController {
     private final BrandService brandService;
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final String defaultURL = "redirect:/products/page/1?sortField=name&sortDir=asc&categoryId=0";
 
     @Autowired
     public ProductController(BrandService brandService, ProductService productService, CategoryService categoryService) {
@@ -42,7 +43,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public String getProducts() {
-        return "redirect:/products/page/1?sortField=name&sortDir=asc&categoryId=0";
+        return defaultURL;
     }
 
 
@@ -97,8 +98,7 @@ public class ProductController {
             @RequestParam(name = "imageIDs", required = false) String[] imageIDs,
             @RequestParam(name = "imageNames", required = false) String[] imageNames,
             @AuthenticationPrincipal ShopmeUserDetails loggedUser,
-            RedirectAttributes redirectAttributes,
-            HttpSession session
+            RedirectAttributes redirectAttributes
     ) throws IOException {
             String message;
             if(product.getId() != null) {
@@ -130,7 +130,7 @@ public class ProductController {
                 deleteExtraImagesWereRemovedOnForm(product);
 
             }
-             return "redirect:/products";
+             return defaultURL;
     }
 
 
@@ -144,7 +144,7 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
 
         }
-        return "redirect:/products";
+        return defaultURL;
     }
 
     @GetMapping("/products/delete/{id}")
@@ -160,7 +160,7 @@ public class ProductController {
         } catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "redirect:/products";
+        return defaultURL;
     }
 
     @GetMapping("/products/edit/{id}")
@@ -190,7 +190,7 @@ public class ProductController {
             return "products/product_form";
         }catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/products";
+            return defaultURL;
         }
 
 
@@ -204,8 +204,9 @@ public class ProductController {
             return "products/product_detail_modal";
         }catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return defaultURL;
         }
-        return "redirect:/products";
+
 
     }
 

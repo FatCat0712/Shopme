@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
+import static com.shopme.common.entity.Constants.SUPABASE_URI;
+
 @Component
 public class SettingFilter implements Filter {
     private final SettingService settingService;
@@ -34,6 +36,8 @@ public class SettingFilter implements Filter {
         generalSettings.forEach(setting -> {
             request.setAttribute(setting.getKey(), setting.getValue());
         });
+
+        request.setAttribute("SUPABASE_URI", SUPABASE_URI);
 
 
         filterChain.doFilter(request, response);

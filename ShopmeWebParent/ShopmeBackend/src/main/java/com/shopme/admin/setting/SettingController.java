@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.shopme.common.entity.Constants.SUPABASE_URI;
+
 @Controller
 public class SettingController {
     private final SettingService settingService;
@@ -37,6 +39,7 @@ public class SettingController {
         List<Currency> listCurrencies = currencyRepository.findAllByOrderByNameAsc();
 
         model.addAttribute("listCurrencies", listCurrencies);
+        model.addAttribute("SUPABASE_URI", SUPABASE_URI);
         listSettings.forEach(setting -> model.addAttribute(setting.getKey(), setting.getValue()));
 
         return "settings/settings";

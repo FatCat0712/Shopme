@@ -94,7 +94,7 @@ public class Category extends IdBasedEntity{
     @Transient
     public String getImagePath() {
         if(id == null || image == null || image.equals("default.png"))  return "/images/image-thumbnail.png";
-        return "/category-images/" + this.id + "/" + image;
+        return Constants.SUPABASE_URI + "/category-images/" + this.id + "/" + image;
     }
 
     @Transient

@@ -14,7 +14,7 @@ xmlns:th="http://www.thymeleaf.org"
                 </div>
 
                 <div class="row">
-                        <a class="col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none" th:each="cat : ${listCategories}"  th:href="@{'/c/' + ${cat.alias}}">
+                        <a class="col-6 col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none" th:each="cat : ${listCategories}"  th:href="@{'/c/' + ${cat.alias}}">
                                 <div>
                                         <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
                                 </div>

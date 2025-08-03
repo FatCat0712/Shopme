@@ -2,6 +2,7 @@ package com.shopme.common.entity.product;
 
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.Constants;
 import com.shopme.common.entity.IdBasedEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,10 +22,11 @@ public class Product extends IdBasedEntity {
     @Column(unique = true, length = 256, nullable = false)
     private String alias;
 
-    @Column(length = 2048, nullable = false, name = "short_description")
+    @Column(length = 4096, nullable = false, name = "short_description")
     private String shortDescription;
 
-    @Column(length = 4096, nullable = false, name = "full_description")
+    @Lob
+    @Column(columnDefinition = "TEXT", nullable = false, name = "full_description")
     private String fullDescription;
 
     @Column(name = "created_time")
@@ -109,7 +111,7 @@ public class Product extends IdBasedEntity {
     @Transient
     public String getMainImagePath() {
         if(id == null || mainImage == null) return "/images/image-thumbnail.png";
-        return "/product-images/" + this.id + "/" + this.mainImage;
+        return Constants.SUPABASE_URI +  "/product-images/" + this.id + "/" + this.mainImage;
     }
 
     @Transient

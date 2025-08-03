@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 <div th:fragment="content" th:remove="tag">
         <div class="form-group row">
-            The following information iss important to calculate shipping cost for the product.</br>
+            The following information iss important to calculate shipping cost for the product.<br>
             The dimensions (L X W X H) is for the box that is used to package the product - not the product's dimensions
         </div>
 
@@ -34,8 +34,10 @@
                 <input type="number" step="0.01" class="form-control" th:field="*{weight}">
             </div>
         </div>
-
 </div>
+
+
+
 
 
 
