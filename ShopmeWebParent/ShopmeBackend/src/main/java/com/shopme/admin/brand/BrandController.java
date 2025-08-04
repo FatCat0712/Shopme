@@ -1,6 +1,6 @@
 package com.shopme.admin.brand;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.category.CategoryService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
@@ -26,6 +26,8 @@ public class BrandController {
     private final BrandService brandService;
     private final CategoryService categoryService;
 
+    private final String defaultURL =  "redirect:/brands/page/1?sortField=name&sortDir=asc";
+
     @Autowired
     public BrandController(BrandService brandService, CategoryService categoryService) {
         this.brandService = brandService;
@@ -34,7 +36,7 @@ public class BrandController {
 
     @GetMapping("/brands")
     public String getBrands() {
-        return "redirect:/brands/page/1?sortField=name&sortDir=asc";
+        return defaultURL;
     }
 
     @GetMapping("/brands/page/{pageNum}")
@@ -69,10 +71,10 @@ public class BrandController {
 
              Brand savedBrand = brandService.save(brand);
 
-             String uploadDir = "ShopmeWebParent/brand-logos/" + savedBrand.getId();
+             String uploadDir = "brand-logos/" + savedBrand.getId();
 
-             FileUploadUtil.cleanDir(uploadDir);
-             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+             SupabaseS3Util.removeFolder(uploadDir);
+             SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
          }
          else {
              if(brand.getLogo().isEmpty()) {
@@ -82,7 +84,7 @@ public class BrandController {
 
          brandService.save(brand);
 
-         return "redirect:/brands";
+         return defaultURL;
     }
 
 
@@ -98,7 +100,7 @@ public class BrandController {
             return "brands/brand_form";
         }catch (BrandNotFound ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-            return "redirect:/brands";
+            return defaultURL;
         }
     }
 
@@ -106,12 +108,15 @@ public class BrandController {
     public String deleteBrand(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes) {
         try {
              brandService.delete(id);
+             String brandDir = "brand-logos/" + id;
+            SupabaseS3Util.removeFolder(brandDir);
+            redirectAttributes.addFlashAttribute("message", String.format("The brand with id %d has been deleted successfully", id));
+            return defaultURL;
         }catch (BrandNotFound ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-            return "redirect:/brands";
+            return defaultURL;
         }
-        redirectAttributes.addFlashAttribute("message", String.format("The brand with id %d has been deleted successfully", id));
-        return "redirect:/brands";
+
     }
 
 

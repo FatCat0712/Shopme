@@ -1,6 +1,6 @@
 package com.shopme.admin.product;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.product.ProductImage;
 import org.slf4j.Logger;
@@ -9,10 +9,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,24 +18,17 @@ public class ProductSaveHelper  {
     private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 
     static void deleteExtraImagesWereRemovedOnForm(Product product) {
-        String extraImageDir = "ShopmeWebParent/product-images/" + product.getId() + "/extras";
-        Path extraImageDirPath = Paths.get(extraImageDir);
+        String extraImageDir = "product-images/" + product.getId() + "/extras";
+        List<String> listObjectKeys = SupabaseS3Util.listFolder(extraImageDir);
 
-        try {
-            Files.list(extraImageDirPath).forEach(file -> {
-                String fileName = file.toFile().getName();
-                if(!product.containsImageName(fileName)) {
-                    try {
-                        Files.delete(file);
-                        log.info("Deleted extra image file: " + fileName);
-                    } catch (IOException e) {
-                        log.error("Could not delete extra image: " + fileName);
-                    }
-                }
-            });
-        } catch (IOException e) {
-            log.info("Could not list directory: " + extraImageDir);
-        }
+        listObjectKeys.forEach(file -> {
+            int lastIndexOfSlash = file.lastIndexOf("/");
+            String fileName = file.substring(lastIndexOfSlash + 1);
+            if(!product.containsImageName(fileName)) {
+                SupabaseS3Util.deleteFile(file);
+                System.out.println("Deleted extra image: " + fileName);
+            }
+        });
     }
 
     static void setExistingExtraImageNames(String[] imageIDs, String[] imageNames, Product product) {
@@ -74,17 +65,24 @@ public class ProductSaveHelper  {
     static void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts, Product savedproduct) throws IOException {
         if(!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(mainImageMultipart.getOriginalFilename()));
-            String uploadDir = "ShopmeWebParent/product-images/" + savedproduct.getId();
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
+            String uploadDir = "product-images/" + savedproduct.getId();
+
+            List<String> listObjectKeys = SupabaseS3Util.listFolder(uploadDir);
+
+            for(String key : listObjectKeys) {
+                if(!key.contains("/extras/")) {
+                    SupabaseS3Util.deleteFile(key);
+                }
+            }
+            SupabaseS3Util.uploadFile(uploadDir, fileName, mainImageMultipart.getInputStream());
         }
 
         if(extraImageMultiparts.length > 0) {
-            String uploadDir = "ShopmeWebParent/product-images/" + savedproduct.getId() + "/extras";
+            String uploadDir = "product-images/" + savedproduct.getId() + "/extras";
             for(MultipartFile multipartFile : extraImageMultiparts) {
                 if(multipartFile.isEmpty()) continue;
                 String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+                SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
             }
         }
 

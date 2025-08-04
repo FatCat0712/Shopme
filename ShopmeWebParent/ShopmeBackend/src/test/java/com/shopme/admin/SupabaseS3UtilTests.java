@@ -10,7 +10,7 @@ import java.util.List;
 public class SupabaseS3UtilTests {
     @Test
     public void testListFolder() {
-        String folderName = "user-photos";
+        String folderName = "product-images/10/";
         List<String> listKeys = SupabaseS3Util.listFolder(folderName);
         listKeys.forEach(System.out::println);
     }

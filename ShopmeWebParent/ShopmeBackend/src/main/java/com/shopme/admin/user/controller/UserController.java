@@ -1,6 +1,6 @@
 package com.shopme.admin.user.controller;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.user.UserNotFoundException;
@@ -26,6 +26,7 @@ import java.util.Objects;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final String defaultURL = "redirect:/users/page/1?sortField=firstName&sortDir=asc";
 
     @Autowired
     public UserController(UserService userService) {
@@ -34,7 +35,7 @@ public class UserController {
 
     @GetMapping("/users")
     public String listFirstPage() {
-       return "redirect:/users/page/1?sortField=firstName&sortDir=asc";
+       return defaultURL;
     }
 
     @GetMapping("/users/page/{pageNum}")
@@ -66,9 +67,9 @@ public class UserController {
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             user.setPhotos(fileName);
              User savedUser =   userService.save(user);
-            String uploadDir = "ShopmeWebParent/ShopmeBackend/user-photos/" + savedUser.getId();
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            String uploadDir = "user-photos/" + savedUser.getId();
+            SupabaseS3Util.removeFolder(uploadDir);
+            SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
         }
         else {
             if(user.getPhotos().isEmpty()) {
@@ -105,6 +106,8 @@ public class UserController {
     public String deleteUser(@PathVariable(name ="id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             userService.delete(id);
+            String userPhotoDir = "user-photos/" + id;
+            SupabaseS3Util.removeFolder(userPhotoDir);
             redirectAttributes.addFlashAttribute("message", String.format("The user ID %d has been deleted successfully", id));
         } catch (UserNotFoundException exception) {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());

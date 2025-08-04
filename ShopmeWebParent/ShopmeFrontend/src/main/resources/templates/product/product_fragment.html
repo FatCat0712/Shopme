@@ -8,7 +8,7 @@
                     <img th:src="@{${product.mainImagePath}}"
                          class="card-img-top p-2 mx-auto d-block"
                          style="width: 150px; height: 150px; object-fit: contain;"
-                         alt="[[${product.shortName}]]" />
+                         th:alt="${product.shortName}" />
                     <div class="card-body p-2">
                         <h6 class="card-title mb-1 text-truncate" style="max-width: 100%">[[${product.shortName}]]</h6>
                         <div th:replace="~{product/product_fragment :: product_price}">...</div>

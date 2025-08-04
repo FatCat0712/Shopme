@@ -1,6 +1,6 @@
 package com.shopme.admin.setting;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.currency.CurrencyRepository;
 import com.shopme.common.entity.Currency;
 import com.shopme.common.entity.setting.Setting;
@@ -87,12 +87,11 @@ public class SettingController {
     private void saveSiteLogo(MultipartFile multipartFile, GeneralSettingBag settingBag) throws IOException {
         if(!multipartFile.isEmpty()) {
             String fileName =  "/site-logo/" + StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            String uploadDir = "ShopmeWebParent/site-logo/";
             settingBag.updateSiteLogo(fileName);
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
+            String uploadDir = "site-logo";
+            SupabaseS3Util.removeFolder(uploadDir);
+            SupabaseS3Util.uploadFile(uploadDir, fileName.replace("/site-logo/", ""), multipartFile.getInputStream());
         }
     }
 

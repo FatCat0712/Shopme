@@ -27,7 +27,6 @@ public class SupabaseS3Util {
         SUPABASE_REGION = System.getenv("SUPABASE_REGION");
         SUPABASE_ACCESS_KEY_ID = System.getenv("SUPABASE_ACCESS_KEY_ID");
         SUPABASE_SECRET_ACCESS_KEY = System.getenv("SUPABASE_SECRET_ACCESS_KEY");
-        System.setProperty("https.protocols", "TLSv1.2");
 
     }
 
@@ -67,6 +66,7 @@ public class SupabaseS3Util {
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(BUCKET_NAME)
                 .key(folderName + "/" + fileName)
+                .contentType("image/png")
                 .acl("public-read")
                 .build();
 

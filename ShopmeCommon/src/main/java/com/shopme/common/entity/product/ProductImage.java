@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.shopme.common.entity.Constants.SUPABASE_URI;
+
 @Entity
 @Table(name = "product_images")
 @Getter
@@ -35,6 +37,6 @@ public class ProductImage extends IdBasedEntity {
     @Transient
     public String getImagePath() {
         if(id == null) return "/images/image-thumbnail.png";
-        return "/product-images/" + this.product.getId() + "/extras/" + name;
+        return SUPABASE_URI + "/product-images/" + this.product.getId() + "/extras/" + name;
     }
 }

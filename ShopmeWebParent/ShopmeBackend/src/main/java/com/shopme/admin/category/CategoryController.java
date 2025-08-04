@@ -1,6 +1,6 @@
 package com.shopme.admin.category;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.common.entity.Category;
 import com.shopme.common.exception.CategoryNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -84,10 +84,9 @@ public class CategoryController {
 
                 Category savedCategory = categoryService.save(category);
 
-                String uploadDir = "ShopmeWebParent/category-images/" + savedCategory.getId();
-
-                FileUploadUtil.cleanDir(uploadDir);
-                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+                String uploadDir = "category-images/" + savedCategory.getId();
+                SupabaseS3Util.removeFolder(uploadDir);
+                SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
             }
             else {
                 if(category.getImage().isEmpty()) {
@@ -125,8 +124,8 @@ public class CategoryController {
     public String deleteCategory(@PathVariable(name = "id") Integer id , RedirectAttributes redirectAttributes) {
         try {
             categoryService.delete(id);
-            String uploadDir = "ShopmeWebParent/category-images/" + id;
-            FileUploadUtil.removeDir(uploadDir);
+            String uploadDir = "category-images/" + id;
+            SupabaseS3Util.removeFolder(uploadDir);
             redirectAttributes.addFlashAttribute("message", String.format("The category ID %d has been deleted successfully", id));
         } catch (CategoryNotFoundException exception) {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());

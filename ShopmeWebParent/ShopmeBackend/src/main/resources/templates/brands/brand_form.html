@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf">
-<head th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">...</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">...</div>
 <body>
         <div class="container-fluid">
             <div th:replace="~{navigation :: menu}">...</div>
@@ -37,9 +37,7 @@
                                 <label class="col-sm-4 col-form-label">Select one or more categories:</label>
                                 <div class="col-sm-8">
                                     <select  class="form-control" th:field="*{categories}" multiple style="resize: vertical; height: 200px">
-                                        <th:block  th:each="category : ${listCategories}">
-                                            <option th:value="${category.id}">[[${category.name}]]</option>
-                                        </th:block>
+                                            <option th:each="category : ${listCategories}" th:value="${category.id}">[[${category.name}]]</option>
                                     </select>
                                 </div>
                             </div>
@@ -70,7 +68,10 @@
 
 
 <script type="text/javascript">
-        moduleURL = "[[@{/brands}]]";
+        let moduleURL = "[[@{/brands}]]";
+        let MAX_FILE_SIZE = 102400; //100KB
+        let dropDownCategories;
+        let divChosenCategories;
 
      $(document).ready(function() {
           dropDownCategories = $("#categories");
@@ -84,28 +85,27 @@
 
     function showChosenCategories() {
         dropDownCategories.children("option:selected").each(function() {
-                selectedCategory = $(this);
-                catId = selectedCategory.val();
-                catName = selectedCategory.text().replaceAll("--", "");
+                let selectedCategory = $(this);
+                let catName = selectedCategory.text().replaceAll("--", "");
 
                 divChosenCategories.append("<span class='badge badge-secondary m-1'>" + catName + "</span>")
         });
     }
 
     function checkUniqueName(form) {
-            brandId = $('#id').val();
-            brandName = $('#name').val();
-            csrfValue = $("input[name='_csrf']").val();
+            let brandId = $('#id').val();
+            let brandName = $('#name').val();
+            let csrfValue = $("input[name='_csrf']").val();
 
-            url = "[[@{/brands/check_name}]]";
+            let url = "[[@{/brands/check_name}]]";
 
-            params = {id: brandId, name: brandName, _csrf: csrfValue};
+            let params = {id: brandId, name: brandName, _csrf: csrfValue};
 
             $.post(url, params, function(response) {
-                    if(response == "OK") {
-                           this.submit();
+                    if(response === "OK") {
+                           form.submit();
                     }
-                    else if(response == "Duplicate") {
+                    else if(response === "Duplicate") {
                         showWarningModal("There is another brand having the same name " + brandName);
                     }
                     else {
@@ -120,6 +120,6 @@
 
 
 </script>
-
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>
