@@ -52,6 +52,17 @@ public class Order extends AbstractAddress {
     @OrderBy("updatedTime ASC")
     private List<OrderTrack> orderTracks = new ArrayList<>();
 
+    public Order() {
+    }
+
+    public Order(Integer id , Date orderTime, float productCost, float subTotal, float total) {
+        this.id = id;
+        this.orderTime = orderTime;
+        this.productCost = productCost;
+        this.subTotal = subTotal;
+        this.total = total;
+    }
+
     public void copyAddressFromCustomer() {
         this.setFirstName(customer.getFirstName());
         this.setLastName(customer.getLastName());

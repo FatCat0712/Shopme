@@ -17,11 +17,12 @@
                 </div>
 
                 <th:block th:each="productImage, status : ${product.images}">
-                    <div class="col border m-3 p-2"  th:id="'divExtraImage' + ${status.index}">
+                    <div class="col border m-3 p-2"  th:id="'divExtraImage' + ${status.index}" th:classappend="extraImageBox">
                         <div>
-                            <label>Extra Image #[[${status.index + 1}]] : [[${productImage.name}]]</label>
-                            <a class="btn fas fa-times-circle fa-2x icon-dark float-right" title="Remove this image" name="linkRemoveExtraImage"></a>
+                            <label class="extraImageLabel">Extra Image #[[${status.index + 1}]] : [[${productImage.name}]]</label>
+                            <a class="btn fas fa-times-circle fa-3x icon-dark float-right" href="" title="Remove this image" name="linkRemoveExtraImage"></a>
                         </div>
+
                         <div class="m-2">
                             <img th:id="'extraThumbnail' + ${status.index}" th:alt="'Extra image #' + ${status.index + 1} + ' preview'" class="img-fluid" th:src="@{${productImage.imagePath}}"/>
                         </div>
@@ -33,9 +34,9 @@
                     </div>
                 </th:block>
 
-                <div class="col border m-3 p-2" th:id="'divExtraImage' + ${currentExtraImagesIndex}">
+                <div class="col border m-3 p-2" th:id="'divExtraImage' + ${currentExtraImagesIndex}" th:classappend="extraImageBox">
                     <div th:id="'extraImageHeader' + ${currentExtraImagesIndex}"  >
-                        <label>Extra Image #[[${currentExtraImagesIndex + 1}]] :</label>
+                        <label class="extraImageLabel">Extra Image #[[${currentExtraImagesIndex + 1}]] :</label>
                     </div>
                     <div class="m-2">
                         <img th:id="'extraThumbnail' + ${currentExtraImagesIndex}" th:alt="'Extra image #'  + ${currentExtraImagesIndex + 1} + ' preview'" class="img-fluid" th:src="@{/images/image-thumbnail.png}"/>

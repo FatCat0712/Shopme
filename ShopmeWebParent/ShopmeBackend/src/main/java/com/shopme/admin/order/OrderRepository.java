@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
+
 @Repository
 public interface OrderRepository extends SearchRepository<Order, Integer>, JpaRepository<Order, Integer> {
     @Query("SELECT o FROM Order o WHERE " +
@@ -27,4 +30,9 @@ public interface OrderRepository extends SearchRepository<Order, Integer>, JpaRe
     Page<Order> findAll(String keyword, Pageable pageable);
 
     Long countById(Integer orderId);
+
+    @Query("SELECT NEW com.shopme.common.entity.order.Order(o.id, o.orderTime, o.productCost, o.subTotal, o.total) " +
+            "FROM Order o WHERE " +
+            "o.orderTime BETWEEN ?1 AND ?2 ORDER BY o.orderTime ASC")
+    List<Order> findByOrderTimeBetween(Date startTime, Date endTime);
 }

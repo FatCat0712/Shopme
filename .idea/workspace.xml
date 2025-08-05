@@ -5,23 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderDetailRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderDetailRepositoryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Brand.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Brand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/ProductImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/SupabaseS3Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/SupabaseS3Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/brand/BrandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/brand/BrandController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/category/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/category/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductSaveHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductSaveHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/setting/SettingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/brands/brand_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/brands/brand_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/SupabaseS3UtilTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/SupabaseS3UtilTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_fragment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/product-images/108/dell-inspiron-5593-core-i5-1035g1-ram-8gb-ssd-256gb-ssd-mx230-2gb-15-6-fhd-win-10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/product-images/108/extras/2-9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/product-images/108/extras/Dell-Inspiron-5593-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/product-images/108/extras/dell-inspiron-5593-2-1720500376.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/order/OrderDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/order/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/product/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/product_form_images.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/product_form_images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/products/product_images.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/products/product_images.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderRepositoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/order/OrderRepositoryTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,11 +33,11 @@
       <list>
         <option value="AnnotationType" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="TypeScript File" />
         <option value="HTML File" />
         <option value="Exception" />
         <option value="JavaScript File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -134,10 +128,13 @@
     "JUnit.CustomerRepositoryTests.testListCustomer.executor": "Debug",
     "JUnit.CustomerRepositoryTests.testUpdateAuthenticationType.executor": "Run",
     "JUnit.CustomerRepositoryTests.testUpdateCustomer.executor": "Run",
+    "JUnit.OrderDetailRepositoryTests.testFindWithCategoryAndTimeBetween.executor": "Run",
+    "JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween.executor": "Run",
     "JUnit.OrderRepositoryTests.testAddNewOrder.executor": "Run",
     "JUnit.OrderRepositoryTests.testCreateNewOrderWithMultipleProducts.executor": "Run",
     "JUnit.OrderRepositoryTests.testCreateNewOrderWithSingleProduct.executor": "Run",
     "JUnit.OrderRepositoryTests.testDeleteOrder.executor": "Run",
+    "JUnit.OrderRepositoryTests.testFindByOrderTimeBetween.executor": "Run",
     "JUnit.OrderRepositoryTests.testGetOrder.executor": "Run",
     "JUnit.OrderRepositoryTests.testListOrders.executor": "Run",
     "JUnit.OrderRepositoryTests.testUpdateOrder.executor": "Run",
@@ -265,7 +262,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SupabaseS3UtilTests.testListFolder">
+  <component name="RunManager" selected="JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween">
     <configuration name="Constants" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shopme.common.entity.Constants" />
       <module name="ShopmeCommon" />
@@ -286,9 +283,87 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShopmeBackend" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
+      <module name="ShopmeBackend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ShopmeFrontEnd" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontendApplication" />
       <module name="ShopmeFrontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopmeFrontEnd" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontendApplication" />
+      <module name="ShopmeFrontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderDetailRepositoryTests.testFindWithCategoryAndTimeBetween" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderDetailRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindWithCategoryAndTimeBetween" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderDetailRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindWithProductAndTimeBetween" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderRepositoryTests.testFindByOrderTimeBetween" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindByOrderTimeBetween" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PayPalApiTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.checkout.paypal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -325,6 +400,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PayPalApiTests.testGetOrderDetails" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.checkout.paypal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
+      <option name="METHOD_NAME" value="testGetOrderDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SupabaseS3UtilTests.testDeleteFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
@@ -336,6 +427,22 @@
       <option name="PACKAGE_NAME" value="com.shopme.admin" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.SupabaseS3UtilTests" />
       <option name="METHOD_NAME" value="testDeleteFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SupabaseS3UtilTests.testListFolder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.SupabaseS3UtilTests" />
+      <option name="METHOD_NAME" value="testListFolder" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -389,6 +496,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SupabaseS3UtilTests.testUploadFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.SupabaseS3UtilTests" />
+      <option name="METHOD_NAME" value="testUploadFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopmeBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="ShopmeBackend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.shopme.admin.ShopmeBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ShopmeBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="ShopmeBackend" />
@@ -408,14 +539,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShopmeFrontendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="ShopmeFrontend" />
+      <selectedOptions>
+        <option name="environmentVariables" />
+      </selectedOptions>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.shopme.ShopmeFrontendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.ShopmeBackend" />
       <item itemvalue="Application.ShopmeFrontEnd" />
-      <item itemvalue="Application.Constants" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
       <item itemvalue="JUnit.PayPalApiTests" />
-      <item itemvalue="JUnit.SupabaseS3UtilTests.testDeleteFile" />
-      <item itemvalue="JUnit.SupabaseS3UtilTests.testRemoveFolder" />
+      <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithCategoryAndTimeBetween" />
+      <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" />
+      <item itemvalue="JUnit.OrderRepositoryTests.testFindByOrderTimeBetween" />
       <item itemvalue="JUnit.SupabaseS3UtilTests.testUploadFile" />
       <item itemvalue="JUnit.SupabaseS3UtilTests.testListFolder" />
       <item itemvalue="Spring Boot.ShopmeBackendApplication" />
@@ -423,11 +565,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" />
+        <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithCategoryAndTimeBetween" />
+        <item itemvalue="JUnit.OrderRepositoryTests.testFindByOrderTimeBetween" />
         <item itemvalue="JUnit.SupabaseS3UtilTests.testListFolder" />
         <item itemvalue="JUnit.SupabaseS3UtilTests.testUploadFile" />
-        <item itemvalue="JUnit.SupabaseS3UtilTests.testRemoveFolder" />
-        <item itemvalue="JUnit.SupabaseS3UtilTests.testDeleteFile" />
-        <item itemvalue="Application.Constants" />
       </list>
     </recent_temporary>
   </component>
@@ -546,6 +688,10 @@
       <workItem from="1754285194073" duration="209000" />
       <workItem from="1754285421570" duration="8631000" />
       <workItem from="1754297733201" duration="7836000" />
+      <workItem from="1754306156456" duration="62000" />
+      <workItem from="1754310199275" duration="4814000" />
+      <workItem from="1754317991439" duration="5088000" />
+      <workItem from="1754361500371" duration="3543000" />
     </task>
     <servers />
   </component>

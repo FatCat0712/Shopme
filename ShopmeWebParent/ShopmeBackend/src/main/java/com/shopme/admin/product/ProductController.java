@@ -1,6 +1,6 @@
 package com.shopme.admin.product;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.brand.BrandService;
 import com.shopme.admin.category.CategoryService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
@@ -151,11 +151,11 @@ public class ProductController {
     public String deleteProduct(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             productService.deleteProduct(id);
-            String productExtraImagesDir = "ShopmeWebParent/product-images/" + id + "/extras";
-            String productMainImageDir =  "ShopmeWebParent/product-images/" + id;
+            String productExtraImagesDir = "product-images/" + id + "/extras";
+            String productMainImageDir =  "product-images/" + id;
 
-            FileUploadUtil.removeDir(productExtraImagesDir);
-            FileUploadUtil.removeDir(productMainImageDir);
+            SupabaseS3Util.removeFolder(productExtraImagesDir);
+            SupabaseS3Util.removeFolder(productMainImageDir);
             redirectAttributes.addFlashAttribute("message", String.format("The product with id %d has been deleted successfully", id));
         } catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());

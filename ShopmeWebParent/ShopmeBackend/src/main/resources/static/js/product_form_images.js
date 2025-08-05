@@ -1,4 +1,4 @@
-var extraImagesCount = 0;
+let extraImagesCount = 0;
 $(document).ready(function() {
     $("input[name='extraImage']").each(function(index) {
           extraImagesCount++;
@@ -11,25 +11,24 @@ $(document).ready(function() {
     })
 
     $("a[name='linkRemoveExtraImage']").each(function(index) {
-        $(this).click(function () {
+        $(this).click(function (e) {
+            e.preventDefault();
             removeExtraImage(index);
         })
     })
 });
 
 function showExtraImageThumbnail(fileInput, index) {
-         var file = fileInput.files[0];
+         let file = fileInput.files[0];
 
-
-         fileName = file.name;
-         imageNameHiddenField = $("#imageName" + index);
+         let fileName = file.name;
+         let imageNameHiddenField = $("#imageName" + index);
          if(imageNameHiddenField.length) {
              imageNameHiddenField.val(fileName);
          }
 
 
-
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function(e) {
             $("#extraThumbnail" + index).attr("src", e.target.result);
         };
@@ -37,14 +36,14 @@ function showExtraImageThumbnail(fileInput, index) {
         reader.readAsDataURL(file);
 
         if(index >= extraImagesCount - 1 ){
-            addNextExtraImageSection(index + 1);
+            addNextExtraImageSection(index);
         }
 
 }
 
 function addNextExtraImageSection(index) {
-    htmlExtraImage = `
-            <div class="col border m-3 p-2" id="divExtraImage${index}">
+    let htmlExtraImage = `
+            <div class="col border m-3 p-2 extraImageBox" id="divExtraImage${index}">
                 <div id="extraImageHeader${index}">
                     <label>Extra Image #${index + 1} :</label>
                 </div>
@@ -57,13 +56,13 @@ function addNextExtraImageSection(index) {
             </div>
     `;
 
-    htmlLinkRemove = `
-            <a class="btn fas fa-times-circle fa-2x icon-dark float-right" title="Remove this image" href="javascript:removeExtraImage(${index - 1})"></a>
+    let htmlLinkRemove = `
+            <a class="btn fas fa-times-circle fa-2x icon-dark float-right" title="Remove this image" href="javascript:removeExtraImage(${index})"></a>
     `;
 
     $("#divProductImages").append(htmlExtraImage);
 
-    $("#extraImageHeader" + (index - 1)).append(htmlLinkRemove);
+    $("#extraImageHeader" + (index)).append(htmlLinkRemove);
 
      extraImagesCount++;
 
@@ -72,6 +71,17 @@ function addNextExtraImageSection(index) {
 
 function removeExtraImage(index) {
         $("#divExtraImage" + index).remove();
+        extraImagesCount = 0;
+        $(".extraImageLabel").each(function (index, element) {
+            let currentText = $(element).text();
+            let indexOfNum = currentText.indexOf('#');
+            $(element).text(currentText.substring(0, indexOfNum + 1) + (index + 1) + currentText.substring(indexOfNum + 2));
+            extraImagesCount++;
+        })
+
+       $(".extraImageBox").each(function (index, element) {
+           $(element).attr('id', 'divExtraImage' + index);
+       })
 }
 
 
