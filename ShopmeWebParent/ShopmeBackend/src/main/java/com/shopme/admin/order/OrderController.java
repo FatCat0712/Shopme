@@ -152,7 +152,7 @@ public class OrderController {
             orderDetail.setProduct(new Product(Integer.parseInt(productIds[i])));
             orderDetail.setProductCost(Float.parseFloat(productDetailCosts[i]));
             orderDetail.setUnitPrice(Float.parseFloat(productPrices[i]));
-            orderDetail.setSubTotal(Float.parseFloat(productSubtotals[i]));
+            orderDetail.setSubtotal(Float.parseFloat(productSubtotals[i]));
             orderDetail.setQuantity(Integer.parseInt(quantities[i]));
             orderDetail.setShippingCost(Float.parseFloat(productShippingCosts[i]));
 

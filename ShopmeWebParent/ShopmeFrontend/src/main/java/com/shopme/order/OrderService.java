@@ -45,7 +45,7 @@ public class OrderService {
 
             newOrder.setCustomer(customer);
             newOrder.setProductCost(checkoutInfo.getProductCost());
-            newOrder.setSubTotal(checkoutInfo.getProductTotal());
+            newOrder.setSubtotal(checkoutInfo.getProductTotal());
             newOrder.setShippingCost(checkoutInfo.getShippingCostTotal());
             newOrder.setTax(0.0f);
             newOrder.setTotal(checkoutInfo.getPaymentTotal());
@@ -70,7 +70,7 @@ public class OrderService {
                 orderDetail.setQuantity(cartItem.getQuantity());
                 orderDetail.setUnitPrice(product.getDiscountPrice());
                 orderDetail.setProductCost(product.getCost() * cartItem.getQuantity());
-                orderDetail.setSubTotal(cartItem.getSubTotal());
+                orderDetail.setSubtotal(cartItem.getSubTotal());
                 orderDetail.setShippingCost(cartItem.getShippingCost());
                 orderDetails.add(orderDetail);
             }

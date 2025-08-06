@@ -26,7 +26,7 @@ public class Order extends AbstractAddress {
 
     private float productCost;
 
-    private float subTotal;
+    private float subtotal;
 
     private float tax;
 
@@ -55,11 +55,11 @@ public class Order extends AbstractAddress {
     public Order() {
     }
 
-    public Order(Integer id , Date orderTime, float productCost, float subTotal, float total) {
+    public Order(Integer id , Date orderTime, float productCost, float subtotal, float total) {
         this.id = id;
         this.orderTime = orderTime;
         this.productCost = productCost;
-        this.subTotal = subTotal;
+        this.subtotal = subtotal;
         this.total = total;
     }
 
@@ -93,7 +93,7 @@ public class Order extends AbstractAddress {
                 "id=" + id +
                 ", customer=" + customer.getFullName() +
                 ", orderStatus=" + orderStatus +
-                ", subTotal=" + subTotal +
+                ", subTotal=" + subtotal +
                 ", paymentMethod=" + paymentMethod +
                 '}';
     }

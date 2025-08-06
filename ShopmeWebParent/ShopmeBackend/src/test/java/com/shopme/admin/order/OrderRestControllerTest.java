@@ -15,8 +15,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class OrderRestControllerTest {
+    private final MockMvc mockMvc;
+
     @Autowired
-    private MockMvc mockMvc;
+    public OrderRestControllerTest(MockMvc mockMvc) {
+        this.mockMvc = mockMvc;
+    }
 
     @Test
     @WithMockUser(username = "user1", password = "pass1", authorities = {"Shipper"})
@@ -28,6 +32,5 @@ public class OrderRestControllerTest {
         mockMvc.perform(post(requestURL).with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());
-        ;
     }
 }

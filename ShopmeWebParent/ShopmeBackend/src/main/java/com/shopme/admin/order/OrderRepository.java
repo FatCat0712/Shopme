@@ -31,7 +31,7 @@ public interface OrderRepository extends SearchRepository<Order, Integer>, JpaRe
 
     Long countById(Integer orderId);
 
-    @Query("SELECT NEW com.shopme.common.entity.order.Order(o.id, o.orderTime, o.productCost, o.subTotal, o.total) " +
+    @Query("SELECT NEW com.shopme.common.entity.order.Order(o.id, o.orderTime, o.productCost, o.subtotal, o.total) " +
             "FROM Order o WHERE " +
             "o.orderTime BETWEEN ?1 AND ?2 ORDER BY o.orderTime ASC")
     List<Order> findByOrderTimeBetween(Date startTime, Date endTime);

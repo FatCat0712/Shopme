@@ -31,7 +31,7 @@ public class OrderDetailRepositoryTests {
         assertThat(listOrderDetails.size()).isGreaterThan(0);
 
         for(OrderDetail detail : listOrderDetails) {
-            System.out.printf("%-30s | %d | %10.2f \t| %10.2f \t| %10.2f \n", detail.getProduct().getCategory().getName(), detail.getQuantity(), detail.getProductCost(), detail.getShippingCost(), detail.getSubTotal());
+            System.out.printf("%-30s | %d | %10.2f \t| %10.2f \t| %10.2f \n", detail.getProduct().getCategory().getName(), detail.getQuantity(), detail.getProductCost(), detail.getShippingCost(), detail.getSubtotal());
         }
     }
 
@@ -44,7 +44,7 @@ public class OrderDetailRepositoryTests {
         assertThat(listOrderDetails.size()).isGreaterThan(0);
 
         for(OrderDetail detail : listOrderDetails) {
-            System.out.printf("%-80s | %d | %10.2f \t| %10.2f \t| %10.2f \n",detail.getProduct().getShortName(), detail.getQuantity(), detail.getProductCost(), detail.getShippingCost(), detail.getSubTotal());
+            System.out.printf("%-80s | %d | %10.2f \t| %10.2f \t| %10.2f \n",detail.getProduct().getShortName(), detail.getQuantity(), detail.getProductCost(), detail.getShippingCost(), detail.getSubtotal());
         }
     }
 }

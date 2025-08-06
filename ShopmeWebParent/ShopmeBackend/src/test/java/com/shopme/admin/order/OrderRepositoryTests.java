@@ -49,7 +49,7 @@ public class OrderRepositoryTests {
         orderDetail1.setProductCost(product1.getCost());
         orderDetail1.setShippingCost(10);
         orderDetail1.setQuantity(1);
-        orderDetail1.setSubTotal(product1.getPrice());
+        orderDetail1.setSubtotal(product1.getPrice());
         orderDetail1.setUnitPrice(product1.getPrice());
 
 
@@ -58,7 +58,7 @@ public class OrderRepositoryTests {
         mainOrder.setProductCost(product1.getCost());
         mainOrder.setTax(0);
         float subTotal = product1.getPrice();
-        mainOrder.setSubTotal(subTotal);
+        mainOrder.setSubtotal(subTotal);
         mainOrder.setTotal(subTotal);
 
         mainOrder.setPaymentMethod(PaymentMethod.COD);
@@ -87,7 +87,7 @@ public class OrderRepositoryTests {
         orderDetail1.setProductCost(product1.getCost());
         orderDetail1.setShippingCost(10);
         orderDetail1.setQuantity(1);
-        orderDetail1.setSubTotal(product1.getPrice());
+        orderDetail1.setSubtotal(product1.getPrice());
         orderDetail1.setUnitPrice(product1.getPrice());
 
         OrderDetail orderDetail2 = new OrderDetail();
@@ -96,7 +96,7 @@ public class OrderRepositoryTests {
         orderDetail2.setProductCost(product2.getCost());
         orderDetail2.setShippingCost(20);
         orderDetail2.setQuantity(2);
-        orderDetail2.setSubTotal(product2.getPrice() * 2);
+        orderDetail2.setSubtotal(product2.getPrice() * 2);
         orderDetail2.setUnitPrice(product2.getPrice());
 
         mainOrder.getOrderDetails().add(orderDetail1);
@@ -106,7 +106,7 @@ public class OrderRepositoryTests {
         mainOrder.setProductCost(product1.getCost() + product2.getCost());
         mainOrder.setTax(0);
         float subTotal = product1.getPrice() + product2.getPrice() * 2;
-        mainOrder.setSubTotal(subTotal);
+        mainOrder.setSubtotal(subTotal);
         mainOrder.setTotal(subTotal);
 
         mainOrder.setPaymentMethod(PaymentMethod.COD);
@@ -196,7 +196,7 @@ public class OrderRepositoryTests {
         assertThat(listByOrderTime.size()).isGreaterThan(0);
 
         for(Order order : listByOrderTime) {
-            System.out.printf("%s | %s | %.2f | %.2f | %.2f \n", order.getId(), order.getOrderTime(), order.getProductCost(), order.getSubTotal(), order.getTotal());
+            System.out.printf("%s | %s | %.2f | %.2f | %.2f \n", order.getId(), order.getOrderTime(), order.getProductCost(), order.getSubtotal(), order.getTotal());
         }
 
     }

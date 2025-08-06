@@ -27,7 +27,6 @@ public class SupabaseS3Util {
         SUPABASE_REGION = System.getenv("SUPABASE_REGION");
         SUPABASE_ACCESS_KEY_ID = System.getenv("SUPABASE_ACCESS_KEY_ID");
         SUPABASE_SECRET_ACCESS_KEY = System.getenv("SUPABASE_SECRET_ACCESS_KEY");
-
     }
 
     private static S3Client createClient() {

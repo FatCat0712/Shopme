@@ -12,6 +12,7 @@ public class ReportItem {
     private float grossSales;
     private float netSales;
     private int ordersCount;
+    private int productsCount;
 
     public ReportItem() {
     }
@@ -24,6 +25,13 @@ public class ReportItem {
         this.identifier = identifier;
         this.grossSales = grossSales;
         this.netSales = netSales;
+    }
+
+    public ReportItem(String identifier, float grossSales, float netSales, int productsCount) {
+        this.identifier = identifier;
+        this.grossSales = grossSales;
+        this.netSales = netSales;
+        this.productsCount = productsCount;
     }
 
     @Override
@@ -48,5 +56,9 @@ public class ReportItem {
 
     public void increaseOrderCount() {
         this.ordersCount++;
+    }
+
+    public void increaseProductCount(int count) {
+        this.productsCount += count;
     }
 }

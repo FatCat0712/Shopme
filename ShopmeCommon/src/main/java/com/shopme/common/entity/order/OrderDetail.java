@@ -3,10 +3,7 @@ package com.shopme.common.entity.order;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.IdBasedEntity;
 import com.shopme.common.entity.product.Product;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,26 +17,27 @@ public class OrderDetail extends IdBasedEntity {
     private float productCost;
     private float shippingCost;
     private float unitPrice;
-    private float subTotal;
+    private float subtotal;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(String categoryName, int quantity, float productCost, float shippingCost, float subTotal) {
+    public OrderDetail(String categoryName, int quantity, float productCost, float shippingCost, float subtotal) {
         this.product = new Product();
         this.product.setCategory(new Category(categoryName));
         this.quantity = quantity;
-        this.productCost = productCost;
+        this.productCost = productCost * quantity;
         this.shippingCost = shippingCost;
-        this.subTotal = subTotal;
+        this.subtotal = subtotal;
     }
 
-    public OrderDetail(int quantity, String productName, float productCost, float shippingCost, float Subtotal) {
+    public OrderDetail(int quantity, String productName, float productCost, float shippingCost, float subtotal) {
         this.product = new Product();
         this.product.setName(productName);
         this.quantity = quantity;
-        this.productCost = productCost;
+        this.productCost = productCost * quantity;
         this.shippingCost = shippingCost;
+        this.subtotal = subtotal;
     }
 
     @ManyToOne
