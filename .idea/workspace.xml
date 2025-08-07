@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/sales_report_by_product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/ReportRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/ReportRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/OrderDetailReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/OrderDetailReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/sales_report_fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/sales_report_fragment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/report/ReportRestControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/report/ReportRestControllerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +154,7 @@
     "JUnit.ProductRepositoryTest.testUpdateProduct.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataByCategory.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataByDateRange.executor": "Run",
+    "JUnit.ReportRestControllerTests.testGetReportDataByProduct.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataLast6Months.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataLast7Days.executor": "Run",
     "JUnit.RoleRepositoryTests.testCreateFirstRole.executor": "Run",
@@ -211,7 +213,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/projects/Shopme",
+    "last_opened_file_path": "D:/projects/Shopme/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -220,7 +222,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "terminal",
+    "settings.editor.selected.configurable": "project.propCompiler",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.1.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -230,11 +232,11 @@
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\reports" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\order" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\orders" />
-      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\checkout" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates" />
@@ -276,7 +278,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ReportRestControllerTests.testGetReportDataByCategory">
+  <component name="RunManager" selected="JUnit.ReportRestControllerTests.testGetReportDataByProduct">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -301,22 +303,6 @@
     <configuration name="ShopmeFrontEnd" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontendApplication" />
       <module name="ShopmeFrontend" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.admin.order.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.order" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.order.OrderDetailRepositoryTests" />
-      <option name="METHOD_NAME" value="testFindWithProductAndTimeBetween" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -417,6 +403,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ReportRestControllerTests.testGetReportDataByProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeBackend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
+      <option name="METHOD_NAME" value="testGetReportDataByProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ReportRestControllerTests.testGetReportDataLast6Months" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
@@ -492,19 +494,19 @@
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
       <item itemvalue="JUnit.PayPalApiTests" />
+      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByProduct" />
       <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByCategory" />
       <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByDateRange" />
       <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast6Months" />
       <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast7Days" />
-      <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByProduct" />
         <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByCategory" />
         <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByDateRange" />
         <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast6Months" />
         <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast7Days" />
-        <item itemvalue="JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween" />
       </list>
     </recent_temporary>
   </component>

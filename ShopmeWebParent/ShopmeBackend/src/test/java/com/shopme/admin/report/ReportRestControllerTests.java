@@ -60,4 +60,15 @@ public class ReportRestControllerTests {
                 .andDo(print());
     }
 
+    @Test
+    @WithMockUser(username = "user1", password = "pass1", authorities = {"Salesperson"})
+    public void testGetReportDataByProduct() throws Exception {
+        String requestURL = "/reports/product/last_7_days";
+        mockMvc.perform(get(requestURL))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+
+
 }

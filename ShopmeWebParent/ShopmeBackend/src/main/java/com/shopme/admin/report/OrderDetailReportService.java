@@ -24,12 +24,22 @@ public class OrderDetailReportService extends AbstractReportService{
         if(reportType.equals(ReportType.CATEGORY)) {
             listOrderDetails = orderDetailRepository.findWithCategoryAndTimeBetween(startDate, endDate);
         }
+        else if(reportType.equals(ReportType.PRODUCT)) {
+            listOrderDetails = orderDetailRepository.findWithProductAndTimeBetween(startDate, endDate);
+        }
 
        List<ReportItem> listReportItems = new ArrayList<>();
         if(listOrderDetails != null) {
             for(OrderDetail od : listOrderDetails) {
                 String identifier;
-                identifier = od.getProduct().getCategory().getName();
+
+                if(reportType.equals(ReportType.CATEGORY)) {
+                    identifier = od.getProduct().getCategory().getName();
+                }
+                else {
+                    identifier = od.getProduct().getShortName();
+                }
+
                 ReportItem reportItem = new ReportItem(identifier);
                 float grossSales = od.getSubtotal() + od.getShippingCost();
                 float netSales = od.getSubtotal() - od.getProductCost();
@@ -64,7 +74,13 @@ public class OrderDetailReportService extends AbstractReportService{
 
     private void printRawData(List<OrderDetail> listOrderDetails) {
         for(OrderDetail detail: listOrderDetails) {
-            System.out.printf("%d %-20s %10.2f %10.2f %10.2f \n", detail.getQuantity(), detail.getProduct().getCategory().getName(), detail.getSubtotal(), detail.getProductCost(), detail.getShippingCost());
+            System.out.printf("%d %-20s %10.2f %10.2f %10.2f \n",
+                    detail.getQuantity(),
+                    detail.getProduct().getName(),
+                    detail.getSubtotal(),
+                    detail.getProductCost(),
+                    detail.getShippingCost()
+            );
         }
     }
 }
