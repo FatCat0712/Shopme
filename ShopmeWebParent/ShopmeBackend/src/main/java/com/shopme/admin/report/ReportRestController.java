@@ -64,7 +64,7 @@ public class ReportRestController {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         Date startTime = dateFormatter.parse(startDate);
         Date endTime = dateFormatter.parse(endDate);
-        return masterOrderReportService.getReportDataByDateRange(startTime, endTime, reportType);
+        return orderDetailReportService.getReportDataByDateRange(startTime, endTime, reportType);
     }
 
 
