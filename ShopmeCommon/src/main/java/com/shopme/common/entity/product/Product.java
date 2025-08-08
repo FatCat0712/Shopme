@@ -62,6 +62,12 @@ public class Product extends IdBasedEntity {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
+    @Column(name = "average_rating")
+    private float averageRating;
+
+    @Column(name = "review_count")
+    private int reviewCount;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductImage> images = new HashSet<>();
 

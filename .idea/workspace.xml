@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/sales_report_by_product.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/review/ReviewRepositoryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/OrderDetailReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/report/OrderDetailReportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/reports.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/sales_report_fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reports/sales_report_fragment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/report/ReportRestControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/report/ReportRestControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/product/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +28,10 @@
         <option value="AnnotationType" />
         <option value="TypeScript File" />
         <option value="Exception" />
-        <option value="Interface" />
         <option value="HTML File" />
         <option value="Enum" />
         <option value="JavaScript File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -157,6 +156,12 @@
     "JUnit.ReportRestControllerTests.testGetReportDataByProduct.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataLast6Months.executor": "Run",
     "JUnit.ReportRestControllerTests.testGetReportDataLast7Days.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testCreateReview.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testDeleteReview.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testGetReview.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testListReview.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testListReviews.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testUpdateReview.executor": "Run",
     "JUnit.RoleRepositoryTests.testCreateFirstRole.executor": "Run",
     "JUnit.RoleRepositoryTests.testCreateRestRoles.executor": "Run",
     "JUnit.SettingRepositoryTest.testCreateCurrencySettings.executor": "Run",
@@ -278,7 +283,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ReportRestControllerTests.testGetReportDataByProduct">
+  <component name="RunManager" selected="JUnit.ReviewRepositoryTests.testDeleteReview">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -371,81 +376,81 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReportRestControllerTests.testGetReportDataByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewRepositoryTests.testCreateReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="PATTERN" value="com.shopme.admin.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
-      <option name="METHOD_NAME" value="testGetReportDataByCategory" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testCreateReview" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReportRestControllerTests.testGetReportDataByDateRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewRepositoryTests.testDeleteReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="PATTERN" value="com.shopme.admin.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
-      <option name="METHOD_NAME" value="testGetReportDataByDateRange" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testDeleteReview" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReportRestControllerTests.testGetReportDataByProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewRepositoryTests.testGetReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="PATTERN" value="com.shopme.admin.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
-      <option name="METHOD_NAME" value="testGetReportDataByProduct" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testGetReview" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReportRestControllerTests.testGetReportDataLast6Months" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewRepositoryTests.testListReviews" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="PATTERN" value="com.shopme.admin.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
-      <option name="METHOD_NAME" value="testGetReportDataLast6Months" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testListReviews" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReportRestControllerTests.testGetReportDataLast7Days" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewRepositoryTests.testUpdateReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.report.*" />
+          <option name="PATTERN" value="com.shopme.admin.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.report" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.report.ReportRestControllerTests" />
-      <option name="METHOD_NAME" value="testGetReportDataLast7Days" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testUpdateReview" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -494,19 +499,19 @@
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
       <item itemvalue="JUnit.PayPalApiTests" />
-      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByProduct" />
-      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByCategory" />
-      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByDateRange" />
-      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast6Months" />
-      <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast7Days" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testCreateReview" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testDeleteReview" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testGetReview" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testListReviews" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testUpdateReview" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByProduct" />
-        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByCategory" />
-        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataByDateRange" />
-        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast6Months" />
-        <item itemvalue="JUnit.ReportRestControllerTests.testGetReportDataLast7Days" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testDeleteReview" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testUpdateReview" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testGetReview" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testCreateReview" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testListReviews" />
       </list>
     </recent_temporary>
   </component>
