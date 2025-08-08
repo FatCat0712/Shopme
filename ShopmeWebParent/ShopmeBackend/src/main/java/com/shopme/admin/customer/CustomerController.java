@@ -118,8 +118,6 @@ public class CustomerController {
     }
 
 
-
-
     public String getRedirectURLtoAffectedCustomer(HttpSession session){
         int pageNum = Integer.parseInt(session.getAttribute("currentPage").toString());
         String sortField = session.getAttribute("sortField").toString();

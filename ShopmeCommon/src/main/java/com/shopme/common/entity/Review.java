@@ -4,6 +4,7 @@ import com.shopme.common.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class Review extends IdBasedEntity{
     private Customer customer;
 
     @Column(name = "review_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reviewTime;
 
     @Override
