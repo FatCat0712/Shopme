@@ -138,18 +138,12 @@
     let contextPath = "[[@{/}]]";
     let csrfHeaderName = "[[${_csrf.headerName}]]";
     let csrfValue = "[[${_csrf.token}]]";
-
-    function clearFilter() {
-        window.location = moduleURL;
-    }
-
-    $(".link-detail--order").on("click" ,function (e) {
-        e.preventDefault();
-        let linkDetailURL = $(this).attr("href");
-        $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
-    })
+      $(document).ready(function() {
+         handleDetailLink('.link-detail--order', '#orderDetailModal');
+    });
 
 
 </script>
+<script th:src="@{/js/common_list.js}"></script>
 <script th:src="@{/js/return_order.js}"></script>
 </html>

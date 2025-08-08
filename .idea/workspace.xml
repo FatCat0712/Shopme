@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewNotFound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reviews/review_details_readonly.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reviews/review_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reviews/reviews.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/common_list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/review/review_detail_modal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/review/reviews_customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/review/ReviewRepositoryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/customer/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/customer/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/review/ReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/brands/brands.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/brands/brands.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/products/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/products/product_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/fragments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/order_overview_readonly.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/order_overview_readonly.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/order_products_readonly.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/order_products_readonly.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/orders_customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/order/orders_customer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +40,8 @@
         <option value="Enum" />
         <option value="JavaScript File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Exception" />
+        <option value="Class" />
         <option value="HTML File" />
       </list>
     </option>
@@ -169,6 +168,9 @@
     "JUnit.ReportRestControllerTests.testGetReportDataLast7Days.executor": "Run",
     "JUnit.ReviewRepositoryTests.testCreateReview.executor": "Run",
     "JUnit.ReviewRepositoryTests.testDeleteReview.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testFindByCustomerAndReviewId.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testFindByCustomerNoKeyword.executor": "Run",
+    "JUnit.ReviewRepositoryTests.testFindByCustomerWithKeyword.executor": "Run",
     "JUnit.ReviewRepositoryTests.testGetReview.executor": "Run",
     "JUnit.ReviewRepositoryTests.testListReview.executor": "Run",
     "JUnit.ReviewRepositoryTests.testListReviews.executor": "Run",
@@ -229,7 +231,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/projects/Shopme/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/reviews",
+    "last_opened_file_path": "D:/projects/Shopme/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/review",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -248,11 +250,11 @@
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\review" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\reviews" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\static\js" />
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\reports" />
-      <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\order" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\ShopmeProject\ShopmeWebParent\ShopmeBackend\src\main\resources\templates" />
@@ -294,7 +296,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ReviewRepositoryTests.testDeleteReview">
+  <component name="RunManager" selected="JUnit.ReviewRepositoryTests.testFindByCustomerAndReviewId">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -382,22 +384,6 @@
       <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
       <option name="METHOD_NAME" value="testGetOrderDetails" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ReviewRepositoryTests.testCreateReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.admin.review.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
-      <option name="METHOD_NAME" value="testCreateReview" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -419,33 +405,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReviewRepositoryTests.testGetReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
+    <configuration name="ReviewRepositoryTests.testFindByCustomerAndReviewId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.review.*" />
+          <option name="PATTERN" value="com.shopme.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
-      <option name="METHOD_NAME" value="testGetReview" />
+      <option name="PACKAGE_NAME" value="com.shopme.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindByCustomerAndReviewId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReviewRepositoryTests.testListReviews" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeBackend" />
+    <configuration name="ReviewRepositoryTests.testFindByCustomerNoKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.admin.review.*" />
+          <option name="PATTERN" value="com.shopme.review.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.review" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.review.ReviewRepositoryTests" />
-      <option name="METHOD_NAME" value="testListReviews" />
+      <option name="PACKAGE_NAME" value="com.shopme.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindByCustomerNoKeyword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReviewRepositoryTests.testFindByCustomerWithKeyword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.review.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.review" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.review.ReviewRepositoryTests" />
+      <option name="METHOD_NAME" value="testFindByCustomerWithKeyword" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -510,19 +512,19 @@
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
       <item itemvalue="JUnit.PayPalApiTests" />
-      <item itemvalue="JUnit.ReviewRepositoryTests.testCreateReview" />
       <item itemvalue="JUnit.ReviewRepositoryTests.testDeleteReview" />
-      <item itemvalue="JUnit.ReviewRepositoryTests.testGetReview" />
-      <item itemvalue="JUnit.ReviewRepositoryTests.testListReviews" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerAndReviewId" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerNoKeyword" />
+      <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerWithKeyword" />
       <item itemvalue="JUnit.ReviewRepositoryTests.testUpdateReview" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerAndReviewId" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerWithKeyword" />
+        <item itemvalue="JUnit.ReviewRepositoryTests.testFindByCustomerNoKeyword" />
         <item itemvalue="JUnit.ReviewRepositoryTests.testDeleteReview" />
         <item itemvalue="JUnit.ReviewRepositoryTests.testUpdateReview" />
-        <item itemvalue="JUnit.ReviewRepositoryTests.testGetReview" />
-        <item itemvalue="JUnit.ReviewRepositoryTests.testCreateReview" />
-        <item itemvalue="JUnit.ReviewRepositoryTests.testListReviews" />
       </list>
     </recent_temporary>
   </component>

@@ -13,7 +13,7 @@
                       <a th:href="@{'/p/' + ${product.alias}}" class="text-muted text-decoration-none fw-hover-bold" target="_blank">[[${product.name}]]</a>
                       <div>
                           <div>
-                               [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subTotal})}"></span>
+                               [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subtotal})}"></span>
                           </div>
                       </div>
                   </div>
