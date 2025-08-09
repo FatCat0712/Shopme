@@ -38,9 +38,13 @@ public class ReviewController {
 
     @PostMapping("/reviews/save")
     public String saveReview(Review review, RedirectAttributes ra) {
+        try {
             reviewService.saveReview(review);
             ra.addFlashAttribute("message", "The review has been saved");
-            return defaultURL;
+        } catch (ReviewNotFound e) {
+           ra.addFlashAttribute("errorMessage", e.getMessage());
+        }
+        return defaultURL;
     }
 
     @GetMapping("/reviews/detail/{id}")

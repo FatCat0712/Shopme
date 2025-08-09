@@ -1,45 +1,63 @@
 package com.shopme.admin.review;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.product.ProductRepository;
 import com.shopme.common.entity.Review;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ReviewService {
-    private final ReviewRepository repo;
+    private final ReviewRepository reviewRepo;
+    private final ProductRepository productRepo;
 
     public static final int REVIEW_PER_PAGE = 5;
 
     @Autowired
-    public ReviewService(ReviewRepository repo) {
-        this.repo = repo;
+    public ReviewService(ReviewRepository reviewRepo, ProductRepository productRepo) {
+        this.reviewRepo = reviewRepo;
+        this.productRepo = productRepo;
     }
 
     public void listByPage(PagingAndSortingHelper helper, int pageNum) {
-        helper.listEntities(pageNum, REVIEW_PER_PAGE, repo);
+        helper.listEntities(pageNum, REVIEW_PER_PAGE, reviewRepo);
     }
 
     public Review getReview(int id) throws ReviewNotFound {
-        Optional<Review> savedReview = repo.findById(id);
+        Optional<Review> savedReview = reviewRepo.findById(id);
         if(savedReview.isEmpty()) {
             throw new ReviewNotFound("Could not find any review with ID " + id);
         }
        return savedReview.get();
     }
 
-    public void saveReview(Review review) {
-            repo.save(review);
+    public void saveReview(Review reviewInForm) throws ReviewNotFound {
+        int productId;
+        if(reviewInForm.getId() == 0) {
+            productId = reviewInForm.getProduct().getId();
+            reviewRepo.save(reviewInForm);
+        }
+        else {
+            Review reviewInDB = reviewRepo.findById(reviewInForm.getId())
+                    .orElseThrow(() -> new ReviewNotFound("Review ID " + reviewInForm.getId() + " not found"));
+            productId = reviewInDB.getProduct().getId();
+            reviewInDB.setHeadline(reviewInForm.getHeadline());
+            reviewInDB.setComment(reviewInForm.getComment());
+            reviewRepo.save(reviewInDB);
+        }
+        productRepo.updateReviewCountAndAverageRating(productId);
     }
 
     public void deleteReview(int id) throws ReviewNotFound {
-        Optional<Review> savedReview = repo.findById(id);
+        Optional<Review> savedReview = reviewRepo.findById(id);
         if(savedReview.isEmpty()) {
             throw new ReviewNotFound("Could not find any review with ID " + id);
         }
-        repo.deleteById(id);
+        reviewRepo.deleteById(id);
     }
 
 

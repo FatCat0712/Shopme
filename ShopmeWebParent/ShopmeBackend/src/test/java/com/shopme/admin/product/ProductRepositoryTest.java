@@ -14,16 +14,20 @@ import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest(showSql = false)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
 public class ProductRepositoryTest {
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository repo;
+    private final TestEntityManager entityManager;
 
     @Autowired
-    private TestEntityManager entityManager;
+    public ProductRepositoryTest(ProductRepository repo, TestEntityManager entityManager) {
+        this.repo = repo;
+        this.entityManager = entityManager;
+    }
 
     @Test
     public void testCreateProduct() {
@@ -48,7 +52,7 @@ public class ProductRepositoryTest {
         product.setCreatedTime(new Date());
         product.setUpdatedTime(new Date());
 
-        Product savedProduct = productRepository.save(product);
+        Product savedProduct = repo.save(product);
 
         assertThat(savedProduct).isNotNull();
         assertThat(savedProduct.getId()).isGreaterThan(0);
@@ -57,14 +61,14 @@ public class ProductRepositoryTest {
 
     @Test
     public void testListAllProducts() {
-       Iterable<Product> iterableProducts =  productRepository.findAll();
+       Iterable<Product> iterableProducts =  repo.findAll();
        iterableProducts.forEach( System.out::println);
     }
 
     @Test
     public void testGetProduct() {
         Integer id = 2;
-        Optional<Product> productById = productRepository.findById(id);
+        Optional<Product> productById = repo.findById(id);
         assertThat(productById.isPresent()).isTrue();
         System.out.println(productById.get());
     }
@@ -72,10 +76,10 @@ public class ProductRepositoryTest {
     @Test
     public void testUpdateProduct() {
         Integer id = 1;
-        Optional<Product> productById = productRepository.findById(id);
+        Optional<Product> productById = repo.findById(id);
         productById.ifPresent(product -> product.setPrice(499));
-
-        productRepository.save(productById.get());
+        assertTrue(productById.isPresent());
+        repo.save(productById.get());
 
         Product updatedProduct = entityManager.find(Product.class, id);
 
@@ -85,9 +89,9 @@ public class ProductRepositoryTest {
     @Test
     public void testDeleteById() {
         Integer id = 3;
-        productRepository.deleteById(id);
+        repo.deleteById(id);
 
-       Optional<Product> result = productRepository.findById(id);
+       Optional<Product> result = repo.findById(id);
 
        assertThat(result.isEmpty()).isTrue();
 
@@ -96,20 +100,31 @@ public class ProductRepositoryTest {
     @Test
     public void testSaveProductWithImages() {
         Integer productId = 1;
-        Product product = productRepository.findById(productId).get();
+        Optional<Product> product = repo.findById(productId);
+        assertTrue(product.isPresent());
+        Product savedProduct = product.get();
 
-        assertThat(product.getImages().size()).isEqualTo(6);
+        assertThat(savedProduct.getImages().size()).isEqualTo(6);
     }
 
     @Test
     public void testSaveProductWithDetails() {
         Integer productId = 1;
-        Product product = productRepository.findById(productId).get();
-        product.addDetail("Device Memory", "128 GB");
-        product.addDetail("CPU Model", "MediaTek");
-        product.addDetail("OS", "Android 10");
+        Optional<Product> product = repo.findById(productId);
+        assertTrue(product.isPresent());
+        Product savedProduct = product.get();
 
-        Product savedProduct = productRepository.save(product);
-        assertThat(savedProduct.getDetails()).isNotEmpty();
+        savedProduct.addDetail("Device Memory", "128 GB");
+        savedProduct.addDetail("CPU Model", "MediaTek");
+        savedProduct.addDetail("OS", "Android 10");
+
+        Product updatedProduct = repo.save(savedProduct);
+        assertThat(updatedProduct.getDetails()).isNotEmpty();
+    }
+
+    @Test
+    public void testUpdateReviewCountAndAverageRating() {
+        Integer productId = 100;
+        repo.updateReviewCountAndAverageRating(productId);
     }
 }

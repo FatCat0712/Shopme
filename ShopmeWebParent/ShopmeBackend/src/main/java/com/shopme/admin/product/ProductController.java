@@ -102,16 +102,21 @@ public class ProductController {
     ) throws IOException {
             String message;
             if(product.getId() != null) {
-                message = String.format("The product with %d has been updated successfully", product.getId());
+                message = String.format("The product with ID %d has been updated", product.getId());
             }
             else {
-                message = "The product has been created successfully";
+                message = "The product has been created";
             }
 
              redirectAttributes.addFlashAttribute("message", message);
             if(!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Editor")) {
                 if(loggedUser.hasRole("Salesperson")) {
-                    productService.savedProductPrice(product);
+                    try {
+                        productService.savedProductPrice(product);
+                    } catch (ProductNotFoundException e) {
+                        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+                        return defaultURL;
+                    }
                 }
             }
             else {

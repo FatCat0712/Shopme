@@ -11,22 +11,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 @Transactional
 public class ProductService {
     public static final int PRODUCTS_PER_PAGE = 5;
-    private final ProductRepository productRepository;
+    private final ProductRepository repo;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+        this.repo = productRepository;
     }
 
     public List<Product> listAll() {
-        return (List<Product>) productRepository.findAll();
+        return (List<Product>) repo.findAll();
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper, Integer categoryId) {
@@ -37,18 +36,18 @@ public class ProductService {
         if(keyword != null && !keyword.isEmpty()) {
             if(categoryId != null && categoryId > 0) {
                 String categoryIdMatch = "-" + categoryId + "-";
-                page =  productRepository.searchInCategory(categoryId, categoryIdMatch, keyword, pageable);
+                page =  repo.searchInCategory(categoryId, categoryIdMatch, keyword, pageable);
             }else {
-                page =  productRepository.findAll(keyword, pageable);
+                page =  repo.findAll(keyword, pageable);
             }
         }
         else {
             if(categoryId != null && categoryId > 0) {
                 String categoryIdMatch = "-" + categoryId + "-";
-                page =  productRepository.findAllInCategory(categoryId, categoryIdMatch, pageable);
+                page =  repo.findAllInCategory(categoryId, categoryIdMatch, pageable);
             }
             else {
-                page = productRepository.findAll(pageable);
+                page = repo.findAll(pageable);
             }
         }
 
@@ -58,7 +57,7 @@ public class ProductService {
     public void searchProducts(int pageNum, PagingAndSortingHelper helper) {
         Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
         String keyword = helper.getKeyword();
-        Page<Product> page = productRepository.searchProductsByName(keyword, pageable);
+        Page<Product> page = repo.searchProductsByName(keyword, pageable);
         helper.updateModelAttribute(pageNum, page);
     }
 
@@ -77,22 +76,25 @@ public class ProductService {
 
         product.setUpdatedTime(new Date());
 
-        return productRepository.save(product);
-
+        Product updatedProduct = repo.save(product);
+        repo.updateReviewCountAndAverageRating(updatedProduct.getId());
+        return  updatedProduct;
     }
 
-    public void savedProductPrice(Product productInForm) {
-        Product productInDB = productRepository.findById(productInForm.getId()).get();
+    public void savedProductPrice(Product productInForm) throws ProductNotFoundException {
+         Optional<Product> product = repo.findById(productInForm.getId());
+         if(product.isEmpty()) {
+             throw new ProductNotFoundException("Could not find any product with ID " + productInForm.getId());
+         }
+        Product productInDB = product.get();
         productInDB.setCost(productInForm.getCost());
         productInDB.setPrice(productInForm.getPrice());
         productInDB.setDiscountPercent(productInForm.getDiscountPercent());
-
-        productRepository.save(productInDB);
-
+        repo.save(productInDB);
     }
 
     public String checkName(Integer id, String name) {
-        Product product = productRepository.findByName(name);
+        Product product = repo.findByName(name);
 
         if(product == null) return "OK";
 
@@ -102,32 +104,28 @@ public class ProductService {
     }
 
     public void updateStatus(Integer id, Boolean status) throws ProductNotFoundException {
-        Optional<Product> saveProduct = productRepository.findById(id);
+        Optional<Product> saveProduct = repo.findById(id);
         if(saveProduct.isEmpty()) {
-            throw new ProductNotFoundException("Could not find any product with id " + id );
+            throw new ProductNotFoundException("Could not find any product with ID " + id );
         }
-        else {
-            productRepository.updateProductStatus(id, status);
-        }
+        repo.updateProductStatus(id, status);
 
     }
 
     public void deleteProduct(Integer id) throws ProductNotFoundException {
-        Optional<Product> saveProduct = productRepository.findById(id);
+        Optional<Product> saveProduct = repo.findById(id);
         if(saveProduct.isEmpty()) {
-            throw new ProductNotFoundException("Could not find any product with id " + id);
+            throw new ProductNotFoundException("Could not find any product with ID " + id);
         }
-        else {
-            productRepository.deleteById(id);
-        }
+        repo.deleteById(id);
     }
 
     public Product get(Integer id ) throws ProductNotFoundException {
-        try {
-            return productRepository.findById(id).get();
-        }catch (NoSuchElementException ex) {
+        Optional<Product> product = repo.findById(id);
+        if(product.isEmpty()) {
             throw new ProductNotFoundException("Could not find any product with ID " + id);
         }
+        return product.get();
     }
 
 
