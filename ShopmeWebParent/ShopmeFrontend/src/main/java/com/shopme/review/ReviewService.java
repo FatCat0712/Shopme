@@ -2,6 +2,7 @@ package com.shopme.review;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
+import com.shopme.common.entity.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,4 +46,11 @@ public class ReviewService {
         }
         return review;
     }
+
+    public Page<Review> list3MostRecentReviewsByProduct(Product product) {
+        Sort sort = Sort.by("reviewTime").descending();
+        Pageable pageable = PageRequest.of(0, REVIEW_PER_PAGE, sort);
+        return repo.findByProduct(product, pageable);
+    }
+
 }

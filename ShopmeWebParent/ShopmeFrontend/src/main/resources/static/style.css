@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .icon-white {
     color:white
 }

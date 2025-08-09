@@ -2,9 +2,11 @@ package com.shopme.product;
 
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.review.ReviewService;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,16 @@ import java.util.List;
 
 @Controller
 public class ProductController {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+    private final ProductService productService;
+    private final ReviewService reviewService;
 
     @Autowired
-    private ProductService productService;
+    public ProductController(CategoryService categoryService, ProductService productService, ReviewService reviewService) {
+        this.categoryService = categoryService;
+        this.productService = productService;
+        this.reviewService = reviewService;
+    }
 
     @GetMapping("/c/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable(name = "category_alias") String alias, Model model) throws CategoryNotFoundException {
@@ -78,7 +85,10 @@ public class ProductController {
             product.setFullDescription(cleanedFullDescription);
 
             List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
+            Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
+
             model.addAttribute("listCategoryParents", listByCategoryParents);
+            model.addAttribute("listReviews", listReviews);
             model.addAttribute("product", product);
             model.addAttribute("pageTitle", product.getShortName());
             return "product/product_detail";

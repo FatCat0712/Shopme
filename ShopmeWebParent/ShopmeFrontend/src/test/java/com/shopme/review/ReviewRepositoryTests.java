@@ -1,6 +1,7 @@
 package com.shopme.review;
 
 import com.shopme.common.entity.Review;
+import com.shopme.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -55,6 +56,15 @@ public class ReviewRepositoryTests {
         Review review = repo.findByCustomer(customerId, reviewId);
         assertThat(review).isNotNull();
         System.out.println(review);
+    }
 
+    @Test
+    public void testingByProduct() {
+        Product product = new Product(23);
+        Pageable pageable = PageRequest.of(0, 3);
+        Page<Review> page = repo.findByProduct(product, pageable);
+        assertThat(page.getTotalElements()).isGreaterThan(0);
+        List<Review> content = page.getContent();
+        content.forEach(System.out::println);
     }
 }
