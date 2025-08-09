@@ -4,13 +4,25 @@
 <body>
         <div th:fragment="content" class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
             <div class="card h-100 text-center border-0 shadow-sm card-hover">
-                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
+                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark" th:title="${product.name}">
                     <img th:src="@{${product.mainImagePath}}"
                          class="card-img-top p-2 mx-auto d-block"
                          style="width: 150px; height: 150px; object-fit: contain;"
                          th:alt="${product.shortName}" />
                     <div class="card-body p-2">
                         <h6 class="card-title mb-1 text-truncate" style="max-width: 100%">[[${product.shortName}]]</h6>
+                        <div>
+                            <table class="mx-auto">
+                                <tr>
+                                    <td>
+                                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" th:value="${product.averageRating}">
+                                    </td>
+                                    <td>
+                                        <small>[[${product.reviewCount}]]</small>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div th:replace="~{product/product_fragment :: product_price}">...</div>
                     </div>
                 </a>
