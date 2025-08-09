@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ReviewService {
     private final ReviewRepository repo;
 
-    private static final int REVIEW_PER_PAGE = 5;
+    public static final int REVIEW_PER_PAGE = 5;
 
     @Autowired
     public ReviewService(ReviewRepository repo) {
@@ -49,7 +49,15 @@ public class ReviewService {
 
     public Page<Review> list3MostRecentReviewsByProduct(Product product) {
         Sort sort = Sort.by("reviewTime").descending();
-        Pageable pageable = PageRequest.of(0, REVIEW_PER_PAGE, sort);
+        Pageable pageable = PageRequest.of(0, 3, sort);
+        return repo.findByProduct(product, pageable);
+    }
+
+    public Page<Review> listByProduct(Product product, int pageNum, String sortField, String sortDir) {
+        Sort sort =Sort.by(sortField);
+        if(sortDir.equals("asc")) sort = sort.ascending();
+        else if(sortDir.equals("desc")) sort = sort.descending();
+        Pageable pageable = PageRequest.of(pageNum - 1, REVIEW_PER_PAGE , sort);
         return repo.findByProduct(product, pageable);
     }
 

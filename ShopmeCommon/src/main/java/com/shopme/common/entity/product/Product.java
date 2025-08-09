@@ -100,12 +100,7 @@ public class Product extends IdBasedEntity {
     }
 
     public boolean containsImageName(String name) {
-        for (ProductImage productImage : images) {
-            if (productImage.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+      return images.stream().anyMatch(productImage -> productImage.getName().equals(name));
     }
 
 

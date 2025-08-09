@@ -22,7 +22,7 @@ public class ProductService {
         return productRepository.listByCategory(categoryId, categoryMatch, pageable);
     }
 
-    public Product getProduct(String alias) throws ProductNotFoundException {
+    public Product get(String alias) throws ProductNotFoundException {
         Product product = productRepository.findByAlias(alias);
         if(product == null) {
             throw new ProductNotFoundException("Could not found any product with alias: " + alias);

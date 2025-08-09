@@ -3,7 +3,10 @@ package com.shopme.review;
 import com.shopme.Utility;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
+import com.shopme.common.entity.product.Product;
+import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.customer.CustomerService;
+import com.shopme.product.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,12 +25,14 @@ import static com.shopme.order.OrderService.ORDER_PER_PAGE;
 public class ReviewController {
     private final ReviewService reviewService;
     private final CustomerService customerService;
+    private final ProductService productService;
     private final String defaultURL = "redirect:/reviews/page/1?sortField=reviewTime&sortDir=desc";
 
     @Autowired
-    public ReviewController(ReviewService reviewService, CustomerService customerService) {
+    public ReviewController(ReviewService reviewService, CustomerService customerService, ProductService productService) {
         this.reviewService = reviewService;
         this.customerService = customerService;
+        this.productService = productService;
     }
 
     @GetMapping("/reviews")
@@ -81,6 +86,84 @@ public class ReviewController {
         } catch (ReviewNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
             return defaultURL;
+        }
+    }
+
+    @GetMapping("/ratings/{product_alias}")
+    public String listFirstReviewPage(@PathVariable(name = "product_alias") String productAlias, Model model) {
+        try {
+            Product product = productService.get(productAlias);
+            int pageNum = 1;
+            Page<Review> page = reviewService.listByProduct(product, pageNum, "reviewTime", "desc");
+            List<Review> listReviews = page.getContent();
+
+
+            long totalItems = page.getTotalElements();
+            int totalPages = page.getTotalPages();
+
+            int startCount = (pageNum - 1) * ReviewService.REVIEW_PER_PAGE + 1;
+            long endCount = startCount + ReviewService.REVIEW_PER_PAGE - 1;
+
+            if(endCount >= totalItems) {
+                endCount = totalItems;
+            }
+
+
+            model.addAttribute("startCount", startCount);
+            model.addAttribute("endCount", endCount);
+            model.addAttribute("totalItems", totalItems);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", pageNum);
+            model.addAttribute("listReviews", listReviews);
+            model.addAttribute("product", product);
+            model.addAttribute("productAlias", productAlias);
+            model.addAttribute("sortField", "reviewTime");
+            model.addAttribute("sortDir", "desc");
+            return "review/review_product";
+
+        } catch (ProductNotFoundException e) {
+            return "error/404";
+        }
+    }
+
+    @GetMapping("/ratings/{product_alias}/page/{pageNum}")
+    public String listByPage(
+            @PathVariable(name = "product_alias") String productAlias,
+            @PathVariable(name = "pageNum") Integer pageNum,
+            @RequestParam(name = "sortField", required = false) String sortField,
+            @RequestParam(name = "sortDir", required = false) String sortDir,
+            Model model
+    ) {
+        try {
+            Product product = productService.get(productAlias);
+
+            Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
+            List<Review> listReviews = page.getContent();
+
+            long totalItems = page.getTotalElements();
+            int totalPages = page.getTotalPages();
+
+            int startCount = (pageNum - 1) * ReviewService.REVIEW_PER_PAGE + 1;
+            long endCount = startCount + ReviewService.REVIEW_PER_PAGE - 1;
+
+            if(endCount >= totalItems) {
+                endCount = totalItems;
+            }
+
+            model.addAttribute("startCount", startCount);
+            model.addAttribute("endCount", endCount);
+            model.addAttribute("totalItems", totalItems);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", pageNum);
+            model.addAttribute("listReviews", listReviews);
+            model.addAttribute("product", product);
+            model.addAttribute("productAlias", productAlias);
+            model.addAttribute("sortField", "reviewTime");
+            model.addAttribute("sortDir", "desc");
+            return "review/review_product";
+
+        } catch (ProductNotFoundException e) {
+            return "error/404";
         }
     }
 

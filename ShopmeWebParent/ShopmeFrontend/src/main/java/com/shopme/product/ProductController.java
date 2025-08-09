@@ -25,6 +25,7 @@ public class ProductController {
     private final ProductService productService;
     private final ReviewService reviewService;
 
+
     @Autowired
     public ProductController(CategoryService categoryService, ProductService productService, ReviewService reviewService) {
         this.categoryService = categoryService;
@@ -76,7 +77,7 @@ public class ProductController {
     @GetMapping("/p/{product_alias}")
     public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
         try {
-            Product product = productService.getProduct(alias);
+            Product product = productService.get(alias);
 
             String cleanedShortDescription = Jsoup.clean(product.getShortDescription(), Safelist.relaxed());
             String cleanedFullDescription = Jsoup.clean(product.getFullDescription(), Safelist.relaxed());
@@ -129,5 +130,11 @@ public class ProductController {
 
             return "product/search_result";
     }
+
+
+
+
+
+
 
 }
