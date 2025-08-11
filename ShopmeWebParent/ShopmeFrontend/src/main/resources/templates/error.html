@@ -10,7 +10,7 @@ xmlns:th="http://www.thymeleaf.org"
             <div class="m-3">
                     <h2>Sorry, an unexpected error has occurred</h2>
                 <div>
-                    <img th:src="@{/images/mascot.png}"/>
+                    <img th:src="@{${SUPABASE_URI} + ${SITE_MASCOT}}"/>
                 </div>
             </div>
             <div th:replace="~{navigation :: footer_menu}"></div>

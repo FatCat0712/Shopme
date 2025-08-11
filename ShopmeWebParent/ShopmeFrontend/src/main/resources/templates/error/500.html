@@ -10,7 +10,7 @@ xmlns:th="http://www.thymeleaf.org"
         <div class="text-center">
             <h2>Sorry, the server encountered error while processing your request</h2>
             <div>
-                <img th:src="@{/images/mascot.png}"/>
+                <img th:src="@{${SUPABASE_URI} + ${SITE_MASCOT}}"/>
             </div>
         </div>
     </main>

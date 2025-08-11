@@ -29,8 +29,18 @@
                             <label>Site Logo:</label>
                         </div>
                         <div class="col-sm-8">
-                            <img id="thumbnail" alt="Site Logo thumbnail" th:src="@{${SUPABASE_URI} + ${SITE_LOGO}}" width="150"  height="70 "/>
-                            <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg">
+                            <img id="siteLogoThumbnail" alt="Site Logo thumbnail" th:src="@{${SUPABASE_URI} + ${SITE_LOGO}}" width="150"  height="70 "/>
+                            <input type="file" id="siteLogo" name="siteLogo" accept="image/png, image/jpeg">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-4 col-form-label">
+                            <label>Site Mascot:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <img id="siteMascotThumbnail" alt="Site Mascot thumbnail" th:src="@{${SUPABASE_URI} + ${SITE_MASCOT}}" width="150"  height="70 "/>
+                            <input type="file" id="siteMascot" name="siteMascot" accept="image/png, image/jpeg">
                         </div>
                     </div>
 
@@ -97,14 +107,6 @@
                         </select>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
 
 
 

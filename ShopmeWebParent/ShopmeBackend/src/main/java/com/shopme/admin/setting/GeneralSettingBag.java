@@ -22,4 +22,10 @@ public class GeneralSettingBag extends SettingBag {
             super.update("SITE_LOGO", value);
         }
     }
+
+    public void updateSiteMascot(String value) {
+        if(value != null) {
+            super.update("SITE_MASCOT", value);
+        }
+    }
 }

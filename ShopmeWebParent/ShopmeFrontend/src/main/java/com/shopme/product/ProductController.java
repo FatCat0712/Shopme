@@ -1,6 +1,6 @@
 package com.shopme.product;
 
-import com.shopme.Utility;
+import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
@@ -8,7 +8,6 @@ import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
-import com.shopme.customer.CustomerService;
 import com.shopme.review.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.jsoup.Jsoup;
@@ -28,22 +27,18 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final ReviewService reviewService;
-    private final CustomerService customerService;
+    private final ControllerHelper controllerHelper;
+
 
     @Autowired
     public ProductController(
             CategoryService categoryService, ProductService productService,
-            ReviewService reviewService, CustomerService customerService
+            ReviewService reviewService, ControllerHelper controllerHelper
     ) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.reviewService = reviewService;
-        this.customerService = customerService;
-    }
-
-    private Customer getAuthenticatedCustomer(HttpServletRequest request) {
-        String email = Utility.getEmailOfAuthenticatedCustomer(request);
-        return customerService.findCustomerByEmail(email);
+        this.controllerHelper = controllerHelper;
     }
 
     @GetMapping("/c/{category_alias}")
@@ -101,7 +96,7 @@ public class ProductController {
             List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
             Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
 
-            Customer customer = getAuthenticatedCustomer(request);
+            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 
             if(customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());

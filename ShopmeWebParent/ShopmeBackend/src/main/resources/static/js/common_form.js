@@ -4,22 +4,29 @@ $(document).ready(
                     window.location = moduleURL;
             });
 
-            $("#fileImage").change(function() {
+            $("#siteLogo").change(function() {
                 if(!checkFileSize(this)) {
                     return;
                 }
-                showImageThumbnail(this);
+                showImageThumbnail(this, '#siteLogoThumbnail');
             });
+
+          $("#siteMascot").change(function() {
+            if(!checkFileSize(this)) {
+                return;
+            }
+            showImageThumbnail(this, '#siteMascotThumbnail');
+        });
     }
 );
 
-function showImageThumbnail(fileInput) {
+function showImageThumbnail(fileInput, id) {
+        console.log(id);
         var file = fileInput.files[0];
         var reader = new FileReader();
         reader.onload = function(e) {
-            $("#thumbnail").attr("src", e.target.result);
+            $(id).attr("src", e.target.result);
         };
-
         reader.readAsDataURL(file);
 }
 

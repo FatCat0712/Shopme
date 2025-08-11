@@ -47,9 +47,15 @@ public class SettingController {
 
 
     @PostMapping("/settings/save_general")
-    public String saveGeneralSettings(@RequestParam("fileImage")MultipartFile multipartFile, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
+    public String saveGeneralSettings(
+            @RequestParam("siteLogo") MultipartFile siteLogo,
+            @RequestParam("siteMascot") MultipartFile siteMascot,
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
+    ) throws IOException {
         GeneralSettingBag generalSettingBag = settingService.getGeneralSettingBag();
-         saveSiteLogo(multipartFile, generalSettingBag);
+         saveSiteLogo(siteLogo, generalSettingBag);
+         saveSiteMascot(siteMascot, generalSettingBag);
          saveCurrencySymbol(request, generalSettingBag);
          updateSettingValueFromForm(request, generalSettingBag.list());
 
@@ -92,6 +98,17 @@ public class SettingController {
             String uploadDir = "site-logo";
             SupabaseS3Util.removeFolder(uploadDir);
             SupabaseS3Util.uploadFile(uploadDir, fileName.replace("/site-logo/", ""), multipartFile.getInputStream());
+        }
+    }
+
+    private void saveSiteMascot(MultipartFile multipartFile, GeneralSettingBag settingBag) throws IOException {
+        if(!multipartFile.isEmpty()) {
+            String fileName =  "/mascot/" +  StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            settingBag.updateSiteMascot(fileName);
+
+            String uploadDir = "mascot";
+            SupabaseS3Util.removeFolder(uploadDir);
+            SupabaseS3Util.uploadFile(uploadDir, fileName.replace("/mascot/", ""), multipartFile.getInputStream());
         }
     }
 
