@@ -2,23 +2,37 @@
 <html lang="en">
 <body>
         <div th:fragment="content" th:remove="tag">
-              <div class="row m-1" th:each="od,status : ${order.orderDetails}"  th:with="product = ${od.product}">
-                  <div class="col-sm-1">
-                      [[${status.count}]]
-                  </div>
-                  <div class="col-sm-3">
-                      <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" class="img-fluid"/>
-                  </div>
-                  <div class="col-sm-8">
-                      <a th:href="@{'/p/' + ${product.alias}}" class="text-muted text-decoration-none fw-hover-bold" target="_blank">[[${product.name}]]</a>
-                      <div>
-                          <div>
-                               [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subtotal})}"></span>
+              <div class="m-1 card" th:each="od,status : ${order.orderDetails}"  th:with="product = ${od.product}">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm-1">
+                              [[${status.count}]]
+                          </div>
+                          <div class="col-sm-3">
+                              <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" style="max-width: 80%; max-height: 80%; object-fit:contain"/>
+                          </div>
+                          <div class="col-sm-8 d-flex flex-column" style="height: 200px">
+                              <div>
+                                  <a th:href="@{'/p/' + ${product.alias}}" class="text-muted text-decoration-none fw-hover-bold" target="_blank">[[${product.name}]]</a>
+                                  <div>
+                                      [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subtotal})}"></span>
+                                  </div>
+                              </div>
+                              <div class="mt-auto">
+                                  <div th:if="${!product.reviewedByCustomer && product.customerCanReview}">
+                                      <div>
+                                          <a th:href="@{'/write_review/product/' + ${product.id}}" class="btn btn-info">Write Review</a>
+                                      </div>
+                                  </div>
+                                  <div th:if="${product.reviewedByCustomer}">
+                                      <div>
+                                          <a th:href="@{'/reviews/page/1?sortField=reviewTime&sortDir=desc&keyword=' + ${#strings.substring(product.shortName, 0, 20)}}" class="btn btn-warning" target="_blank">See your Review</a>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>
-
-
               </div>
         </div>
 </body>

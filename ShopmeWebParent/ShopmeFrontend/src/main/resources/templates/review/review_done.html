@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <div th:replace="~{fragments :: page_head('Write Product Review', 'tag')}">...</div>
+    <link th:href="@{/star-rating/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
+    <script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
+    <link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
+    <script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <div th:replace="~{navigation :: header_menu}"></div>
+        <div th:replace="~{navigation :: search_bar}">...</div>
+        <div th:replace="~{navigation :: quick_links}">...</div>
+
+        <div>
+            <h2>
+                Write Product Review
+            </h2>
+        </div>
+
+        <div>
+            <img th:src="@{${review.product.mainImagePath}}" style="width: 200px"/>
+        </div>
+
+        <div>
+                <div>
+                    <h4>[[${review.product.name}]]</h4>
+                </div>
+                <span class="h4 text-success">
+                    Your review has been posted!
+                </span>
+        </div>
+
+        <div class="border border-secondary rounded p-3" style="max-width: 600px; margin: 0 auto">
+            <p>
+                <input type="text" th:value="${review.rating}" class="product-rating-star" dir="ltr" data-size="md" data-step="1"/>
+            </p>
+            <p>
+                <input type="text" th:value="${review.headline}" class="form-control" readonly>
+            </p>
+            <p>
+                <textarea th:text="${review.comment}" class="form-control" rows="3" cols="10" readonly></textarea>
+            </p>
+        </div>
+
+        <div>&nbsp;</div>
+        <div th:replace="~{navigation :: footer_menu}"></div>
+
+
+    </div>
+    <script type="text/javascript">
+        $(".product-rating-star").rating({
+            displayOnly: true,
+            hoverOnClear: false,
+            hoverOnClear: false,
+            theme: 'krajee-svg'
+        });
+    </script>
+</body>
+</html>
+
+

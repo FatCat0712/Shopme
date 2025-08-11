@@ -2,15 +2,18 @@
 <html lang="en"
 xmlns:th="http://www.thymeleaf.org"
 >
-
-<head th:replace="~{fragments :: page_head('Internal Server Error - Shopme', 'none')}">...</head>
-<body>
-        <div class="container-fluid">
-            <div th:replace="~{navigation :: header_menu}"></div>
-            <div class="m-3">
-                    <h2>Sorry, the server has encountered  an error while processing your request</h2>
+<head th:replace="~{fragments :: page_head('Error', 'none')}">...</head>
+<body  class="d-flex flex-column min-vh-100">
+<div class="container-fluid d-flex flex-column flex-grow-1">
+    <div th:replace="~{navigation :: header_menu}"></div>
+    <main class="flex-fill">
+        <div class="text-center">
+            <h2>Sorry, the server encountered error while processing your request</h2>
+            <div>
+                <img th:src="@{/images/mascot.png}"/>
             </div>
-            <div th:replace="~{navigation :: footer_menu}"></div>
         </div>
-</body>
+    </main>
+    <div th:replace="~{navigation :: footer_menu}"></div>
+</div>
 </html>

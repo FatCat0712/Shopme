@@ -1,12 +1,16 @@
 package com.shopme.product;
 
+import com.shopme.Utility;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.customer.CustomerService;
 import com.shopme.review.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +28,22 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final ReviewService reviewService;
-
+    private final CustomerService customerService;
 
     @Autowired
-    public ProductController(CategoryService categoryService, ProductService productService, ReviewService reviewService) {
+    public ProductController(
+            CategoryService categoryService, ProductService productService,
+            ReviewService reviewService, CustomerService customerService
+    ) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.reviewService = reviewService;
+        this.customerService = customerService;
+    }
+
+    private Customer getAuthenticatedCustomer(HttpServletRequest request) {
+        String email = Utility.getEmailOfAuthenticatedCustomer(request);
+        return customerService.findCustomerByEmail(email);
     }
 
     @GetMapping("/c/{category_alias}")
@@ -75,7 +88,7 @@ public class ProductController {
     }
 
     @GetMapping("/p/{product_alias}")
-    public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
+    public String viewProductDetail(HttpServletRequest request, @PathVariable("product_alias") String alias, Model model) {
         try {
             Product product = productService.get(alias);
 
@@ -88,10 +101,25 @@ public class ProductController {
             List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
             Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
 
+            Customer customer = getAuthenticatedCustomer(request);
+
+            if(customer != null) {
+                boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
+
+                if(customerReviewed) {
+                    model.addAttribute("customerReviewed", true);
+                }
+                else {
+                    boolean customerCanReview = reviewService.canCustomerReviewProduct(customer, product.getId());
+                    model.addAttribute("customerCanReview", customerCanReview);
+                }
+            }
+
             model.addAttribute("listCategoryParents", listByCategoryParents);
             model.addAttribute("listReviews", listReviews);
             model.addAttribute("product", product);
             model.addAttribute("pageTitle", product.getShortName());
+
             return "product/product_detail";
         } catch (ProductNotFoundException e) {
             return "error/404";

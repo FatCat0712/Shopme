@@ -143,8 +143,6 @@
     let csrfHeaderName = "[[${_csrf.headerName}]]";
     let csrfValue = "[[${_csrf.token}]]";
 
-
-
     $(document).ready(function() {
         let bigImage = $("#bigImage");
 
@@ -161,13 +159,6 @@
             $("#carouselExampleIndicators").carousel(imageIndex);
         })
 
-        $(".product-detail-rating-star").rating({
-            displayOnly: true,
-            hoverOnClear: false,
-            showCaption: false,
-            theme: 'krajee-svg'
-        })
-
         $(".link-reviews").on("click", function(e){
             e.preventDefault();
             scrollToDiv();
@@ -182,5 +173,6 @@
 <script th:src="@{/js/quantity_control.js}"></script>
 <script th:src="@{/js/common_modal.js}"></script>
 <script th:src="@{/js/add_to_cart.js}"></script>
+<script th:src="@{/js/common_rating.js}"></script>
 </body>
 </html>

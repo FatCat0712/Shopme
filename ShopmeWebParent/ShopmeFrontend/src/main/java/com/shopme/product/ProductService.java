@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductService {
     public static final int PRODUCTS_PER_PAGE = 10;
@@ -29,6 +31,16 @@ public class ProductService {
         }
         return product;
     }
+
+    public Product get(Integer id) throws ProductNotFoundException {
+        Optional<Product> savedProduct= productRepository.findById(id);
+        if(savedProduct.isEmpty()) {
+            throw new ProductNotFoundException("Could not found any product with ID: " + id);
+        }
+        return savedProduct.get();
+    }
+
+
 
     public Page<Product> search(String keyword, int pageNum) {
         Pageable pageable = PageRequest.of(pageNum -1, SEARCH_RESULTS_PER_PAGE);

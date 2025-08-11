@@ -2,8 +2,11 @@ package com.shopme.order;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.Order;
+import com.shopme.common.entity.order.OrderDetail;
+import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.OrderNotFoundException;
 import com.shopme.customer.CustomerService;
+import com.shopme.review.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,11 +26,13 @@ import static com.shopme.order.OrderService.ORDER_PER_PAGE;
 public class OrderController {
     private final OrderService orderService;
     private final CustomerService customerService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public OrderController(OrderService orderService, CustomerService customerService) {
+    public OrderController(OrderService orderService, CustomerService customerService, ReviewService reviewService) {
         this.orderService = orderService;
         this.customerService = customerService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/orders")
@@ -83,11 +88,25 @@ public class OrderController {
             String customerEmail  =  getEmailOfAuthenticatedCustomer(request);
             Customer customer = customerService.findCustomerByEmail(customerEmail);
             Order order =orderService.getOrder(id, customer);
+            setProductReviewableStatus(customer, order);
             model.addAttribute("order", order);
             return "order/order_details_modal";
         }catch (OrderNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/orders";
+        }
+    }
+
+    private void setProductReviewableStatus(Customer customer, Order order) {
+        for (OrderDetail od : order.getOrderDetails()) {
+            Product product = od.getProduct();
+            Integer productId = product.getId();
+            boolean didCustomerReviewProduct = reviewService.didCustomerReviewProduct(customer, productId);
+            product.setReviewedByCustomer(didCustomerReviewProduct);
+            if (!didCustomerReviewProduct) {
+                boolean canCustomerReviewProduct = reviewService.canCustomerReviewProduct(customer, productId);
+                product.setCustomerCanReview(canCustomerReviewProduct);
+            }
         }
     }
 

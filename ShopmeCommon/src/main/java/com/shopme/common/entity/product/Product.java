@@ -68,6 +68,12 @@ public class Product extends IdBasedEntity {
     @Column(name = "review_count")
     private int reviewCount;
 
+    @Transient
+    private boolean customerCanReview;
+
+    @Transient
+    private boolean reviewedByCustomer;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductImage> images = new HashSet<>();
 

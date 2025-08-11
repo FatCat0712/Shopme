@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,6 +73,7 @@ public class ReviewController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reversedSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("moduleURL", "/reviews");
+        model.addAttribute("keyword", keyword);
 
         return "review/reviews_customer";
     }
@@ -91,39 +93,7 @@ public class ReviewController {
 
     @GetMapping("/ratings/{product_alias}")
     public String listFirstReviewPage(@PathVariable(name = "product_alias") String productAlias, Model model) {
-        try {
-            Product product = productService.get(productAlias);
-            int pageNum = 1;
-            Page<Review> page = reviewService.listByProduct(product, pageNum, "reviewTime", "desc");
-            List<Review> listReviews = page.getContent();
-
-
-            long totalItems = page.getTotalElements();
-            int totalPages = page.getTotalPages();
-
-            int startCount = (pageNum - 1) * ReviewService.REVIEW_PER_PAGE + 1;
-            long endCount = startCount + ReviewService.REVIEW_PER_PAGE - 1;
-
-            if(endCount >= totalItems) {
-                endCount = totalItems;
-            }
-
-
-            model.addAttribute("startCount", startCount);
-            model.addAttribute("endCount", endCount);
-            model.addAttribute("totalItems", totalItems);
-            model.addAttribute("totalPages", totalPages);
-            model.addAttribute("currentPage", pageNum);
-            model.addAttribute("listReviews", listReviews);
-            model.addAttribute("product", product);
-            model.addAttribute("productAlias", productAlias);
-            model.addAttribute("sortField", "reviewTime");
-            model.addAttribute("sortDir", "desc");
-            return "review/review_product";
-
-        } catch (ProductNotFoundException e) {
-            return "error/404";
-        }
+       return listByPage(productAlias, 1,"reviewTime", "desc", model);
     }
 
     @GetMapping("/ratings/{product_alias}/page/{pageNum}")
@@ -161,6 +131,53 @@ public class ReviewController {
             model.addAttribute("sortField", "reviewTime");
             model.addAttribute("sortDir", "desc");
             return "review/review_product";
+
+        } catch (ProductNotFoundException e) {
+            return "error/404";
+        }
+    }
+
+    @GetMapping("/write_review/product/{productId}")
+    public String showReviewForm(@PathVariable(name = "productId") Integer productId, Model model, HttpServletRequest request) {
+        Review review = new Review();
+        try {
+            Product product = productService.get(productId);
+            model.addAttribute("review", review);
+            model.addAttribute("product", product);
+
+            Customer customer = getLoggedInCustomer(request);
+            boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, productId);
+
+            if(customerReviewed) {
+                model.addAttribute("customerReviewed", true);
+            }
+            else {
+                boolean canCustomerReview = reviewService.canCustomerReviewProduct(customer, productId);
+                if(canCustomerReview) {
+                    model.addAttribute("customerCanReview", true);
+                }
+                else {
+
+                    model.addAttribute("noPreviewPermission", true);
+                }
+            }
+
+            return "review/review_form";
+        } catch (ProductNotFoundException e) {
+            return "error/404";
+        }
+    }
+
+    @PostMapping("/post_review")
+    public String saveReview(Review review, Model model,@RequestParam(name = "productId") Integer productId, HttpServletRequest request) {
+        Customer customer = getLoggedInCustomer(request);
+        try {
+            Product product = productService.get(productId);
+            review.setProduct(product);
+            review.setCustomer(customer);
+            Review savedReview = reviewService.save(review);
+            model.addAttribute("review", savedReview);
+            return "review/review_done";
 
         } catch (ProductNotFoundException e) {
             return "error/404";

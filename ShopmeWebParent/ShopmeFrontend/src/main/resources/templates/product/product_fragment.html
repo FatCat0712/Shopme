@@ -66,8 +66,23 @@
                 </div>
             </div>
             <div class="mt-2">
-                <a th:href="@{'/ratings/' + ${product.alias}}">View all [[${product.reviewCount}]] ratings</a>
+                <a class="text-decoration-none" th:href="@{'/ratings/' + ${product.alias}}">View all [[${product.reviewCount}]] ratings</a>
             </div>
+            <div class="ml-1">
+                <div th:if="${customerReviewed}">
+                    <span class="text-success">You already reviewed this product.</span>
+                </div>
+                <div th:if="${customerCanReview}">
+                <span class="text-info">
+                    You purchased and got this product.
+                    <b>
+                        <a class="text-decoration-none" th:href="@{'/write_review/product/' + ${product.id}}">Write your review now</a>
+                    </b>
+                </span>
+                </div>
+            </div>
+
+
             <div class="mt-5 ml-3">
                 <th:block th:each="review : ${listReviews}">
                     <div class="my-4">

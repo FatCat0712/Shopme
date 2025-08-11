@@ -16,7 +16,7 @@
                               Product Cost:<span th:replace="~{fragments :: format_currency(${od.productCost})}"></span>
                           </div>
                           <div>
-                              Subtotal: [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subTotal})}"></span>
+                              Subtotal: [[${od.quantity}]] x <span th:replace="~{fragments :: format_currency(${od.unitPrice})}"></span> = <span th:replace="~{fragments :: format_currency(${od.subtotal})}"></span>
                           </div>
                           <div>
                               Shipping Cost: <span th:replace="~{fragments :: format_currency(${od.shippingCost})}"></span>
