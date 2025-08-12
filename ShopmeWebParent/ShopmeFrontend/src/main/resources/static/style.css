@@ -159,4 +159,13 @@ a.text-muted:hover {
     background-color: #fdeaea;
 }
 
+.carousel-item {
+    height: 70vh; /* 80% of viewport height */
+}
+.carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 

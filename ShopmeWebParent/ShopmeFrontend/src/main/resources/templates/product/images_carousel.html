@@ -18,11 +18,11 @@ xmlns:th="http://www.thymeleaf.org">
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img th:src="@{${product.mainImagePath}}" alt="First slide" height="800">
+                                        <img th:src="@{${product.mainImagePath}}" alt="First slide">
                                     </div>
                                     <th:block th:each="extraImage : ${product.images}">
                                         <div class="carousel-item">
-                                            <img  th:src="@{${extraImage.imagePath}}" height="800">
+                                            <img  th:src="@{${extraImage.imagePath}}">
                                         </div>
                                     </th:block>
 

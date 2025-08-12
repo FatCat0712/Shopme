@@ -41,6 +41,10 @@ public class User extends IdBasedEntity {
         public User() {
         }
 
+        public User(int id) {
+                this.id = id;
+        }
+
         public User(String email, String password, String firstName, String lastName) {
                 this.email = email;
                 this.password = password;
