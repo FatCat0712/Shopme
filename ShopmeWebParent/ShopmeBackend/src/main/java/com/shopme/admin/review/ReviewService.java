@@ -2,7 +2,7 @@ package com.shopme.admin.review;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.product.ProductRepository;
-import com.shopme.common.entity.Review;
+import com.shopme.common.entity.review.Review;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

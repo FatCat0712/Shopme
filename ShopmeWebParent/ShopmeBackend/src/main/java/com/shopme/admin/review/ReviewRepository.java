@@ -1,7 +1,7 @@
 package com.shopme.admin.review;
 
 import com.shopme.admin.paging.SearchRepository;
-import com.shopme.common.entity.Review;
+import com.shopme.common.entity.review.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

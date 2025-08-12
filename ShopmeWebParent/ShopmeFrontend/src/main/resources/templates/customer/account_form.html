@@ -12,7 +12,7 @@ xmlns:th="http://www.thymeleaf.org"
                         <div class="text-center">
                                 <h2>Your Account Details</h2>
                         </div>
-                        <form th:action="@{/update_account_details}" method="post" th:object="${customer}" style="width: 900px; margin: 0 auto 50px auto">
+                        <form th:action="@{/update_account_details}" method="post" th:object="${customer}" style="width: 80%; margin: 0 auto 50px auto">
                                 <div th:if="${message != null}" class="alert alert-success text-center">
                                         [[${message}]]
                                 </div>

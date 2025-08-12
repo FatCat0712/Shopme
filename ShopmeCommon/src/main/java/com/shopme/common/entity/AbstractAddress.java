@@ -18,10 +18,10 @@ public abstract class AbstractAddress extends IdBasedEntity {
     @Column(name = "phone_number", nullable = false, length = 15)
     protected String phoneNumber;
 
-    @Column(name = "address_line1", nullable = false, length = 64)
+    @Column(name = "address_line_1", nullable = false, length = 64)
     protected String addressLine1;
 
-    @Column(name = "address_line2", length = 64)
+    @Column(name = "address_line_2", length = 64)
     protected String addressLine2;
 
     @Column(nullable = false, length = 45)

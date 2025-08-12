@@ -1,5 +1,7 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.review;
 
+import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.IdBasedEntity;
 import com.shopme.common.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import java.util.Date;
 @Table(name = "reviews")
 @Getter
 @Setter
-public class Review extends IdBasedEntity{
+public class Review extends IdBasedEntity {
     @Column(name = "headline", length = 150)
     private String headline;
 
@@ -32,6 +34,15 @@ public class Review extends IdBasedEntity{
     @Column(name = "review_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reviewTime;
+
+    private int votes;
+
+    public Review() {
+    }
+
+    public Review(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

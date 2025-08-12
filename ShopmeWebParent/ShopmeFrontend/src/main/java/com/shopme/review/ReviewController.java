@@ -2,7 +2,7 @@ package com.shopme.review;
 
 import com.shopme.Utility;
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.Review;
+import com.shopme.common.entity.review.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.customer.CustomerService;

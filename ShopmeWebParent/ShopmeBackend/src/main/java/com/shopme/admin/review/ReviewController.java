@@ -2,7 +2,7 @@ package com.shopme.admin.review;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.Review;
+import com.shopme.common.entity.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

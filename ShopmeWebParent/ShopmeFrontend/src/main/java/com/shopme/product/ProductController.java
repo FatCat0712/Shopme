@@ -4,7 +4,7 @@ import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.Review;
+import com.shopme.common.entity.review.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;

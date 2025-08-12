@@ -1,7 +1,7 @@
 package com.shopme.review;
 
-import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.entity.review.Review;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,8 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -74,5 +76,15 @@ public class ReviewRepositoryTests {
         Integer productId = 199;
         Long count = repo.countByCustomerAndProduct(customerId, productId);
         assertThat(count).isEqualTo(1);
+    }
+
+    @Test
+    public void testUpdateCount() {
+        Integer reviewId = 4;
+        repo.updateVoteCount(reviewId);
+        Optional<Review> review = repo.findById(reviewId);
+        assertTrue(review.isPresent());
+        Review savedReview = review.get();
+        assertThat(savedReview.getVotes()).isEqualTo(1);
     }
 }

@@ -8,10 +8,10 @@
                           <div class="col-sm-1">
                               [[${status.count}]]
                           </div>
-                          <div class="col-sm-3">
+                          <div class="col-sm-12 col-md-3 text-center">
                               <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" style="max-width: 80%; max-height: 80%; object-fit:contain"/>
                           </div>
-                          <div class="col-sm-8 d-flex flex-column" style="height: 200px">
+                          <div class="col-sm-12 col-md-8 d-flex flex-column">
                               <div>
                                   <a th:href="@{'/p/' + ${product.alias}}" class="text-muted text-decoration-none fw-hover-bold" target="_blank">[[${product.name}]]</a>
                                   <div>
