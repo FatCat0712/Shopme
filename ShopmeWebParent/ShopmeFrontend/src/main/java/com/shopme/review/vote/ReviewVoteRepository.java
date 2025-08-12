@@ -1,4 +1,4 @@
-package com.shopme.review;
+package com.shopme.review.vote;
 
 import com.shopme.common.entity.review.ReviewVote;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +14,6 @@ public interface ReviewVoteRepository extends CrudRepository<ReviewVote, Integer
 
     @Query("SELECT rv FROM ReviewVote rv WHERE rv.review.product.id = ?1 AND rv.customer.id = ?2")
     List<ReviewVote> findByProductAndCustomer(Integer productId, Integer customerId);
+
+
 }

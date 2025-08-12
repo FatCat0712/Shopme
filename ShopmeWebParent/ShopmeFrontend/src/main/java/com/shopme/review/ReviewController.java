@@ -1,12 +1,12 @@
 package com.shopme.review;
 
-import com.shopme.Utility;
+import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.review.Review;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.ProductNotFoundException;
-import com.shopme.customer.CustomerService;
 import com.shopme.product.ProductService;
+import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,15 +25,20 @@ import static com.shopme.order.OrderService.ORDER_PER_PAGE;
 @Controller
 public class ReviewController {
     private final ReviewService reviewService;
-    private final CustomerService customerService;
     private final ProductService productService;
-    private final String defaultURL = "redirect:/reviews/page/1?sortField=reviewTime&sortDir=desc";
+    private final ControllerHelper controllerHelper;
+    private final ReviewVoteService voteService;
+    private final String defaultURL = "redirect:/reviews/page/1?sortField=votes&sortDir=desc";
 
     @Autowired
-    public ReviewController(ReviewService reviewService, CustomerService customerService, ProductService productService) {
+    public ReviewController(
+            ReviewService reviewService, ProductService productService,
+                            ControllerHelper controllerHelper, ReviewVoteService voteService
+    ) {
         this.reviewService = reviewService;
-        this.customerService = customerService;
         this.productService = productService;
+        this.controllerHelper = controllerHelper;
+        this.voteService = voteService;
     }
 
     @GetMapping("/reviews")
@@ -50,10 +55,11 @@ public class ReviewController {
             @RequestParam(name = "keyword", required = false) String keyword,
             Model model
     ) {
-        Customer customer = getLoggedInCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
         Page<Review> page = reviewService.listByCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
 
         List<Review> listReviews = page.getContent();
+
         int totalPages = page.getTotalPages();
         long totalItems = page.getTotalElements();
         int startCount = (pageNum - 1) * ORDER_PER_PAGE + 1;
@@ -80,7 +86,7 @@ public class ReviewController {
 
     @GetMapping("/review/details/{id}")
     public String viewReview(HttpServletRequest request, @PathVariable(name = "id") Integer id, RedirectAttributes ra, Model model) {
-        Customer customer = getLoggedInCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
         try {
             Review review =reviewService.getByCustomerAndId(customer, id);
             model.addAttribute("review", review);
@@ -92,8 +98,8 @@ public class ReviewController {
     }
 
     @GetMapping("/ratings/{product_alias}")
-    public String listFirstReviewPage(@PathVariable(name = "product_alias") String productAlias, Model model) {
-       return listByPage(productAlias, 1,"reviewTime", "desc", model);
+    public String listFirstReviewPage(@PathVariable(name = "product_alias") String productAlias, Model model, HttpServletRequest request) {
+       return listByPage(productAlias, 1,"reviewTime", "desc", model, request);
     }
 
     @GetMapping("/ratings/{product_alias}/page/{pageNum}")
@@ -102,13 +108,19 @@ public class ReviewController {
             @PathVariable(name = "pageNum") Integer pageNum,
             @RequestParam(name = "sortField", required = false) String sortField,
             @RequestParam(name = "sortDir", required = false) String sortDir,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
         try {
             Product product = productService.get(productAlias);
 
             Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
             List<Review> listReviews = page.getContent();
+
+            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+            if(customer != null) {
+                voteService.markReviewsVotedProductByCustomer(listReviews, product.getId(), customer.getId());
+            }
 
             long totalItems = page.getTotalElements();
             int totalPages = page.getTotalPages();
@@ -128,8 +140,8 @@ public class ReviewController {
             model.addAttribute("listReviews", listReviews);
             model.addAttribute("product", product);
             model.addAttribute("productAlias", productAlias);
-            model.addAttribute("sortField", "reviewTime");
-            model.addAttribute("sortDir", "desc");
+            model.addAttribute("sortField", sortField);
+            model.addAttribute("sortDir", sortDir);
             return "review/review_product";
 
         } catch (ProductNotFoundException e) {
@@ -145,7 +157,7 @@ public class ReviewController {
             model.addAttribute("review", review);
             model.addAttribute("product", product);
 
-            Customer customer = getLoggedInCustomer(request);
+            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
             boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, productId);
 
             if(customerReviewed) {
@@ -170,7 +182,7 @@ public class ReviewController {
 
     @PostMapping("/post_review")
     public String saveReview(Review review, Model model,@RequestParam(name = "productId") Integer productId, HttpServletRequest request) {
-        Customer customer = getLoggedInCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
         try {
             Product product = productService.get(productId);
             review.setProduct(product);
@@ -182,11 +194,6 @@ public class ReviewController {
         } catch (ProductNotFoundException e) {
             return "error/404";
         }
-    }
-
-    private Customer getLoggedInCustomer(HttpServletRequest request) {
-        String email = Utility.getEmailOfAuthenticatedCustomer(request);
-       return  customerService.findCustomerByEmail(email);
     }
 
 }

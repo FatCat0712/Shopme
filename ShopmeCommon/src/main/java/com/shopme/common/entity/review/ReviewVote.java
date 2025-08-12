@@ -2,10 +2,7 @@ package com.shopme.common.entity.review;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.IdBasedEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,7 +34,6 @@ public class ReviewVote extends IdBasedEntity {
     }
 
 
-
     @Override
     public String toString() {
         return "ReviewVote{" +
@@ -45,5 +41,15 @@ public class ReviewVote extends IdBasedEntity {
                 ", review=" + review.getId() +
                 ", votes=" + votes +
                 '}';
+    }
+
+    @Transient
+    public boolean isUpVoted() {
+        return this.votes == VOTE_UP_POINT;
+    }
+
+    @Transient
+    public boolean isDownVoted() {
+        return this.votes == VOTE_DOWN_POINT;
     }
 }

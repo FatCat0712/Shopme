@@ -32,7 +32,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
             "AND r.product.id = ?2")
     Long countByCustomerAndProduct(Integer customerId, Integer productId);
 
-    @Query("UPDATE Review r SET r.votes = (SELECT SUM (rv.votes) FROM ReviewVote rv WHERE rv.review.id = ?1) WHERE r.id = ?1")
+    @Query("UPDATE Review r SET r.votes = (SELECT COALESCE(SUM(rv.votes),0) FROM ReviewVote rv WHERE rv.review.id = ?1) WHERE r.id = ?1")
     @Modifying
     void updateVoteCount(Integer reviewId);
+
+    @Query("SELECT r.votes FROM Review r WHERE r.id = ?1")
+    Integer getVoteCount(Integer reviewId);
 }

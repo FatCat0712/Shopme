@@ -4,11 +4,12 @@ import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.review.Review;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.review.ReviewService;
+import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
@@ -27,17 +28,20 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final ReviewService reviewService;
+    private final ReviewVoteService voteService;
     private final ControllerHelper controllerHelper;
 
 
     @Autowired
     public ProductController(
             CategoryService categoryService, ProductService productService,
-            ReviewService reviewService, ControllerHelper controllerHelper
+            ReviewService reviewService, ReviewVoteService voteService,
+            ControllerHelper controllerHelper
     ) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.reviewService = reviewService;
+        this.voteService = voteService;
         this.controllerHelper = controllerHelper;
     }
 
@@ -100,6 +104,7 @@ public class ProductController {
 
             if(customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
+                voteService.markReviewsVotedProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
 
                 if(customerReviewed) {
                     model.addAttribute("customerReviewed", true);

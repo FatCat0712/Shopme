@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "reviews")
@@ -37,6 +38,13 @@ public class Review extends IdBasedEntity {
 
     private int votes;
 
+    @Transient
+    private boolean upvotedByCurrentCustomer;
+
+    @Transient
+    private boolean downvotedByCurrentCustomer;
+
+
     public Review() {
     }
 
@@ -54,5 +62,17 @@ public class Review extends IdBasedEntity {
                 ", customer=" + customer.getId() +
                 ", reviewTime=" + reviewTime +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return Objects.equals(id, review.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
