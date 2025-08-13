@@ -17,4 +17,5 @@ public interface ReviewRepository extends JpaRepository<Review, Integer>, Search
             "OR r.headline LIKE %?1% " +
             "OR r.comment LIKE %?1%")
     Page<Review> findAll(String keyword, Pageable pageable);
+
 }

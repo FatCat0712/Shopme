@@ -1,7 +1,7 @@
 package com.shopme.admin.question.export;
 
 import com.shopme.admin.AbstractExporter;
-import com.shopme.common.entity.Question;
+import com.shopme.common.entity.question.Question;
 import jakarta.servlet.http.HttpServletResponse;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;

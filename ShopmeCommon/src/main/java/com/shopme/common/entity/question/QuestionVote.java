@@ -1,4 +1,4 @@
-package com.shopme.common.entity.review;
+package com.shopme.common.entity.question;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.vote.VoteBasedEntity;
@@ -10,13 +10,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "review_votes")
+@Table(name = "question_votes")
 @Getter
 @Setter
-public class ReviewVote extends VoteBasedEntity {
+public class QuestionVote extends VoteBasedEntity {
     @ManyToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @JoinColumn(name = "question_id")
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -24,8 +24,8 @@ public class ReviewVote extends VoteBasedEntity {
 
     @Override
     public String toString() {
-        return "ReviewVote{" +
-                "review=" + review.getId() +
+        return "QuestionVote{" +
+                "question=" + question.getId() +
                 ", customer=" + customer.getId() +
                 '}';
     }

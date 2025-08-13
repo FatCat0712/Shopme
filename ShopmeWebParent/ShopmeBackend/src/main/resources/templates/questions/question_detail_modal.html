@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <div th:unless="${#strings.length(question.answerContent) > 0}" class="text-center mb-2">
+            <div th:unless="${question.answerContent != null && #strings.length(question.answerContent) > 0}" class="text-center mb-2">
                 <span class="badge bg-warning" style="font-size: 0.9rem">This question has not been answered</span>
             </div>
 

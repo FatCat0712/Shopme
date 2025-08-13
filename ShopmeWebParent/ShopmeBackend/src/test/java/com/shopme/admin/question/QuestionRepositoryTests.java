@@ -1,15 +1,13 @@
 package com.shopme.admin.question;
 
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.Question;
+import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.User;
 import com.shopme.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
@@ -33,13 +31,13 @@ public class QuestionRepositoryTests {
     @Test
     public void saveQuestion() {
         int productId = 59;
-        int customerId = 12;
+        int customerId = 7;
 
         Question question = new Question();
         question.setProduct(new Product(productId));
         question.setAsker(new Customer(customerId));
         question.setAskTime(new Date());
-        question.setQuestionContent("Is the charging cable included in the box ?");
+        question.setQuestionContent("Is thi computer touch screen ?");
         question.setApprovalStatus(false);
 
         Question savedQuestion = repo.save(question);
@@ -48,8 +46,7 @@ public class QuestionRepositoryTests {
 
     @Test
     public void listQuestions() {
-        Pageable pageable = PageRequest.of(0, 10);
-        List<Question> listQuestions = repo.findAll(null, pageable).getContent();
+        List<Question> listQuestions = repo.findAll();
         assertThat(listQuestions.size()).isGreaterThan(0);
         listQuestions.forEach(System.out::println);
     }

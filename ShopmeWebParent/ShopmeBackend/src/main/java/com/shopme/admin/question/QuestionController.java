@@ -4,7 +4,7 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.question.export.QuestionCsvExporter;
 import com.shopme.admin.user.UserService;
-import com.shopme.common.entity.Question;
+import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.User;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

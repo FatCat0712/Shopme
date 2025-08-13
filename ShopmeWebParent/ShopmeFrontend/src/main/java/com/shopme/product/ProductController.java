@@ -4,10 +4,12 @@ import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.question.QuestionService;
 import com.shopme.review.ReviewService;
 import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,19 +32,21 @@ public class ProductController {
     private final ReviewService reviewService;
     private final ReviewVoteService voteService;
     private final ControllerHelper controllerHelper;
+    private final QuestionService questionService;
 
 
-    @Autowired
+   @Autowired
     public ProductController(
             CategoryService categoryService, ProductService productService,
             ReviewService reviewService, ReviewVoteService voteService,
-            ControllerHelper controllerHelper
+            ControllerHelper controllerHelper, QuestionService questionService
     ) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.reviewService = reviewService;
         this.voteService = voteService;
         this.controllerHelper = controllerHelper;
+        this.questionService = questionService;
     }
 
     @GetMapping("/c/{category_alias}")
@@ -99,6 +103,8 @@ public class ProductController {
 
             List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
             Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
+            Page<Question> listQuestions = questionService.list3MostVotedQuestions(product);
+            Integer answeredQuestions = questionService.countOfAnsweredQuestions(product);
 
             Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 
@@ -117,6 +123,8 @@ public class ProductController {
 
             model.addAttribute("listCategoryParents", listByCategoryParents);
             model.addAttribute("listReviews", listReviews);
+            model.addAttribute("listQuestions", listQuestions);
+            model.addAttribute("answeredQuestions", answeredQuestions);
             model.addAttribute("product", product);
             model.addAttribute("pageTitle", product.getShortName());
 

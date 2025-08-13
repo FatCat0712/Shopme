@@ -3,6 +3,8 @@ package com.shopme.review.vote;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.review.Review;
 import com.shopme.common.entity.review.ReviewVote;
+import com.shopme.common.entity.vote.VoteResult;
+import com.shopme.common.entity.vote.VoteType;
 import com.shopme.review.ReviewNotFoundException;
 import com.shopme.review.ReviewRepository;
 import jakarta.transaction.Transactional;

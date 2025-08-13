@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<body>
+<div th:fragment="content"  id="questions" class="ml-3">
+    <h3>Questions & answers for this product</h3>
+
+    <div class="ml-1 my-4" th:each="question : ${listQuestions}">
+            <div class="row">
+                 <b>Questions:</b>
+                <span class="ml-3">
+                    <a class="fas fa-2x fa-sort-up icon-dark mr-1" href=""></a>
+                    [[${question.votes}]] Votes
+                    <a class="fas fa-2x fa-sort-down icon-dark ml-1" href=""></a>
+                </span>
+            </div>
+            <div>
+                [[${question.questionContent}]]
+            </div>
+            <div class="ml-2">
+                <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+            </div>
+            <div class="row">
+                <b>Answer:</b>
+            </div>
+            <div>
+                [[${question.answerContent}]]
+            </div>
+            <div class="ml-2">
+                <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+            </div>
+    </div>
+
+    <div class="row ml-2">
+        <div class="col-auto my-auto">
+            <a class="text-decoration-none" th:href="@{'/questions/' + ${product.alias} + '/page/1?sortField=askTime&sortDir=desc'}">View all [[${product.questionCount}]] questions</a>
+        </div>
+        <div class="col-auto my-auto">
+            <button sec:authorize="!isAuthenticated()" class="btn btn-secondary">
+                Ask a question
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>

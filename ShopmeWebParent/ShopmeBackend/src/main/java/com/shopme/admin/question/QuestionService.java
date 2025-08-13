@@ -1,7 +1,7 @@
 package com.shopme.admin.question;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
-import com.shopme.common.entity.Question;
+import com.shopme.common.entity.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class QuestionService {
     }
 
     public List<Question> listAll() {
-        return (List<Question>) repo.findAll();
+        return repo.findAll();
     }
 
     public void listByPage(PagingAndSortingHelper helper, int pageNum) {

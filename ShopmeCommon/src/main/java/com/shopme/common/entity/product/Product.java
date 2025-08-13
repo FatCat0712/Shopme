@@ -68,6 +68,9 @@ public class Product extends IdBasedEntity {
     @Column(name = "review_count")
     private int reviewCount;
 
+    @Column(name = "question_count")
+    private int questionCount;
+
     @Transient
     private boolean customerCanReview;
 

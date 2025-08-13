@@ -1,5 +1,8 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.question;
 
+import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.IdBasedEntity;
+import com.shopme.common.entity.User;
 import com.shopme.common.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,7 +16,7 @@ import java.util.Date;
 @Table(name = "questions")
 @Getter
 @Setter
-public class Question extends IdBasedEntity{
+public class Question extends IdBasedEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -39,13 +42,20 @@ public class Question extends IdBasedEntity{
 
     @Transient
     public boolean isAnswered() {
-        return !answerContent.isEmpty();
+        return answerContent != null  &&  !answerContent.isEmpty();
     }
 
     @Column(nullable = false)
     private boolean approvalStatus;
 
     private int votes;
+
+    public Question() {
+    }
+
+    public Question(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

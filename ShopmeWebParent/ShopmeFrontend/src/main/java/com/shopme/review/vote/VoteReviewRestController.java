@@ -2,6 +2,8 @@ package com.shopme.review.vote;
 
 import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.vote.VoteResult;
+import com.shopme.common.entity.vote.VoteType;
 import com.shopme.review.ReviewNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

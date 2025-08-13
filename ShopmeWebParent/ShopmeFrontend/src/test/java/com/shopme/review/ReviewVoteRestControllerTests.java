@@ -2,7 +2,7 @@ package com.shopme.review;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopme.common.entity.review.Review;
-import com.shopme.review.vote.VoteResult;
+import com.shopme.common.entity.vote.VoteResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

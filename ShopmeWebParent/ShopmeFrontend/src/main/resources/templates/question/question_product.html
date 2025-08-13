@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <div th:replace="~{fragments :: page_head('Reviews', 'tag')}">...</div>
+    <link th:href="@{/star-rating/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
+    <script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
+    <link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
+    <script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
+</head>
+
+<body  class="d-flex flex-column min-vh-100">
+<div class="container-fluid d-flex flex-column flex-grow-1">
+    <div th:replace="~{navigation :: header_menu}">...</div>
+    <div th:replace="~{navigation :: search_bar}">...</div>
+    <div th:replace="~{navigation :: quick_links}">...</div>
+
+
+    <main class="flex-fill">
+        <div class="row">
+            <div class="col-auto">
+                <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 100px"/>
+            </div>
+            <div class="col-auto">
+                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
+                    <h5>[[${product.name}]]</h5>
+                </a>
+
+                <div class="row">
+                    <div class="ml-3">
+                        <a th:href="@{'/questions/' + ${product.alias} + '/page/' +  ${currentPage}  + '?sortField=votes&sortDir=desc'}" class="text-decoration-none">Sort by most votes</a>
+                    </div>
+                    <div class="ml-3">
+                        <a th:href="@{'/questions/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=askTime&sortDir=desc'}" class="text-decoration-none">Sort by most recent</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto my-4" th:each="question : ${listQuestions}">
+            <div class="row">
+                <b>Questions:</b>
+                <span class="ml-3">
+                    <a class="fas fa-2x fa-sort-up icon-dark mr-1" href=""></a>
+                    [[${question.votes}]] Votes
+                    <a class="fas fa-2x fa-sort-down icon-dark ml-1" href=""></a>
+                </span>
+            </div>
+            <div>
+                [[${question.questionContent}]]
+            </div>
+            <div class="ml-2">
+                <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+            </div>
+            <div class="row">
+                <b>Answer:</b>
+            </div>
+            <div>
+                [[${question.answerContent}]]
+            </div>
+            <div class="ml-2">
+                <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments :: modal_dialog}"></div>
+
+
+    <div th:replace="~{navigation :: footer_menu}"></div>
+</div>
+</body>
+<script>
+    let csrfHeaderName = "[[${_csrf.headerName}]]";
+    let csrfValue = "[[${_csrf.token}]]";
+</script>
+<script  th:src="@{/js/common_modal.js}"></script>
+<script th:src="@{/js/common_rating.js}"></script>
+<script  th:src="@{/js/review_vote.js}"></script>
+</html>
