@@ -58,14 +58,7 @@ public class User extends IdBasedEntity {
 
         @Override
         public String toString() {
-                return "User{" +
-                        "id=" + id +
-                        ", email='" + email + '\'' +
-                        ", password='" + password + '\'' +
-                        ", firstName='" + firstName + '\'' +
-                        ", lastName='" + lastName + '\'' +
-                        ", roles=" + roles +
-                        '}';
+                return firstName + " " + lastName;
         }
 
         @Transient

@@ -50,6 +50,11 @@ public class Customer extends AbstractAddressWithCountry{
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
     @Transient
     public String getFullName() {
         return firstName + " " + lastName;

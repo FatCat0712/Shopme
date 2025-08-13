@@ -112,11 +112,7 @@ public class Product extends IdBasedEntity {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", shortDescription='" + shortDescription +'\'' +
-                '}';
+        return this.name;
     }
 
     @Transient

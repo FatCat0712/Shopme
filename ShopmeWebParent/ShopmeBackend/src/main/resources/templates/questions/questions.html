@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: page_head('Questions - Shopme Admin', 'none')}"></head>
+<body>
+        <div class="container-fluid">
+            <div th:replace="~{navigation :: menu}"></div>
+            <div>
+                <h2>[[${pageTitle}]]</h2>
+                <a th:href="@{/questions/export/csv}">Export to csv</a>
+            </div>
+            <div th:replace="~{fragments :: search_form_and_message}"></div>
+            <div class="full-details">
+                <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th>Question</th>
+                                <th>Asker</th>
+                                <th>
+                                    <div th:replace="~{fragments :: column_link('askTime', 'Ask Time', 'tag')}"></div>
+                                </th>
+                                <th>Approved</th>
+                                <th>Answered</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="question : ${listQuestions}">
+                                <td>[[${question.id}]]</td>
+                                <td>
+                                    <a th:href="@{'/products/detail/' + ${question.product.id}}" class="link-product-detail text-decoration-none">
+                                        [[${question.product.shortName}]]
+                                    </a>
+                                </td>
+                                <td>[[${question.questionContent}]]</td>
+                                <td>
+                                    <a th:href="@{'/customers/detail/' + ${question.asker.id}}" class="link-customer-detail text-decoration-none">
+                                        [[${question.asker.fullName}]]
+                                    </a>
+                               </td>
+                                <td>[[${#dates.format(question.askTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+                                <td>
+                                    <a th:unless="${question.approvalStatus == true}" class="fas fa-circle fa-2x icon-dark" th:href="@{'/questions/' +${question.id} + '/approved/true'}"></a>
+                                    <a th:if="${question.approvalStatus == true}" class="fas fa-check-circle fa-2x icon-green"  th:href="@{'/questions/' +${question.id} + '/approved/false'}"></a>
+                                </td>
+                                <td>
+                                    <i th:if="${question.answered == true}" class="fas fa-check-circle fa-2x icon-green"></i>
+                                    <i th:unless="${question.answered == true}" class="fas fa-circle fa-2x icon-dark"></i>
+                                </td>
+                                <td>
+                                    <a class="fas fa-2x fa-file-alt icon-green link-question-detail" th:href="@{'/questions/detail/' + ${question.id}}"></a>
+                                    &nbsp;
+                                    <a th:replace="~{fragments :: edit('question', '/questions/edit/' + ${question.id})}"></a>
+                                    &nbsp;
+                                    <a th:replace="~{fragments :: delete('question',${question.id} ,'/questions/delete/' + ${question.id}, true)}"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="modal fade" id="productDetailModal">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="customerDetailModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="questionDetailModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="~{modal_fragments :: confirm_modal}"></div>
+
+            <div th:replace="~{fragments :: pagination('question')}"></div>
+
+            <div th:replace="~{fragments :: footer}"></div>
+        </div>
+
+<script type="text/javascript">
+    let moduleURL = "[[@{/questions}]]";
+
+    $(document).ready(function() {
+        $(".link-product-detail").on("click", function(e) {
+            e.preventDefault();
+            loadProductDetail(this);
+        });
+
+         $(".link-customer-detail").on("click", function(e) {
+            e.preventDefault();
+            loadCustomerDetail(this);
+        });
+
+        $(".link-question-detail").on("click", function(e) {
+            e.preventDefault();
+            loadQuestionDetail(this);
+        });
+
+        $(".link-delete").on("click", function(e){
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'question')
+        })
+
+    })
+
+    function loadProductDetail(productLink) {
+        let linkDetailURL = $(productLink).attr("href");
+         $("#productDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    }
+
+    function loadCustomerDetail(customerLink) {
+        let linkDetailURL = $(customerLink).attr("href");
+         $("#customerDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    }
+
+    function loadQuestionDetail(questionLink) {
+         let linkDetailURL = $(questionLink).attr("href");
+         $("#questionDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+    }
+</script>
+<script th:src="@{/js/common_list.js}"></script>
+</body>
+</html>

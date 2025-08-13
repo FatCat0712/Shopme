@@ -29,6 +29,7 @@ public class ProjectSecurityConfig {
                     .requestMatchers("/customers/**", "/orders/**", "/get_shipping_cost", "/reports/**").hasAnyAuthority("Admin", "Salesperson")
                     .requestMatchers("/order_shipper/update/**").hasAnyAuthority("Shipper")
                     .requestMatchers("/reviews/**").hasAnyAuthority("Admin", "Assistant")
+                    .requestMatchers("/questions/**").hasAnyAuthority("Admin", "Assistant")
                     .anyRequest().authenticated()
             );
 

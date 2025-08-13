@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -35,9 +37,13 @@ public class Question extends IdBasedEntity{
 
     private Date answerTime;
 
-    @Enumerated(EnumType.STRING)
+    @Transient
+    public boolean isAnswered() {
+        return !answerContent.isEmpty();
+    }
+
     @Column(nullable = false)
-    private ApprovalStatus approvalStatus;
+    private boolean approvalStatus;
 
     private int votes;
 
@@ -53,5 +59,11 @@ public class Question extends IdBasedEntity{
                 ", approvalStatus=" + approvalStatus +
                 ", votes=" + votes +
                 '}';
+    }
+
+    @Transient
+    public String getFormattedAskTime() {
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(this.askTime);
     }
 }

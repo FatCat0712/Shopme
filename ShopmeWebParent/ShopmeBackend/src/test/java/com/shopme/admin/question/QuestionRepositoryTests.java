@@ -1,6 +1,5 @@
 package com.shopme.admin.question;
 
-import com.shopme.common.entity.ApprovalStatus;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Question;
 import com.shopme.common.entity.User;
@@ -9,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
@@ -32,15 +33,14 @@ public class QuestionRepositoryTests {
     @Test
     public void saveQuestion() {
         int productId = 59;
-        int customerId = 1;
+        int customerId = 12;
 
         Question question = new Question();
         question.setProduct(new Product(productId));
         question.setAsker(new Customer(customerId));
         question.setAskTime(new Date());
-        question.setQuestionContent("Is this computer any good for gaming?");
-        question.setAnswerTime(new Date());
-        question.setApprovalStatus(ApprovalStatus.PENDING);
+        question.setQuestionContent("Is the charging cable included in the box ?");
+        question.setApprovalStatus(false);
 
         Question savedQuestion = repo.save(question);
         assertThat(savedQuestion.getId()).isGreaterThan(0);
@@ -48,7 +48,8 @@ public class QuestionRepositoryTests {
 
     @Test
     public void listQuestions() {
-        List<Question> listQuestions = repo.findAll();
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Question> listQuestions = repo.findAll(null, pageable).getContent();
         assertThat(listQuestions.size()).isGreaterThan(0);
         listQuestions.forEach(System.out::println);
     }
@@ -63,7 +64,7 @@ public class QuestionRepositoryTests {
         Question savedQuestion = question.get();
         savedQuestion.setAnswerContent(answerContent);
         savedQuestion.setAnswerer(new User(userId));
-        savedQuestion.setApprovalStatus(ApprovalStatus.APPROVED);
+        savedQuestion.setApprovalStatus(true);
         savedQuestion.setAnswerTime(new Date());
 
         Question updatedQuestion = repo.save(savedQuestion);
