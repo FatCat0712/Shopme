@@ -66,7 +66,7 @@ public class QuestionVoteService {
         voteRepo.save(vote);
         questionRepo.updateVoteCount(questionId);
         Integer voteCount = questionRepo.getVoteCount(questionId);
-        return VoteResult.success("You have voted " + voteType + " that review", voteCount);
+        return VoteResult.success("You have voted " + voteType + " that question", voteCount);
     }
 
 }

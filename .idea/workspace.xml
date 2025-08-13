@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/question/QuestionVoteRestControllerTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/question_vote.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_top_questions.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_top_questions.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,7 @@
     "Application.Constants.executor": "Run",
     "Application.ShopmeBackend.executor": "Run",
     "Application.ShopmeBackendApplication.executor": "Run",
-    "Application.ShopmeFrontEnd.executor": "Debug",
+    "Application.ShopmeFrontEnd.executor": "Run",
     "Application.ShopmeFrontendApplication.executor": "Run",
     "Application.Utility.executor": "Run",
     "Application.com.shopme.site.admin.ShopmeBackendApplication.executor": "Run",
@@ -162,7 +163,9 @@
     "JUnit.QuestionVoteRepositoryTests.saveQuestionVote.executor": "Run",
     "JUnit.QuestionVoteRepositoryTests.testFindByProductAndCustomer.executor": "Run",
     "JUnit.QuestionVoteRepositoryTests.testFindByQuestionAndCustomer.executor": "Run",
+    "JUnit.QuestionVoteRestControllerTests.testUndoVoteDown.executor": "Run",
     "JUnit.QuestionVoteRestControllerTests.testUndoVoteUp.executor": "Run",
+    "JUnit.QuestionVoteRestControllerTests.testVoteDown.executor": "Run",
     "JUnit.QuestionVoteRestControllerTests.testVoteLogin.executor": "Run",
     "JUnit.QuestionVoteRestControllerTests.testVoteNonExistQuestion.executor": "Run",
     "JUnit.QuestionVoteRestControllerTests.testVoteUp.executor": "Run",

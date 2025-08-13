@@ -11,9 +11,9 @@
             <div class="row">
                  <b>Questions:</b>
                 <span class="ml-3">
-                    <a class="fas fa-2x fa-sort-up icon-dark mr-1" href=""></a>
-                    [[${question.votes}]] Votes
-                    <a class="fas fa-2x fa-sort-down icon-dark ml-1" href=""></a>
+                    <a class="fas fa-2x fa-sort-up icon-dark mr-1 link-vote-question" th:href="@{'/vote_question/' + ${question.id}  + '/up'}" th:id="'linkVoteQuestionUp-' + ${question.id}" th:questionId="${question.id}"></a>
+                    <span th:id="'questionVoteCount-' + ${question.id}">[[${question.votes}]] Votes</span>
+                    <a class="fas fa-2x fa-sort-down icon-dark ml-1 link-vote-question" th:href="@{'/vote_question/' + ${question.id}  + '/down'}" th:id="'linkVoteQuestionDown-' + ${question.id}"  th:questionId="${question.id}"></a>
                 </span>
             </div>
             <div>

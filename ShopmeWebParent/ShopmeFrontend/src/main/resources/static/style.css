@@ -18,6 +18,10 @@ html {
     color: gray
 }
 
+.icon-blue {
+    color: #0000EE;
+}
+
 a.text-muted {
     font-weight: 400;
     transition: font-weight 0.15s ease-in-out;
