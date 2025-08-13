@@ -33,7 +33,7 @@ public class QuestionVoteRestController {
             return VoteResult.fail("You must login to vote the question");
         }
 
-        VoteType voteType = VoteType.valueOf(type);
+        VoteType voteType = VoteType.valueOf(type.toUpperCase());
         try {
           return service.doVote(id, customer, voteType);
         } catch (QuestionNotFound e) {

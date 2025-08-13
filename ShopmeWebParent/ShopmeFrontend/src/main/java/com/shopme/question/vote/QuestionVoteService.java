@@ -36,7 +36,7 @@ public class QuestionVoteService {
         int customerId = customer.getId();
         Optional<Question> question = questionRepo.findById(questionId);
         if(question.isEmpty()) {
-            throw new QuestionNotFound("Could not find any questions with ID " + questionId);
+            throw new QuestionNotFound("The question with ID " + questionId + " is no longer exists");
         }
 
         Question savedQuestion = question.get();
