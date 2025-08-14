@@ -5,11 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateQuestionRequest {
+public class QuestionCreateRequest {
     private String questionContent;
     private Integer productId;
 
-    public CreateQuestionRequest(String questionContent, Integer productId) {
+    public QuestionCreateRequest() {
+    }
+
+    public QuestionCreateRequest(String questionContent, Integer productId) {
         this.questionContent = questionContent;
         this.productId = productId;
     }

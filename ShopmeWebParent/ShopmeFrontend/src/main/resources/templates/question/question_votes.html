@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-$END$
+  <div th:fragment="content" class="col-auto my-4" th:each="question : ${listQuestions}">
+            <div class="row">
+                        <b>Questions:</b>
+                        <span class="ml-3">
+                              <a class="fas fa-2x fa-sort-up mr-1 link-vote-question" th:classappend="${question.isUpvotedByCurrentCustomer ? 'icon-blue' : 'icon-dark'}" th:href="@{'/vote_question/' + ${question.id}  + '/up'}" th:id="'linkVoteQuestionUp-' + ${question.id}" th:questionId="${question.id}"></a>
+                              <span th:id="'questionVoteCount-' + ${question.id}">[[${question.votes}]] Votes</span>
+                            <a class="fas fa-2x fa-sort-down ml-1 link-vote-question" th:classappend="${question.isDownvotedByCurrentCustomer ? 'icon-blue' : 'icon-dark'}" th:href="@{'/vote_question/' + ${question.id}  + '/down'}" th:id="'linkVoteQuestionDown-' + ${question.id}"  th:questionId="${question.id}"></a>
+                        </span>
+          </div>
+          <div>
+             [[${question.questionContent}]]
+          </div>
+          <div class="ml-2">
+            <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+          </div>
+          <div class="row">
+            <b>Answer:</b>
+          </div>
+          <div>
+            [[${question.answerContent}]]
+          </div>
+          <div class="ml-2">
+              <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+          </div>
+  </div>
 </body>
 </html>

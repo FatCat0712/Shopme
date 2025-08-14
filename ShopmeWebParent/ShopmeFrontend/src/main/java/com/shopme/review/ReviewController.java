@@ -55,7 +55,7 @@ public class ReviewController {
             @RequestParam(name = "keyword", required = false) String keyword,
             Model model
     ) {
-        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
         Page<Review> page = reviewService.listByCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
 
         List<Review> listReviews = page.getContent();
@@ -86,7 +86,7 @@ public class ReviewController {
 
     @GetMapping("/review/details/{id}")
     public String viewReview(HttpServletRequest request, @PathVariable(name = "id") Integer id, RedirectAttributes ra, Model model) {
-        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
         try {
             Review review =reviewService.getByCustomerAndId(customer, id);
             model.addAttribute("review", review);
@@ -117,7 +117,7 @@ public class ReviewController {
             Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
             List<Review> listReviews = page.getContent();
 
-            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
             if(customer != null) {
                 voteService.markReviewsVotedProductByCustomer(listReviews, product.getId(), customer.getId());
             }
@@ -157,7 +157,7 @@ public class ReviewController {
             model.addAttribute("review", review);
             model.addAttribute("product", product);
 
-            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
             boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, productId);
 
             if(customerReviewed) {
@@ -169,7 +169,6 @@ public class ReviewController {
                     model.addAttribute("customerCanReview", true);
                 }
                 else {
-
                     model.addAttribute("noPreviewPermission", true);
                 }
             }
@@ -182,7 +181,7 @@ public class ReviewController {
 
     @PostMapping("/post_review")
     public String saveReview(Review review, Model model,@RequestParam(name = "productId") Integer productId, HttpServletRequest request) {
-        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
         try {
             Product product = productService.get(productId);
             review.setProduct(product);

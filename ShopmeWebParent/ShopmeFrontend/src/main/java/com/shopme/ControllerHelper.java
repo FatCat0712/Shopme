@@ -15,7 +15,7 @@ public class ControllerHelper {
         this.customerService = customerService;
     }
 
-    public Customer getAuthenticatedCustomer(HttpServletRequest request) {
+    public Customer getAuthenticatetdCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         return customerService.findCustomerByEmail(email);
     }

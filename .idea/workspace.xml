@@ -5,12 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/question_vote.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/question_detail_modal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/questions_customer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/VoteBasedEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/VoteBasedEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/question/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/question/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/question/QuestionVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/question/QuestionVote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/review/ReviewVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/review/ReviewVote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/vote/VoteResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/vote/VoteResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/ControllerHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/ControllerHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/product/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/DuplicateQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/DuplicateQuestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/ask/QuestionCreateRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/question/vote/QuestionVoteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/vote/VoteReviewRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/review/vote/VoteReviewRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/security/ProjectSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/create_question.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/static/js/create_question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_top_questions.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/product/product_top_questions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/question_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/question_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/question_votes.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/question/question_votes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/question/QuestionCreateRestControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/question/QuestionCreateRestControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/question/QuestionVoteRestControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/test/java/com/shopme/question/QuestionVoteRestControllerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +55,10 @@
         <option value="TypeScript File" />
         <option value="JavaScript File" />
         <option value="Enum" />
-        <option value="HTML File" />
         <option value="Interface" />
         <option value="Exception" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -154,6 +179,9 @@
     "JUnit.ProductRepositoryTest.testSaveProductWithImages.executor": "Run",
     "JUnit.ProductRepositoryTest.testUpdateProduct.executor": "Run",
     "JUnit.ProductRepositoryTest.testUpdateReviewCountAndAverageRating.executor": "Run",
+    "JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithDuplicateContent.executor": "Run",
+    "JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithLogin.executor": "Run",
+    "JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithNoLogin.executor": "Run",
     "JUnit.QuestionRepositoryTests.deleteQuestion.executor": "Run",
     "JUnit.QuestionRepositoryTests.listQuestions.executor": "Run",
     "JUnit.QuestionRepositoryTests.saveQuestion (1).executor": "Run",
@@ -317,7 +345,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.QuestionVoteRestControllerTests.testUndoVoteDown">
+  <component name="RunManager" selected="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithDuplicateContent">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -405,6 +433,54 @@
       <option name="PACKAGE_NAME" value="com.shopme.checkout.paypal" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.checkout.paypal.PayPalApiTests" />
       <option name="METHOD_NAME" value="testGetOrderDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionCreateRestControllerTests.testCreateQuestionWithDuplicateContent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.question.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.question" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionCreateRestControllerTests" />
+      <option name="METHOD_NAME" value="testCreateQuestionWithDuplicateContent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionCreateRestControllerTests.testCreateQuestionWithLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.question.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.question" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionCreateRestControllerTests" />
+      <option name="METHOD_NAME" value="testCreateQuestionWithLogin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionCreateRestControllerTests.testCreateQuestionWithNoLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopmeFrontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shopme.question.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shopme.question" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionCreateRestControllerTests" />
+      <option name="METHOD_NAME" value="testCreateQuestionWithNoLogin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -414,7 +490,7 @@
       <module name="ShopmeFrontend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.question.*" />
+          <option name="PATTERN" value="com.shopme.common.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -426,65 +502,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuestionVoteRestControllerTests.testUndoVoteUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.question.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.question" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionVoteRestControllerTests" />
-      <option name="METHOD_NAME" value="testUndoVoteUp" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="QuestionVoteRestControllerTests.testVoteDown" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeFrontend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.question.*" />
+          <option name="PATTERN" value="com.shopme.common.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.shopme.question" />
       <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionVoteRestControllerTests" />
       <option name="METHOD_NAME" value="testVoteDown" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="QuestionVoteRestControllerTests.testVoteNonExistQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.question.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.question" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionVoteRestControllerTests" />
-      <option name="METHOD_NAME" value="testVoteNonExistQuestion" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="QuestionVoteRestControllerTests.testVoteUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ShopmeFrontend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shopme.question.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.question" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.question.QuestionVoteRestControllerTests" />
-      <option name="METHOD_NAME" value="testVoteUp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -533,19 +561,19 @@
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.PayPalApiTests" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
+      <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithDuplicateContent" />
+      <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithLogin" />
+      <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithNoLogin" />
       <item itemvalue="JUnit.QuestionVoteRestControllerTests.testUndoVoteDown" />
-      <item itemvalue="JUnit.QuestionVoteRestControllerTests.testUndoVoteUp" />
       <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteDown" />
-      <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteNonExistQuestion" />
-      <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteUp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithDuplicateContent" />
+        <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithLogin" />
+        <item itemvalue="JUnit.QuestionCreateRestControllerTests.testCreateQuestionWithNoLogin" />
         <item itemvalue="JUnit.QuestionVoteRestControllerTests.testUndoVoteDown" />
         <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteDown" />
-        <item itemvalue="JUnit.QuestionVoteRestControllerTests.testUndoVoteUp" />
-        <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteUp" />
-        <item itemvalue="JUnit.QuestionVoteRestControllerTests.testVoteNonExistQuestion" />
       </list>
     </recent_temporary>
   </component>
@@ -694,11 +722,6 @@
           <properties class="com.shopme.common.exception.ProductNotFoundException" package="com.shopme.common.exception" />
           <option name="timeStamp" value="5" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/order/OrderController.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>

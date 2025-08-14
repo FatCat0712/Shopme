@@ -4,12 +4,13 @@ import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.question.QuestionService;
+import com.shopme.question.vote.QuestionVoteService;
 import com.shopme.review.ReviewService;
 import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,23 +31,26 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final ReviewService reviewService;
-    private final ReviewVoteService voteService;
+    private final ReviewVoteService reviewVoteService;
     private final ControllerHelper controllerHelper;
     private final QuestionService questionService;
+    private final QuestionVoteService questionVoteService;
 
 
-   @Autowired
+    @Autowired
     public ProductController(
             CategoryService categoryService, ProductService productService,
-            ReviewService reviewService, ReviewVoteService voteService,
-            ControllerHelper controllerHelper, QuestionService questionService
+            ReviewService reviewService, ReviewVoteService reviewVoteService,
+            ControllerHelper controllerHelper, QuestionService questionService,
+            QuestionVoteService questionVoteService
     ) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.reviewService = reviewService;
-        this.voteService = voteService;
+        this.reviewVoteService = reviewVoteService;
         this.controllerHelper = controllerHelper;
         this.questionService = questionService;
+        this.questionVoteService = questionVoteService;
     }
 
     @GetMapping("/c/{category_alias}")
@@ -106,11 +110,13 @@ public class ProductController {
             Page<Question> listQuestions = questionService.list3MostVotedQuestions(product);
             Integer answeredQuestions = questionService.countOfAnsweredQuestions(product);
 
-            Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
 
             if(customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
-                voteService.markReviewsVotedProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+                reviewVoteService.markReviewsVotedProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+                questionVoteService.markQuestionsVotedForProductByCustomer(listQuestions.getContent(), product, customer);
+
 
                 if(customerReviewed) {
                     model.addAttribute("customerReviewed", true);

@@ -1,7 +1,7 @@
 package com.shopme.common.entity.review;
 
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.vote.VoteBasedEntity;
+import com.shopme.common.entity.VoteBasedEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

@@ -1,6 +1,7 @@
 package com.shopme.question.vote;
 
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.question.QuestionVote;
 import com.shopme.common.entity.vote.VoteResult;
@@ -11,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,5 +70,26 @@ public class QuestionVoteService {
         Integer voteCount = questionRepo.getVoteCount(questionId);
         return VoteResult.success("You have voted " + voteType + " that question", voteCount);
     }
+
+    public void markQuestionsVotedForProductByCustomer(List<Question> listQuestions, Product product, Customer customer) {
+        Integer productId = product.getId();
+        Integer customerId = customer.getId();
+        List<QuestionVote> listVotes = voteRepo.findByProductAndCustomer(productId, customerId);
+        for(QuestionVote vote : listVotes) {
+            Question votedQuestion = vote.getQuestion();
+            if (listQuestions.contains(votedQuestion)) {
+                int index = listQuestions.indexOf(votedQuestion);
+                Question question = listQuestions.get(index);
+                if(vote.isUpVoted()) {
+                    question.setUpvotedByCurrentCustomer(true);
+                }
+                else if(vote.isDownVoted()) {
+                    question.setDownvotedByCurrentCustomer(true);
+                }
+            }
+        }
+    }
+
+
 
 }

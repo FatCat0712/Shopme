@@ -18,9 +18,6 @@ public class VoteResult {
         return new VoteResult(true, message, voteCount);
     }
 
-    public VoteResult() {
-    }
-
     private VoteResult(boolean successful, String message, int voteCount) {
         this.successful = successful;
         this.message = message;

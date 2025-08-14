@@ -28,7 +28,7 @@ public class QuestionVoteRestController {
             @PathVariable(name = "type") String type,
             HttpServletRequest request
     ) {
-        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
         if(customer == null) {
             return VoteResult.fail("You must login to vote the question");
         }

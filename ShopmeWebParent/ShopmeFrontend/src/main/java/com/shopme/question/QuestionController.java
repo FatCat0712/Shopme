@@ -1,10 +1,12 @@
 package com.shopme.question;
 
 import com.shopme.ControllerHelper;
-import com.shopme.common.entity.question.Question;
+import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.entity.question.Question;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.product.ProductService;
+import com.shopme.question.vote.QuestionVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,18 +21,76 @@ import java.util.List;
 @Controller
 public class QuestionController {
     private final QuestionService questionService;
+    private final QuestionVoteService questionVoteService;
     private final ProductService productService;
     private final ControllerHelper controllerHelper;
 
     @Autowired
-    public QuestionController(QuestionService questionService, ProductService productService, ControllerHelper controllerHelper) {
+    public QuestionController(
+            QuestionService questionService, QuestionVoteService questionVoteService,
+            ProductService productService, ControllerHelper controllerHelper
+    ) {
         this.questionService = questionService;
+        this.questionVoteService = questionVoteService;
         this.productService = productService;
         this.controllerHelper = controllerHelper;
     }
 
-    @GetMapping("/questions/{product_alias}/page/{pageNum}")
+    @GetMapping("/questions")
+    public String listFirstPage(HttpServletRequest request, Model model) {
+        return listByPage(request, 1, "desc", null, model);
+    }
+
+    @GetMapping("/questions/page/{pageNum}")
     public String listByPage(
+            HttpServletRequest request,
+            @PathVariable(name = "pageNum") Integer pageNum,
+            @RequestParam(name = "sortDir", required = false) String sortDir,
+            @RequestParam(name = "keyword", required = false) String keyword,
+            Model model
+    ) {
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        Page<Question> page  = questionService.listByCustomer(customer, pageNum, sortDir, keyword);
+        List<Question> listQuestions = page.getContent();
+        long totalItems = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+
+        int startCount = (pageNum - 1) * QuestionService.QUESTION_PER_PAGE + 1;
+        long endCount = startCount + QuestionService.QUESTION_PER_PAGE - 1;
+
+        if(endCount >= totalItems) {
+            endCount = totalItems;
+        }
+
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("listQuestions", listQuestions);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reversedSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("sortField", "askTime");
+        model.addAttribute("moduleURL", "/questions");
+
+        return "question/questions_customer";
+    }
+
+    @GetMapping("/questions/detail/{id}")
+    public String viewQuestionDetail(@PathVariable(name = "id") Integer questionId, Model model) {
+        try {
+            Question question = questionService.get(questionId);
+            model.addAttribute("question", question);
+        } catch (QuestionNotFound e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+        return "question/question_detail_modal";
+    }
+
+
+
+    @GetMapping("/questions/{product_alias}/page/{pageNum}")
+    public String listByProduct(
             @PathVariable(name = "product_alias") String productAlias,
             @PathVariable(name = "pageNum") Integer pageNum,
             @RequestParam(name = "sortField", required = false) String sortField,
@@ -42,7 +102,15 @@ public class QuestionController {
             Product product = productService.get(productAlias);
 
             Page<Question> page = questionService.listByProduct(product, pageNum, sortField, sortDir);
+
+            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+
+
             List<Question> listQuestions = page.getContent();
+
+            if(customer != null) {
+                questionVoteService.markQuestionsVotedForProductByCustomer(listQuestions, product, customer);
+            }
 
             long totalItems = page.getTotalElements();
             int totalPages = page.getTotalPages();

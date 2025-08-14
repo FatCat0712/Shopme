@@ -15,6 +15,17 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
             "q.product.id = ?1")
     Page<Question> findByProduct(Integer productId, Pageable pageable);
 
+    @Query("SELECT q FROM Question q " +
+            "WHERE q.asker.id = ?1")
+    Page<Question> findByCustomer(Integer customerId, Pageable pageable);
+
+    @Query("SELECT q FROM Question q " +
+            "WHERE q.asker.id = ?2 " +
+            "AND (q.product.name LIKE %?1% " +
+            "OR q.questionContent LIKE %?1% " +
+            "OR q.answerContent LIKE %?1%) ")
+    Page<Question> findByCustomerAndKeyword(String keyword, Integer customerId, Pageable pageable);
+
     @Query("SELECT COUNT(q.id) FROM Question q  " +
             "WHERE q.answerContent IS NOT NULL " +
             "AND LENGTH(q.answerContent) > 0  "+
@@ -29,4 +40,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Query("SELECT q.votes FROM Question q WHERE q.id = ?1")
     Integer getVoteCount(Integer questionId);
+
+    @Query("SELECT COUNT(q) FROM Question q WHERE TRIM(LOWER(q.questionContent)) = TRIM(LOWER(?2)) AND q.product.id = ?1")
+    Integer countExactContentMatch(Integer productId, String content);
 }

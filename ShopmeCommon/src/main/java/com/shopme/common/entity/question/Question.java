@@ -11,6 +11,7 @@ import lombok.Setter;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "questions")
@@ -50,6 +51,12 @@ public class Question extends IdBasedEntity {
 
     private int votes;
 
+    @Transient
+    private boolean upvotedByCurrentCustomer;
+
+    @Transient
+    private boolean downvotedByCurrentCustomer;
+
     public Question() {
     }
 
@@ -75,5 +82,16 @@ public class Question extends IdBasedEntity {
     public String getFormattedAskTime() {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return formatter.format(this.askTime);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Question question)) return false;
+        return Objects.equals(id, question.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

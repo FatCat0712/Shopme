@@ -16,7 +16,6 @@
     <div th:replace="~{navigation :: search_bar}">...</div>
     <div th:replace="~{navigation :: quick_links}">...</div>
 
-
     <main class="flex-fill">
         <div class="row">
             <div class="col-auto">
@@ -38,31 +37,7 @@
             </div>
         </div>
 
-        <div class="col-auto my-4" th:each="question : ${listQuestions}">
-            <div class="row">
-                <b>Questions:</b>
-                <span class="ml-3">
-                    <a class="fas fa-2x fa-sort-up icon-dark mr-1" href=""></a>
-                    [[${question.votes}]] Votes
-                    <a class="fas fa-2x fa-sort-down icon-dark ml-1" href=""></a>
-                </span>
-            </div>
-            <div>
-                [[${question.questionContent}]]
-            </div>
-            <div class="ml-2">
-                <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
-            </div>
-            <div class="row">
-                <b>Answer:</b>
-            </div>
-            <div>
-                [[${question.answerContent}]]
-            </div>
-            <div class="ml-2">
-                <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
-            </div>
-        </div>
+       <div th:replace="~{question/question_votes :: content}"></div>
     </main>
 
     <div th:replace="~{fragments :: modal_dialog}"></div>
@@ -77,5 +52,5 @@
 </script>
 <script  th:src="@{/js/common_modal.js}"></script>
 <script th:src="@{/js/common_rating.js}"></script>
-<script  th:src="@{/js/review_vote.js}"></script>
+<script th:src="@{/js/question_vote.js}"></script>
 </html>

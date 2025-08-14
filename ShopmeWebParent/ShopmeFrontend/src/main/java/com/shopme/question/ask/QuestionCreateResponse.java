@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateQuestionResponse {
+public class QuestionCreateResponse {
     private boolean successful;
     private String message;
 
-    public CreateQuestionResponse(boolean successful, String message) {
+    public QuestionCreateResponse(boolean successful, String message) {
         this.successful = successful;
         this.message = message;
     }

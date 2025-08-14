@@ -1,7 +1,6 @@
-package com.shopme.common.entity.vote;
+package com.shopme.common.entity;
 
 
-import com.shopme.common.entity.IdBasedEntity;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import lombok.Getter;

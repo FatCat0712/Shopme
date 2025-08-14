@@ -7,41 +7,33 @@
 <div th:fragment="content"  id="questions" class="ml-3">
     <h3>Questions & answers for this product</h3>
 
-    <div class="ml-1 my-4" th:each="question : ${listQuestions}">
-            <div class="row">
-                 <b>Questions:</b>
-                <span class="ml-3">
-                    <a class="fas fa-2x fa-sort-up icon-dark mr-1 link-vote-question" th:href="@{'/vote_question/' + ${question.id}  + '/up'}" th:id="'linkVoteQuestionUp-' + ${question.id}" th:questionId="${question.id}"></a>
-                    <span th:id="'questionVoteCount-' + ${question.id}">[[${question.votes}]] Votes</span>
-                    <a class="fas fa-2x fa-sort-down icon-dark ml-1 link-vote-question" th:href="@{'/vote_question/' + ${question.id}  + '/down'}" th:id="'linkVoteQuestionDown-' + ${question.id}"  th:questionId="${question.id}"></a>
-                </span>
-            </div>
-            <div>
-                [[${question.questionContent}]]
-            </div>
-            <div class="ml-2">
-                <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
-            </div>
-            <div class="row">
-                <b>Answer:</b>
-            </div>
-            <div>
-                [[${question.answerContent}]]
-            </div>
-            <div class="ml-2">
-                <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
-            </div>
-    </div>
+    <div th:replace="~{question/question_votes :: content}"></div>
 
     <div class="row ml-2">
         <div class="col-auto my-auto">
             <a class="text-decoration-none" th:href="@{'/questions/' + ${product.alias} + '/page/1?sortField=askTime&sortDir=desc'}">View all [[${product.questionCount}]] questions</a>
         </div>
         <div class="col-auto my-auto">
-            <button sec:authorize="!isAuthenticated()" class="btn btn-secondary">
-                Ask a question
-            </button>
+            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()">
+                <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
+                    Ask a question
+                </button>
+            </form>
         </div>
+    </div>
+
+    <div class="ml-2 my-2">
+            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4">
+                <div sec:authorize="isAuthenticated()" class="d-flex" >
+                    <div class="w-100">
+                        <input type="hidden" id="productId" th:value="${product.id}">
+                        <textarea class="form-control" id="questionContent" rows="2"  placeholder="Type your question here" required></textarea>
+                    </div>
+                    <div class="my-auto ml-2">
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </div>
+                </div>
+            </form>
     </div>
 
 
@@ -50,9 +42,6 @@
             <hr/>
         </div>
     </div>
-
-
-
 
 </div>
 </body>

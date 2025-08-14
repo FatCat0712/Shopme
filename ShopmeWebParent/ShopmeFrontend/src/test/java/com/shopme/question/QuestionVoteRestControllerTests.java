@@ -35,7 +35,7 @@ public class QuestionVoteRestControllerTests {
     }
 
     @Test
-    public void testVoteLogin() throws Exception {
+    public void testVoteWithNoLogin() throws Exception {
         String requestURL = "/vote_question/9/up";
 
         MvcResult mvcResult = mockMvc.perform(
