@@ -4,113 +4,129 @@ xmlns:th="http://www.thymeleaf.org"
 >
 
 <head th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">...</head>
-<body>
-        <div class="container-fluid">
+<body  class="d-flex flex-column min-vh-100">
+        <div class="container-fluid d-flex flex-column flex-grow-1">
                 <div th:replace="~{navigation :: header_menu}">...</div>
                 <div>&nbsp;</div>
-                <div class="text-center">
-                        <h2>Customer Registration</h2>
-                </div>
+                <main class="flex-fill">
+                    <div class="text-center">
+                        <h2>Registration Form</h2>
+                    </div>
+                    <form th:action="@{/update_account_details}" method="post" th:object="${customer}" style="width: 80%; margin: 0 auto 50px auto">
+                        <div th:if="${message != null}" class="alert alert-success text-center">
+                            [[${message}]]
+                        </div>
 
-                <form th:action="@{/create_customer}" method="post" th:object="${customer}" style="max-width: 600px; margin: 0 auto;" onsubmit="return checkEmailUnique(this);">
+                        <div th:if="${errorMesssage != null}" class="alert alert-warning text-center">
+                            [[${errorMessage}]]
+                        </div>
+
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" name="redirect" th:value="${param.redirect}">
+
                         <div class="border border-secondary rounded p-3">
-                                <div class="form-group row">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">First Name:</label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{firstName}" required minlength="2" maxlength="45">
+                                            <input class="form-control" type="text" th:field="*{firstName}" required minlength="2" maxlength="45">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Last Name:</label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{lastName}" required minlength="2" maxlength="45">
+                                            <input class="form-control" type="text" th:field="*{lastName}" required minlength="2" maxlength="45">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Email:</label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="email" th:field="*{email}" required minlength="8" maxlength="45">
+                                            <input class="form-control" type="email" th:field="*{email}">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Password: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="password" th:field="*{password}" required minlength="6" maxlength="15" oninput="checkPasswordMatch(document.getElementById('confirmPassword'))">
+                                            <input class="form-control" type="password" th:field="*{password}" minlength="6" maxlength="15" placeholder="Leave blank if you don't want to change your password" oninput="checkPasswordMatch(document.getElementById('confirmPassword'))">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Re-type Password: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="password" id="confirmPassword" required minlength="6" maxlength="15" oninput="checkPasswordMatch(this)">
+                                            <input class="form-control" type="password" id="confirmPassword" minlength="6" maxlength="15" oninput="checkPasswordMatch(this)">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Phone Number: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{phoneNumber}" required minlength="8" maxlength="15">
+                                            <input class="form-control" type="text" th:field="*{phoneNumber}" required minlength="8" maxlength="15">
                                         </div>
+                                    </div>
                                 </div>
-
-                                <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Address Line 1: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{addressLine1}" required minlength="3" maxlength="64">
+                                            <input class="form-control" type="text" th:field="*{addressLine1}" required minlength="3" maxlength="64">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Address Line 2: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{addressLine2}" minlength="3" maxlength="64">
+                                            <input class="form-control" type="text" th:field="*{addressLine2}" minlength="3" maxlength="64">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">City: </label>
                                         <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{city}" minlength="2" maxlength="45">
+                                            <input class="form-control" type="text" th:field="*{city}" minlength="2" maxlength="45">
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">Country: </label>
                                         <div class="col-sm-8">
-                                                <select class="form-control" th:field="*{country}">
-                                                        <th:block th:each="country : ${listCountries}">
-                                                                <option th:value="${country.id}">[[${country.name}]]</option>
-                                                        </th:block>
-                                                </select>
+                                            <select class="form-control" th:field="*{country}">
+                                                <th:block th:each="country : ${listCountries}">
+                                                    <option th:value="${country.id}">[[${country.name}]]</option>
+                                                </th:block>
+                                            </select>
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-form-label col-sm-4">State/Province:</label>
                                         <div class="col-sm-8">
-                                                <input  class="form-control" type="text" th:field="*{state}" minlength="3" maxlength="45" list="listStates">
-                                                <datalist id="listStates"></datalist>
+                                            <input  class="form-control" type="text" th:field="*{state}" minlength="3" maxlength="45" list="listStates">
+                                            <datalist id="listStates"></datalist>
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="form-group row">
+                                    <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Postal Code:</label>
                                         <div class="col-sm-8">
-                                                <input  class="form-control" type="text" th:field="*{postalCode}" minlength="2" maxlength="10">
+                                            <input  class="form-control" type="text" th:field="*{postalCode}" minlength="2" maxlength="10">
                                         </div>
+                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="text-center">
-                                        <input type="submit" value="Create Account" class="btn btn-primary">
-                                </div>
+
+                            <div class="text-center">
+                                <input type="submit" value="Save" class="btn btn-primary px-4">
+                            </div>
                         </div>
-                </form>
-                <div>&nbsp;</div>
-
-                <div th:replace="~{fragments :: modal_dialog}">...</div>
+                    </form>
+                    <div th:replace="~{fragments :: modal_dialog}"></div>
+                </main>
 
 
                 <div th:replace="~{navigation :: footer_menu}">...</div>
