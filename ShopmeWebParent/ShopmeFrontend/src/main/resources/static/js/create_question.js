@@ -1,6 +1,7 @@
+
 function submitQuestionCreateForm() {
     let productId = $("#productId").val();
-    let questionContent = $("#questionContent").val();
+    questionContent = $("#questionContent").val();
     sendQuestionCreateRequest(productId, questionContent);
     return false;
 }
@@ -17,7 +18,11 @@ function sendQuestionCreateRequest(productId, questionContent) {
         data: JSON.stringify(requestBody),
         contentType: 'application/json'
     }).done(function(response) {
-       showModalDialog("Post Question", response.message);
+        console.log(response);
+        if(response.successful) {
+            showModalDialog("Post Question", response.message);
+            $("#questionContent").val('');
+        }
     }).fail(function(error) {
         showWarningModal(error.responseJSON.message);
     })

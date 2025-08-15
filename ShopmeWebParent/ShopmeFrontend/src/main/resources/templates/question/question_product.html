@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
 <head>
-    <div th:replace="~{fragments :: page_head('Reviews', 'tag')}">...</div>
+    <div th:replace="~{fragments :: page_head('Questions', 'tag')}">...</div>
     <link th:href="@{/star-rating/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
     <script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
     <link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
@@ -38,6 +39,30 @@
         </div>
 
        <div th:replace="~{question/question_votes :: content}"></div>
+
+        <div class="row ml-2">
+            <div class="col-auto my-auto">
+                <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post">
+                    <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
+                        Ask a question
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="ml-2 my-2">
+            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4" method="post">
+                <div sec:authorize="isAuthenticated()" class="d-flex" >
+                    <div class="w-100">
+                        <input type="hidden" id="productId" th:value="${product.id}">
+                        <textarea class="form-control" id="questionContent" rows="2"  placeholder="Type your question here" required></textarea>
+                    </div>
+                    <div class="my-auto ml-2">
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </main>
 
     <div th:replace="~{fragments :: modal_dialog}"></div>
@@ -49,8 +74,10 @@
 <script>
     let csrfHeaderName = "[[${_csrf.headerName}]]";
     let csrfValue = "[[${_csrf.token}]]";
+    let contextPath = "[[@{/}]]"
 </script>
 <script  th:src="@{/js/common_modal.js}"></script>
 <script th:src="@{/js/common_rating.js}"></script>
 <script th:src="@{/js/question_vote.js}"></script>
+<script th:src="@{/js/create_question.js}"></script>
 </html>

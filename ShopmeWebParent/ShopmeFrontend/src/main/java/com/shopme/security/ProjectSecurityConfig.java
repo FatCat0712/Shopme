@@ -39,7 +39,7 @@ public class ProjectSecurityConfig {
                     .requestMatchers(
                             "/account_details", "/update_account_details", "/cart", "/address_book/**", "/checkout",
                             "/place_order", "/process_paypal_order", "/orders/**", "/reviews/**", "/write_review/product/**",
-                            "/post_review", "/questions/**").authenticated()
+                            "/post_review", "/questions/page/**", "/questions/detail/**").authenticated()
                     .anyRequest().permitAll());
 
             http.formLogin(flc -> flc.loginPage("/login")

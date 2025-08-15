@@ -50,14 +50,20 @@
                         </li>
                     </th:block>
 
-                    <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson','Editor','Shipper')">
+                    <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson','Editor','Shipper','Assistant')">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/products}">Products</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Editor')" th:href="@{/products/new}">Create New</a>
-                                <a class="dropdown-item" th:href="@{/products}">View All</a>
-                                <a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin','Assistant')" th:href="@{/questions}">Questions</a>
-                                <a class="dropdown-item" sec:authorize="hasAuthority('Admin')" th:href="@{/reviews}">Reviews</a>
+                                <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                    <a class="dropdown-item" th:href="@{/products/new}">Create New</a>
+                                    <a class="dropdown-item" th:href="@{/products}">View All</a>
+                                </th:block>
+                                <th:block sec:authorize="hasAnyAuthority('Admin','Assistant')">
+                                    <a class="dropdown-item"  th:href="@{/questions}">Questions</a>
+                                </th:block>
+                                 <th:block>
+                                     <a class="dropdown-item" sec:authorize="hasAuthority('Admin')" th:href="@{/reviews}">Reviews</a>
+                                 </th:block>
                             </div>
                         </li>
                     </th:block>

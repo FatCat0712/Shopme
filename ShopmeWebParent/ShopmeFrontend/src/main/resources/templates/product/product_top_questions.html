@@ -14,7 +14,7 @@
             <a class="text-decoration-none" th:href="@{'/questions/' + ${product.alias} + '/page/1?sortField=askTime&sortDir=desc'}">View all [[${product.questionCount}]] questions</a>
         </div>
         <div class="col-auto my-auto">
-            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()">
+            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post">
                 <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
                     Ask a question
                 </button>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="ml-2 my-2">
-            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4">
+            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4" method="post">
                 <div sec:authorize="isAuthenticated()" class="d-flex" >
                     <div class="w-100">
                         <input type="hidden" id="productId" th:value="${product.id}">
