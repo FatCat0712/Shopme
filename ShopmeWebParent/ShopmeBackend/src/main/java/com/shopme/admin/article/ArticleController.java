@@ -5,7 +5,7 @@ import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.User;
 import com.shopme.common.entity.article.Article;
-import com.shopme.common.exception.ArticleNotFound;
+import com.shopme.common.exception.ArticleNotFoundException;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,7 @@ public class ArticleController {
                 ra.addFlashAttribute("message", "The article has been created");
             }
             articleService.saveArticle(article, currentUser);
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultURL;
@@ -79,7 +79,7 @@ public class ArticleController {
             model.addAttribute("article", article);
             model.addAttribute("pageTitle", article.getTitle());
             return "articles/article_detail_modal";
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
             return defaultURL;
         }
@@ -94,7 +94,7 @@ public class ArticleController {
         try {
             articleService.publishArticle(id, status);
             ra.addFlashAttribute("message", String.format("The article with ID %d has been %s", id, status ? "published" : "unpublished"));
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultURL;
@@ -107,7 +107,7 @@ public class ArticleController {
             model.addAttribute("article", article);
             model.addAttribute("pageTitle", String.format("Edit Article (ID:%d)", id));
             return "articles/article_form";
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
             return defaultURL;
         }
@@ -118,7 +118,7 @@ public class ArticleController {
         try {
             articleService.deleteArticle(id);
             ra.addFlashAttribute("message", String.format("The article with ID %d has been deleted", id));
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultURL;

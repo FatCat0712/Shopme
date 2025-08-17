@@ -4,6 +4,7 @@ import com.shopme.admin.article.ArticleService;
 import com.shopme.common.entity.article.Article;
 import com.shopme.common.entity.article.ArticleType;
 import com.shopme.common.entity.menu.Menu;
+import com.shopme.common.exception.MenuNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +50,7 @@ public class MenuController {
             Integer menuId = menuInForm.getId();
             menuService.saveMenu(menuInForm);
             ra.addFlashAttribute("message", String.format("The %s menu has been %s", menuInForm.getTitle(), menuId != null ? "updated" : "created"));
-        } catch (MenuNotFound e) {
+        } catch (MenuNotFoundException e) {
             ra.addFlashAttribute("errorMessage", "Could not update as: " + e.getMessage());
         }
         return defaultRedirectURL;
@@ -64,7 +65,7 @@ public class MenuController {
             model.addAttribute("menu", menu);
             model.addAttribute("pageTitle", String.format("Edit %s Menu", menu.getTitle()));
             return "menus/menu_form";
-        } catch (MenuNotFound e) {
+        } catch (MenuNotFoundException e) {
            ra.addFlashAttribute("errorMessage", e.getMessage());
            return defaultRedirectURL;
         }
@@ -86,7 +87,7 @@ public class MenuController {
         try {
             Menu menu = menuService.updateMenuPosition(id, action);
             ra.addFlashAttribute("message", String.format("The %s menu has been moved %s by one position", menu.getTitle(), action));
-        } catch (MenuNotFound | InvalidMenuPosition e) {
+        } catch (MenuNotFoundException | InvalidMenuPosition e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultRedirectURL;
@@ -97,7 +98,7 @@ public class MenuController {
         try {
             Menu menu = menuService.deleteMenu(menuId);
             ra.addFlashAttribute("message", String.format("The %s menu has been deleted", menu.getTitle()));
-        } catch (MenuNotFound e) {
+        } catch (MenuNotFoundException e) {
            ra.addFlashAttribute("errorMessage", e.getMessage());
         }
         return defaultRedirectURL;

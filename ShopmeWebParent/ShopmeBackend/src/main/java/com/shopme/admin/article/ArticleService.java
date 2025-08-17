@@ -4,7 +4,7 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.User;
 import com.shopme.common.entity.article.Article;
 import com.shopme.common.entity.article.ArticleType;
-import com.shopme.common.exception.ArticleNotFound;
+import com.shopme.common.exception.ArticleNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,38 +28,38 @@ public class ArticleService {
         helper.listEntities(pageNum, ARTICLE_PER_PAGE, repo);
     }
 
-    public Article getByAlias(String alias) throws ArticleNotFound {
+    public Article getByAlias(String alias) throws ArticleNotFoundException {
         Article article = repo.findByAlias(alias);
         if(article == null) {
-            throw new ArticleNotFound("Could not find any articles with alias " + alias);
+            throw new ArticleNotFoundException("Could not find any articles with alias " + alias);
         }
         return article;
     }
 
-    public Article getById(Integer articleId) throws ArticleNotFound {
+    public Article getById(Integer articleId) throws ArticleNotFoundException {
         Optional<Article> article = repo.findById(articleId);
         if(article.isEmpty()) {
-            throw new ArticleNotFound("Could not find any articles with ID " + articleId);
+            throw new ArticleNotFoundException("Could not find any articles with ID " + articleId);
         }
         return article.get();
     }
 
-    public void publishArticle(Integer articleId, Boolean status) throws ArticleNotFound {
+    public void publishArticle(Integer articleId, Boolean status) throws ArticleNotFoundException {
         Optional<Article> article = repo.findById(articleId);
         if(article.isEmpty()) {
-            throw new ArticleNotFound("Could not find any articles with ID " + articleId);
+            throw new ArticleNotFoundException("Could not find any articles with ID " + articleId);
         }
         repo.publishArticle(articleId, status);
     }
 
-    public void saveArticle(Article articleInForm, User publisher) throws ArticleNotFound {
+    public void saveArticle(Article articleInForm, User publisher) throws ArticleNotFoundException {
          Integer articleId = articleInForm.getId();
         Article resultArticle;
         int userId = publisher.getId();
         if(articleId != null) {
             Optional<Article> article = repo.findById(articleId);
             if(article.isEmpty()) {
-                throw new ArticleNotFound("Could not find any articles with ID " + articleId);
+                throw new ArticleNotFoundException("Could not find any articles with ID " + articleId);
             }
             else {
                 resultArticle = article.get();
@@ -83,10 +83,10 @@ public class ArticleService {
         repo.save(resultArticle);
     }
 
-    public void deleteArticle(Integer articleId) throws ArticleNotFound {
+    public void deleteArticle(Integer articleId) throws ArticleNotFoundException {
         Optional<Article> article = repo.findById(articleId);
         if(article.isEmpty()) {
-            throw new ArticleNotFound("Could not find any articles with ID " + articleId);
+            throw new ArticleNotFoundException("Could not find any articles with ID " + articleId);
         }
         repo.deleteById(articleId);
     }

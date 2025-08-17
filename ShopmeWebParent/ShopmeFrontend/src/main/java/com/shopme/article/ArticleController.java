@@ -1,7 +1,7 @@
 package com.shopme.article;
 
 import com.shopme.common.entity.article.Article;
-import com.shopme.common.exception.ArticleNotFound;
+import com.shopme.common.exception.ArticleNotFoundException;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ArticleController {
            article.setContent(cleanContent);
            model.addAttribute("article", article);
            return "article/article_detail";
-        } catch (ArticleNotFound e) {
+        } catch (ArticleNotFoundException e) {
             return "error/404";
         }
     }

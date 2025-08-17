@@ -37,7 +37,10 @@
                                            <option  th:value="${menu.article.id}">[[${menu.article.title}]]</option>
                                            <option th:each="article : ${listArticles}" th:value="${article.id}" th:selected="${article.id == menu.article.id}">[[${article.title}]]</option>
                                        </th:block>
-                                       <option th:each="article : ${listArticles}" th:value="${article.id}">[[${article.title}]]</option>
+                                       <th:block th:unless="${menu.article != null}">
+                                           <option th:each="article : ${listArticles}" th:value="${article.id}">[[${article.title}]]</option>
+                                       </th:block>
+
                                    </select>
                                 </div>
                             </div>
@@ -75,11 +78,7 @@
 
 
 <script type="text/javascript">
-        let moduleURL = "[[@{/articles}]]";
-         $(document).ready(function() {
-            $('.article-content').richText();
-        });
-
+        let moduleURL = "[[@{/menus}]]";
 </script>
 <script th:src="@{/js/common_form.js}"></script>
 </body>

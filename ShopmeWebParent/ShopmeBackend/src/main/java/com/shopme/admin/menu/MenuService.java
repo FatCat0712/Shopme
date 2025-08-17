@@ -2,6 +2,7 @@ package com.shopme.admin.menu;
 
 import com.shopme.common.entity.menu.Menu;
 import com.shopme.common.entity.menu.MenuType;
+import com.shopme.common.exception.MenuNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -25,20 +26,20 @@ public class MenuService {
         return repo.findAll(sort);
     }
 
-    public Menu get(Integer menuId) throws MenuNotFound {
+    public Menu get(Integer menuId) throws MenuNotFoundException {
         Optional<Menu> menu = repo.findById(menuId);
         if(menu.isEmpty()) {
-            throw new MenuNotFound("Could not find any menus with ID " + menuId);
+            throw new MenuNotFoundException("Could not find any menus with ID " + menuId);
         }
         return menu.get();
     }
 
-    public Menu enableMenu(Integer menuId, Boolean status) throws MenuNotFound {
+    public Menu enableMenu(Integer menuId, Boolean status) throws MenuNotFoundException {
         Menu menu = get(menuId); repo.updateMenuStatus(menuId, status);
         return menu;
     }
 
-    public Menu updateMenuPosition(Integer menuId, String action) throws MenuNotFound, InvalidMenuPosition {
+    public Menu updateMenuPosition(Integer menuId, String action) throws MenuNotFoundException, InvalidMenuPosition {
 //        get the menu from database first
         Menu menu = get(menuId);
         MenuType menuType = menu.getMenuType();
@@ -74,15 +75,15 @@ public class MenuService {
         return repo.save(menu);
     }
 
-    public void saveMenu(Menu menuInForm) throws MenuNotFound {
+    public void saveMenu(Menu menuInForm) throws MenuNotFoundException {
         Integer menuId = menuInForm.getId();
         Menu menu;
         if(menuId != null) {
             try {
                 menu = get(menuId);
                 menu.setEnabled(menuInForm.isEnabled());
-            } catch (MenuNotFound e) {
-                throw new MenuNotFound(e.getMessage());
+            } catch (MenuNotFoundException e) {
+                throw new MenuNotFoundException(e.getMessage());
             }
         }
         else {
@@ -105,13 +106,13 @@ public class MenuService {
     }
 
 
-    public Menu deleteMenu(Integer menuId) throws MenuNotFound {
+    public Menu deleteMenu(Integer menuId) throws MenuNotFoundException {
         try {
             Menu menu = get(menuId);
             repo.deleteById(menu.getId());
             return menu;
-        } catch (MenuNotFound e) {
-            throw new MenuNotFound(e.getMessage());
+        } catch (MenuNotFoundException e) {
+            throw new MenuNotFoundException(e.getMessage());
         }
     }
 }

@@ -24,7 +24,9 @@ public interface ArticleRepository extends CrudRepository<Article, Integer>, Sea
     @Modifying
     void publishArticle(Integer articleId, Boolean status);
 
-    @Query("SELECT a FROM Article a WHERE a.articleType = ?1 AND a.id NOT IN (SELECT m.article.id FROM Menu m WHERE m.article IS NOT NULL)")
+    @Query("SELECT a FROM Article a WHERE a.articleType = ?1 " +
+            "AND a.alias != 'contact-us' " +
+            "AND a.id NOT IN (SELECT m.article.id FROM Menu m WHERE m.article IS NOT NULL)")
     List<Article> listUnlinkedArticleByArticleType(ArticleType articleType);
 
     @Query("SELECT a FROM Article a WHERE a.articleType = ?1")
