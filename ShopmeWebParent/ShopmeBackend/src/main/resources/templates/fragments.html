@@ -33,8 +33,8 @@
     </div>
 
     <div th:fragment="enable_link(enabled, entityName, entityURL)" th:remove="tag">
-            <a th:if="${enabled == true}" class="fas fa-check-circle fa-2x icon-green" th:href="@{${entityURL} + '/enabled/false'}" th:title="'Disable this ' + ${entityName}"></a>
-           <a th:if="${enabled == false}" class="fas fa-circle fa-2x icon-dark" th:href="@{${entityURL} + '/enabled/true'}" th:title="'Enable this ' + ${entityName}"></a>
+            <a th:if="${enabled == true}" class="fas fa-check-circle fa-2x icon-green text-decoration-none" th:href="@{${entityURL} + '/enabled/false'}" th:title="'Disable this ' + ${entityName}"></a>
+           <a th:if="${enabled == false}" class="fas fa-circle fa-2x icon-dark text-decoration-none" th:href="@{${entityURL} + '/enabled/true'}" th:title="'Enable this ' + ${entityName}"></a>
     </div>
 
     <div th:fragment="edit(entityName, editURL)" th:remove="tag">

@@ -5,24 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/article/Article.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/article/ArticleType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/exception/ArticleNotFound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/articles/article_detail_modal.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/articles/article_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/articles/articles.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/article/ArticleRepositoryTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/article/ArticleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/article/ArticleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/java/com/shopme/article/ArticleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/article/article_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/security/ProjectSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/register/register_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/register/register_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/menu/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/menu/MenuType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/menu/InvalidMenuPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/menu/MenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/menu/MenuNotFound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/menu/MenuRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/menu/MenuService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/menus/menu_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/menus/menus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/test/java/com/shopme/admin/menu/MenuRepositoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/article/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeCommon/src/main/java/com/shopme/common/entity/article/Article.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/java/com/shopme/admin/article/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/common_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/static/js/common_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/articles/article_detail_modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/articles/article_detail_modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/fragments.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +41,9 @@
         <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Enum" />
-        <option value="Exception" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -144,6 +142,11 @@
     "JUnit.CustomerRepositoryTests.testListCustomer.executor": "Debug",
     "JUnit.CustomerRepositoryTests.testUpdateAuthenticationType.executor": "Run",
     "JUnit.CustomerRepositoryTests.testUpdateCustomer.executor": "Run",
+    "JUnit.MenuRepositoryTests.deleteMenu.executor": "Run",
+    "JUnit.MenuRepositoryTests.testGetMenu.executor": "Run",
+    "JUnit.MenuRepositoryTests.testListMenus.executor": "Run",
+    "JUnit.MenuRepositoryTests.testSaveMenu.executor": "Run",
+    "JUnit.MenuRepositoryTests.updateMenu.executor": "Run",
     "JUnit.OrderDetailRepositoryTests.testCountByProductAndCustomerAndOrderStatus.executor": "Run",
     "JUnit.OrderDetailRepositoryTests.testFindWithCategoryAndTimeBetween.executor": "Run",
     "JUnit.OrderDetailRepositoryTests.testFindWithProductAndTimeBetween.executor": "Run",
@@ -272,7 +275,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/projects/Shopme/ShopmeWebParent/ShopmeFrontend/src/main/resources/templates/article",
+    "last_opened_file_path": "D:/projects/Shopme/ShopmeWebParent/ShopmeBackend/src/main/resources/templates/menus",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -291,11 +294,11 @@
       <recent name="com.shopme.admin.user" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\menus" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\article" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\articles" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\question" />
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeBackend\src\main\resources\templates\questions" />
-      <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeFrontend\src\main\resources\templates\review" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\Shopme\ShopmeWebParent\ShopmeFrontend\src\main\resources\static\rating-star" />
@@ -331,13 +334,14 @@
           <value>
             <map>
               <entry key="ShopmeBackend" value="STOPPED" />
+              <entry key="ShopmeFrontEnd" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ArticleRepositoryTests.testCreateArticle">
+  <component name="RunManager" selected="JUnit.MenuRepositoryTests.testSaveMenu">
     <configuration name="ShopmeBackend" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackendApplication" />
       <module name="ShopmeBackend" />
@@ -366,81 +370,81 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArticleRepositoryTests.listArticles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuRepositoryTests.deleteMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.common.exception.*" />
+          <option name="PATTERN" value="com.shopme.admin.menu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.article" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.article.ArticleRepositoryTests" />
-      <option name="METHOD_NAME" value="listArticles" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.menu" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.menu.MenuRepositoryTests" />
+      <option name="METHOD_NAME" value="deleteMenu" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArticleRepositoryTests.testCreateArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuRepositoryTests.testGetMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.common.exception.*" />
+          <option name="PATTERN" value="com.shopme.admin.menu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.article" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.article.ArticleRepositoryTests" />
-      <option name="METHOD_NAME" value="testCreateArticle" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.menu" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.menu.MenuRepositoryTests" />
+      <option name="METHOD_NAME" value="testGetMenu" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArticleRepositoryTests.testDeleteArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuRepositoryTests.testListMenus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.common.exception.*" />
+          <option name="PATTERN" value="com.shopme.admin.menu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.article" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.article.ArticleRepositoryTests" />
-      <option name="METHOD_NAME" value="testDeleteArticle" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.menu" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.menu.MenuRepositoryTests" />
+      <option name="METHOD_NAME" value="testListMenus" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArticleRepositoryTests.testGetArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuRepositoryTests.testSaveMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.common.exception.*" />
+          <option name="PATTERN" value="com.shopme.admin.menu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.article" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.article.ArticleRepositoryTests" />
-      <option name="METHOD_NAME" value="testGetArticle" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.menu" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.menu.MenuRepositoryTests" />
+      <option name="METHOD_NAME" value="testSaveMenu" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArticleRepositoryTests.testUpdateArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MenuRepositoryTests.updateMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ShopmeBackend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shopme.common.exception.*" />
+          <option name="PATTERN" value="com.shopme.admin.menu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.shopme.admin.article" />
-      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.article.ArticleRepositoryTests" />
-      <option name="METHOD_NAME" value="testUpdateArticle" />
+      <option name="PACKAGE_NAME" value="com.shopme.admin.menu" />
+      <option name="MAIN_CLASS_NAME" value="com.shopme.admin.menu.MenuRepositoryTests" />
+      <option name="METHOD_NAME" value="updateMenu" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -553,19 +557,19 @@
       <item itemvalue="Application.ShopmeFrontEnd" />
       <item itemvalue="JUnit.PayPalApiTests" />
       <item itemvalue="JUnit.PayPalApiTests.testGetOrderDetails" />
-      <item itemvalue="JUnit.ArticleRepositoryTests.listArticles" />
-      <item itemvalue="JUnit.ArticleRepositoryTests.testCreateArticle" />
-      <item itemvalue="JUnit.ArticleRepositoryTests.testDeleteArticle" />
-      <item itemvalue="JUnit.ArticleRepositoryTests.testGetArticle" />
-      <item itemvalue="JUnit.ArticleRepositoryTests.testUpdateArticle" />
+      <item itemvalue="JUnit.MenuRepositoryTests.deleteMenu" />
+      <item itemvalue="JUnit.MenuRepositoryTests.testGetMenu" />
+      <item itemvalue="JUnit.MenuRepositoryTests.testListMenus" />
+      <item itemvalue="JUnit.MenuRepositoryTests.testSaveMenu" />
+      <item itemvalue="JUnit.MenuRepositoryTests.updateMenu" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ArticleRepositoryTests.testCreateArticle" />
-        <item itemvalue="JUnit.ArticleRepositoryTests.testDeleteArticle" />
-        <item itemvalue="JUnit.ArticleRepositoryTests.testUpdateArticle" />
-        <item itemvalue="JUnit.ArticleRepositoryTests.listArticles" />
-        <item itemvalue="JUnit.ArticleRepositoryTests.testGetArticle" />
+        <item itemvalue="JUnit.MenuRepositoryTests.testSaveMenu" />
+        <item itemvalue="JUnit.MenuRepositoryTests.testListMenus" />
+        <item itemvalue="JUnit.MenuRepositoryTests.deleteMenu" />
+        <item itemvalue="JUnit.MenuRepositoryTests.updateMenu" />
+        <item itemvalue="JUnit.MenuRepositoryTests.testGetMenu" />
       </list>
     </recent_temporary>
   </component>

@@ -32,6 +32,13 @@ public class Article extends IdBasedEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Article() {
+    }
+
+    public Article(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Article{" +

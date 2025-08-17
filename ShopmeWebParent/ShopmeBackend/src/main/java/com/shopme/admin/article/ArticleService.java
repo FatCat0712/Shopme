@@ -3,12 +3,14 @@ package com.shopme.admin.article;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.User;
 import com.shopme.common.entity.article.Article;
+import com.shopme.common.entity.article.ArticleType;
 import com.shopme.common.exception.ArticleNotFound;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,8 +74,8 @@ public class ArticleService {
             resultArticle = articleInForm;
         }
 
-        if(resultArticle.getAlias() == null) {
-            String formattedAlias = resultArticle.getTitle().replace(" ", "-");
+        if(resultArticle.getAlias().isEmpty()) {
+            String formattedAlias = resultArticle.getTitle().replaceAll(" & ", "-").replaceAll(" ", "-").toLowerCase();
             resultArticle.setAlias(formattedAlias);
         }
         resultArticle.setUser(new User(userId));
@@ -87,5 +89,9 @@ public class ArticleService {
             throw new ArticleNotFound("Could not find any articles with ID " + articleId);
         }
         repo.deleteById(articleId);
+    }
+
+    public List<Article> listUnlinkedArticlesByArticleType(ArticleType articleType) {
+        return repo.listUnlinkedArticleByArticleType(articleType);
     }
 }

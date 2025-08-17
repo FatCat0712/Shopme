@@ -10,3 +10,11 @@ function showDeleteConfirmModal(link, entityName) {
      $("#confirmModal").modal();
 
 }
+
+function handleDetailLink(linkClass, modalId) {
+    $(linkClass).on("click" ,function (e) {
+            e.preventDefault();
+            let linkDetailURL = $(this).attr("href");
+            $(modalId).modal("show").find(".modal-content").load(linkDetailURL);
+    })
+}
