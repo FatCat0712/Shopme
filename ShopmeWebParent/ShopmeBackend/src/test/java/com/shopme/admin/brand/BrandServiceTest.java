@@ -1,6 +1,6 @@
 package com.shopme.admin.brand;
 
-import com.shopme.common.entity.Brand;
+import com.shopme.common.entity.brand.Brand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

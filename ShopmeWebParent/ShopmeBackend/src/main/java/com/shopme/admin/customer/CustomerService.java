@@ -2,7 +2,7 @@ package com.shopme.admin.customer;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.shopme.shippingrate;
 
 import com.shopme.common.entity.Address;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.ShippingRate;
 import org.springframework.beans.factory.annotation.Autowired;

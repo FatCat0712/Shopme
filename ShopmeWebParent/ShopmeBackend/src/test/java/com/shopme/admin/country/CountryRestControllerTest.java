@@ -2,7 +2,7 @@ package com.shopme.admin.country;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopme.admin.setting.country.CountryRepository;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,17 +24,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CountryRestControllerTest {
-    @Autowired
-    MockMvc mockMvc;
+    private final MockMvc mockMvc;
+    private final ObjectMapper objectMapper;
+    private final CountryRepository countryRepository;
 
     @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
-    CountryRepository countryRepository;
+    public CountryRestControllerTest(MockMvc mockMvc, ObjectMapper objectMapper, CountryRepository countryRepository) {
+        this.mockMvc = mockMvc;
+        this.objectMapper = objectMapper;
+        this.countryRepository = countryRepository;
+    }
 
     @Test
-    @WithMockUser(username = "name@codejava.net", password = "java2020", roles = "ADMIN")
+    @WithMockUser(username = "name@codejava.net", password = "nam2020", authorities = "Admin")
     public void testListCountries() throws Exception {
         String url = "/countries/list";
         MvcResult result = mockMvc.perform(get(url))
@@ -129,9 +131,6 @@ public class CountryRestControllerTest {
         Optional<Country> findById = countryRepository.findById(countryId);
 
         assertThat(findById).isNotPresent();
-
-
-
     }
 
 

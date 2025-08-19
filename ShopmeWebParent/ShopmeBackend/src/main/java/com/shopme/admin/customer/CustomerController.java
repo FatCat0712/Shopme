@@ -3,7 +3,7 @@ package com.shopme.admin.customer;
 import com.shopme.admin.customer.export.CustomerCsvExporter;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

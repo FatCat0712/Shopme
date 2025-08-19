@@ -3,7 +3,7 @@ package com.shopme.admin.shippingrate;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.product.ProductRepository;
 import com.shopme.admin.setting.country.CountryRepository;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.ShippingRate;
 import com.shopme.common.entity.product.Product;
 import jakarta.transaction.Transactional;

@@ -1,5 +1,8 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.brand;
 
+import com.shopme.common.entity.Category;
+import com.shopme.common.entity.Constants;
+import com.shopme.common.entity.IdBasedEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +14,7 @@ import java.util.Set;
 @Table(name = "brands")
 @Getter
 @Setter
-public class Brand extends IdBasedEntity{
+public class Brand extends IdBasedEntity {
     @Column(nullable = false, length = 45, unique = true)
     private String name;
 
@@ -29,8 +32,18 @@ public class Brand extends IdBasedEntity{
     public Brand() {
     }
 
+    public Brand(Integer id) {
+        this.id = id;
+    }
+
     public Brand(String name) {
         this.name = name;
+    }
+
+    public Brand(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+        this.logo = "logo.png";
     }
 
     public Brand(Integer id, String name, String logo, Set<Category> categories) {
@@ -40,11 +53,7 @@ public class Brand extends IdBasedEntity{
         this.categories = categories;
     }
 
-    public Brand(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-        this.logo = "logo.png";
-    }
+
 
     @Override
     public String toString() {

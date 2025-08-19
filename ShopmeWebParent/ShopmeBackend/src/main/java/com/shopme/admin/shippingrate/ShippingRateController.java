@@ -2,7 +2,7 @@ package com.shopme.admin.shippingrate;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.ShippingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -171,7 +171,6 @@ function changeFormStateToSelectedCountry() {
     fieldCountryCode.val(countryCode);
 
 
-
 }
 
 function loadCountries() {

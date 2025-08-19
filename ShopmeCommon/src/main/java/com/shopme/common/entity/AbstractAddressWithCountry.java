@@ -1,5 +1,6 @@
 package com.shopme.common.entity;
 
+import com.shopme.common.entity.country.Country;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;

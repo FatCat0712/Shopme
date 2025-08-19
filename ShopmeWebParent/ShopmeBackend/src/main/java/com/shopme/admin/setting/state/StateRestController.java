@@ -1,8 +1,8 @@
 package com.shopme.admin.setting.state;
 
-import com.shopme.common.entity.Country;
-import com.shopme.common.entity.State;
-import com.shopme.common.entity.StateDTO;
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.state.State;
+import com.shopme.common.entity.state.StateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

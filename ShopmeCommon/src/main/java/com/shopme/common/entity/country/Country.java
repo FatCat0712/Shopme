@@ -1,5 +1,7 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.country;
 
+import com.shopme.common.entity.IdBasedEntity;
+import com.shopme.common.entity.state.State;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import java.util.Set;
 @Table(name = "countries")
 @Getter
 @Setter
-public class Country extends IdBasedEntity{
+public class Country extends IdBasedEntity {
 
     @Column(length = 46, nullable = false, unique = true)
     private String name;

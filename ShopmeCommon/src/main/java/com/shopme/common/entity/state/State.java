@@ -1,5 +1,7 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.state;
 
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.IdBasedEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

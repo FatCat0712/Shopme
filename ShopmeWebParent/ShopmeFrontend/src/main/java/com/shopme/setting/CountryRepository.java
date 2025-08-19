@@ -1,6 +1,6 @@
 package com.shopme.setting;
 
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

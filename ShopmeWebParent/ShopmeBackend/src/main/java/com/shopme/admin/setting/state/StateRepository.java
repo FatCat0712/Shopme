@@ -1,7 +1,7 @@
 package com.shopme.admin.setting.state;
 
-import com.shopme.common.entity.Country;
-import com.shopme.common.entity.State;
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.state.State;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

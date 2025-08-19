@@ -1,6 +1,7 @@
 package com.shopme.admin.setting.country;
 
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.country.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,9 @@ public class CountryRestController {
     private CountryRepository countryRepository;
 
     @GetMapping("/countries/list")
-    public List<Country> listAll() {
-        return countryRepository.findAllByOrderByNameAsc();
+    public List<CountryDTO> listAll() {
+        List<Country> listCountries = countryRepository.findAllByOrderByNameAsc();
+        return listCountries.stream().map(c -> new CountryDTO(c.getId(), c.getName(), c.getCode())).toList();
     }
 
     @PostMapping("/countries/save")

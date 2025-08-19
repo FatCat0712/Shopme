@@ -1,10 +1,10 @@
 package com.shopme.admin.state;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shopme.common.entity.StateDTO;
+import com.shopme.common.entity.state.StateDTO;
 import com.shopme.admin.setting.state.StateRepository;
-import com.shopme.common.entity.Country;
-import com.shopme.common.entity.State;
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.state.State;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.shopme.admin.brand;
 
-import com.shopme.common.entity.Brand;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

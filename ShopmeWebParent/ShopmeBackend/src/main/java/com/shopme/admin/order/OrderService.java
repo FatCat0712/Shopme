@@ -2,7 +2,7 @@ package com.shopme.admin.order;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.order.Order;
 import com.shopme.common.entity.order.OrderStatus;
 import com.shopme.common.entity.order.OrderTrack;

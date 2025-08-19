@@ -1,6 +1,6 @@
 package com.shopme.common.entity.product;
 
-import com.shopme.common.entity.Brand;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Constants;
 import com.shopme.common.entity.IdBasedEntity;

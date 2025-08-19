@@ -1,8 +1,8 @@
 package com.shopme.admin.state;
 
 import com.shopme.admin.setting.state.StateRepository;
-import com.shopme.common.entity.Country;
-import com.shopme.common.entity.State;
+import com.shopme.common.entity.country.Country;
+import com.shopme.common.entity.state.State;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

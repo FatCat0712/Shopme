@@ -1,7 +1,7 @@
 package com.shopme.customer;
 
 import com.shopme.common.entity.AuthenticationType;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

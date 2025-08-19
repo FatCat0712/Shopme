@@ -1,7 +1,7 @@
 package com.shopme.customer;
 
 import com.shopme.Utility;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import com.shopme.security.CustomerDetails;
 import com.shopme.security.oauth.CustomerOAuth2User;

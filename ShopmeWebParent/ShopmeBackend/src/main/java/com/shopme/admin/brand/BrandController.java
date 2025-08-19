@@ -4,7 +4,7 @@ import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.category.CategoryService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.Brand;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

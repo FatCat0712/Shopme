@@ -24,6 +24,10 @@ public class ArticleService {
         this.repo = repo;
     }
 
+    public List<Article> listAll() {
+        return repo.findAll();
+    }
+
     public void listByPage(PagingAndSortingHelper helper, int pageNum) {
         helper.listEntities(pageNum, ARTICLE_PER_PAGE, repo);
     }

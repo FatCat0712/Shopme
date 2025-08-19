@@ -1,7 +1,7 @@
 package com.shopme.address;
 
 import com.shopme.common.entity.Address;
-import com.shopme.common.entity.Country;
+import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
 import com.shopme.setting.CountryRepository;
 import jakarta.transaction.Transactional;
