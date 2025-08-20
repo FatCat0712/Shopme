@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+        <div th:fragment="content" th:remove="tag">
+                <div id="productList" class="d-flex flex-wrap g-2">
+                        <div th:each="section,status : ${section.sectionProducts}" class="col-sm-3 text-center product-box"  th:id="'col' + ${status.count}" th:with="product = ${section.product}">
+                            <input type="hidden" th:value="${product.id}" name="sectionProducts" class="hiddenProductId"/>
+                            <div class="d-flex justify-content-between mb-1">
+                                <a class="fas fa-chevron-left icon-dark link-move-left--product text-decoration-none" href=""></a>
+                                <a class="fas fa-trash icon-dark text-decoration-none link-remove--product" href="" th:colNumber="${status.count}"></a>
+                                <a class="fas fa-chevron-right icon-dark link-move-right--product text-decoration-none" href=""></a>
+                            </div>
+                            <div>
+                                <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" width="100px"/>
+                            </div>
+                            <div>
+                                <b>[[${product.name}]]</b>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+</body>
+</html>

@@ -57,7 +57,13 @@ public class ProductService {
     public void searchProducts(int pageNum, PagingAndSortingHelper helper) {
         Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
         String keyword = helper.getKeyword();
-        Page<Product> page = repo.searchProductsByName(keyword, pageable);
+        Page<Product> page;
+        if(keyword != null) {
+            page = repo.searchProductsByName(keyword, pageable);
+        }
+        else {
+            page = repo.findAll(pageable);
+        }
         helper.updateModelAttribute(pageNum, page);
     }
 

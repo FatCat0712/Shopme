@@ -17,6 +17,7 @@ public class SectionDTO {
     private List<Integer> sectionArticles;
     private List<Integer> sectionBrands;
     private List<Integer> sectionCategories;
+    private List<Integer> sectionProducts;
 
     @Override
     public String toString() {

@@ -4,7 +4,9 @@ import com.shopme.admin.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.article.Article;
 import com.shopme.common.entity.brand.Brand;
+import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.section.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -83,8 +85,7 @@ public class SectionController {
     @GetMapping("/sections/new/{type}")
     public String createSection(@PathVariable(name = "type") String type, Model model) {
         SectionType sectionType = SectionType.valueOf(type.toUpperCase());
-
-        SectionDTO section = new SectionDTO();
+        Section section = new Section();
         section.setSectionType(sectionType);
 
         model.addAttribute("section", section);
@@ -93,17 +94,42 @@ public class SectionController {
         return "sections/section_form";
     }
 
-    @PostMapping("/sections/save")
-    public String saveSection(SectionDTO sectionDTO, RedirectAttributes ra) {
-        Section section = mapToSection(sectionDTO);
+    @GetMapping("/sections/edit/{id}")
+    public String editSection(@PathVariable(name = "id") Integer id, RedirectAttributes ra, Model model) {
         try {
-            sectionService.save(section);
+            Section section = sectionService.get(id);
+            model.addAttribute("sectionType", section.getSectionType().toString().toLowerCase());
+            model.addAttribute("section", section);
+            return "sections/section_form";
+        } catch (SectionNotFoundException e) {
+            ra.addFlashAttribute("errorMessage", e.getMessage());
+            return defaultRedirectURL;
+        }
+    }
+
+    @GetMapping("/sections/delete/{id}")
+    public String deleteSection(@PathVariable(name = "id") Integer id, RedirectAttributes ra) {
+        try {
+            sectionService.delete(id);
+            ra.addFlashAttribute("message", String.format("The section with ID %d has been deleted", id));
+        } catch (SectionNotFoundException e) {
+            ra.addFlashAttribute("errorMessage", e.getMessage());
+        }
+        return defaultRedirectURL;
+    }
+
+
+    @PostMapping("/sections/save")
+    public String saveSection(HttpServletRequest request, RedirectAttributes ra) {
+        Section section = mapToSection(request);
+        try {
             if(section.getId() != null) {
                 ra.addFlashAttribute("message", String.format("The section with ID %d has been %s", section.getId(), "updated"));
             }
             else {
                 ra.addFlashAttribute("message", "The section has been created");
             }
+            sectionService.save(section);
         } catch (SectionNotFoundException e) {
           ra.addFlashAttribute("errorMessage", e.getMessage());
         }
@@ -111,55 +137,88 @@ public class SectionController {
         return defaultRedirectURL;
     }
 
-    public Section mapToSection(SectionDTO dto) {
-        Section section = new Section();
-        Integer sectionId = dto.getId();
-        if(sectionId != null) {
-            section.setId(sectionId);
-        }
-        section.setHeading(dto.getHeading());
-        section.setDescription(dto.getDescription());
-        section.setSectionType(dto.getSectionType());
-        section.setEnabled(dto.isEnabled());
+    public Section mapToSection(HttpServletRequest request) {
+        String sectionId = request.getParameter("id");
+        String heading = request.getParameter("heading");
+        String description = request.getParameter("description");
+        SectionType sectionType = SectionType.valueOf(request.getParameter("sectionType"));
+        boolean enabled = Boolean.parseBoolean(request.getParameter("enabled"));
+        String[] sectionArticles = request.getParameterValues("sectionArticles");
+        String[] sectionCategories = request.getParameterValues("sectionCategories");
+        String[] sectionBrands = request.getParameterValues("sectionBrands");
+        String[] sectionProducts = request.getParameterValues("sectionProducts");
 
-        if(dto.getSectionArticles() != null) {
-            List<Integer> sectionArticlesByNum = dto.getSectionArticles();
+        Section section = new Section();
+        if(!sectionId.isEmpty()) {
+            section.setId(Integer.parseInt(sectionId));
+        }
+        section.setHeading(heading);
+        section.setDescription(description);
+        section.setSectionType(sectionType);
+        section.setEnabled(enabled);
+
+        if(sectionArticles != null) {
             List<SectionArticle> sectionArticleList = new ArrayList<>();
-            for(int i = 1; i <= sectionArticlesByNum.size(); i++) {
+            for(int i = 0; i < sectionArticles.length; i++) {
                 SectionArticle sectionArticle = new SectionArticle();
                 sectionArticle.setSection(section);
-                sectionArticle.setArticle(new Article(sectionArticlesByNum.get(i  - 1)));
-                sectionArticle.setPosition(i);
+
+                int articleId = Integer.parseInt(sectionArticles[i]);
+                sectionArticle.setArticle(new Article(articleId));
+
+                sectionArticle.setPosition(i + 1);
+
                 sectionArticleList.add(sectionArticle);
             }
             section.setSectionArticles(sectionArticleList);
         }
 
-        if(dto.getSectionBrands() != null) {
-            List<Integer> sectionBrandsByNum = dto.getSectionBrands();
-            List<SectionBrand> sectionBrandList = new ArrayList<>();
-            for(int i = 1; i <= sectionBrandsByNum.size(); i++) {
-                SectionBrand sectionBrand = new SectionBrand();
-                sectionBrand.setSection(section);
-                sectionBrand.setBrand(new Brand(sectionBrandsByNum.get(i  - 1)));
-                sectionBrand.setPosition(i);
-                sectionBrandList.add(sectionBrand);
-            }
-            section.setSectionBrands(sectionBrandList);
-        }
-
-
-        if(dto.getSectionCategories() != null) {
-            List<Integer> sectionCategoryByNum = dto.getSectionCategories();
-            List<SectionCategory> sectionCategoryList = new ArrayList<>();
-            for(int i = 1; i <= sectionCategoryByNum.size(); i++) {
+        if(sectionCategories != null) {
+            List<SectionCategory> sectionCategoriesList = new ArrayList<>();
+            for(int i = 0; i < sectionCategories.length; i++) {
                 SectionCategory sectionCategory = new SectionCategory();
                 sectionCategory.setSection(section);
-                sectionCategory.setCategory(new Category(sectionCategoryByNum.get(i  - 1)));
-                sectionCategory.setPosition(i);
-                sectionCategoryList.add(sectionCategory);
+
+                int categoryId = Integer.parseInt(sectionCategories[i]);
+                sectionCategory.setCategory(new Category(categoryId));
+
+                sectionCategory.setPosition(i + 1);
+
+                sectionCategoriesList.add(sectionCategory);
             }
-            section.setSectionCategories(sectionCategoryList);
+            section.setSectionCategories(sectionCategoriesList);
+        }
+
+        if(sectionBrands != null) {
+            List<SectionBrand> sectionBrandsList = new ArrayList<>();
+            for(int i = 0; i < sectionBrands.length; i++) {
+                SectionBrand sectionBrand = new SectionBrand();
+                sectionBrand.setSection(section);
+
+                int brandId = Integer.parseInt(sectionBrands[i]);
+                sectionBrand.setBrand(new Brand(brandId));
+
+                sectionBrand.setPosition(i + 1);
+
+                sectionBrandsList.add(sectionBrand);
+            }
+            section.setSectionBrands(sectionBrandsList);
+        }
+
+        if(sectionProducts != null) {
+            List<SectionProduct> sectionProductsList = new ArrayList<>();
+            for(int i = 0; i < sectionProducts.length; i++) {
+                SectionProduct sectionProduct = new SectionProduct();
+                sectionProduct.setSection(section);
+
+                int productId = Integer.parseInt(sectionProducts[i]);
+                sectionProduct.setProduct(new Product(productId));
+
+                sectionProduct.setPosition(i + 1);
+
+                sectionProductsList.add(sectionProduct);
+            }
+            section.setSectionProducts(sectionProductsList);
         }
         return section;
     }

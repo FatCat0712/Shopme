@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,9 +49,8 @@ public class SectionService {
         try {
             Section section = get(sectionId);
             int currentPosition = section.getPosition();
-            int currentNumOfEnabledSections = repo.findAll().size();
+            int currentLastPosition = repo.findLastPosition();
             int newPosition = 0;
-            Section currentSectionByNewPosition;
             if("up".equals(action)) {
                 newPosition =  currentPosition - 1;
                 if(newPosition < 1) {
@@ -61,12 +59,12 @@ public class SectionService {
             }
             else if("down".equals(action)) {
                 newPosition = currentPosition + 1;
-                if(newPosition > currentNumOfEnabledSections) {
+                if(newPosition > currentLastPosition) {
                     throw new InvalidSectionPosition(String.format("The section with ID %d is already at the last position", sectionId));
                 }
             }
 
-            currentSectionByNewPosition = repo.findByPosition(newPosition);
+            Section currentSectionByNewPosition = repo.findByPosition(newPosition);
             currentSectionByNewPosition.setPosition(currentPosition);
             section.setPosition(newPosition);
 
@@ -77,59 +75,69 @@ public class SectionService {
         }
     }
 
+    public void delete(Integer sectionId) throws SectionNotFoundException {
+        try {
+            Section section = get(sectionId);
+            repo.updatePositionOfAllSection(section.getPosition());
+            repo.deleteById(sectionId);
+        } catch (SectionNotFoundException e) {
+            throw new SectionNotFoundException(e.getMessage());
+        }
+    }
 
 
     public void save(Section sectionInForm) throws SectionNotFoundException {
         Integer sectionId = sectionInForm.getId();
-        Section sectionAtLastPosition = repo.findByLastPosition();
+        Integer lastPosition = repo.findLastPosition();
+
         SectionType sectionTypeInForm = sectionInForm.getSectionType();
         Section section;
         if(sectionId != null) {
             section = get(sectionId);
             if(section.getSectionType().equals(SectionType.SELECTED_CATEGORIES) && sectionTypeInForm.equals(SectionType.SELECTED_CATEGORIES)) {
-                section.setSectionCategories(sectionInForm.getSectionCategories());
+                section.getSectionCategories().clear();
+                for(SectionCategory sc : sectionInForm.getSectionCategories()) {
+                    sc.setSection(section);
+                    section.getSectionCategories().add(sc);
+                }
             }
             else if(section.getSectionType().equals(SectionType.SELECTED_ARTICLES) && sectionTypeInForm.equals(SectionType.SELECTED_ARTICLES)) {
-                section.setSectionArticles(sectionInForm.getSectionArticles());
+                section.getSectionArticles().clear();
+                for(SectionArticle sa : sectionInForm.getSectionArticles()) {
+                    sa.setSection(section);
+                    section.getSectionArticles().add(sa);
+                }
             }
             else if(section.getSectionType().equals(SectionType.SELECTED_BRANDS) && sectionTypeInForm.equals(SectionType.SELECTED_BRANDS)) {
-                section.setSectionBrands(sectionInForm.getSectionBrands());
+                section.getSectionBrands().clear();
+                for(SectionBrand sb : sectionInForm.getSectionBrands()) {
+                    sb.setSection(section);
+                    section.getSectionBrands().add(sb);
+                }
+            }
+            else if(section.getSectionType().equals(SectionType.SELECTED_PRODUCTS) && sectionTypeInForm.equals(SectionType.SELECTED_PRODUCTS)) {
+                section.getSectionProducts().clear();
+                for(SectionProduct sp : sectionInForm.getSectionProducts()) {
+                    sp.setSection(section);
+                    section.getSectionProducts().add(sp);
+                }
             }
         }
         else {
-            section = new Section();
+            section = sectionInForm;
+            if(lastPosition != null) {
+                section.setPosition(lastPosition + 1);
+            }
+            else {
+                section.setPosition(1);
+            }
         }
 
         section.setHeading(sectionInForm.getHeading());
         section.setDescription(sectionInForm.getDescription());
         section.setSectionType(sectionTypeInForm);
         section.setEnabled(sectionInForm.isEnabled());
-        section.setPosition(sectionAtLastPosition.getPosition() + 1);
-
-       if(sectionTypeInForm.equals(SectionType.SELECTED_CATEGORIES)) {
-           List<SectionCategory> categories = sectionInForm.getSectionCategories();
-           for(SectionCategory c : categories) {
-               c.setSection(section);
-           }
-          section.setSectionCategories(categories);
-       }
-       else if(sectionTypeInForm.equals(SectionType.SELECTED_ARTICLES)) {
-           List<SectionArticle> articles = sectionInForm.getSectionArticles();
-           for(SectionArticle a: articles) {
-               a.setSection(section);
-           }
-           section.setSectionArticles(articles);
-       }
-       else if(sectionTypeInForm.equals(SectionType.SELECTED_BRANDS)) {
-           List<SectionBrand> brands = sectionInForm.getSectionBrands();
-           for(SectionBrand b : brands) {
-               b.setSection(section);
-           }
-           section.setSectionBrands(brands);
-       }
-
         repo.save(section);
-
     }
 
 

@@ -14,9 +14,12 @@ public interface SectionRepository extends JpaRepository<Section, Integer> {
 
     Section findByPosition(Integer position);
 
-    @Query("SELECT s FROM Section s WHERE s.position = (SELECT MAX(s.position) FROM Section s)")
-    Section findByLastPosition();
+    @Query("SELECT MAX(s.position) FROM Section s")
+    Integer findLastPosition();
 
+    @Query("UPDATE Section s SET s.position = s.position - 1 WHERE s.position > ?1 ")
+    @Modifying
+    void updatePositionOfAllSection(Integer position);
 
 
 }

@@ -22,7 +22,7 @@ public class ProductRestController {
     @GetMapping("/products/get/{id}")
     public ProductDTO getProductInfo(@PathVariable(name = "id") Integer id) throws ProductNotFoundException {
         Product product =  productService.get(id);
-        return new ProductDTO(product.getName(), product.getMainImagePath(), product.getDiscountPrice(), product.getCost());
+        return new ProductDTO(product.getName(), product.getShortName(), product.getMainImagePath(), product.getDiscountPrice(), product.getCost());
     }
 
 

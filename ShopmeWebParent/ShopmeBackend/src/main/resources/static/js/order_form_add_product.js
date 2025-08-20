@@ -67,7 +67,7 @@ function getProductInfo(productId, shippingCost) {
 
         updateOrderAmounts();
     }).fail(function (err) {
-        showWarningModal(err.reponseJSON.message);
+        showWarningModal(err.responseJSON.message);
     })
 }
 

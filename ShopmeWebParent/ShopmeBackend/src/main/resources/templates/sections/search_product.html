@@ -3,20 +3,18 @@
 <div th:replace="~{fragments :: page_head('Search Product', 'none')}">...</div>
 <body>
         <div class="container-fluid">
-            <form th:action="@{/orders/search_product}" method="POST" class="form-inline my-2">
+            <form th:action="@{/sections/search_product}" method="POST" class="form-inline my-2">
                 <input type="text" class="form-control mr-sm-2" name="keyword" placeholder="product name" th:value="${keyword}" required>
                 <input type="submit" class="btn btn-outline-success" value="Search">
             </form>
             <div class="row">
                 <th:block  th:each="product : ${listProducts}">
-                    <div class="col">
-                        <div>
-                            <a href="" class="link-product" th:pid="${product.id}">
+                    <div class="col-sm-4 mb-2">
+                            <a href="" class="link-product text-decoration-none" th:pid="${product.id}">
                                 <img th:src="@{${product.mainImagePath}}" height="150px" th:alt="${product.name}"/>
                                 <br/>
                                 <b th:id="'pname' + ${product.id}">[[${product.shortName}]]</b>
                             </a>
-                        </div>
                     </div>
                 </th:block>
             </div>
@@ -41,7 +39,6 @@
             else {
                 window.parent.addProduct(productId, productName);
             }
-
         });
     }
 </script>

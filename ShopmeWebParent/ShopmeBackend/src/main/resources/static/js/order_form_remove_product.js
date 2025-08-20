@@ -28,8 +28,6 @@ function removeProduct(link) {
     $(".link-remove").each(function(index, element) {
          $(element).attr("rowNumber", index + 1);
     });
-
-
 }
 
 function doesOrderHaveOnlyOneProduct() {

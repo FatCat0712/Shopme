@@ -126,11 +126,12 @@
          $(".link-delete").on("click", function(e) {
              e.preventDefault();
              link = $(this);
-             entityName="menu";
+             entityName="section";
              showDeleteConfirmModal(link, entityName);
          });
 
      });
 </script>
+<script th:src="@{/js/common_list.js}"></script>
 </body>
 </html>
