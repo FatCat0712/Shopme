@@ -12,16 +12,24 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
+    private final ProductRepository productRepository;
     public static final int PRODUCTS_PER_PAGE = 10;
     public static final int SEARCH_RESULTS_PER_PAGE = 10;
 
     @Autowired
-    private ProductRepository productRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Page<Product> listByCategory(int pageNumber, Integer categoryId) {
         String categoryMatch = "-" + categoryId + "-";
         Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE);
         return productRepository.listByCategory(categoryId, categoryMatch, pageable);
+    }
+
+    public Page<Product> listByBrand(int pageNumber, Integer brandId) {
+        Pageable pageable = PageRequest.of(pageNumber -1, PRODUCTS_PER_PAGE);
+        return productRepository.listByBrand(brandId, pageable);
     }
 
     public Product get(String alias) throws ProductNotFoundException {

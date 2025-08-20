@@ -6,6 +6,7 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
+import com.shopme.common.exception.BrandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,7 +99,7 @@ public class BrandController {
             model.addAttribute("pageTitle", String.format("Edit Brand (ID: %d)", savedBrand.getId()));
             model.addAttribute("listCategories", sortedCategories);
             return "brands/brand_form";
-        }catch (BrandNotFound ex) {
+        }catch (BrandNotFoundException ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
             return defaultURL;
         }
@@ -112,7 +113,7 @@ public class BrandController {
             SupabaseS3Util.removeFolder(brandDir);
             redirectAttributes.addFlashAttribute("message", String.format("The brand with id %d has been deleted successfully", id));
             return defaultURL;
-        }catch (BrandNotFound ex) {
+        }catch (BrandNotFoundException ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
             return defaultURL;
         }

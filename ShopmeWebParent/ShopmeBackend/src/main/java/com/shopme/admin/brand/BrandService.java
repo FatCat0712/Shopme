@@ -2,6 +2,7 @@ package com.shopme.admin.brand;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.brand.Brand;
+import com.shopme.common.exception.BrandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,18 +33,18 @@ public class BrandService {
         return brandRepository.save(brand);
     }
 
-    public Brand get(Integer id) throws BrandNotFound {
+    public Brand get(Integer id) throws BrandNotFoundException {
         Optional<Brand> brandById =  brandRepository.findById(id);
         if(brandById.isEmpty()) {
-            throw new BrandNotFound("Could not find brand with id " + id);
+            throw new BrandNotFoundException("Could not find brand with id " + id);
         }
         return brandById.get();
     }
 
-    public void delete(Integer id) throws  BrandNotFound {
+    public void delete(Integer id) throws BrandNotFoundException {
         Long countById = brandRepository.countById(id);
         if(countById == null || countById == 0) {
-            throw new BrandNotFound("Could not find brand with id " + id);
+            throw new BrandNotFoundException("Could not find brand with id " + id);
         }
         else {
             brandRepository.deleteById(id);

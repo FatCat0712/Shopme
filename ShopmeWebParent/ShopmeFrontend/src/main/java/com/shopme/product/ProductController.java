@@ -1,12 +1,15 @@
 package com.shopme.product;
 
 import com.shopme.ControllerHelper;
+import com.shopme.brand.BrandService;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.review.Review;
+import com.shopme.common.exception.BrandNotFoundException;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.question.QuestionService;
@@ -30,6 +33,7 @@ import java.util.List;
 public class ProductController {
     private final CategoryService categoryService;
     private final ProductService productService;
+    private final BrandService brandService;
     private final ReviewService reviewService;
     private final ReviewVoteService reviewVoteService;
     private final ControllerHelper controllerHelper;
@@ -40,12 +44,13 @@ public class ProductController {
     @Autowired
     public ProductController(
             CategoryService categoryService, ProductService productService,
-            ReviewService reviewService, ReviewVoteService reviewVoteService,
-            ControllerHelper controllerHelper, QuestionService questionService,
-            QuestionVoteService questionVoteService
+            BrandService brandService, ReviewService reviewService,
+            ReviewVoteService reviewVoteService, ControllerHelper controllerHelper,
+            QuestionService questionService, QuestionVoteService questionVoteService
     ) {
         this.categoryService = categoryService;
         this.productService = productService;
+        this.brandService = brandService;
         this.reviewService = reviewService;
         this.reviewVoteService = reviewVoteService;
         this.controllerHelper = controllerHelper;
@@ -56,6 +61,11 @@ public class ProductController {
     @GetMapping("/c/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable(name = "category_alias") String alias, Model model) throws CategoryNotFoundException {
         return  viewCategoryByPage(alias, 1, model);
+    }
+
+    @GetMapping("/b/{brand_name}")
+    public String viewBrandFirstPage(@PathVariable(name = "brand_name") String brandName, Model model){
+        return  viewBrandByPage(brandName, 1, model);
     }
 
     @GetMapping("/c/{category_alias}/page/{pageNum}")
@@ -91,8 +101,41 @@ public class ProductController {
         }catch (CategoryNotFoundException e) {
             return "error/404";
         }
-
     }
+
+    @GetMapping("/b/{brand_name}/page/{pageNum}")
+    public String viewBrandByPage(@PathVariable(name = "brand_name") String brandName, @PathVariable(name = "pageNum") Integer pageNum,   Model model) {
+        try {
+            Brand brand = brandService.findByName(brandName);
+
+            Page<Product> page = productService.listByBrand(pageNum, brand.getId());
+
+            long totalItems = page.getTotalElements();
+            int totalPages = page.getTotalPages();
+            List<Product> listProducts = page.getContent();
+
+            int startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
+            long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
+
+            if (endCount >= totalItems) {
+                endCount = totalItems;
+            }
+
+            model.addAttribute("pageTitle", brand.getName());
+            model.addAttribute("startCount", startCount);
+            model.addAttribute("endCount", endCount);
+            model.addAttribute("totalItems", totalItems);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", pageNum);
+            model.addAttribute("listProducts", listProducts);
+            model.addAttribute("brand", brand);
+
+            return "product/products_by_brand";
+        } catch (BrandNotFoundException e) {
+            return "error/404";
+        }
+    }
+
 
     @GetMapping("/p/{product_alias}")
     public String viewProductDetail(HttpServletRequest request, @PathVariable("product_alias") String alias, Model model) {

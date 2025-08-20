@@ -32,6 +32,7 @@ public class ProjectSecurityConfig {
                     .requestMatchers("/questions/**").hasAnyAuthority("Admin", "Assistant")
                     .requestMatchers("/articles/**").hasAnyAuthority("Admin", "Editor")
                     .requestMatchers("/menus/**").hasAnyAuthority("Admin", "Editor")
+                    .requestMatchers("/sections/**").hasAnyAuthority("Admin", "Editor")
                     .anyRequest().authenticated()
             );
 

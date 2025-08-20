@@ -16,6 +16,10 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
             "OR p.category.allParentIDs LIKE %?2% ORDER BY p.name")
     Page<Product> listByCategory(Integer categoryId, String categoryMatch, Pageable pageable);
 
+    @Query("SELECT p FROM Product p " +
+            "WHERE p.enabled = true AND p.brand.id = ?1")
+    Page<Product> listByBrand(Integer brandId, Pageable pageable);
+
      Product findByAlias(String alias);
 
     @Query(value = "SELECT * FROM products p WHERE p.enabled = true AND " +

@@ -3,6 +3,7 @@ package com.shopme.admin.brand;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.brand.BrandDTO;
+import com.shopme.common.exception.BrandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class BrandRestController {
             Brand brand = service.get(brandId);
             Set<Category> categories = brand.getCategories();
             return categories.stream().map(category -> new CategoryDTO(category.getId(), category.getName())).collect(Collectors.toList());
-        } catch (BrandNotFound e) {
+        } catch (BrandNotFoundException e) {
            throw new BrandNotFoundRestException();
         }
     }
