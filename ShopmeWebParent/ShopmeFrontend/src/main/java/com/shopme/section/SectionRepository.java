@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Integer> {
-    @Query("SELECT s FROM Section s WHERE s.enabled = true")
+    @Query("SELECT s FROM Section s WHERE s.enabled = true ORDER BY s.position")
     List<Section> findEnabledSections();
 }

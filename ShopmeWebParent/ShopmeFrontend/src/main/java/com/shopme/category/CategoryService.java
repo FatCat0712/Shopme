@@ -10,8 +10,12 @@ import java.util.List;
 
 @Service
 public class CategoryService {
+    private final CategoryRepository categoryRepository;
+
     @Autowired
-    private CategoryRepository categoryRepository;
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     public List<Category> listNoChildrenCategories() {
         List<Category> listEnabledCategory = categoryRepository.findAllEnabled();
@@ -40,5 +44,7 @@ public class CategoryService {
 
         return  listParents;
     }
+
+
 
 }

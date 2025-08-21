@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public List<User> listAll() {
-        return (List<User>)userRepository.findAll(Sort.by("firstName").ascending());
+        return userRepository.findAll(Sort.by("firstName").ascending());
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
@@ -128,8 +128,14 @@ public class UserService {
             userInDB.setLastName(userInform.getLastName());
             return userRepository.save(userInDB);
         }
+    }
 
+    public Integer countEnabledUsers() {
+        return listAll().stream().filter(User::isEnabled).toList().size();
+    }
 
+    public Integer countDisabledUsers() {
+        return listAll().stream().filter(user -> !user.isEnabled()).toList().size();
     }
 
 

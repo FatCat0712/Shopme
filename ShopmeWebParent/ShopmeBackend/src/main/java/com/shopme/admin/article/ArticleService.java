@@ -17,7 +17,7 @@ import java.util.Optional;
 @Transactional
 public class ArticleService {
     private final ArticleRepository repo;
-    private final int ARTICLE_PER_PAGE = 5;
+    private final static int ARTICLE_PER_PAGE = 5;
 
     @Autowired
     public ArticleService(ArticleRepository repo) {
@@ -97,5 +97,21 @@ public class ArticleService {
 
     public List<Article> listUnlinkedArticlesByArticleType(ArticleType articleType) {
         return repo.listUnlinkedArticleByArticleType(articleType);
+    }
+
+    public Integer countMenuBoundArticles() {
+        return listAll().stream().filter(a -> a.getArticleType().equals(ArticleType.MENU)).toList().size();
+    }
+
+    public Integer countFreeArticles() {
+        return listAll().stream().filter(a -> a.getArticleType().equals(ArticleType.FREE)).toList().size();
+    }
+
+    public Integer countPublishedArticles() {
+        return listAll().stream().filter(Article::isPublished).toList().size();
+    }
+
+    public Integer countUnPublishedArticles() {
+        return listAll().stream().filter(a -> !a.isPublished()).toList().size();
     }
 }

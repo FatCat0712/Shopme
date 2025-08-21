@@ -25,7 +25,7 @@ public class ProductService {
     }
 
     public List<Product> listAll() {
-        return (List<Product>) repo.findAll();
+        return repo.findAll();
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper, Integer categoryId) {
@@ -133,6 +133,24 @@ public class ProductService {
         }
         return product.get();
     }
+
+    public Integer countEnabledProducts() {
+        return listAll().stream().filter(Product::isEnabled).toList().size();
+    }
+
+    public Integer countDisabledProducts() {
+        return listAll().stream().filter(p -> !p.isEnabled()).toList().size();
+    }
+
+    public Integer countInStockProducts() {
+        return listAll().stream().filter(Product::isInStock).toList().size();
+    }
+
+    public Integer countOutOfStockProducts() {
+        return listAll().stream().filter(p -> !p.isInStock()).toList().size();
+    }
+
+
 
 
 

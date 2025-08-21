@@ -115,4 +115,20 @@ public class MenuService {
             throw new MenuNotFoundException(e.getMessage());
         }
     }
+
+    public Integer countHeaderMenus() {
+        return listAll().stream().filter(m -> m.getMenuType().equals(MenuType.HEADER)).toList().size();
+    }
+
+    public Integer countFooterMenus() {
+        return listAll().stream().filter(m -> m.getMenuType().equals(MenuType.FOOTER)).toList().size();
+    }
+
+    public Integer countEnabledMenus() {
+        return listAll().stream().filter(Menu::isEnabled).toList().size();
+    }
+
+    public Integer countDisabledMenus() {
+        return listAll().stream().filter(m -> !m.isEnabled()).toList().size();
+    }
 }

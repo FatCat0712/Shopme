@@ -15,13 +15,16 @@ import java.util.*;
 @Service
 @Transactional
 public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
-
+    private final CategoryRepository categoryRepository;
     public static final int ROOT_CATEGORIES_PER_PAGE = 4;
 
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
     public List<Category> listAll() {
-        return (List<Category>)categoryRepository.findAll();
+        return categoryRepository.findAll();
     }
 
     public List<Category> listByPage(CategoryPageInfo pageInfo, int pageNum, String sortDir, String keyword) {
@@ -200,5 +203,17 @@ public class CategoryService {
         }
 
         categoryRepository.deleteById(id);
+    }
+
+    public Integer countRootCategories() {
+        return listAll().stream().filter(c -> c.getParent() ==null).toList().size();
+    }
+
+    public Integer countEnabledCategories() {
+        return listAll().stream().filter(Category::isEnabled).toList().size();
+    }
+
+    public Integer countDisabledCategories() {
+        return listAll().stream().filter(c -> !c.isEnabled()).toList().size();
     }
 }

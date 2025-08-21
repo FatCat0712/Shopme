@@ -175,6 +175,15 @@ public class Order extends AbstractAddress {
         return paymentMethod.equals(PaymentMethod.COD);
     }
 
+
+    @Transient
+    public boolean isNew() {return hasStatus(OrderStatus.NEW);}
+
+    @Transient
+    public boolean isProcessing() {
+        return hasStatus(OrderStatus.PROCESSING);
+    }
+
     @Transient
     public boolean isPicked() {
         return hasStatus(OrderStatus.PICKED);
@@ -195,25 +204,26 @@ public class Order extends AbstractAddress {
         return hasStatus(OrderStatus.RETURNED);
     }
 
-
-    public boolean hasStatus(OrderStatus status) {
-        for(OrderTrack aTrack: orderTracks) {
-            if(aTrack.getStatus().equals(status)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Transient
     public boolean isReturnRequested() {
         return hasStatus(OrderStatus.RETURN_REQUESTED);
     }
 
     @Transient
-    public boolean isProcessing() {
-        return hasStatus(OrderStatus.PROCESSING);
+    public boolean isCancelled() {
+        return hasStatus(OrderStatus.CANCELLED);
     }
+
+
+
+
+    public boolean hasStatus(OrderStatus status) {
+        return orderTracks.getLast().getStatus().equals(status);
+    }
+
+
+
+
 
 
     @Transient

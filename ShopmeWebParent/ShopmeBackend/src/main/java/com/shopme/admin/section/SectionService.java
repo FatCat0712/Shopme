@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,10 @@ public class SectionService {
     @Autowired
     public SectionService(SectionRepository repo) {
         this.repo = repo;
+    }
+
+    public List<Section> listAll() {
+        return repo.findAll();
     }
 
     public Page<Section> listByPage(int pageNum) {
@@ -140,6 +145,12 @@ public class SectionService {
         repo.save(section);
     }
 
+    public Integer countEnabledSections() {
+        return listAll().stream().filter(Section::isEnabled).toList().size();
+    }
 
+    public Integer countDisabledSections() {
+        return listAll().stream().filter(s -> !s.isEnabled()).toList().size();
+    }
 
 }

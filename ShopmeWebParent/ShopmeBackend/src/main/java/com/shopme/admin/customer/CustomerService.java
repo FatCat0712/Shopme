@@ -20,6 +20,7 @@ public class CustomerService  {
     private final CustomerRepository customerRepository;
     private final CountryRepository countryRepository;
     private final PasswordEncoder passwordEncoder;
+    public final static int CUSTOMER_PER_PAGE = 10;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, CountryRepository countryRepository, PasswordEncoder passwordEncoder) {
@@ -28,7 +29,6 @@ public class CustomerService  {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public final static int CUSTOMER_PER_PAGE = 10;
 
     public List<Customer> listAll() {
         return (List<Customer>) customerRepository.findAll(Sort.by("id").ascending());
@@ -97,5 +97,13 @@ public class CustomerService  {
         else {
             customerRepository.deleteById(id);
         }
+    }
+
+    public Integer countEnabledCustomers() {
+        return listAll().stream().filter(Customer::isEnabled).toList().size();
+    }
+
+    public Integer countDisabledCustomers() {
+        return listAll().stream().filter(c -> !c.isEnabled()).toList().size();
     }
 }

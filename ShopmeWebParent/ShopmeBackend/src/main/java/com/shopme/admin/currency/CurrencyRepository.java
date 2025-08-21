@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CurrencyRepository extends CrudRepository<Currency, Integer> {
-        public List<Currency> findAllByOrderByNameAsc();
+        List<Currency> findAllByOrderByNameAsc();
 }

@@ -22,13 +22,15 @@ public class ShippingRateService {
     private final CountryRepository countryRepository;
     private final ProductRepository productRepository;
 
-
-
     @Autowired
     public ShippingRateService(ShippingRateRepository shippingRateRepository, CountryRepository countryRepository, ProductRepository productRepository) {
         this.shippingRateRepository = shippingRateRepository;
         this.countryRepository = countryRepository;
         this.productRepository = productRepository;
+    }
+
+    public List<ShippingRate> listAll() {
+        return  shippingRateRepository.findAll();
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
@@ -94,6 +96,10 @@ public class ShippingRateService {
 
 
         return finalWeight * shippingRate.getRate();
+    }
+
+    public Integer countCODSupported() {
+        return listAll().stream().filter(ShippingRate::getCodSupported).toList().size();
     }
 
 

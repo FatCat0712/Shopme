@@ -66,5 +66,22 @@ public class QuestionService {
         repo.deleteById(id);
     }
 
+    public Integer countApprovedQuestions() {
+        return listAll().stream().filter(Question::isApprovalStatus).toList().size();
+    }
+
+    public Integer countUnapprovedQuestions() {
+        return listAll().stream().filter(q -> !q.isApprovalStatus()).toList().size();
+    }
+
+    public Integer countAnsweredQuestions() {
+        return listAll().stream().filter(Question::isAnswered).toList().size();
+    }
+
+    public Integer countUnansweredQuestions() {
+        return listAll().stream().filter(q -> !q.isAnswered()).toList().size();
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.shopme.admin.setting;
 
 import com.shopme.common.entity.setting.Setting;
+import com.shopme.common.entity.setting.SettingBag;
 import com.shopme.common.entity.setting.SettingCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,4 +50,8 @@ public class SettingService {
     }
 
     public List<Setting> getPaymentSettings() {return settingRepository.findByCategory(SettingCategory.PAYMENT);}
+
+    public SettingBag getMailServerSettingsBag() {
+        return new SettingBag(getMailServerSettings());
+    }
 }

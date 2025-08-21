@@ -21,7 +21,6 @@ import java.util.Optional;
 @Service
 public class OrderService {
     public final static int ORDER_PER_PAGE = 10;
-
     private final OrderRepository orderRepository;
     private final CountryRepository countryRepository;
 
@@ -30,6 +29,10 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository, CountryRepository countryRepository) {
         this.orderRepository = orderRepository;
         this.countryRepository = countryRepository;
+    }
+
+    public List<Order> listAll() {
+       return orderRepository.findAll();
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
@@ -108,7 +111,28 @@ public class OrderService {
             orderIdDB.setOrderStatus(statusToUpdate);
 
             orderRepository.save(orderIdDB);
-
         }
     }
+
+    public Integer countNewOrders() {
+        return listAll().stream().filter(Order::isNew).toList().size();
+    }
+
+    public Integer countDeliveredOrders() {
+       return listAll().stream().filter(Order::isDelivered).toList().size();
+    }
+
+    public Integer countProcessingOrders() {
+       return listAll().stream().filter(Order::isProcessing).toList().size();
+    }
+
+    public Integer countShippingOrders() {
+       return listAll().stream().filter(Order::isShipping).toList().size();
+    }
+
+    public Integer countCancelledOrders() {
+       return listAll().stream().filter(Order::isCancelled).toList().size();
+    }
+
+
 }
