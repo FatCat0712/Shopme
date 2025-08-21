@@ -18,7 +18,7 @@ public interface ShippingRateRepository extends JpaRepository<ShippingRate, Inte
     @Modifying
     void updateCODSupported(Integer id, Boolean enabled);
 
-    @Query("SELECT s FROM ShippingRate  s WHERE s.country.name LIKE ?1 OR s.state LIKE ?1")
+    @Query("SELECT s FROM ShippingRate  s WHERE s.country.name LIKE %?1% OR s.state LIKE %?1%")
     Page<ShippingRate> findAll(String keyword, Pageable pageable);
 
     Long  countById(Integer id);

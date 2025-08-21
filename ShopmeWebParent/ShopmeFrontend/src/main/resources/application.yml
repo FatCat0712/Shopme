@@ -6,9 +6,9 @@ spring:
     application:
         name: ShopmeFrontend
     datasource:
-        password: abc@123
-        url: jdbc:mysql://localhost:3306/shopmedb
-        username: root
+        password: ${DB_PASSWORD}
+        url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+        username: ${DB_USER}
     jpa:
         hibernate:
             ddl-auto: update

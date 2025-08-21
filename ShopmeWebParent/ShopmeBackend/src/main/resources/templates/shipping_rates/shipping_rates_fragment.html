@@ -6,7 +6,7 @@ xmlns:th="http://www.thymeleaf.org">
     <a th:if="${sr.codSupported == true}"
        class="fas fa-hand-holding-dollar fa-2x icon-green"
        th:href="@{'/shipping_rates/cod/'  + ${sr.id} + '/enabled/false'}"
-       title="'Disable this shipping rate">
+       title="Disable this shipping rate">
     </a>
     <a th:if="${sr.codSupported == false}"
        class="fas fa-hand-holding-dollar fa-2x icon-dark"
