@@ -56,14 +56,15 @@
                             <div class="dropdown-menu">
                                 <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                                     <a class="dropdown-item" th:href="@{/products/new}">Create New</a>
+                                </th:block>
+                                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Shipper')">
                                     <a class="dropdown-item" th:href="@{/products}">View All</a>
                                 </th:block>
+
                                 <th:block sec:authorize="hasAnyAuthority('Admin','Assistant')">
                                     <a class="dropdown-item"  th:href="@{/questions}">Questions</a>
+                                    <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
                                 </th:block>
-                                 <th:block>
-                                     <a class="dropdown-item" sec:authorize="hasAuthority('Admin')" th:href="@{/reviews}">Reviews</a>
-                                 </th:block>
                             </div>
                         </li>
                     </th:block>

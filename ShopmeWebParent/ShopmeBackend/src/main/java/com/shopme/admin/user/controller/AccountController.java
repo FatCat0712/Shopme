@@ -1,6 +1,6 @@
 package com.shopme.admin.user.controller;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.SupabaseS3Util;
 import com.shopme.admin.security.ShopmeUserDetails;
 import com.shopme.admin.user.UserNotFoundException;
 import com.shopme.admin.user.UserService;
@@ -33,7 +33,6 @@ public class AccountController {
     public String viewDetails(Authentication authentication, Model model) {
         String email = authentication.getName();
         User user =userService.getByEmail(email);
-
         model.addAttribute("user", user);
         return "users/account_form";
     }
@@ -47,8 +46,8 @@ public class AccountController {
             User savedUser = userService.updateAccount(userInform);
             String uploadDir = "user-photos/" + savedUser.getId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            SupabaseS3Util.removeFolder(uploadDir);
+            SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 
         }
         else {

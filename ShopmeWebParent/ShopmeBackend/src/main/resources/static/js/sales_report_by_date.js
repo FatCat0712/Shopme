@@ -5,7 +5,6 @@ let totalGrossSales = 0;
 let totalNetSales = 0;
 let totalItems = 0;
 
-
 $(document).ready(function () {
     setupButtonEventHandler("_date", loadSalesReportByDate);
 });

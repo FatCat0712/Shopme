@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer>, SearchRepo
     @Modifying
    void updateEnabledStatus(Integer id, boolean enabled);
 
-     @Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ' ,u.firstName, ' ', u.lastName) LIKE  %?1%")
+     @Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ' ,u.firstName, ' ', u.lastName, ' ') LIKE  %?1%")
    Page<User> findAll(String keyword, Pageable pageable);
 
 }

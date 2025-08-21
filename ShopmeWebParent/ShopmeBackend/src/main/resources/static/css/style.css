@@ -121,16 +121,17 @@
 }
 
 
-.col-lg-2-4 {
-    flex: 0 0 20%;
-    max-width: 20%;
-}
 
-.col-lg-4-8 {
+
+
+@media (min-width: 992px) {  /* large breakpoint */
+ .col-lg-4-8 {
     flex: 0 0 40%;
     max-width: 40%;
+  }
+
+  .col-lg-2-4 {
+      flex: 0 0 20%;
+      max-width: 20%;
+  }
 }
-
-
-
-

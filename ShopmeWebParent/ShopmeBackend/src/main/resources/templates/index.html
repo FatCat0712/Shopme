@@ -16,7 +16,7 @@
 
     <div class="row mt-2">
         <th:block sec:authorize="hasAuthority('Admin')">
-            <div class="col-lg-4-8 col-md-4 col-sm-6">
+            <div class="col-sm-6 col-md-4 col-lg-4-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div>
@@ -25,7 +25,6 @@
                         <div>
                             <a class="text-decoration-none" th:href="@{/settings}">Edit</a>
                         </div>
-
                     </div>
                     <div class="card-body">
                         <div>Site Name: <b>[[${generalSettingBag.get("SITE_NAME").value}]]</b></div>
@@ -36,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2-4 col-md-4 col-sm-6">
+            <div class="col-sm-6 col-md-4 col-lg-2-4">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -67,37 +66,37 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-        <div class="col-lg-2-4 col-md-4 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <b>Categories: [[${numOfCategories}]]</b>
+            <div class="col-sm-6 col-md-4 col-lg-2-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <b>Categories: [[${numOfCategories}]]</b>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <a class="text-decoration-none" th:href="@{/categories/new}">
-                            Add Category
-                        </a>
-                    </div>
-                    <div>
-                        Root Categories: <b>[[${countRootCategories}]]</b>
-                    </div>
-                    <div>
-                        Enabled: <b>[[${countEnabledCategories}]]</b>
-                    </div>
-                    <div>
-                        Disabled: <b>[[${countDisabledCategories}]]</b>
-                    </div>
-                    <div>
-                        <a class="text-decoration-none" th:href="@{/categories}">View all</a>
+                    <div class="card-body">
+                        <div>
+                            <a class="text-decoration-none" th:href="@{/categories/new}">
+                                Add Category
+                            </a>
+                        </div>
+                        <div>
+                            Root Categories: <b>[[${countRootCategories}]]</b>
+                        </div>
+                        <div>
+                            Enabled: <b>[[${countEnabledCategories}]]</b>
+                        </div>
+                        <div>
+                            Disabled: <b>[[${countDisabledCategories}]]</b>
+                        </div>
+                        <div>
+                            <a class="text-decoration-none" th:href="@{/categories}">View all</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6">
+            <div class="col-sm-6 col-md-4 col-lg-2-4">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -118,7 +117,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson','Shipper')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -126,22 +125,25 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <div>
+                                <a class="text-decoration-none" th:href="@{/products/new}">
+                                    Add Product
+                                </a>
+                            </div>
+                        </th:block>
+
                         <div>
-                            <a class="text-decoration-none" th:href="@{/products/new}">
-                                Add Product
-                            </a>
+                            Enabled: <b>[[${countEnabledProducts}]]</b>
                         </div>
                         <div>
-                            Enabled: <b>[[${countOfEnabledProducts}]]</b>
+                            Disabled: <b>[[${countDisabledProducts}]]</b>
                         </div>
                         <div>
-                            Disabled: <b>[[${countOfDisabledProducts}]]</b>
+                            In Stock: <b>[[${countInStockProducts}]]</b>
                         </div>
                         <div>
-                            In Stock: <b>[[${countOfInStockProducts}]]</b>
-                        </div>
-                        <div>
-                            Out of Stock: <b>[[${countOfOutOfStockProducts}]]</b>
+                            Out of Stock: <b>[[${countOutOfStockProducts}]]</b>
                         </div>
                         <div>
                             <a class="text-decoration-none" th:href="@{/products}">View all</a>
@@ -151,7 +153,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -184,7 +186,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -204,7 +206,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -230,7 +232,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -253,8 +255,8 @@
                 </div>
             </div>
         </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor','Salesperson', 'Shipper')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+        <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson', 'Shipper')">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -287,7 +289,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -322,7 +324,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4  col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -357,7 +359,7 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasAnyAuthority('Admin')">
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -394,7 +396,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2-4 col-md-4 col-sm-6 my-2">
+            <div class="col-sm-6  col-md-4  col-lg-2-4 my-2">
                 <div class="card">
                     <div class="card-header">
                         <div>

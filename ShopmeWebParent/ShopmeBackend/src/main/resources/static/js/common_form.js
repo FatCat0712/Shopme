@@ -17,6 +17,13 @@ $(document).ready(
             }
             showImageThumbnail(this, '#siteMascotThumbnail');
         });
+
+         $("#fileImage").change(function() {
+                if(!checkFileSize(this)) {
+                    return;
+               }
+            showImageThumbnail(this, '#thumbnail');
+        });
     }
 );
 

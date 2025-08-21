@@ -91,8 +91,8 @@
 
 
 <script type="text/javascript">
-    moduleURL = "[[@{/}]]";
-
+    let moduleURL = "[[@{/}]]";
+    let MAX_FILE_SIZE = 204800;
     function checkPasswordMatch(confirmPassword) {
         if(confirmPassword.value != $("#password").val()) {
                 confirmPassword.setCustomValidity("Password do not match!");

@@ -97,7 +97,7 @@ public class UserController {
             return "users/user_form";
         }catch (UserNotFoundException exception) {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/users";
+            return defaultURL;
         }
     }
 
@@ -113,14 +113,14 @@ public class UserController {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
         }
 
-        return "redirect:/users";
+        return defaultURL;
     }
 
     @GetMapping("/users/{id}/enabled/{status}")
     public String updateEnabledStatus(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes) {
         userService.updateUserEnabledStatus(id, enabled);
         redirectAttributes.addFlashAttribute("message", String.format("The user ID %d has been %s", id, enabled ? "enabled" : "disabled"));
-        return "redirect:/users";
+        return defaultURL;
     }
 
     @GetMapping("/users/export/csv")
