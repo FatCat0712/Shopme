@@ -187,7 +187,7 @@ public class OrderController {
             orderTracks.add(orderTrack);
 
         }
-        order.setOrderStatus(orderTracks.getLast().getStatus());
+        order.setOrderStatus(orderTracks.get(orderTracks.size() - 1).getStatus());
         order.setOrderTracks(orderTracks);
 
     }

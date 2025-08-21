@@ -36,7 +36,7 @@ public class CategoryService {
         Category parent = child.getParent();
 
         while(parent != null) {
-          listParents.addFirst(parent);
+          listParents.add(0, parent);
           parent = parent.getParent();
         }
 

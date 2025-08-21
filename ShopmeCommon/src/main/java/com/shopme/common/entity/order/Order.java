@@ -218,7 +218,7 @@ public class Order extends AbstractAddress {
 
 
     public boolean hasStatus(OrderStatus status) {
-        return orderTracks.getLast().getStatus().equals(status);
+        return orderTracks.get(getOrderTracks().size() - 1).getStatus().equals(status);
     }
 
 
