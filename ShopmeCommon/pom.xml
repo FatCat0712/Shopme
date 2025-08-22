@@ -7,11 +7,12 @@
 	<name>ShopmeCommon</name>
 	<description>common library</description>
     <packaging>jar</packaging>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.4</version>
-	</parent>
+    <parent>
+        <groupId>com.shopme</groupId>
+        <artifactId>ShopmeProject</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 	<url/>
 	<licenses>
 		<license/>
