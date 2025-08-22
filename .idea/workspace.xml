@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="" />
+    <list default="true" id="839c35fd-19f6-4589-967e-9c0d4459a108" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/railway.toml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
