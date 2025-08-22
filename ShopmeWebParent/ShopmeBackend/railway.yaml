@@ -6,7 +6,7 @@ build:
         nixPkgs: ["nodejs", "maven", "jdk17"]
       build:
         cmds:
-          - "cd ../../ShopmeCommon && mvn clean install -DskipTests"
+          - "cd ../ShopmeCommon && mvn clean install -DskipTests"
           - "mvn clean package -DskipTests"
           - "ls -la target/"
 deploy:
