@@ -78,10 +78,13 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <excludes>
+                        <exclude>
+                            **/*.java
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

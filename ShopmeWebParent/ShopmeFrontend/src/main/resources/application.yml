@@ -1,7 +1,7 @@
 server:
     port: 9090
-    servlet:
-        context-path: /Shopme
+#    servlet:
+        #context-path: /Shopme
 spring:
     application:
         name: ShopmeFrontend
@@ -9,6 +9,10 @@ spring:
         password: zKEFoOCTEIOUksseEhigJBNwipeqoMmy
         url: jdbc:mysql://hopper.proxy.rlwy.net:23318/shopmedb
         username: root
+        hikari:
+          minimum-idle: 1
+          maximum-pool-size: 2
+
     jpa:
         hibernate:
             ddl-auto: update
