@@ -3,23 +3,60 @@
 <body>
 <div th:fragment="content" id="divProductDetails">
         <th:block th:each="detail,status : ${product.details}">
-                <div class="form-inline" th:id="'divDetail' + ${status.index}">
-                        <label class="col-form-label m-3">Name:</label>
-                        <input type="text" class="form-control w-25" name="detailNames" maxlength="255" th:value="${detail.name}">
-                        <label class="col-form-label m-3">Value:</label>
-                        <input type="text" class="form-control w-25" name="detailValues" maxlength="255" th:value="${detail.value}">
-                        <a class="btn fas fa-times-circle fa-2x icon-dark float-right" title="Remove this detail" name="linkRemoveDetail"></a>
-
+                <div  th:id="'divDetail' + ${status.index}">
+                    <div class="row align-items-center">
                         <input type="hidden" name="detailIDs" th:value="${detail.id}"/>
+                        <div class="col-12 col-md-5">
+                            <div class="row align-items-center">
+                                <div class="col-2">
+                                    <label class="col-form-label m-3">Name:</label>
+                                </div>
+                                <div class="col-10">
+                                    <input type="text" class="form-control" name="detailNames" maxlength="255" th:value="${detail.name}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <div class="row align-items-center">
+                                <div class="col-2">
+                                    <label class="col-form-label m-3">Value:</label>
+                                </div>
+                                <div class="col-10">
+                                    <input type="text" class="form-control" name="detailValues" maxlength="255" th:value="${detail.value}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <a class="fa-solid fa-trash icon-dark float-right" href="#" title="Remove this detail" name="linkRemoveDetail"></a>
+                        </div>
+                    </div>
                 </div>
         </th:block>
 
         <div class="form-inline" th:id="'divDetail' + ${#lists.size(product.details)}" >
-                <label class="col-form-label m-3">Name:</label>
-                <input type="text" class="form-control w-25" name="detailNames" maxlength="255">
-                <label class="col-form-label m-3">Value:</label>
-                <input type="text" class="form-control w-25" name="detailValues" maxlength="255" >
+            <div  class="row align-items-center">
                 <input type="hidden" name="detailIDs" value="0"/>
+                <div class="col-12 col-md-5">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <label class="col-form-label m-3">Name:</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="detailNames" maxlength="255">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <label class="col-form-label m-3">Value:</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="detailValues" maxlength="255" >
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 </div>
 </body>

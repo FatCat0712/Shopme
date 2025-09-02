@@ -15,6 +15,10 @@ function handleDetailLink(linkClass, modalId) {
     $(linkClass).on("click" ,function (e) {
             e.preventDefault();
             let linkDetailURL = $(this).attr("href");
-            $(modalId).modal("show").find(".modal-content").load(linkDetailURL);
+            let modalElement = $(modalId);
+            $(modalId).find(".modal-content").load(linkDetailURL, function() {
+                let modal = new bootstrap.Modal(modalElement[0]);
+                modal.show();
+            });
     })
 }

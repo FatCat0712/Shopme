@@ -56,7 +56,7 @@
                             <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link"  th:href="@{/users/new}">Create New User</a>
-                                    <a class="nav-link" th:href="@{/users}">View All Users</a>
+                                    <a class="nav-link view-link" th:href="@{/users}">View All Users</a>
                                 </nav>
                             </div>
                         </th:block>
@@ -67,7 +67,7 @@
                             <div class="collapse" id="collapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link"  th:href="@{/categories/new}">Create New Category</a>
-                                    <a class="nav-link" th:href="@{/categories}">View All Categories</a>
+                                    <a class="nav-link view-link" th:href="@{/categories}">View All Categories</a>
                                 </nav>
                             </div>
                         </th:block>
@@ -78,7 +78,7 @@
                             <div class="collapse" id="collapseBrands" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link"  th:href="@{/brands/new}">Create New Brands</a>
-                                    <a class="nav-link" th:href="@{/brands}">View All Brands</a>
+                                    <a class="nav-link view-link" th:href="@{/brands}">View All Brands</a>
                                 </nav>
                             </div>
                         </th:block>
@@ -92,33 +92,33 @@
                                         <a class="nav-link"  th:href="@{/products/new}">Create New Product</a>
                                     </th:block>
                                     <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Shipper')">
-                                        <a class="nav-link" th:href="@{/products}">View All Products</a>
+                                        <a class="nav-link view-link" th:href="@{/products}">View All Products</a>
                                     </th:block>
                                     <th:block sec:authorize="hasAnyAuthority('Admin','Assistant')">
-                                        <a class="nav-link"  th:href="@{/questions}">Questions</a>
-                                        <a class="nav-link" th:href="@{/reviews}">Reviews</a>
+                                        <a class="nav-link view-link"  th:href="@{/questions}">Questions</a>
+                                        <a class="nav-link view-link" th:href="@{/reviews}">Reviews</a>
                                     </th:block>
                                 </nav>
                             </div>
                         </th:block>
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                                <a class="nav-link" th:href="@{/customers}">Customers</a>
+                                <a class="nav-link view-link" th:href="@{/customers}">Customers</a>
                         </th:block>
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                                <a class="nav-link" th:href="@{/shipping_rates}">Shipping Rates</a>
+                                <a class="nav-link view-link" th:href="@{/shipping_rates}">Shipping Rates</a>
                         </th:block>
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
-                                <a class="nav-link" th:href="@{/orders}">Orders</a>
+                                <a class="nav-link view-link" th:href="@{/orders}">Orders</a>
                         </th:block>
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                                <a class="nav-link" th:href="@{/reports}">Sales Report</a>
+                                <a class="nav-link view-link" th:href="@{/reports}">Sales Report</a>
                         </th:block>
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                                <a class="nav-link" th:href="@{/articles}">Articles</a>
+                                <a class="nav-link view-link" th:href="@{/articles}">Articles</a>
                         </th:block>
 
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                                <a class="nav-link" th:href="@{/menus}">Menus</a>
+                                <a class="nav-link view-link" th:href="@{/menus}">Menus</a>
                         </th:block>
 
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
@@ -148,7 +148,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <a class="text-decoration-none text-bg-gray" th:href="@{/account}" sec:authentication="principal.fullname"></a>
+                    <a class="text-decoration-none text-white" th:href="@{/account}" sec:authentication="principal.fullname"></a>
                 </div>
             </nav>
         </div>

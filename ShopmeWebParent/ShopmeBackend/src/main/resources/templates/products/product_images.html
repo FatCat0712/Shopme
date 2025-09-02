@@ -20,7 +20,7 @@
                     <div class="col border m-3 p-2"  th:id="'divExtraImage' + ${status.index}" th:classappend="extraImageBox">
                         <div>
                             <label class="extraImageLabel">Extra Image #[[${status.index + 1}]] : [[${productImage.name}]]</label>
-                            <a class="btn fas fa-times-circle fa-3x icon-dark float-right" href="" title="Remove this image" name="linkRemoveExtraImage"></a>
+                            <a class="ms-1 fa-solid fa-trash icon-dark float-right" href="" title="Remove this image" name="linkRemoveExtraImage"></a>
                         </div>
 
                         <div class="m-2">
@@ -34,7 +34,7 @@
                     </div>
                 </th:block>
 
-                <div class="col border m-3 p-2" th:id="'divExtraImage' + ${currentExtraImagesIndex}" th:classappend="extraImageBox">
+                <div class="col border p-2" th:id="'divExtraImage' + ${currentExtraImagesIndex}" th:classappend="extraImageBox">
                     <div th:id="'extraImageHeader' + ${currentExtraImagesIndex}"  >
                         <label class="extraImageLabel">Extra Image #[[${currentExtraImagesIndex + 1}]] :</label>
                     </div>

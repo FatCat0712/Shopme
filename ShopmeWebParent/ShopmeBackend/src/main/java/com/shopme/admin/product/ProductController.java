@@ -212,7 +212,6 @@ public class ProductController {
             return defaultURL;
         }
 
-
     }
 
 
