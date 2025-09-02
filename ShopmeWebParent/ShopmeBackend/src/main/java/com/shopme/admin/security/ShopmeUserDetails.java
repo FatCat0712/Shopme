@@ -5,9 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class  ShopmeUserDetails implements UserDetails {
+public class  ShopmeUserDetails implements UserDetails, Serializable {
 
     private final User user;
 

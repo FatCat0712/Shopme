@@ -4,444 +4,444 @@
          xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
 <head th:replace="~{fragments :: page_head('Home - ShopmeAdmin', 'none')}">...</head>
-<body>
-<div class="container-fluid">
-    <div th:replace="~{navigation :: menu}">...</div>
-    <div>
-        <h2>Shopme Control Panel</h2>
-        Welcome <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
-        &nbsp;
-        <span sec:authentication="principal.authorities"></span>
-    </div>
-
-    <div class="row mt-2">
-        <th:block sec:authorize="hasAuthority('Admin')">
-            <div class="col-sm-6 col-md-4 col-lg-4-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
+<body  class="sb-nav-fixed">
+        <div th:replace="~{navigation :: menu}">...</div>
+        <div id="layoutSidenav">
+            <div th:replace="~{navigation :: side-nav }"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
                         <div>
-                            <b>General Information</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/settings}">Edit</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>Site Name: <b>[[${generalSettingBag.get("SITE_NAME").value}]]</b></div>
-                        <div>Currency Name: <b>[[${currency.name}]]</b></div>
-                        <div>Currency Symbol: <b>[[${generalSettingBag.get("CURRENCY_SYMBOL").value}]]</b></div>
-                        <div>Decimal Point Type: [[${generalSettingBag.get("DECIMAL_POINT_TYPE").value}]]</div>
-                        <div>Thousands Point Type:  [[${generalSettingBag.get("THOUSAND_POINT_TYPE").value}]]</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-2-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Users: [[${numOfUsers}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/users/new}">
-                                Add User
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" href="" onclick="return false;">
-                                Enabled: <b>[[${countEnabledUsers}]]</b>
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" href="" onclick="return false;">
-                                Disabled: <b>[[${countDisabledUsers}]]</b>
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/users}">View all</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Categories: [[${numOfCategories}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/categories/new}">
-                                Add Category
-                            </a>
-                        </div>
-                        <div>
-                            Root Categories: <b>[[${countRootCategories}]]</b>
-                        </div>
-                        <div>
-                            Enabled: <b>[[${countEnabledCategories}]]</b>
-                        </div>
-                        <div>
-                            Disabled: <b>[[${countDisabledCategories}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/categories}">View all</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Brands: [[${numOfBrands}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/categories/new}">
-                                Add Brand
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/categories}">View all</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson','Shipper')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Products: [[${numOfProducts}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                            <div>
-                                <a class="text-decoration-none" th:href="@{/products/new}">
-                                    Add Product
-                                </a>
-                            </div>
-                        </th:block>
-
-                        <div>
-                            Enabled: <b>[[${countEnabledProducts}]]</b>
-                        </div>
-                        <div>
-                            Disabled: <b>[[${countDisabledProducts}]]</b>
-                        </div>
-                        <div>
-                            In Stock: <b>[[${countInStockProducts}]]</b>
-                        </div>
-                        <div>
-                            Out of Stock: <b>[[${countOutOfStockProducts}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/products}">View all</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Questions: [[${numOfQuestions}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/questions}">View all</a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" onclick="return false;">
-                                Approved: <b>[[${countApprovedQuestions}]]</b>
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" onclick="return false;">
-                                Unapproved: <b>[[${countUnapprovedQuestions}]]</b>
-                            </a>
-                        </div>
-                        <div>
-                            Answered: <b>[[${countAnsweredQuestions}]]</b>
-                        </div>
-                        <div>
-                            Unanswered: <b>[[${countUnansweredQuestions}]]</b>
+                            <h2>Shopme Control Panel</h2>
+                            Welcome <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
+                            &nbsp;
+                            <span sec:authentication="principal.authorities"></span>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Reviews: [[${numOfReviews}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/questions}">View all</a>
-                        </div>
-                        <div>
-                           Reviewed Products: <b>[[${countOfReviewedProducts}]]</b>
-                        </div>
+                        <div class="row mt-2">
+                            <th:block sec:authorize="hasAuthority('Admin')">
+                                <div class="col-sm-6 col-md-4 col-lg-4-8">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div>
+                                                <b>General Information</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/settings}">Edit</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>Site Name: <b>[[${generalSettingBag.get("SITE_NAME").value}]]</b></div>
+                                            <div>Currency Name: <b>[[${currency.name}]]</b></div>
+                                            <div>Currency Symbol: <b>[[${generalSettingBag.get("CURRENCY_SYMBOL").value}]]</b></div>
+                                            <div>Decimal Point Type: [[${generalSettingBag.get("DECIMAL_POINT_TYPE").value}]]</div>
+                                            <div>Thousands Point Type:  [[${generalSettingBag.get("THOUSAND_POINT_TYPE").value}]]</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-2-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Users: [[${numOfUsers}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/users/new}">
+                                                    Add User
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" href="" onclick="return false;">
+                                                    Enabled: <b>[[${countEnabledUsers}]]</b>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" href="" onclick="return false;">
+                                                    Disabled: <b>[[${countDisabledUsers}]]</b>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/users}">View all</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Categories: [[${numOfCategories}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/categories/new}">
+                                                    Add Category
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Root Categories: <b>[[${countRootCategories}]]</b>
+                                            </div>
+                                            <div>
+                                                Enabled: <b>[[${countEnabledCategories}]]</b>
+                                            </div>
+                                            <div>
+                                                Disabled: <b>[[${countDisabledCategories}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/categories}">View all</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Brands: [[${numOfBrands}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/categories/new}">
+                                                    Add Brand
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/categories}">View all</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson','Shipper')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Products: [[${numOfProducts}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                                <div>
+                                                    <a class="text-decoration-none" th:href="@{/products/new}">
+                                                        Add Product
+                                                    </a>
+                                                </div>
+                                            </th:block>
 
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Customers: [[${numOfCustomers}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/customers}">View all</a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" onclick="return false;" href="">
-                                Enabled: <b>[[${countEnabledCustomers}]]</b>
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" onclick="return false;" href="">
-                                Disabled: <b>[[${countDisabledCustomers}]]</b>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Shipping Rates: [[${numOfShippingRates}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/shipping_rates/new}">Add Shipping Rate</a>
-                        </div>
-                        <div>
-                            COD Supported: <b>[[${countCODSupported}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/shipping_rates}">
-                               View All
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson', 'Shipper')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Orders: [[${numOfOrders}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/orders}">
-                                View All
-                            </a>
-                        </div>
-                        <div>
-                            New: <b>[[${countNewOrders}]]</b>
-                        </div>
-                        <div>
-                            Delivered: <b>[[${countDeliveredOrders}]]</b>
-                        </div>
-                        <div>
-                            Processing: <b>[[${countProcessingOrders}]]</b>
-                        </div>
-                        <div>
-                            Shipping: <b>[[${countShippingOrders}]]</b>
-                        </div>
-                        <div>
-                            Cancelled: <b>[[${countCancelledOrders}]]</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Articles: [[${numOfArticles}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/articles/new}">
-                                Create New
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/articles}">
-                                View All
-                            </a>
-                        </div>
-                        <div>
-                            Menu-Bound: <b>[[${countMenuBoundArticles}]]</b>
-                        </div>
-                        <div>
-                            Free: <b>[[${countFreeArticles}]]</b>
-                        </div>
-                        <div>
-                            Published: <b>[[${countPublishedArticles}]]</b>
-                        </div>
-                        <div>
-                            Unpublished: <b>[[${countUnpublishedArticles}]]</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-            <div class="col-sm-6 col-md-4  col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Menus: [[${numOfMenus}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/menus/new}">
-                                Create New
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/menus}">
-                                View All
-                            </a>
-                        </div>
-                        <div>
-                            Header: <b>[[${countHeaderMenus}]]</b>
-                        </div>
-                        <div>
-                            Footer: <b>[[${countFooterMenus}]]</b>
-                        </div>
-                        <div>
-                            Enabled: <b>[[${countEnabledMenus}]]</b>
-                        </div>
-                        <div>
-                            Disabled: <b>[[${countDisabledMenus}]]</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-        <th:block sec:authorize="hasAnyAuthority('Admin')">
-            <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Storefront Sections: [[${numOfSections}]]</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/sections/new/text}">
-                               Add Text Section
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_products}">
-                                Add Product Section
-                            </a>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_categories}">
-                                Add Category Section
-                            </a>
-                        </div>
-                        <div>
-                            Enabled: <b>[[${countEnabledSections}]]</b>
-                        </div>
-                        <div>
-                            Disabled: <b>[[${countDisabledSections}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/sections}">
-                                View All
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6  col-md-4  col-lg-2-4 my-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <b>Settings</b>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            Countries: <b>[[${numOfCountries}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/settings#countries}">
-                               Manage Countries
-                            </a>
-                        </div>
-                        <div>
-                            States: <b>[[${numOfStates}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/settings#states}">
-                                Manage States
-                            </a>
-                        </div>
-                        <div>
-                            Mail Server: <b>[[${mailSettingBag.get("MAIL_HOST").value}]]</b>
-                        </div>
-                        <div>
-                            <a class="text-decoration-none" th:href="@{/settings#mailServer}">
-                                Configure Mai Server
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
+                                            <div>
+                                                Enabled: <b>[[${countEnabledProducts}]]</b>
+                                            </div>
+                                            <div>
+                                                Disabled: <b>[[${countDisabledProducts}]]</b>
+                                            </div>
+                                            <div>
+                                                In Stock: <b>[[${countInStockProducts}]]</b>
+                                            </div>
+                                            <div>
+                                                Out of Stock: <b>[[${countOutOfStockProducts}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/products}">View all</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Questions: [[${numOfQuestions}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/questions}">View all</a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" onclick="return false;">
+                                                    Approved: <b>[[${countApprovedQuestions}]]</b>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" onclick="return false;">
+                                                    Unapproved: <b>[[${countUnapprovedQuestions}]]</b>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Answered: <b>[[${countAnsweredQuestions}]]</b>
+                                            </div>
+                                            <div>
+                                                Unanswered: <b>[[${countUnansweredQuestions}]]</b>
+                                            </div>
 
-    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Reviews: [[${numOfReviews}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/questions}">View all</a>
+                                            </div>
+                                            <div>
+                                                Reviewed Products: <b>[[${countOfReviewedProducts}]]</b>
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Customers: [[${numOfCustomers}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/customers}">View all</a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" onclick="return false;" href="">
+                                                    Enabled: <b>[[${countEnabledCustomers}]]</b>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" onclick="return false;" href="">
+                                                    Disabled: <b>[[${countDisabledCustomers}]]</b>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Shipping Rates: [[${numOfShippingRates}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/shipping_rates/new}">Add Shipping Rate</a>
+                                            </div>
+                                            <div>
+                                                COD Supported: <b>[[${countCODSupported}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/shipping_rates}">
+                                                    View All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson', 'Shipper')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Orders: [[${numOfOrders}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/orders}">
+                                                    View All
+                                                </a>
+                                            </div>
+                                            <div>
+                                                New: <b>[[${countNewOrders}]]</b>
+                                            </div>
+                                            <div>
+                                                Delivered: <b>[[${countDeliveredOrders}]]</b>
+                                            </div>
+                                            <div>
+                                                Processing: <b>[[${countProcessingOrders}]]</b>
+                                            </div>
+                                            <div>
+                                                Shipping: <b>[[${countShippingOrders}]]</b>
+                                            </div>
+                                            <div>
+                                                Cancelled: <b>[[${countCancelledOrders}]]</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Articles: [[${numOfArticles}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/articles/new}">
+                                                    Create New
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/articles}">
+                                                    View All
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Menu-Bound: <b>[[${countMenuBoundArticles}]]</b>
+                                            </div>
+                                            <div>
+                                                Free: <b>[[${countFreeArticles}]]</b>
+                                            </div>
+                                            <div>
+                                                Published: <b>[[${countPublishedArticles}]]</b>
+                                            </div>
+                                            <div>
+                                                Unpublished: <b>[[${countUnpublishedArticles}]]</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <div class="col-sm-6 col-md-4  col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Menus: [[${numOfMenus}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/menus/new}">
+                                                    Create New
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/menus}">
+                                                    View All
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Header: <b>[[${countHeaderMenus}]]</b>
+                                            </div>
+                                            <div>
+                                                Footer: <b>[[${countFooterMenus}]]</b>
+                                            </div>
+                                            <div>
+                                                Enabled: <b>[[${countEnabledMenus}]]</b>
+                                            </div>
+                                            <div>
+                                                Disabled: <b>[[${countDisabledMenus}]]</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasAnyAuthority('Admin')">
+                                <div class="col-sm-6 col-md-4 col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Storefront Sections: [[${numOfSections}]]</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/sections/new/text}">
+                                                    Add Text Section
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/sections/new/selected_products}">
+                                                    Add Product Section
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/sections/new/selected_categories}">
+                                                    Add Category Section
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Enabled: <b>[[${countEnabledSections}]]</b>
+                                            </div>
+                                            <div>
+                                                Disabled: <b>[[${countDisabledSections}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/sections}">
+                                                    View All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6  col-md-4  col-lg-2-4 my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div>
+                                                <b>Settings</b>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                Countries: <b>[[${numOfCountries}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/settings#countries}">
+                                                    Manage Countries
+                                                </a>
+                                            </div>
+                                            <div>
+                                                States: <b>[[${numOfStates}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/settings#states}">
+                                                    Manage States
+                                                </a>
+                                            </div>
+                                            <div>
+                                                Mail Server: <b>[[${mailSettingBag.get("MAIL_HOST").value}]]</b>
+                                            </div>
+                                            <div>
+                                                <a class="text-decoration-none" th:href="@{/settings#mailServer}">
+                                                    Configure Mai Server
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
 
-
-    <div th:replace="~{fragments :: footer}">...</div>
-
-</div>
-
-
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
 
 </body>
 </html>

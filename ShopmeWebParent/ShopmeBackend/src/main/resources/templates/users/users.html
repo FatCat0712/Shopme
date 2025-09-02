@@ -1,115 +1,151 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments :: page_head('Users - Shopme Admin', 'none')}">...</head>
-<body>
+<body class="sb-nav-fixed">
 <div class="container-fluid">
     <div th:replace="~{navigation :: menu}">...</div>
-    <div>
-        <h2>Manage Users</h2>
-        <a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark mr-2" title="Create New User"></a>
-        <a  th:replace="~{fragments :: export_link('csv')}"></a>
-        <a  th:replace="~{fragments :: export_link('excel')}"></a>
-        <a  th:replace="~{fragments :: export_link('pdf')}"></a>
-    </div>
-
-    <div th:replace="~{fragments :: search_form_and_message}"></div>
-
-    <div class="full-details table-responsive-xl">
-        <table class="table table-bordered table-striped table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th class="hideable-column">
-                        <th th:replace="~{fragments :: column_link('id', 'User ID', 'tag')}" ></th>
-                    </th>
-
-                    <th>Photos </th>
-                    <th class="hideable-column">
-                        <th  th:replace="~{fragments :: column_link('email', 'E-mail', 'tag')}" ></th>
-                    </th>
-
-                    <th  th:replace="~{fragments :: column_link('firstName', 'First Name', 'none')}"></th>
-                    <th  th:replace="~{fragments :: column_link('lastName', 'Last Name', 'none')}"></th>
-                    <th>Roles</th>
-                    <th th:replace="~{fragments :: column_link('enabled', 'Enabled', 'none')}"></th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr th:each="user : ${listUsers}">
-                        <td class="hideable-column">[[${user.id}]]</td>
-                        <td>
-                            <div th:replace="~{fragments :: user_photos}"></div>
-                        </td>
-                        <td class="hideable-column">[[${user.email}]]</td>
-                        <td>[[${user.firstName}]]</td>
-                        <td>[[${user.lastName}]]</td>
-                        <td>[[${user.roles}]]</td>
-                        <td>
-                            <div th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}">...</div>
-                        </td>
-                        <td>
-                            <div th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}">...</div>
-                            &nbsp;
-                            <div th:replace="~{fragments :: delete('user', ${user.id} ,'/users/delete/' + ${user.id}, true)}">...</div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="less-details">
-        <div th:each="user : ${listUsers}" class="card mb-3 shadow-sm p-3">
-            <div class="row align-items-center g-3">
-                <!-- Profile Image -->
-                <div class="col-auto">
-                    <img th:src="@{${user.photosImagePath}}" th:alt="${user.fullName}"
-                         class="img-thumbnail rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-                </div>
-
-                <!-- User Info and Actions -->
-                <div class="col">
-                    <div class="d-flex justify-content-between align-items-start flex-wrap">
-                        <!-- Name and Roles -->
-                        <div>
-                            <h6 class="mb-1" th:text="${user.fullName}">User Name</h6>
-
-                            <!-- Roles as badges -->
+    <div id="layoutSidenav">
+        <div th:replace="~{navigation :: side-nav }"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                             <div>
+                                <h2>Manage Users</h2>
+                                <ol class="breadcrumb mb-4">
+                                    <li class="breadcrumb-item">
+                                        <a th:href="@{/}" class="text-decoration-none">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a  th:href="@{/users}" class="text-decoration-none">Users</a>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div>
+                                <div th:if="${message != null}" class="alert alert-success text-center">
+                                    [[${message}]]
+                                </div>
+
+                                <div th:if="${errorMessage != null}" class="alert alert-danger text-center">
+                                    [[${errorMessage}]]
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex  flex-column flex-md-row justify-content-between align-items-center">
+                            <div>
+                                <a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark me-2" title="Create New User"></a>
+                                <a  th:replace="~{fragments :: export_link('csv')}"></a>
+                                <a  th:replace="~{fragments :: export_link('excel')}"></a>
+                                <a  th:replace="~{fragments :: export_link('pdf')}"></a>
+                            </div>
+                            <div th:replace="~{fragments :: search_form}"></div>
+                        </div>
+
+                        <div class="wrapper  position-relative">
+                            <div id="spinner-overlay">
+                                <div class="spinner"></div>
+                            </div>
+
+                            <div class="full-details table-responsive-xl">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th class="hideable-column">
+                                        <th th:replace="~{fragments :: column_link('id', 'User ID', 'tag')}" ></th>
+                                        </th>
+
+                                        <th>Photos </th>
+                                        <th class="hideable-column">
+                                        <th  th:replace="~{fragments :: column_link('email', 'E-mail', 'tag')}" ></th>
+                                        </th>
+
+                                        <th  th:replace="~{fragments :: column_link('firstName', 'First Name', 'none')}"></th>
+                                        <th  th:replace="~{fragments :: column_link('lastName', 'Last Name', 'none')}"></th>
+                                        <th>Roles</th>
+                                        <th th:replace="~{fragments :: column_link('enabled', 'Enabled', 'none')}"></th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : ${listUsers}">
+                                        <td class="hideable-column">[[${user.id}]]</td>
+                                        <td>
+                                            <div th:replace="~{fragments :: user_photos}"></div>
+                                        </td>
+                                        <td class="hideable-column">[[${user.email}]]</td>
+                                        <td>[[${user.firstName}]]</td>
+                                        <td>[[${user.lastName}]]</td>
+                                        <td>[[${user.roles}]]</td>
+                                        <td>
+                                            <div th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}">...</div>
+                                        </td>
+                                        <td>
+                                            <div th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}">...</div>
+                                            &nbsp;
+                                            <div th:replace="~{fragments :: delete('user', ${user.id} ,'/users/delete/' + ${user.id}, true)}">...</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="less-details">
+                                <div th:each="user : ${listUsers}" class="card mb-3 shadow-sm p-3">
+                                    <div class="row align-items-center g-3">
+                                        <!-- Profile Image -->
+                                        <div class="col-auto">
+                                            <img th:src="@{${user.photosImagePath}}" th:alt="${user.fullName}"
+                                                 class="img-thumbnail rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                                        </div>
+
+                                        <!-- User Info and Actions -->
+                                        <div class="col">
+                                            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                                <!-- Name and Roles -->
+                                                <div>
+                                                    <h6 class="mb-1" th:text="${user.fullName}">User Name</h6>
+
+                                                    <!-- Roles as badges -->
+                                                    <div>
                             <span th:each="role : ${user.roles}"
                                   class="badge bg-light text-dark border"
                                   th:text="${role.name}">Role</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Action Icons -->
+                                                <div class="mt-2 mt-md-0">
+                                                    <!-- Enable / Disable -->
+                                                    <span th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}"
+                                                          title="Enable/Disable user"></span>
+                                                    &nbsp;
+
+                                                    <!-- Edit -->
+                                                    <span th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}"
+                                                          title="Edit user"></span>
+                                                    &nbsp;
+
+                                                    <!-- Delete -->
+                                                    <span th:replace="~{fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)}"
+                                                          title="Delete user"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                        <!-- Action Icons -->
-                        <div class="mt-2 mt-md-0">
-                            <!-- Enable / Disable -->
-                            <span th:replace="~{fragments :: enable_link(${user.enabled}, 'user', '/users/' + ${user.id})}"
-                                  title="Enable/Disable user"></span>
-                            &nbsp;
 
-                            <!-- Edit -->
-                            <span th:replace="~{fragments :: edit('user', '/users/edit/' + ${user.id})}"
-                                  title="Edit user"></span>
-                            &nbsp;
+                        <div th:replace="~{fragments :: pagination('users')}">...</div>
 
-                            <!-- Delete -->
-                            <span th:replace="~{fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)}"
-                                  title="Delete user"></span>
-                        </div>
-                    </div>
+                        <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
                 </div>
-            </div>
+            </main>
         </div>
-
     </div>
 
-   <div th:replace="~{fragments :: pagination('users')}">...</div>
-
-    <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
-
-
-    <div th:replace="~{fragments :: footer}">...</div>
 </div>
 
 <script th:src="@{/js/common_list.js}"></script>

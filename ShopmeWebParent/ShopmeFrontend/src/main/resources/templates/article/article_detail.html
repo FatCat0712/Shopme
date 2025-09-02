@@ -4,15 +4,21 @@ xmlns:th="http://www.thymeleaf.org"
 >
 
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
-<body  class="d-flex flex-column min-vh-100">
-    <div class="container-fluid d-flex flex-column flex-grow-1">
-        <div th:replace="~{navigation :: header_menu}"></div>
-        <main class="flex-fill">
-            <div class="ml-3 my-4" style="width: 80%">
-                <div th:utext="${article.content}"></div>
+<body >
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-10 mx-auto">
+            <div  class="d-flex flex-column min-vh-100">
+                <div th:replace="~{navigation :: header_menu}"></div>
+                <main class="flex-fill">
+                    <div class="ml-3 my-4" style="width: 80%">
+                        <div th:utext="${article.content}"></div>
+                    </div>
+                </main>
+                <div th:replace="~{navigation :: footer_menu}"></div>
             </div>
-        </main>
-        <div th:replace="~{navigation :: footer_menu}"></div>
+        </div>
     </div>
+</div>
 </body>
 </html>

@@ -5,138 +5,153 @@
 >
 
 <body>
-    <div th:fragment="menu">
-        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-                <input type="submit" />
-        </form>
-        <nav class="navbar navbar-expand-lg  bg-dark navbar-dark">
-            <a class="navbar-brand" th:href="@{/}">
+    <div th:fragment="menu" th:remove="tag">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" th:href="@{/}">
                 <img th:src="@{/images/ShopmeAdminSmall.png}"/>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"  data-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <ul class="navbar-nav">
-                    <th:block sec:authorize="hasAuthority('Admin')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/users}">Users</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" th:href="@{/users/new}">Create New</a>
-                                <a class="dropdown-item" th:href="@{/users}">View All</a>
-                            </div>
-                        </li>
-                    </th:block>
-
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/categories}">Categories</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" th:href="@{/categories/new}">Create New</a>
-                                <a class="dropdown-item" th:href="@{/categories}">View All</a>
-                            </div>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/brands}">Brands</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" th:href="@{/brands/new}">Create New</a>
-                                <a class="dropdown-item" th:href="@{/brands}">View All</a>
-                            </div>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson','Editor','Shipper','Assistant')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/products}">Products</a>
-                            <div class="dropdown-menu">
-                                <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                                    <a class="dropdown-item" th:href="@{/products/new}">Create New</a>
-                                </th:block>
-                                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Shipper')">
-                                    <a class="dropdown-item" th:href="@{/products}">View All</a>
-                                </th:block>
-
-                                <th:block sec:authorize="hasAnyAuthority('Admin','Assistant')">
-                                    <a class="dropdown-item"  th:href="@{/questions}">Questions</a>
-                                    <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
-                                </th:block>
-                            </div>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/customers}">Customers</a>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/shipping_rates}">Shipping Rates</a>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/orders}">Orders</a>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/reports}">Sales Report</a>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/articles}">Articles</a>
-                        </li>
-                    </th:block>
-
-                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/menus}">Menus</a>
-                        </li>
-                    </th:block>
-
-                    <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/settings}">Settings</a>
-                        <div class="dropdown-menu">
-                            <th:block sec:authorize="hasAuthority('Admin')">
-                                <a class="dropdown-item" th:href="@{/settings#general}">General</a>
-                            </th:block>
-
-                            <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                                <a class="dropdown-item" th:href="@{/sections}">Home Page</a>
-                            </th:block>
-
-                            <th:block sec:authorize="hasAuthority('Admin')">
-                                <a class="dropdown-item" th:href="@{/settings#countries}">Countries</a>
-                                <a class="dropdown-item" th:href="@{/settings#states}">States</a>
-                                <a class="dropdown-item" th:href="@{/settings#mail-server}">Mail Server</a>
-                                <a class="dropdown-item" th:href="@{/settings#mail-templates}">Mail Templates</a>
-                                <a class="dropdown-item" th:href="@{/settings#payment}">Payment</a>
-                            </th:block>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fas fa-user fa-2x icon-silver"></span>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullname"></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item"  id="logoutLink" href="">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="text-bg-dark">
+                    <span sec:authentication="name"></span>
+                </div>
             </div>
+
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        <i class="fas fa-user fa-fw"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" data-bs-popper="static">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <form method="post" th:action="@{/logout}">
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Navbar-->
         </nav>
+    </div>
+
+    <div th:fragment="side-nav" th:remove="tag">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" th:href="@{/}">
+                            Dashboard
+                        </a>
+                        <th:block sec:authorize="hasAuthority('Admin')">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">
+                                Users <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link"  th:href="@{/users/new}">Create New User</a>
+                                    <a class="nav-link" th:href="@{/users}">View All Users</a>
+                                </nav>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                                Categories <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link"  th:href="@{/categories/new}">Create New Category</a>
+                                    <a class="nav-link" th:href="@{/categories}">View All Categories</a>
+                                </nav>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBrands" aria-expanded="false" aria-controls="collapseBrands">
+                                Brands <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseBrands" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link"  th:href="@{/brands/new}">Create New Brands</a>
+                                    <a class="nav-link" th:href="@{/brands}">View All Brands</a>
+                                </nav>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson','Editor','Shipper','Assistant')">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+                                Products <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseProducts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                        <a class="nav-link"  th:href="@{/products/new}">Create New Product</a>
+                                    </th:block>
+                                    <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Shipper')">
+                                        <a class="nav-link" th:href="@{/products}">View All Products</a>
+                                    </th:block>
+                                    <th:block sec:authorize="hasAnyAuthority('Admin','Assistant')">
+                                        <a class="nav-link"  th:href="@{/questions}">Questions</a>
+                                        <a class="nav-link" th:href="@{/reviews}">Reviews</a>
+                                    </th:block>
+                                </nav>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                                <a class="nav-link" th:href="@{/customers}">Customers</a>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                                <a class="nav-link" th:href="@{/shipping_rates}">Shipping Rates</a>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+                                <a class="nav-link" th:href="@{/orders}">Orders</a>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                                <a class="nav-link" th:href="@{/reports}">Sales Report</a>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <a class="nav-link" th:href="@{/articles}">Articles</a>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                <a class="nav-link" th:href="@{/menus}">Menus</a>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+                                Settings <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseSettings" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <th:block sec:authorize="hasAuthority('Admin')">
+                                        <a class="nav-link"  th:href="@{/settings#general}">General</a>
+                                    </th:block>
+                                    <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                                        <a class="nav-link" th:href="@{/sections}">Home Page</a>
+                                    </th:block>
+                                    <th:block sec:authorize="hasAuthority('Admin')">
+                                        <a class="nav-link" th:href="@{/settings#countries}">Countries</a>
+                                        <a class="nav-link" th:href="@{/settings#states}">States</a>
+                                        <a class="nav-link" th:href="@{/settings#mail-server}">Mail Server</a>
+                                        <a class="nav-link" th:href="@{/settings#mail-templates}">Mail Templates</a>
+                                        <a class="nav-link" th:href="@{/settings#payment}">Payment</a>
+                                    </th:block>
+                                </nav>
+                            </div>
+                        </th:block>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    <a class="text-decoration-none text-bg-gray" th:href="@{/account}" sec:authentication="principal.fullname"></a>
+                </div>
+            </nav>
+        </div>
     </div>
 
 

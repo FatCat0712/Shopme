@@ -214,15 +214,10 @@ public class Order extends AbstractAddress {
         return hasStatus(OrderStatus.CANCELLED);
     }
 
-
-
-
+    @Transient
     public boolean hasStatus(OrderStatus status) {
-        return orderTracks.get(getOrderTracks().size() - 1).getStatus().equals(status);
+        return !orderTracks.isEmpty() && orderTracks.getLast().getStatus().equals(status);
     }
-
-
-
 
 
 

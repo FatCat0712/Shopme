@@ -7,24 +7,28 @@
     <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/new_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spinner.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <script type="text/javascript" th:src="@{/js/spinner.js}"></script>
 </head>
 <body>
 
     <th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
         <a
-                class="text-white"
+                class="text-dark text-decoration-none text-center"
                 th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ? sortDir : reversedSortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}"
-        >[[${columnLabel}]] </a>
+        >[[${columnLabel}]]</a>
             <span th:if="${sortField == fieldName}" th:class="${sortDir == 'asc' ?  'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
     </th>
 
 
 
     <a th:fragment="export_link(extension)"
-        th:class="'fas fa-file-' + ${extension} +  ' fa-2x icon-dark mr-2'"
+        th:class="'fas fa-file-' + ${extension} +  ' fa-2x icon-dark me-2'"
         th:href="@{${moduleURL} + '/export/' + ${extension}}" th:title="'Export To ' + ${extension.toUpperCase()}"></a>
 
     <div th:fragment="user_photos">
@@ -90,12 +94,12 @@
                         </div>
     </div>
 
-    <div th:fragment="search_form_and_message">
+    <div th:fragment="search_form">
                 <form th:action="@{${moduleURL} + '/page/1'} " class="form-inline m-3">
                     <input type="hidden" name="sortField" th:value="${sortField}">
                     <input type="hidden" name="sortDir" th:value="${sortDir}">
                     <div class="input-group">
-                        <label class="col-form-label d-none d-sm-inline-block" for="search" >Filter:</label>
+                        <label class="col-form-label d-none d-sm-inline-block me-2" for="search" >Filter</label>
                         <div class="col-auto">
                             <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
                         </div>
@@ -107,17 +111,7 @@
                             <i class="fas fa-eraser"></i>
                         </button>
                     </div>
-
-
                 </form>
-
-        <div th:if="${message != null}" class="alert alert-success text-center">
-            [[${message}]]
-        </div>
-
-        <div th:if="${errorMessage != null}" class="alert alert-danger text-center">
-            [[${errorMessage}]]
-        </div>
     </div>
 
 

@@ -2,107 +2,111 @@
 <html lang="en"
 xmlns:th="http://www.thymeleaf.org"
 >
-
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
 <body>
         <div class="container-fluid">
-                <div th:replace="~{navigation :: header_menu}">...</div>
-                <div th:replace="~{navigation :: search_bar}">...</div>
-                <div th:replace="~{navigation :: quick_links}">...</div>
+            <div class="row">
+                <div class="col-12 col-md-10 mx-auto">
+                    <div th:replace="~{navigation :: header_menu}">...</div>
+                    <div th:replace="~{navigation :: search_bar}">...</div>
+                    <div th:replace="~{navigation :: quick_links}">...</div>
 
-                <div th:each="section : ${listSections}">
-                        <div style="font-size: 32px; font-weight: 600">[[${section.heading}]]</div>
-                        <div th:utext="${section.description}"></div>
+                        <main class="flex-fill" >
+                            <div th:each="section : ${listSections}">
+                                <div style="font-size: 32px; font-weight: 600">[[${section.heading}]]</div>
+                                <div th:utext="${section.description}"></div>
 
-                        <div th:if="${section.sectionType.name() == 'SELECTED_PRODUCTS'}">
-                            <div class="row">
-                                <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
-                                   th:each="section : ${section.sectionProducts}"
-                                   th:href="@{'/p/' + ${product.alias}}"
-                                   th:with="product = ${section.product}"
-                                   target="_blank"
-                                >
-                                    <div class="text-center">
-                                        <img th:src="@{${product.mainImagePath}}" style="background-color: #F7F7F7; width: 100px;" th:alt="${product.name}"/>
+                                <div th:if="${section.sectionType.name() == 'SELECTED_PRODUCTS'}">
+                                    <div class="row">
+                                        <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
+                                           th:each="section : ${section.sectionProducts}"
+                                           th:href="@{'/p/' + ${product.alias}}"
+                                           th:with="product = ${section.product}"
+                                           target="_blank"
+                                        >
+                                            <div class="text-center">
+                                                <img th:src="@{${product.mainImagePath}}" style="background-color: #F7F7F7; width: 100px;" th:alt="${product.name}"/>
+                                            </div>
+                                            <div>
+                                                <p>[[${product.shortName}]]</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div>
-                                        <p>[[${product.shortName}]]</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div th:if="${section.sectionType.name() == 'SELECTED_CATEGORIES'}">
-                            <div class="row">
-                                <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
-                                   th:each="section : ${section.sectionCategories}"
-                                   th:href="@{'/c/' + ${cat.alias}}"
-                                   th:with="cat = ${section.category}"
-                                   target="_blank">
-                                    <div>
-                                        <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
-                                    </div>
-                                    <div>
-                                        <p>[[${cat.name}]]</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div th:if="${section.sectionType.name() == 'ALL_CATEGORIES'}">
-                                <div class="row">
-                                    <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                       th:each="cat : ${listCategories}"
-                                       th:href="@{'/c/' + ${cat.alias}}"
-                                    >
-                                        <div>
-                                            <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
-                                        </div>
-                                        <div>
-                                            <p>[[${cat.name}]]</p>
-                                        </div>
-                                    </a>
                                 </div>
-                        </div>
+
+                                <div th:if="${section.sectionType.name() == 'SELECTED_CATEGORIES'}">
+                                    <div class="row">
+                                        <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
+                                           th:each="section : ${section.sectionCategories}"
+                                           th:href="@{'/c/' + ${cat.alias}}"
+                                           th:with="cat = ${section.category}"
+                                        >
+                                            <div>
+                                                <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
+                                            </div>
+                                            <div>
+                                                <p>[[${cat.name}]]</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div th:if="${section.sectionType.name() == 'ALL_CATEGORIES'}">
+                                    <div class="row">
+                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
+                                           th:each="cat : ${listCategories}"
+                                           th:href="@{'/c/' + ${cat.alias}}"
+                                        >
+                                            <div>
+                                                <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
+                                            </div>
+                                            <div>
+                                                <p>[[${cat.name}]]</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
 
 
-                        <div th:if="${section.sectionType.name() == 'SELECTED_BRANDS'}">
-                            <div class="row">
-                                <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                   th:each="section : ${section.sectionBrands}"
-                                   th:href="@{'/b/' + ${brand.name}}"
-                                   th:with="brand = ${section.brand}"
-                                >
-                                    <div>
-                                        <img th:src="@{${brand.logoPath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${brand.name}"/>
+                                <div th:if="${section.sectionType.name() == 'SELECTED_BRANDS'}">
+                                    <div class="row">
+                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
+                                           th:each="section : ${section.sectionBrands}"
+                                           th:href="@{'/b/' + ${brand.name}}"
+                                           th:with="brand = ${section.brand}"
+                                        >
+                                            <div>
+                                                <img th:src="@{${brand.logoPath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${brand.name}"/>
+                                            </div>
+                                            <div>
+                                                <p>[[${brand.name}]]</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div>
-                                        <p>[[${brand.name}]]</p>
+                                </div>
+
+
+                                <div th:if="${section.sectionType.name() == 'SELECTED_ARTICLES'}">
+                                    <div class="row">
+                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
+                                           th:each="section : ${section.sectionArticles}"
+                                           th:href="@{'/articles/' + ${article.title}}"
+                                           th:with="article = ${section.article}"
+                                        >
+                                            <div>
+                                                <p>[[${article.title}]]</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                        </div>
+                        </main>
 
 
-                        <div th:if="${section.sectionType.name() == 'SELECTED_ARTICLES'}">
-                            <div class="row">
-                                <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                   th:each="section : ${section.sectionArticles}"
-                                   th:href="@{'/articles/' + ${article.title}}"
-                                   th:with="article = ${section.article}"
-                                >
-                                    <div>
-                                        <p>[[${article.title}]]</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                    <div th:replace="~{navigation :: footer_menu}"></div>
                 </div>
+            </div>
 
-
-                <div th:replace="~{navigation :: footer_menu}"></div>
         </div>
-
-
 </body>
 </html>

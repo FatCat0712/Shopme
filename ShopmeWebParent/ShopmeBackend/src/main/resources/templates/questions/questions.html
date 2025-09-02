@@ -9,15 +9,15 @@
                 <a th:href="@{/questions/export/csv}">Export to csv</a>
             </div>
             <div th:replace="~{fragments :: search_form_and_message}"></div>
-            <div class="full-details">
-                <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <div class="full-details table-responsive-xl">
+                <table class="table table-bordered table-striped table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th>ID</th>
+                                <th class="hideable-column">ID</th>
                                 <th>Product</th>
                                 <th>Question</th>
                                 <th>Asker</th>
-                                <th>
+                                <th class="hideable-column">
                                     <div th:replace="~{fragments :: column_link('askTime', 'Ask Time', 'tag')}"></div>
                                 </th>
                                 <th>Approved</th>
@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="question : ${listQuestions}">
-                                <td>[[${question.id}]]</td>
+                                <td class="hideable-column">[[${question.id}]]</td>
                                 <td>
                                     <a th:href="@{'/products/detail/' + ${question.product.id}}" class="link-product-detail text-decoration-none">
                                         [[${question.product.shortName}]]
@@ -39,7 +39,7 @@
                                         [[${question.asker.fullName}]]
                                     </a>
                                </td>
-                                <td>[[${#dates.format(question.askTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+                                <td  class="hideable-column">[[${#dates.format(question.askTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
                                 <td>
                                     <a th:unless="${question.approvalStatus == true}" class="fas fa-circle fa-2x icon-dark" th:href="@{'/questions/' +${question.id} + '/approved/true'}"></a>
                                     <a th:if="${question.approvalStatus == true}" class="fas fa-check-circle fa-2x icon-green"  th:href="@{'/questions/' +${question.id} + '/approved/false'}"></a>
@@ -59,6 +59,56 @@
                         </tbody>
                 </table>
             </div>
+
+            <div class="less-details">
+                <div th:each="question : ${listQuestions}" class="card mb-3 shadow-sm p-3">
+                    <div  class="row align-items-center g-3">
+                        <div class="col-auto">
+                            <span class="text-muted">[[${question.id}]]</span>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                <div>
+                                    <b>
+                                        [[${question.questionContent}]]
+                                    </b>
+                                </div>
+                                <div>
+                                    <a class="text-muted text-decoration-none  link-detail--product" th:href="@{'/products/detail/' + ${question.product.id}}">
+                                        <small>[[${question.product.shortName}]]</small>
+                                    </a>
+                                </div>
+                                <div class="d-flex w-100 mt-3 flex-nowrap justify-content-between">
+                                    <div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div  class="d-flex align-items-center">
+                                                <small>Answered:</small>&nbsp;
+                                                <i th:if="${question.answered == true}" class="fas fa-lg fa-check-circle icon-green"></i>
+                                                <i th:unless="${question.answered == true}" class="fas fa-lg fa-circle icon-dark"></i>
+                                            </div>
+                                            &nbsp;&nbsp;
+                                            <div class="d-flex align-items-center">
+                                                <small>Approved:</small>&nbsp;
+                                                <a th:unless="${question.approvalStatus == true}" class="fas fa-lg fa-circle icon-dark" th:href="@{'/questions/' +${question.id} + '/approved/true'}"></a>
+                                                <a th:if="${question.approvalStatus == true}" class="fas fa-lg fa-check-circle icon-green"  th:href="@{'/questions/' +${question.id} + '/approved/false'}"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a class="fas fa-file-alt fa-2x icon-green link-detail--question" th:href="@{'/questions/detail/' + ${question.id}}"></a>
+                                        &nbsp;
+                                        <div th:replace="~{fragments :: edit('question', '/questions/edit/' + ${question.id})}">...</div>
+                                        &nbsp;
+                                        <div th:replace="~{fragments :: delete('question', ${question.id} ,'/questions/delete/' + ${question.id}, true)}">...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="modal fade" id="productDetailModal">
                 <div class="modal-dialog modal-xl">

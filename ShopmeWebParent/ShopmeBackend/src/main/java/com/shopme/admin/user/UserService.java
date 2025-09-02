@@ -49,7 +49,9 @@ public class UserService {
                     userInForm.setPassword(existingUser.getPassword());
                 }
                 else {
+                    existingUser.setPassword(userInForm.getPassword());
                     encodePassword(existingUser);
+                    return userRepository.save(existingUser);
                 }
             }
 

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MainController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("")
+    @RequestMapping(value = {"/",""})
     public String viewHomePage(Model model) {
         List<Section> listSections = sectionService.listAll();
         List<Category> listCategories = categoryService.listNoChildrenCategories();
