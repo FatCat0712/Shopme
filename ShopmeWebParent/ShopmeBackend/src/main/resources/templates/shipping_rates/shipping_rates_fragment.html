@@ -4,14 +4,16 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="cod_support" th:remove="tag">
     <a th:if="${sr.codSupported == true}"
-       class="fas fa-hand-holding-dollar fa-2x icon-green"
+       class="text-decoration-none"
        th:href="@{'/shipping_rates/cod/'  + ${sr.id} + '/enabled/false'}"
        title="Disable this shipping rate">
+        <i class="fas fa-hand-holding-dollar fa-2x icon-green"></i>
     </a>
     <a th:if="${sr.codSupported == false}"
-       class="fas fa-hand-holding-dollar fa-2x icon-dark"
+       class="text-decoration-none"
        th:href="@{'/shipping_rates/cod/'  + ${sr.id}  +'/enabled/true'}"
        title="'Enable this shipping rate">
+        <i  class="fas fa-hand-holding-dollar fa-2x icon-dark"></i>
     </a>
 </div>
 

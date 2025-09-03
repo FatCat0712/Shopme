@@ -4,114 +4,132 @@ xmlns:th="http://www.thymeleaf.org"
 >
 
 <head th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">...</head>
-<body>
+<body class="sb-nav-fixed">
         <div class="container-fluid">
                 <div th:replace="~{navigation :: menu}">...</div>
-                <div>&nbsp;</div>
-                <div class="text-center">
-                        <h2>Customer Registration</h2>
+                <div id="layoutSidenav">
+                    <div th:replace="~{navigation :: side-nav }"></div>
+                    <div id="layoutSidenav_content">
+                        <main>
+                            <div class="container-fluid px-4">
+                                <div class="text-start">
+                                    <h2>[[${pageTitle}]]</h2>
+                                </div>
+                                <ol class="breadcrumb mb-3">
+                                    <li class="breadcrumb-item">
+                                        <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a  th:href="@{/customers}" class="text-decoration-none view-link">Customers</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                       Update
+                                    </li>
+                                </ol>
+                                <form th:action="@{/customers/save}" class="col-md-10 mx-auto" method="post" th:object="${customer}" onsubmit="return checkEmailUnique(this);">
+                                    <div class="border border-secondary rounded p-3">
+                                        <input type="hidden" th:field="*{id}">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">First Name:</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{firstName}" required minlength="2" maxlength="45">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Last Name:</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{lastName}" required minlength="2" maxlength="45">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Email:</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="email" th:field="*{email}" required minlength="8" maxlength="45">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Password: </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="password" th:field="*{password}" placeholder="Leave blank if you don't want  to change password">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Phone Number: </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{phoneNumber}" required minlength="8" maxlength="15">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Address Line 1: </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{addressLine1}" required minlength="3" maxlength="64">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Address Line 2: </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{addressLine2}" minlength="3" maxlength="64">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">City: </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" th:field="*{city}" minlength="2" maxlength="45">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">Country: </label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" th:field="*{country}">
+                                                            <th:block th:each="country : ${listCountries}">
+                                                                <option th:value="${country.id}">[[${country.name}]]</option>
+                                                            </th:block>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-sm-4">State/Province:</label>
+                                                    <div class="col-sm-8">
+                                                        <input  class="form-control" type="text" th:field="*{state}" minlength="3" maxlength="45" list="listStates">
+                                                        <datalist id="listStates"></datalist>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Postal Code:</label>
+                                                    <div class="col-sm-8">
+                                                        <input  class="form-control" type="text" th:field="*{postalCode}" minlength="2" maxlength="10">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <input type="submit" value="Save" class="btn btn-primary m-3" />
+                                                <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </main>
+                    </div>
                 </div>
 
-                <form th:action="@{/customers/save}" method="post" th:object="${customer}" style="max-width: 600px; margin: 0 auto;" onsubmit="return checkEmailUnique(this);">
-                        <div class="border border-secondary rounded p-3">
-                                <input type="hidden" th:field="*{id}">
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">First Name:</label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{firstName}" required minlength="2" maxlength="45">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Last Name:</label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{lastName}" required minlength="2" maxlength="45">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Email:</label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="email" th:field="*{email}" required minlength="8" maxlength="45">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Password: </label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="password" th:field="*{password}" placeholder="Leave blank if you don't want  to change password">
-                                        </div>
-                                </div>
-
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Phone Number: </label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{phoneNumber}" required minlength="8" maxlength="15">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Address Line 1: </label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{addressLine1}" required minlength="3" maxlength="64">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Address Line 2: </label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{addressLine2}" minlength="3" maxlength="64">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">City: </label>
-                                        <div class="col-sm-8">
-                                                <input class="form-control" type="text" th:field="*{city}" minlength="2" maxlength="45">
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">Country: </label>
-                                        <div class="col-sm-8">
-                                                <select class="form-control" th:field="*{country}">
-                                                        <th:block th:each="country : ${listCountries}">
-                                                                <option th:value="${country.id}">[[${country.name}]]</option>
-                                                        </th:block>
-                                                </select>
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-form-label col-sm-4">State/Province:</label>
-                                        <div class="col-sm-8">
-                                                <input  class="form-control" type="text" th:field="*{state}" minlength="3" maxlength="45" list="listStates">
-                                                <datalist id="listStates"></datalist>
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Postal Code:</label>
-                                        <div class="col-sm-8">
-                                                <input  class="form-control" type="text" th:field="*{postalCode}" minlength="2" maxlength="10">
-                                        </div>
-                                </div>
-
-
-                                <div class="text-center">
-                                        <input type="submit" value="Save" class="btn btn-primary m-3" />
-                                        <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
-                                </div>
-                        </div>
-                </form>
-
-
                 <div th:replace="~{modal_fragments :: modal_dialog}">...</div>
-
-
-
 
         </div>
 

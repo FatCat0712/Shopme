@@ -38,6 +38,9 @@ public class PagingAndSortingHelper {
             endCount = page.getTotalElements();
         }
 
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);

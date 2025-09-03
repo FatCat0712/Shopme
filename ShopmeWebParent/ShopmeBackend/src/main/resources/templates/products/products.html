@@ -19,7 +19,9 @@
                                <div>
                                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                                        <div class="my-2">
-                                           <a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark me-2" title="Create New Product"></a>
+                                           <a th:href="@{/products/new}" class="me-2 text-decoration-none" title="Create New Product">
+                                               <i class="fas fa-folder-plus fa-2x icon-dark "></i>
+                                           </a>
                                            <a  th:replace="~{fragments :: export_link('csv')}"></a>
                                        </div>
                                    </th:block>
@@ -82,7 +84,7 @@
                                             <th>Main Image</th>
                                             <th  th:replace="~{fragments :: column_link( 'name', 'Product Name', 'none')}">...</th>
                                             <th class="hideable-column">
-                                                <div  th:replace="~{fragments :: column_link( 'brand', 'Brand ', 'tag')}">...</div>
+                                                <div th:replace="~{fragments :: column_link( 'brand', 'Brand ', 'tag')}">...</div>
                                             </th>
                                             <th class="hideable-column">
                                                 <div th:replace="~{fragments :: column_link( 'category', 'Category ', 'tag')}">...</div>
@@ -112,7 +114,9 @@
                                                 </td>
                                             </th:block>
                                             <td>
-                                                <a class="fas fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product"></a>
+                                                <a class="link-detail text-decoration-none" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product">
+                                                    <i class="fas fa-file-alt fa-2x icon-green"></i>
+                                                </a>
                                                 &nbsp;
                                                 &nbsp;
                                                 <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">

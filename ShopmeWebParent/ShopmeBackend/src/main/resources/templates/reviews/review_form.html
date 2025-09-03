@@ -4,84 +4,88 @@
 >
 
 <head th:replace="~{fragments :: page_head(${pageTitle}, 'none')}">...</head>
-<body>
+<body class="sb-nav-fixed">
 <div class="container-fluid">
     <div th:replace="~{navigation :: menu}">...</div>
-    <div>&nbsp;</div>
-    <div class="text-center">
-        <h2>Manage Review | Edit Review (ID [[${id}]])</h2>
-    </div>
+    <div id="layoutSidenav">
+        <div th:replace="~{navigation :: side-nav }"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <div>&nbsp;</div>
+                    <div class="text-center">
+                        <h2>Edit Review (ID [[${id}]])</h2>
+                    </div>
+                    <form th:action="@{/reviews/save}" method="post" th:object="${review}" style="max-width: 60%; margin: 0 auto;">
+                        <div class="border border-secondary rounded p-3">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" name="product" th:value="${review.product.id}">
+                            <input type="hidden" name="customer" th:value="${review.customer.id}">
+                            <input type="hidden" name="reviewTime" th:value="${review.reviewTime}">
+                            <input type="hidden" name="rating" th:value="${review.rating}">
 
-    <form th:action="@{/reviews/save}" method="post" th:object="${review}" style="max-width: 60%; margin: 0 auto;">
-        <div class="border border-secondary rounded p-3">
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" name="product" th:value="${review.product.id}">
-            <input type="hidden" name="customer" th:value="${review.customer.id}">
-            <input type="hidden" name="reviewTime" th:value="${review.reviewTime}">
-            <input type="hidden" name="rating" th:value="${review.rating}">
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Product:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" th:value="${review.product.name}" readonly>
+                                </div>
+                            </div>
 
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Product:</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" th:value="${review.product.name}" readonly>
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Customer:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" th:value="${review.customer.fullName}"  readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Rating:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="email" th:value="${review.rating}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Votes:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" th:value="${review.votes}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Review Time:</label>
+                                <div class="col-sm-8">
+                                    <span>[[${review.reviewTime}]]</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Headline:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" th:field="*{headline}" maxlength="150">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 align-items-center">
+                                <label class="col-sm-4">Comment:</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="5" th:field="*{comment}" maxlength="500"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <input type="submit" value="Save" class="btn btn-primary m-3" />
+                                <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div th:replace="~{modal_fragments :: modal_dialog}">...</div>
                 </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Customer:</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" th:value="${review.customer.fullName}"  readonly>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Rating:</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="email" th:value="${review.rating}" readonly>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Votes:</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" th:value="${review.votes}" readonly>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Review Time:</label>
-                <div class="col-sm-8">
-                    <span>[[${review.reviewTime}]]</span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Headline:</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" th:field="*{headline}" maxlength="150">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Comment:</label>
-                <div class="col-sm-8">
-                    <textarea class="form-control" rows="4" th:field="*{comment}" maxlength="500"></textarea>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <input type="submit" value="Save" class="btn btn-primary m-3" />
-                <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
-            </div>
+            </main>
         </div>
-    </form>
-
-
-    <div th:replace="~{modal_fragments :: modal_dialog}">...</div>
-
-
-
-
+    </div>
 </div>
 
 <script type="text/javascript">

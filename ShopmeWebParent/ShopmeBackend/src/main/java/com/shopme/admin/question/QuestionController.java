@@ -6,6 +6,7 @@ import com.shopme.admin.question.export.QuestionCsvExporter;
 import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.question.Question;
 import com.shopme.common.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -75,14 +76,22 @@ public class QuestionController {
     }
 
     @GetMapping("/questions/{id}/approved/{status}")
-    public String approveQuestion(@PathVariable(name = "id") Integer questionId, @PathVariable(name = "status") Boolean isApproved, RedirectAttributes ra) {
+    public String approveQuestion(
+            @PathVariable(name = "id") Integer questionId,
+            @PathVariable(name = "status") Boolean isApproved,
+            RedirectAttributes ra,
+            HttpServletRequest request
+    ) {
         try {
             questionService.approveQuestion(questionId, isApproved);
             ra.addFlashAttribute("message", String.format("The question with ID %d was %s", questionId, isApproved ? "approved" : "rejected"));
+            String referer = request.getHeader("referer");
+            return "redirect:" + referer;
         } catch (QuestionNotFound e) {
            ra.addFlashAttribute("errorMessage", e.getMessage());
+            return defaultURL;
         }
-        return defaultURL;
+
     }
 
     @PostMapping("/questions/save")

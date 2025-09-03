@@ -1,12 +1,14 @@
 package com.shopme.admin.brand;
 
 import com.shopme.admin.SupabaseS3Util;
+import com.shopme.admin.brand.export.BrandCsvExporter;
 import com.shopme.admin.category.CategoryService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.exception.BrandNotFoundException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +91,6 @@ public class BrandController {
     }
 
 
-
     @GetMapping("/brands/edit/{id}")
     public String editBrand(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes, Model model) {
         try {
@@ -117,8 +118,16 @@ public class BrandController {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
             return defaultURL;
         }
-
     }
+
+    @GetMapping("/brands/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<Brand> listBrands = brandService.listAll();
+        System.out.println(listBrands);
+        BrandCsvExporter exporter = new BrandCsvExporter();
+        exporter.export(listBrands, response);
+    }
+
 
 
 

@@ -11,6 +11,17 @@
                         <div class="container-fluid px-4">
                             <div>
                                 <h2>[[${pageTitle}]]</h2>
+                                <ol class="breadcrumb mb-1">
+                                    <li class="breadcrumb-item">
+                                        <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a  th:href="@{/brands}" class="text-decoration-none view-link">Brands</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                        [[${brand.id != null ? 'Update' : 'Create'}]]
+                                    </li>
+                                </ol>
                             </div>
                             <form th:action="@{/brands/save}" method="post" style="max-width: 500px; margin: 0 auto" th:object="${brand}" enctype="multipart/form-data"
                                   onsubmit="return checkUniqueName(this)">

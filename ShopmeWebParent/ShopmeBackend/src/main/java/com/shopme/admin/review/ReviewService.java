@@ -16,7 +16,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepo;
     private final ProductRepository productRepo;
 
-    public static final int REVIEW_PER_PAGE = 5;
+    public static final int REVIEW_PER_PAGE = 8;
 
     @Autowired
     public ReviewService(ReviewRepository reviewRepo, ProductRepository productRepo) {

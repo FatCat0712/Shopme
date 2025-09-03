@@ -6,11 +6,11 @@ import com.shopme.admin.category.CategoryService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.security.ShopmeUserDetails;
-import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ProductNotFoundException;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,11 @@ public class ProductController {
     private final String defaultURL = "redirect:/products/page/1?sortField=name&sortDir=asc&categoryId=0";
 
     @Autowired
-    public ProductController(BrandService brandService, ProductService productService, CategoryService categoryService) {
+    public ProductController(
+            BrandService brandService,
+            ProductService productService,
+            CategoryService categoryService
+    ) {
         this.brandService = brandService;
         this.productService = productService;
         this.categoryService = categoryService;
@@ -141,15 +145,22 @@ public class ProductController {
 
 
     @GetMapping("/products/{id}/enabled/{status}")
-    public String enableProduct(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") Boolean status, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String enableProduct(
+            @PathVariable(name = "id") Integer id,
+            @PathVariable(name = "status") Boolean status,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request
+    ) {
         try {
             productService.updateStatus(id, status);
             redirectAttributes.addFlashAttribute("message", String.format("The product with id %d has been %s successfully",id , status ? "enabled" : "disabled"));
+            String referer = request.getHeader("referer");
+            return "redirect:" + referer;
         } catch (ProductNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-
+            return defaultURL;
         }
-        return defaultURL;
+
     }
 
     @GetMapping("/products/delete/{id}")

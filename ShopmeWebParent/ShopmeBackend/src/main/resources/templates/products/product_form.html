@@ -19,6 +19,17 @@
                             <div>
                                 <h2>[[${pageTitle}]]</h2>
                             </div>
+                            <ol class="breadcrumb mb-3">
+                                <li class="breadcrumb-item">
+                                    <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a  th:href="@{/products}" class="text-decoration-none view-link">Products</a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                   Create
+                                </li>
+                            </ol>
                             <form th:action="@{/products/save}" method="post" th:object="${product}" onsubmit="return checkUniqueName(this)"
                                   enctype="multipart/form-data"
                             >

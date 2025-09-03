@@ -3,10 +3,10 @@ package com.shopme.admin.customer;
 import com.shopme.admin.customer.export.CustomerCsvExporter;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
-import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.country.Country;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +58,7 @@ public class CustomerController {
             List<Country> listCountries = customerService.listAllCountries();
             model.addAttribute("customer", savedCustomer);
             model.addAttribute("listCountries", listCountries);
+            model.addAttribute("pageTitle", String.format("Edit Customer (ID: %d)", savedCustomer.getId()));
             return "customers/customer_form";
         }catch (CustomerNotFound ex) {
             ra.addFlashAttribute("errorMessage", ex.getMessage());
@@ -66,11 +67,12 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/delete/{id}")
-    public String deleteCustomer(@PathVariable("id") Integer id, HttpSession session, RedirectAttributes ra) {
+    public String deleteCustomer(@PathVariable("id") Integer id,HttpServletRequest request, RedirectAttributes ra) {
         try {
             customerService.deleteCustomer(id);
             ra.addFlashAttribute("message", String.format("The customer with ID %d has been deleted successfully", id));
-            return getRedirectURLtoAffectedCustomer(session);
+            String referer = request.getHeader("referer");
+            return "redirect:" + referer;
         }catch (CustomerNotFound ex) {
             ra.addFlashAttribute("errorMessage", ex.getMessage());
             return "redirect:/customers/customers";
@@ -82,12 +84,13 @@ public class CustomerController {
     public String enableCustomer(
             @PathVariable(name = "id") Integer id,
             @PathVariable(name = "status") Boolean status,
-            HttpSession session,
+            HttpServletRequest request,
             RedirectAttributes ra) {
         try {
             customerService.enableCustomer(id, status);
             ra.addFlashAttribute("message", String.format("The customer with ID %d has been %s successfully", id, status ? "enabled" : "disabled"));
-            return getRedirectURLtoAffectedCustomer(session);
+            String referer = request.getHeader("referer");
+            return "redirect:" + referer;
         }catch (CustomerNotFound ex) {
             ra.addFlashAttribute("errorMessage", ex.getMessage());
             return "redirect:/customers/customers";
@@ -116,21 +119,6 @@ public class CustomerController {
        CustomerCsvExporter exporter = new CustomerCsvExporter();
         exporter.export(listCustomers, response);
     }
-
-
-    public String getRedirectURLtoAffectedCustomer(HttpSession session){
-        int pageNum = Integer.parseInt(session.getAttribute("currentPage").toString());
-        String sortField = session.getAttribute("sortField").toString();
-        String sortDir = session.getAttribute("sortDir").toString();
-
-        String keyword = null;
-        if(session.getAttribute("keyword") != null) {
-            keyword = session.getAttribute("keyword").toString();
-        }
-
-        return String.format("redirect:/customers/page/%d?sortField=%s&sortDir=%s&keyword=%s",pageNum, sortField, sortDir, keyword != null ? keyword : "");
-    }
-
 
 
 }

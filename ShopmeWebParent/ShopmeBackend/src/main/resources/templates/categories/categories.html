@@ -11,10 +11,21 @@
                         <div class="container-fluid px-4">
                             <div>
                                 <h2>Manage Categories</h2>
+                                <ol class="breadcrumb mb-2">
+                                    <li class="breadcrumb-item">
+                                        <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a  th:href="@{/categories}" class="text-decoration-none view-link">Categories</a>
+                                    </li>
+                                </ol>
                             </div>
+
                             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
                                 <div>
-                                    <a th:href="@{/categories/new}" class="fas fa-folder-plus fa-2x icon-dark me-2" title="Create New Category"></a>
+                                    <a th:href="@{/categories/new}" class="me-2 text-decoration-none" title="Create New Category">
+                                        <i class="fas fa-folder-plus fa-2x icon-dark "></i>
+                                    </a>
                                     <a th:replace="~{fragments :: export_link('csv')}"></a>
                                 </div>
                                 <div>

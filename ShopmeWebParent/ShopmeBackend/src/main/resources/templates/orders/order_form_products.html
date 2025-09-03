@@ -2,8 +2,8 @@
 <html lang="en">
 <body>
         <div th:fragment="content" th:remove="tag">
-                <div id="productList">
-                        <div th:each="detail,status : ${order.orderDetails}" th:id="'row' + ${status.count}" class="product-box">
+                <div id="productList" class="row">
+                        <div th:each="detail,status : ${order.orderDetails}" th:id="'row' + ${status.count}" class="product-box col-6">
                             <input type="hidden" name="detailId" th:value="${detail.id}" />
                                 <div class="border rounded p-2" th:with="product = ${detail.product}">
                                     <input type="hidden" name="productId" th:value="${product.id}" class="hiddenProductId" />
@@ -13,7 +13,7 @@
                                             <div><a class="fas fa-trash icon-dark link-remove" href="" th:rowNumber="${status.count}"></a> </div>
                                         </div>
                                         <div class="col-3">
-                                            <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" class="img-fluid"/>
+                                                <img th:src="@{${product.mainImagePath}}" th:alt="${product.name}" class="img-fluid"/>
                                         </div>
                                     </div>
                                     <div class="row m-2">

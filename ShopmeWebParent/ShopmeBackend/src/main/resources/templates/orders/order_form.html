@@ -5,61 +5,77 @@
 
 <div th:replace="~{fragments :: page_head(${pageTitle}, 'tag')}">...</div>
 
-<body>
+<body class="sb-nav-fixed">
 <div class="container-fluid">
     <div th:replace="~{navigation :: menu}">...</div>
-    <div>
-        <h2>Manage Products | [[${pageTitle}]]</h2>
-    </div>
+        <div id="layoutSidenav">
+            <div th:replace="~{navigation :: side-nav }"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <div>
+                            <h2>[[${pageTitle}]]</h2>
+                            <ol class="breadcrumb mb-3">
+                                <li class="breadcrumb-item">
+                                    <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a  th:href="@{/orders}" class="text-decoration-none view-link">Orders</a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    Update
+                                </li>
+                            </ol>
+                        </div>
 
-    <form th:action="@{/orders/save}" method="post" th:object="${order}" onsubmit="return processFormBeforeSubmit()">
-        <input type="hidden" th:field="*{id}">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"  data-toggle="tab" href="#products" role="tab">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#track" role="tab">Track</a>
-            </li>
-        </ul>
+                        <form th:action="@{/orders/save}" method="post" th:object="${order}" onsubmit="return processFormBeforeSubmit()">
+                            <input type="hidden" th:field="*{id}">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#overview" role="tab">Overview</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"  data-bs-toggle="tab" href="#products" role="tab">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#shipping" role="tab">Shipping</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#track" role="tab">Track</a>
+                                </li>
+                            </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active p-3" id="overview" role="tabpanel">
-                <div th:replace="~{orders/order_form_overview :: content}">...</div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active p-3" id="overview" role="tabpanel">
+                                    <div th:replace="~{orders/order_form_overview :: content}">...</div>
+                                </div>
+                                <div class="tab-pane  p-3" id="products" role="tabpanel">
+                                    <div th:replace="~{orders/order_form_products :: content}">...</div>
+                                </div>
+                                <div class="tab-pane  p-3" id="shipping" role="tabpanel">
+                                    <div th:replace="~{orders/order_form_shipping :: content}">...</div>
+                                </div>
+                                <div class="tab-pane  p-3" id="track" role="tabpanel">
+                                    <div th:replace="~{orders/order_form_tracks :: content}"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="text-center">
+                                <input type="submit" value="Save" class="btn btn-primary m-3" />
+                                <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+                            </div>
+
+
+                        </form>
+
+                        <div th:replace="~{modal_fragments :: modal_dialog}"></div>
+                        <div th:replace="~{orders/add_product_modal :: content}"></div>
+                    </div>
+                </main>
             </div>
-            <div class="tab-pane  p-3" id="products" role="tabpanel">
-                <div th:replace="~{orders/order_form_products :: content}">...</div>
-            </div>
-            <div class="tab-pane  p-3" id="shipping" role="tabpanel">
-                <div th:replace="~{orders/order_form_shipping :: content}">...</div>
-            </div>
-            <div class="tab-pane  p-3" id="track" role="tabpanel">
-                <div th:replace="~{orders/order_form_tracks :: content}"></div>
-            </div>
-        </div>
-
-
-        <div class="text-center">
-            <input type="submit" value="Save" class="btn btn-primary m-3" />
-            <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
-        </div>
-
-
-    </form>
-
-    <div th:replace="~{modal_fragments :: modal_dialog}"></div>
-    <div th:replace="~{orders/add_product_modal :: content}"></div>
-
-    <div th:replace="~{fragments :: footer}">...</div>
-
 </div>
 
 <script>
@@ -81,6 +97,5 @@
 <script th:src="@{/js/order_form_add_product.js}"></script>
 <script th:src="@{/js/order_form_remove_product.js}"></script>
 <script th:src="@{/js/order_form_tracks.js}"></script>
-
 </body>
 </html>

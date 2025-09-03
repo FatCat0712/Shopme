@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class QuestionService {
     private final QuestionRepository repo;
-    public final static int QUESTION_PER_PAGE = 10;
+    public final static int QUESTION_PER_PAGE = 5;
 
     @Autowired
     public QuestionService(QuestionRepository repo) {

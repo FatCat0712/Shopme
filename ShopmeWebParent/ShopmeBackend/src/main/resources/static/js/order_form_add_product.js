@@ -5,7 +5,7 @@ $(document).ready(function () {
         let url = link.attr("href");
         $("#addProductModal").on("shown.bs.modal", function () {
            $(this).find("iframe").attr("src", url);
-        }).modal();
+        }).modal('show');
     })
 });
 
@@ -45,9 +45,10 @@ function getShippingCost(productId) {
         data: params
     }).done(function (shippingCost) {
         getProductInfo(productId, shippingCost);
-
     }).fail(function (err) {
-        showWarningModal(err.responseJSON.message);
+        const errorMessage = err.responseJSON.error;
+
+        showWarningModal(errorMessage);
         let shippingCost = 0.0;
         getProductInfo(productId, shippingCost);
     }).always(function() {
@@ -79,7 +80,7 @@ function generateProductCode(productId,productName, mainImagePath, productCost, 
     let rowId = "row" + nextCount;
     let blankLineId = "blankLine" + nextCount;
     let htmlCode = `
-    <div id="${rowId}" class="product-box">
+    <div id="${rowId}" class="product-box col-6">
             <input type="hidden" name="detailId" value="0"/>
             <div class="border rounded p-2">
                                  <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />

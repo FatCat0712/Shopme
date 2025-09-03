@@ -54,7 +54,6 @@ public class Brand extends IdBasedEntity {
     }
 
 
-
     @Override
     public String toString() {
         return "Brand{" +
@@ -65,9 +64,12 @@ public class Brand extends IdBasedEntity {
                 '}';
     }
 
+
     @Transient
     public String getLogoPath() {
         if(this.id == null) return "/images/image-thumbnail.png";
         return Constants.SUPABASE_URI + "/brand-logos/" + this.id + "/" + this.logo;
     }
+
+
 }

@@ -1,111 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{fragments :: page_head('Orders - Shopme Admin', 'none')}">...</div>
-<body>
+<body class="sb-nav-fixed">
         <div class="container-fluid">
             <div th:replace="~{navigation :: menu}">...</div>
-            <div>
-                <h2>Manage Orders</h2>
-            </div>
+            <div id="layoutSidenav">
+                <div th:replace="~{navigation :: side-nav }"></div>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2>Manage Orders</h2>
+                                    <ol class="breadcrumb mb-2">
+                                        <li class="breadcrumb-item">
+                                            <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a  th:href="@{/orders}" class="text-decoration-none view-link">Orders</a>
+                                        </li>
+                                    </ol>
+                                </div>
+                               <div>
+                                   <div th:replace="~{fragments :: search_form}"></div>
+                               </div>
+                            </div>
+
+                            <div class="wrapper position-relative">
+                                <div id="spinner-overlay">
+                                    <div class="spinner"></div>
+                                </div>
+                                <div class="full-details table-responsive-xl">
+                                    <table class="table table-bordered table-striped table-hover">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th class="hideable-column" >
+                                                <div th:replace="~{fragments :: column_link('id', 'ID', 'tag')}">...</div>
+                                            </th>
+                                            <th th:replace="~{fragments :: column_link('customer', 'Customer', 'none')}">...</th>
+                                            <th th:replace="~{fragments :: column_link('total', 'Total', 'none')}">...</th>
+                                            <th th:replace="~{fragments :: column_link('orderTime', 'Order Time', 'none')}">...</th>
+
+                                            <th class="hideable-column">
+                                                <div th:replace="~{fragments :: column_link('destination', 'Destination', 'tag')}">...</div>
+                                            </th>
+
+                                            <th class="hideable-column">
+                                                <div th:replace="~{fragments :: column_link('paymentMethod', 'Payment Method', 'tag')}">...</div>
+                                            </th>
+
+                                            <th class="hideable-column">
+                                                <div th:replace="~{fragments :: column_link('orderStatus', 'Status', 'tag')}">...</div>
+                                            </th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="order : ${listOrders}">
+                                            <td class="hideable-column">[[${order.id}]]</td>
+                                            <td>
+                                                <a class="link-detail--customer text-decoration-none" th:href="@{'/customers/detail/' + ${order.customer.id}}" title="View details of this customer">[[${order.customer.fullName}]]</a>
+                                            </td>
+                                            <td>
+                                                <div th:replace="~{fragments :: format_currency(${order.total})}">...</div>
+                                            </td>
+                                            <td>
+                                                <div th:replace="~{fragments :: format_time(${order.orderTime}, 'yyyy-MM-dd HH:mm:ss')}">...</div>
+                                            </td>
+                                            <td class="hideable-column">[[${order.destination}]]</td>
+                                            <td class="hideable-column">[[${order.paymentMethod}]]</td>
+                                            <td class="hideable-column">[[${order.orderStatus}]]</td>
+                                            <td>
+                                                <a class="link-detail--order text-decoration-none" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order">
+                                                    <i class="fas fa-file-alt fa-2x icon-green"></i>
+                                                </a>
+                                                &nbsp;
+                                                <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
+                                                &nbsp;
+                                                <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="less-details">
+                                    <div class="card mb-3 flex-row p-3" th:each="order : ${listOrders}">
+                                        <div class="col-sm-2">
+                                            [[${order.id}]]
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <b>[[${order.customer.fullName}]], [[${order.country}]]</b>
+                                            <div>[[${order.orderTime}]]</div>
+                                            <div class="my-1"><span th:replace="~{fragments :: format_currency(${order.total})}"></span></div>
+                                            <span class="badge bg-warning text-dark"> [[${order.orderStatus}]]</span>
+                                            <span class="badge bg-info text-dark">[[${order.paymentMethod}]]</span>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
+                                            &nbsp;
+                                            <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
+                                            &nbsp;
+                                            <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-            <div th:replace="~{fragments :: search_form_and_message}"></div>
 
-           <div class="full-details table-responsive-xl">
-               <table class="table table-bordered table-striped table-hover">
-                   <thead class="thead-dark">
-                            <tr>
-                               <th class="hideable-column" >
-                                   <div th:replace="~{fragments :: column_link('id', 'ID', 'tag')}">...</div>
-                               </th>
-                               <th th:replace="~{fragments :: column_link('customer', 'Customer', 'none')}">...</th>
-                                <th th:replace="~{fragments :: column_link('total', 'Total', 'none')}">...</th>
-                                <th th:replace="~{fragments :: column_link('orderTime', 'Order Time', 'none')}">...</th>
+                            <div th:replace="~{fragments :: pagination('orders')}">...</div>
 
-                                <th class="hideable-column">
-                                    <div th:replace="~{fragments :: column_link('destination', 'Destination', 'tag')}">...</div>
-                                </th>
 
-                                <th class="hideable-column">
-                                     <div th:replace="~{fragments :: column_link('paymentMethod', 'Payment Method', 'tag')}">...</div>
-                                </th>
+                            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
 
-                                <th class="hideable-column">
-                                    <div th:replace="~{fragments :: column_link('orderStatus', 'Status', 'tag')}">...</div>
-                                </th>
-                                <th>Action</th>
-                            </tr>
-                   </thead>
-                   <tbody>
-                        <tr th:each="order : ${listOrders}">
-                                <td class="hideable-column">[[${order.id}]]</td>
-                                <td><a class="link-detail--customer" th:href="@{'/customers/detail/' + ${order.customer.id}}" title="View details of this customer">[[${order.customer.fullName}]]</a></td>
-                                <td>
-                                    <div th:replace="~{fragments :: format_currency(${order.total})}">...</div>
-                                </td>
-                                <td>
-                                    <div th:replace="~{fragments :: format_time(${order.orderTime}, 'yyyy-MM-dd HH:mm:ss')}">...</div>
-                                </td>
-                                <td class="hideable-column">[[${order.destination}]]</td>
-                                <td class="hideable-column">[[${order.paymentMethod}]]</td>
-                                <td class="hideable-column">[[${order.orderStatus}]]</td>
-                                <td>
-                                    <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
-                                    &nbsp;
-                                    <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
-                                    &nbsp;
-                                    <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
-                                </td>
-                        </tr>
-                   </tbody>
-               </table>
-           </div>
 
-            <div class="less-details">
-                <div class="card mb-3 flex-row p-3" th:each="order : ${listOrders}">
-                    <div class="col-sm-2">
-                        [[${order.id}]]
-                    </div>
-                    <div class="col-sm-5">
-                        <b>[[${order.customer.fullName}]], [[${order.country}]]</b>
-                        <div>[[${order.orderTime}]]</div>
-                        <div class="my-1"><span th:replace="~{fragments :: format_currency(${order.total})}"></span></div>
-                        <span class="badge bg-warning text-dark"> [[${order.orderStatus}]]</span>
-                        <span class="badge bg-info text-dark">[[${order.paymentMethod}]]</span>
-                    </div>
-                    <div class="col-sm-5">
-                        <a class="fas fa-file-alt fa-2x icon-green link-detail--order" th:href="@{'/orders/detail/' + ${order.id}}" title="View details of this order"></a>
-                            &nbsp;
-                        <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}">...</div>
-                        &nbsp;
-                        <div th:replace="~{fragments :: delete('order', ${order.id},'/orders/delete/' + ${order.id}, true)}"></div>
-                    </div>
+                            <div class="modal fade" id="customerDetailModal">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="orderDetailModal">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
                 </div>
             </div>
-
-
-            <div th:replace="~{fragments :: pagination('orders')}">...</div>
-
-
-            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
-
-            <div th:replace="~{fragments :: footer}">...</div>
-
-
-            <div class="modal fade" id="customerDetailModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="orderDetailModal">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                    </div>
-                </div>
-            </div>
-
         </div>
 
 <script type="text/javascript">

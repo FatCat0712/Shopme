@@ -4,15 +4,18 @@
 <body>
         <div class="container-fluid">
             <form th:action="@{/orders/search_product}" method="POST" class="form-inline my-2">
-                <input type="text" class="form-control mr-sm-2" name="keyword" placeholder="product name" th:value="${keyword}" required>
-                <input type="submit" class="btn btn-outline-success" value="Search">
+                <div class="d-flex">
+                    <input type="text" class="form-control me-sm-2 w-50" name="keyword" placeholder="product name" th:value="${keyword}" required>
+                    <button type="submit" class="btn btn-outline-success">Search</button>
+                </div>
+
             </form>
             <div class="row">
                 <th:block  th:each="product : ${listProducts}">
-                    <div class="col">
+                    <div class="col-3">
                         <div>
-                            <a href="" class="link-product" th:pid="${product.id}">
-                                <img th:src="@{${product.mainImagePath}}" height="150px" th:alt="${product.name}"/>
+                            <a href="" class="link-product text-decoration-none" th:pid="${product.id}">
+                                <img th:src="@{${product.mainImagePath}}" width="150px" th:alt="${product.name}"/>
                                 <br/>
                                 <b th:id="'pname' + ${product.id}">[[${product.shortName}]]</b>
                             </a>

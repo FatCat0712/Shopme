@@ -11,6 +11,14 @@
                         <div class="container-fluid px-4">
                             <div>
                                 <h2>[[${pageTitle}]]</h2>
+                                <ol class="breadcrumb mb-1">
+                                    <li class="breadcrumb-item">
+                                        <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a  th:href="@{/questions}" class="text-decoration-none view-link">Questions</a>
+                                    </li>
+                                </ol>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -58,15 +66,21 @@
                                             </td>
                                             <td  class="hideable-column">[[${#dates.format(question.askTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
                                             <td>
-                                                <a th:unless="${question.approvalStatus == true}" class="fas fa-circle fa-2x icon-dark text-decoration-none" th:href="@{'/questions/' +${question.id} + '/approved/true'}"></a>
-                                                <a th:if="${question.approvalStatus == true}" class="fas fa-check-circle fa-2x icon-green text-decoration-none"  th:href="@{'/questions/' +${question.id} + '/approved/false'}"></a>
+                                                <a th:unless="${question.approvalStatus == true}" class="text-decoration-none" th:href="@{'/questions/' +${question.id} + '/approved/true'}">
+                                                    <i  class="fas fa-circle fa-2x icon-dark"></i>
+                                                </a>
+                                                <a th:if="${question.approvalStatus == true}" class=" text-decoration-none"  th:href="@{'/questions/' +${question.id} + '/approved/false'}">
+                                                    <i class="fas fa-check-circle fa-2x icon-green"></i>
+                                                </a>
                                             </td>
                                             <td>
                                                 <i th:if="${question.answered == true}" class="fas fa-check-circle fa-2x icon-green"></i>
                                                 <i th:unless="${question.answered == true}" class="fas fa-circle fa-2x icon-dark"></i>
                                             </td>
                                             <td>
-                                                <a class="fas fa-2x fa-file-alt icon-green link-question-detail" th:href="@{'/questions/detail/' + ${question.id}}"></a>
+                                                <a class="link-question-detail" th:href="@{'/questions/detail/' + ${question.id}}">
+                                                    <i class="fas fa-2x fa-file-alt icon-green "></i>
+                                                </a>
                                                 &nbsp;
                                                 <a th:replace="~{fragments :: edit('question', '/questions/edit/' + ${question.id})}"></a>
                                                 &nbsp;

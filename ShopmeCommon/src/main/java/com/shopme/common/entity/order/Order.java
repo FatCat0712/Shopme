@@ -100,7 +100,7 @@ public class Order extends AbstractAddress {
 
     @Transient
     public String getDestination() {
-        return String.format("%s, %s, %s", city, state, country);
+        return String.format("%s %s %s", city != null && !city.isEmpty() ? city + "," : "", state != null ? state + "," : "", country);
     }
 
 

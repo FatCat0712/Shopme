@@ -10,6 +10,7 @@ import com.shopme.admin.user.export.UserExcelExporter;
 import com.shopme.admin.user.export.UserPdfExporter;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,10 +118,16 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}/enabled/{status}")
-    public String updateEnabledStatus(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes) {
+    public String updateEnabledStatus(
+            @PathVariable(name = "id") Integer id,
+            @PathVariable(name = "status") boolean enabled,
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
+    ) {
         userService.updateUserEnabledStatus(id, enabled);
         redirectAttributes.addFlashAttribute("message", String.format("The user ID %d has been %s", id, enabled ? "enabled" : "disabled"));
-        return defaultURL;
+        String referer = request.getHeader("referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping("/users/export/csv")

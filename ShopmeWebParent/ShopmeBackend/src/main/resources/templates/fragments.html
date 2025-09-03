@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <title>[[${title}]]</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/new_style.css}">
@@ -14,6 +14,8 @@
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
     <script type="text/javascript" th:src="@{/js/spinner.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common_form.js}"></script>
+
 </head>
 <body>
 
@@ -27,9 +29,14 @@
 
 
 
-    <a th:fragment="export_link(extension)"
-        th:class="'fas fa-file-' + ${extension} +  ' fa-2x icon-dark me-2'"
-        th:href="@{${moduleURL} + '/export/' + ${extension}}" th:title="'Export To ' + ${extension.toUpperCase()}"></a>
+    <a
+            th:fragment="export_link(extension)"
+            th:href="@{${moduleURL} + '/export/' + ${extension}}"
+            th:title="'Export To ' + ${extension.toUpperCase()}"
+            class="text-decoration-none me-2"
+    >
+        <i th:class="'fas fa-file-' + ${extension} +  ' fa-2x icon-dark'"></i>
+    </a>
 
     <div th:fragment="user_photos">
         <span th:if="${user.photos == null}" class="fas fa-portrait fa-3x icon-silver" ></span>
@@ -37,25 +44,28 @@
     </div>
 
     <div th:fragment="enable_link(enabled, entityName, entityURL)" th:remove="tag">
-            <a th:if="${enabled == true}" class="fas fa-check-circle fa-2x icon-green text-decoration-none" th:href="@{${entityURL} + '/enabled/false'}" th:title="'Disable this ' + ${entityName}"></a>
-           <a th:if="${enabled == false}" class="fas fa-circle fa-2x icon-dark text-decoration-none" th:href="@{${entityURL} + '/enabled/true'}" th:title="'Enable this ' + ${entityName}"></a>
+            <a th:if="${enabled == true}" class="text-decoration-none" th:href="@{${entityURL} + '/enabled/false'}" th:title="'Disable this ' + ${entityName}">
+                <i class="fas fa-check-circle fa-2x icon-green "></i>
+            </a>
+           <a th:if="${enabled == false}" class="text-decoration-none" th:href="@{${entityURL} + '/enabled/true'}" th:title="'Enable this ' + ${entityName}">
+               <i class="fas fa-circle fa-2x icon-dark "></i>
+           </a>
     </div>
 
     <div th:fragment="edit(entityName, editURL)" th:remove="tag">
-         <a class="fas fa-edit fa-2x icon-green" th:href="@{${editURL}}" th:title="'Edit this ' + ${entityName} "> </a>
+         <a class="text-decoration-none" th:href="@{${editURL}}" th:title="'Edit this ' + ${entityName} ">
+            <i class="fas fa-edit fa-2x icon-green"></i>
+         </a>
     </div>
 
     <div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
         <th:block th:if="${visible}">
-            <a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{${deleteURL}}"  th:entityId="${entityId}" th:title="'Delete this ' + ${entityName}"></a>
+            <a class="link-delete text-decoration-none" th:href="@{${deleteURL}}"  th:entityId="${entityId}" th:title="'Delete this ' + ${entityName}">
+                <i class="fas fa-trash fa-2x icon-dark "></i>
+            </a>
         </th:block>
     </div>
 
-
-
-    <footer th:fragment="footer" class="text-center m-3">
-        <p>Shopme Control Panel - Copyright &copy; Shopme</p>
-    </footer>
 
     <a th:fragment="page_link(pageNum, pageLabel)"
        class="page-link"
@@ -95,13 +105,13 @@
     </div>
 
     <div th:fragment="search_form">
-                <form th:action="@{${moduleURL} + '/page/1'} " class="form-inline m-3">
+                <form th:action="@{${moduleURL} + '/page/1'} " class="form-inline m-3" id="searchForm">
                     <input type="hidden" name="sortField" th:value="${sortField}">
                     <input type="hidden" name="sortDir" th:value="${sortDir}">
                     <div class="input-group">
-                        <label class="col-form-label d-none d-sm-inline-block me-2" for="search" >Filter</label>
+                        <label class="col-form-label d-none d-sm-inline-block me-2" for="search">Filter</label>
                         <div class="col-auto">
-                            <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
+                            <input type="search" name="keyword" class="form-control" id="search" th:placeholder="Search..." required>
                         </div>
                         <button type="submit" value="Search" class="btn btn-primary">
                             <i class="fas fa-search"></i>

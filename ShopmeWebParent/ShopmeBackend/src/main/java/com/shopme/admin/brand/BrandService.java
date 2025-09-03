@@ -4,6 +4,7 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.exception.BrandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class BrandService {
     public static final int BRAND_PER_PAGE = 10;
 
     public List<Brand> listAll() {
-        return brandRepository.findAll();
+        return brandRepository.findAll(Sort.by("name").ascending());
     }
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
