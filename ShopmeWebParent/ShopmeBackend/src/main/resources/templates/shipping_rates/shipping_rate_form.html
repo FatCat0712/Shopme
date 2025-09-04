@@ -19,7 +19,7 @@
                                         <a  th:href="@{/shipping_rates}" class="text-decoration-none view-link">Shipping Rate</a>
                                     </li>
                                     <li class="breadcrumb-item active">
-                                        Update
+                                        [[${shippingRate.id != null ? 'Update' : 'Create'}]]
                                     </li>
                                 </ol>
                             </div>

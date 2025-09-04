@@ -16,7 +16,7 @@ public enum OrderStatus {
     PROCESSING {
         @Override
         public String defaultDescription() {
-            return "Order is being processing";
+            return "Order is being processed";
         }
     },
     PACKAGED {

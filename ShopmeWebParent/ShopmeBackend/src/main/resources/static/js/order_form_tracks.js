@@ -83,7 +83,7 @@ function generateTrackHtmlCode() {
                         <div><a class="fas fa-trash icon-dark link-delete-track" href="" rowNumber="${nextCount}"></a></div>
                     </div>
                     <div class="col-sm-10">
-                        <div class="form-group row">
+                        <div class="row mb-3">
                             <div class="col-sm-2">
                                 <label class="col-form-label">Time:</label>
                             </div>
@@ -91,7 +91,7 @@ function generateTrackHtmlCode() {
                                 <input type="datetime-local" name="trackDate" class="form-control" value="${formatCurrentDateTime()}" style="max-width: 300px" required/>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="row mb-3">
                             <div class="col-sm-2">
                                 <label class="col-form-label" >Status:</label>
                             </div>
@@ -99,7 +99,7 @@ function generateTrackHtmlCode() {
                                 <select name="trackStatus" class="form-control order-status" rowNumber="${nextCount}" style="max-width: 150px">
                                    <option value="Order was placed by the customer|NEW">NEW</option>
                                     <option value="Order was cancelled|CANCELLED">CANCELLED</option>
-                                    <option value="Order is being processing|PROCESSING">PROCESSING</option>
+                                    <option value="Order is being processed|PROCESSING">PROCESSING</option>
                                     <option value="Products were packaged|PACKAGED">PACKAGED</option>
                                     <option value="Shipper picked the package|PICKED">PICKED</option>
                                     <option value="Shipper is delivering the package|SHIPPING">SHIPPING</option>
@@ -110,7 +110,7 @@ function generateTrackHtmlCode() {
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="row mb-3">
                             <div  class="col-sm-2">
                                 <label class="col-form-label">Notes:</label>
                             </div>

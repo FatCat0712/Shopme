@@ -44,7 +44,7 @@ public class ShippingRateController {
     public String newRate(Model model) {
         ShippingRate shippingRate = new ShippingRate();
         List<Country> listCountries = shippingRateService.listCountries();
-        model.addAttribute("pageTitle", "New Rate");
+        model.addAttribute("pageTitle", "New Shipping Rate");
         model.addAttribute("shippingRate", shippingRate);
         model.addAttribute("listCountries", listCountries);
         return "shipping_rates/shipping_rate_form";
@@ -52,7 +52,6 @@ public class ShippingRateController {
 
     @PostMapping("/shipping_rates/save")
     public String saveRate(ShippingRate shippingRateInForm, RedirectAttributes ra) {
-
         Integer id = shippingRateInForm.getId();
         Country country = shippingRateInForm.getCountry();
         String state = shippingRateInForm.getState();
@@ -60,11 +59,10 @@ public class ShippingRateController {
         try {
             shippingRateService.checkUnique(id, country, state);
             shippingRateService.save(shippingRateInForm);
-            ra.addFlashAttribute("message", String.format("The shipping rate has been %s successfully", id != null ? "updated" : "created"));
+            ra.addFlashAttribute("message", String.format("The shipping rate with ID %d has been %s", id , id != null ? "updated" : "created"));
         } catch (ShippingRateAlreadyExistsException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }
-
 
         return defaultRedirectUrl;
     }
@@ -88,7 +86,7 @@ public class ShippingRateController {
     public String updateCODSupport(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") Boolean status, RedirectAttributes ra) {
         try {
             shippingRateService.updateCODSupport(id, status);
-            ra.addFlashAttribute("message", String.format("COD Support for Shipping rate with ID %d has been %s successfully", id, status ? "enabled" : "disabled"));
+            ra.addFlashAttribute("message", String.format("COD Support for Shipping rate with ID %d has been %s", id, status ? "enabled" : "disabled"));
         } catch (ShippingRateNotFoundException e) {
             ra.addFlashAttribute("errorMessage", e.getMessage());
         }

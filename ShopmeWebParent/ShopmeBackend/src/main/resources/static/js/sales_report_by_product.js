@@ -46,7 +46,6 @@ function customizeChartForSalesReportByProduct() {
         page: 'enable',
         sortColumn: 2,
         sortAscending: false,
-
     }
 }
 

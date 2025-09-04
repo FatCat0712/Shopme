@@ -17,13 +17,22 @@
                                             <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
                                         </li>
                                         <li class="breadcrumb-item">
-                                            <a  th:href="@{/orders}" class="text-decoration-none view-link">Orders</a>
+                                            <a  th:href="@{/reports}" class="text-decoration-none view-link">Orders</a>
                                         </li>
                                     </ol>
                                 </div>
                                <div>
-                                   <div th:replace="~{fragments :: search_form}"></div>
-                               </div>
+                                       <div th:if="${message != null}" class="alert alert-success text-center mb-0">
+                                           [[${message}]]
+                                       </div>
+
+                                       <div th:if="${errorMessage != null}" class="alert alert-danger text-center mb-0">
+                                           [[${errorMessage}]]
+                                       </div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <div th:replace="~{fragments :: search_form}"></div>
                             </div>
 
                             <div class="wrapper position-relative">

@@ -34,7 +34,9 @@
 
 
                                 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
-                                    <a th:href="@{/shipping_rates/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2" title="Create New Shipping Rate"></a>
+                                    <a th:href="@{/shipping_rates/new}" class="mr-2" title="Create New Shipping Rate">
+                                        <i class="fas fa-folder-plus fa-2x icon-dark"></i>
+                                    </a>
                                     <div th:replace="~{fragments :: search_form}"></div>
                                 </div>
 
