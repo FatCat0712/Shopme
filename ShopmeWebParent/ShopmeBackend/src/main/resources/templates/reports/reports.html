@@ -20,7 +20,7 @@
                                 <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a  th:href="@{/orders}" class="text-decoration-none view-link">Sales Report</a>
+                                <a  th:href="@{/reports}" class="text-decoration-none view-link">Sales Report</a>
                             </li>
                         </ol>
                     </div>
@@ -54,7 +54,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     MAX_FILE_SIZE = 102400;
     contextPath = "[[@{/}]]";
@@ -68,10 +67,11 @@
     suffixCurrencySymbol = currencySymbolPosition === "after" ? currencySymbol : '';
 
     $(document).ready(function() {
-        google.charts.load('current', {packages: ['corechart', 'table']});
-        google.charts.setOnLoadCallback(loadSalesReportByDate);
+        loadSalesReportByDate('last_7_days');
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
 <script type="text/javascript" th:src="@{/js/jquery.number.min.js}"></script>
 <script  type="text/javascript" th:src="@{/js/sales_report_common.js}"></script>
 <script  type="text/javascript" th:src="@{/js/sales_report_by_date.js}"></script>

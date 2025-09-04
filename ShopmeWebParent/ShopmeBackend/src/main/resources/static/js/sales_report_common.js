@@ -63,7 +63,7 @@ function formatCurrency(amount) {
     return prefixCurrencySymbol + formattedAmount + suffixCurrencySymbol;
 }
 
-function getCharTitle(period) {
+function getChartTitle(period) {
     if(period === 'last_7_days') return "Sales in Last 7 Days";
     if(period === 'last_28_days') return "Sales in Last 28 Days";
     if(period === 'last_6_months') return "Sales in Last 6 Months";
