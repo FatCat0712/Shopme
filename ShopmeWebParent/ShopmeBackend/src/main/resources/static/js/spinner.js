@@ -25,9 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show spinner on pagination & action links
   document.querySelectorAll("a").forEach(link => {
     const href = link.getAttribute("href");
-    if (href && (link.classList.contains('page-link') || link.classList.contains('view-link'))) {
+    if (href && (link.classList.contains('page-link') || link.classList.contains('view-link') || link.classList.contains('action-link'))) {
       link.addEventListener("click", (e) => {
         showSpinner();
+        e.preventDefault();
+        setTimeout(() => window.location.href = link.href, 100);
       });
     }
   });

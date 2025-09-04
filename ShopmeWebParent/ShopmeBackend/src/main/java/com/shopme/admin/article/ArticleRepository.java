@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer>, SearchRepository<Article, Integer> {
-    @Query("SELECT a FROM Article a WHERE a.title LIKE %?1% OR a.content LIKE %?1%")
+    @Query("SELECT a FROM Article a WHERE a.title LIKE %?1%")
     Page<Article> findAll(String keyword, Pageable pageable);
 
     @Query("SELECT a FROM Article a WHERE a.alias = ?1")

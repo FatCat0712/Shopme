@@ -5,7 +5,7 @@ $(document).ready(function() {
           $("#addProductModal").on("shown.bs.modal", function() {
                 $(this).find("iframe").attr("src", url);
           });
-          $("#addProductModal").modal();
+          $("#addProductModal").modal('show');
     });
 
     $("#productList").on("click", ".link-move-left--product", function(e) {

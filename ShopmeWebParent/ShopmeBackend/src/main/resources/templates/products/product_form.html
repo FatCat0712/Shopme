@@ -27,88 +27,95 @@
                                     <a  th:href="@{/products}" class="text-decoration-none view-link">Products</a>
                                 </li>
                                 <li class="breadcrumb-item active">
-                                   Create
+                                   [[${product.id != null ? 'Update' : 'Create'}]]
                                 </li>
                             </ol>
-                            <form th:action="@{/products/save}" method="post" th:object="${product}" onsubmit="return checkUniqueName(this)"
-                                  enctype="multipart/form-data"
-                            >
-                                <input type="hidden" th:field="*{id}">
-                                <input th:if="${product.category !=null} " type="hidden" id="categoryId" th:value="${product.category.id}">
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#overview" role="tab">Overview</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link"  data-bs-toggle="tab" href="#description" role="tab">Description</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#images" role="tab">Images</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#details" role="tab">Details</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#shipping" role="tab">Shipping</a>
-                                    </li>
-                                </ul>
 
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active p-3" id="overview" role="tabpanel">
-                                        <div th:replace="~{products/product_overview :: content}">...</div>
-                                    </div>
-                                    <div class="tab-pane" id="description" role="tabpanel" >
-                                        <th:block th:unless="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_description :: content}"></div>
-                                        </th:block>
-
-                                        <th:block th:if="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_description_readonly :: content}">...</div>
-                                        </th:block>
-
-                                    </div>
-                                    <div class="tab-pane" id="images" role="tabpanel">
-                                        <th:block  th:unless="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_images :: content}">...</div>
-                                        </th:block>
-
-                                        <th:block th:if="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_images_readonly :: content}">...</div>
-                                        </th:block>
-
-                                    </div>
-                                    <div class="tab-pane p-3" id="details" role="tabpanel">
-                                        <th:block th:unless="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_details :: content}">...</div>
-                                            <div>
-                                                <input type="button" class="btn btn-secondary" value="Add More Detail" onclick=" addNextDetailSection()"/>
-                                            </div>
-                                        </th:block>
-
-                                        <th:block  th:if="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_details_readonly :: content}">...</div>
-                                        </th:block>
-                                    </div>
-                                    <div class="tab-pane p-3" id="shipping" role="tabpanel">
-                                        <th:block th:unless="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_shipping :: content}">...</div>
-                                        </th:block>
-                                        <th:block th:if="${isReadOnlyForSalesperson == true}">
-                                            <div th:replace="~{products/product_shipping_readonly :: content}">...</div>
-                                        </th:block>
-                                    </div>
+                            <div class="wrapper position-relative">
+                                <div id="spinner-overlay">
+                                    <div class="spinner"></div>
                                 </div>
+                                <form th:action="@{/products/save}" method="post" th:object="${product}" onsubmit="return checkUniqueName(this)"
+                                      enctype="multipart/form-data"
+                                >
+                                    <input type="hidden" th:field="*{id}">
+                                    <input th:if="${product.category !=null} " type="hidden" id="categoryId" th:value="${product.category.id}">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#overview" role="tab">Overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  data-bs-toggle="tab" href="#description" role="tab">Description</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#images" role="tab">Images</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#details" role="tab">Details</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#shipping" role="tab">Shipping</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active p-3" id="overview" role="tabpanel">
+                                            <div th:replace="~{products/product_overview :: content}">...</div>
+                                        </div>
+                                        <div class="tab-pane" id="description" role="tabpanel" >
+                                            <th:block th:unless="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_description :: content}"></div>
+                                            </th:block>
+
+                                            <th:block th:if="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_description_readonly :: content}">...</div>
+                                            </th:block>
+
+                                        </div>
+                                        <div class="tab-pane" id="images" role="tabpanel">
+                                            <th:block  th:unless="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_images :: content}">...</div>
+                                            </th:block>
+
+                                            <th:block th:if="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_images_readonly :: content}">...</div>
+                                            </th:block>
+
+                                        </div>
+                                        <div class="tab-pane p-3" id="details" role="tabpanel">
+                                            <th:block th:unless="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_details :: content}">...</div>
+                                                <div>
+                                                    <input type="button" class="btn btn-secondary" value="Add More Detail" onclick=" addNextDetailSection()"/>
+                                                </div>
+                                            </th:block>
+
+                                            <th:block  th:if="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_details_readonly :: content}">...</div>
+                                            </th:block>
+                                        </div>
+                                        <div class="tab-pane p-3" id="shipping" role="tabpanel">
+                                            <th:block th:unless="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_shipping :: content}">...</div>
+                                            </th:block>
+                                            <th:block th:if="${isReadOnlyForSalesperson == true}">
+                                                <div th:replace="~{products/product_shipping_readonly :: content}">...</div>
+                                            </th:block>
+                                        </div>
+                                    </div>
 
 
-                                <div class="text-center">
-                                    <input type="submit" value="Save" class="btn btn-primary m-3" />
-                                    <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
-                                </div>
+                                    <div class="text-center">
+                                        <input type="submit" value="Save" class="btn btn-primary m-3" />
+                                        <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+                                    </div>
 
 
-                            </form>
+                                </form>
+                            </div>
+
 
 
                             <div th:replace="~{modal_fragments :: modal_dialog}">...</div>

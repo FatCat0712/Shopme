@@ -1,123 +1,159 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments :: page_head('Sections - Shopme Admin', 'none')}">...</head>
-<body>
+<body  class="sb-nav-fixed">
         <div class="container-fluid">
             <div th:replace="~{navigation :: menu}">...</div>
-            <div>
-                <h2>Home Page Customization (Manage Sections)</h2>
-                <span>Manage sections that are displayed on the website's home page. The orders of sections matters).</span>
-
-                <div class="col-md-6 my-2">
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/text}">Add Text Section</a>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_articles}">Add Article Section</a>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_categories}">Add Category Section</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 my-2">
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_brands}">Add Brand Section</a>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/selected_products}">Add Product Section</a>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <a class="text-decoration-none" th:href="@{/sections/new/all_categories}">Add All Categories Section</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div th:if="${message != null}" class="alert alert-success text-center">
-                [[${message}]]
-            </div>
-
-            <div th:if="${errorMessage != null}" class="alert alert-danger text-center">
-                [[${errorMessage}]]
-            </div>
+            <div id="layoutSidenav">
+                <div th:replace="~{navigation :: side-nav }"></div>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2>Home Page Customization (Manage Sections)</h2>
+                                    <ol class="breadcrumb mb-2">
+                                        <li class="breadcrumb-item">
+                                            <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a  th:href="@{/sections}" class="text-decoration-none view-link">Sections</a>
+                                        </li>
+                                    </ol>
 
 
-           <div class="full-details table-responsive-xl">
-               <table class="table table-bordered table-striped table-hover">
-                   <thead class="thead-dark">
-                            <tr>
-                               <th class="hideable-column">ID</th>
-                               <th>Heading</th>
-                                <th class="hideable-column">Type</th>
-                                <th>Position</th>
-                                <th>Enabled</th>
-                                <th>Action</th>
-                            </tr>
-                   </thead>
-                   <tbody>
-                        <tr th:each="section: ${listSections}">
-                            <td  class="hideable-column">[[${section.id}]]</td>
-                            <td>[[${section.heading}]]</td>
-                            <td class="hideable-column">[[${section.sectionType.defaultDescription}]]</td>
-                            <td>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a class="fa fa-2x fa-chevron-up text-decoration-none" th:href="@{'/sections/' + ${section.id} + '/position/up'}"></a>
-                                    [[${section.position}]]
-                                    <a class="fa fa-2x fa-chevron-down text-decoration-none" th:href="@{'/sections/' + ${section.id} + '/position/down'}"></a>
+
+                                    <span>Manage sections that are displayed on the website's home page. The orders of sections matters).</span>
+                                    <div class="row">
+                                        <div class="col-12 my-2">
+                                            <div class="row">
+                                                <div class="col-sm-4 text-center">
+                                                    <a class="text-decoration-none" th:href="@{/sections/new/text}">Add Text Section</a>
+                                                </div>
+                                                <div class="col-sm-4 text-center">
+                                                    <a class="text-decoration-none" th:href="@{/sections/new/selected_articles}">Add Article Section</a>
+                                                </div>
+                                                <div class="col-sm-4 text-center">
+                                                    <a class="text-decoration-none" th:href="@{/sections/new/selected_categories}">Add Category Section</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 my-2">
+                                                <div class="row">
+                                                    <div class="col-sm-4 text-center">
+                                                        <a class="text-decoration-none" th:href="@{/sections/new/selected_brands}">Add Brand Section</a>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <a class="text-decoration-none" th:href="@{/sections/new/selected_products}">Add Product Section</a>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <a class="text-decoration-none" th:href="@{/sections/new/all_categories}">Add All Categories Section</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
-                            </td>
-                            <td>
-                                <div th:replace="~{fragments :: enable_link(${section.enabled}, 'section', '/sections/' + ${section.id})}"></div>
-                            </td>
-                            <td>
-                                <div th:replace="~{fragments :: edit('section', '/sections/edit/' + ${section.id})}">...</div>
-                                &nbsp;
-                                <div th:replace="~{fragments :: delete('section', ${section.id} ,'/sections/delete/' + ${section.id}, true)}">...</div>
-                            </td>
-                        </tr>
-                   </tbody>
-               </table>
-           </div>
+                                <div>
+                                    <div th:if="${message != null}" class="alert alert-success text-center">
+                                        [[${message}]]
+                                    </div>
 
-            <div class="less-details">
-                <div th:each="section : ${listSections}" class="card mb-3 shadow-sm p-3">
-                    <div>
-                        <a class="text-decoration-none link-detail--article">
-                            <b>
-                                [[${section.heading}]]
-                            </b>
-                            ([[${section.sectionType.defaultDescription}]])
-                        </a>
-                    </div>
-                    <div class="d-flex justify-content-between my-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a class="fa fa-2x fa-chevron-up text-decoration-none" th:href="@{'/sections/' + ${section.id} + '/position/up'}"></a>
-                            &nbsp;
-                            [[${section.position}]]
-                            &nbsp;
-                            <a class="fa fa-2x fa-chevron-down text-decoration-none" th:href="@{'/sections/' + ${section.id} + '/position/down'}"></a>
+                                    <div th:if="${errorMessage != null}" class="alert alert-danger text-center">
+                                        [[${errorMessage}]]
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wrapper position-relative">
+                                <div id="spinner-overlay">
+                                    <div class="spinner"></div>
+                                </div>
+
+                                <div class="full-details table-responsive-xl">
+                                    <table class="table table-bordered table-striped table-hover">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th class="hideable-column">ID</th>
+                                            <th>Heading</th>
+                                            <th class="hideable-column">Type</th>
+                                            <th>Position</th>
+                                            <th>Enabled</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="section: ${listSections}">
+                                            <td  class="hideable-column">[[${section.id}]]</td>
+                                            <td>[[${section.heading}]]</td>
+                                            <td class="hideable-column">[[${section.sectionType.defaultDescription}]]</td>
+                                            <td>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <a class="text-decoration-none action-link" th:href="@{'/sections/' + ${section.id} + '/position/up'}">
+                                                        <i class="fa fa-2x fa-chevron-up "></i>
+                                                    </a>
+                                                    [[${section.position}]]
+                                                    <a class="text-decoration-none action-link" th:href="@{'/sections/' + ${section.id} + '/position/down'}">
+                                                       <i class="fa fa-2x fa-chevron-down"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div th:replace="~{fragments :: enable_link(${section.enabled}, 'section', '/sections/' + ${section.id})}"></div>
+                                            </td>
+                                            <td>
+                                                <div th:replace="~{fragments :: edit('section', '/sections/edit/' + ${section.id})}">...</div>
+                                                &nbsp;
+                                                <div th:replace="~{fragments :: delete('section', ${section.id} ,'/sections/delete/' + ${section.id}, true)}">...</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="less-details">
+                                    <div th:each="section : ${listSections}" class="card mb-3 shadow-sm p-3">
+                                        <div>
+                                            <a class="text-decoration-none link-detail--article">
+                                                <b>
+                                                    [[${section.heading}]]
+                                                </b>
+                                                ([[${section.sectionType.defaultDescription}]])
+                                            </a>
+                                        </div>
+                                        <div class="d-flex justify-content-between my-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <a class="text-decoration-none action-link" th:href="@{'/sections/' + ${section.id} + '/position/up'}">
+                                                    <i class="fa fa-2x fa-chevron-up "></i>
+                                                </a>
+                                                &nbsp;
+                                                [[${section.position}]]
+                                                &nbsp;
+                                                <a class="text-decoration-none action-link" th:href="@{'/sections/' + ${section.id} + '/position/down'}">
+                                                    <i class="fa fa-2x fa-chevron-down"></i>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <div th:replace="~{fragments :: enable_link(${section.enabled}, 'sections', '/sections/' + ${section.id})}"></div>
+                                                &nbsp;
+                                                <div th:replace="~{fragments :: edit('sections', '/sections/edit/' + ${section.id})}">...</div>
+                                                &nbsp;
+                                                <div th:replace="~{fragments :: delete('sections', ${section.id} ,'/sections/delete/' + ${section.id}, true)}">...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div th:replace="~{fragments :: pagination('section')}">...</div>
+
+
+                            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
                         </div>
-                        <div>
-                            <div th:replace="~{fragments :: enable_link(${section.enabled}, 'sections', '/sections/' + ${section.id})}"></div>
-                            &nbsp;
-                            <div th:replace="~{fragments :: edit('sections', '/sections/edit/' + ${section.id})}">...</div>
-                            &nbsp;
-                            <div th:replace="~{fragments :: delete('sections', ${section.id} ,'/sections/delete/' + ${section.id}, true)}">...</div>
-                        </div>
-                    </div>
+                    </main>
                 </div>
             </div>
-
-
-            <div th:replace="~{fragments :: pagination('section')}">...</div>
-
-
-            <div th:replace="~{modal_fragments :: confirm_modal}">...</div>
-
-            <div th:replace="~{fragments :: footer}">...</div>
         </div>
 
 <script type="text/javascript">

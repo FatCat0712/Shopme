@@ -191,6 +191,9 @@ function loadCountries() {
 }
 
 function showToastMessage(message) {
+        const toastBox =   document.getElementById('toastBox')
+        toastBox.classList.remove('d-none');
+        toastBox.classList.add('d-flex');
         $("#toastMessage").text(message);
         $(".toast").toast('show');
 }

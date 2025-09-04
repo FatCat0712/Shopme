@@ -128,17 +128,10 @@
                             <div class="collapse" id="collapseSettings" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <th:block sec:authorize="hasAuthority('Admin')">
-                                        <a class="nav-link"  th:href="@{/settings#general}">General</a>
+                                        <a class="nav-link view-link"  th:href="@{/settings}">All settings</a>
                                     </th:block>
                                     <th:block  sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                                        <a class="nav-link" th:href="@{/sections}">Home Page</a>
-                                    </th:block>
-                                    <th:block sec:authorize="hasAuthority('Admin')">
-                                        <a class="nav-link" th:href="@{/settings#countries}">Countries</a>
-                                        <a class="nav-link" th:href="@{/settings#states}">States</a>
-                                        <a class="nav-link" th:href="@{/settings#mail-server}">Mail Server</a>
-                                        <a class="nav-link" th:href="@{/settings#mail-templates}">Mail Templates</a>
-                                        <a class="nav-link" th:href="@{/settings#payment}">Payment</a>
+                                        <a class="nav-link view-link" th:href="@{/sections}">Home Page</a>
                                     </th:block>
                                 </nav>
                             </div>

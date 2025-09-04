@@ -58,10 +58,6 @@ public class SettingController {
          saveSiteMascot(siteMascot, generalSettingBag);
          saveCurrencySymbol(request, generalSettingBag);
          updateSettingValueFromForm(request, generalSettingBag.list());
-
-        redirectAttributes.addFlashAttribute("message", "General settings have been saved.");
-
-
         return "redirect:/settings#general";
     }
 
@@ -69,15 +65,13 @@ public class SettingController {
     public String saveMailServerSettings(HttpServletRequest request, RedirectAttributes ra) {
            List<Setting> mailServerSettings =  settingService.getMailServerSettings();
            updateSettingValueFromForm(request, mailServerSettings);
-           ra.addFlashAttribute("message", "Mail server settings have been saved");
            return "redirect:/settings#mailServer";
     }
 
     @PostMapping("/settings/save_mail_templates")
-    public String saveMailTemplatesSettings(HttpServletRequest request, RedirectAttributes ra) {
+    public String saveMailTemplatesSettings(HttpServletRequest request) {
         List<Setting> mailTemplateSettings =  settingService.getMailTemplatesSettings();
         updateSettingValueFromForm(request, mailTemplateSettings);
-        ra.addFlashAttribute("message", "Mail templates settings have been saved");
         return "redirect:/settings#mailTemplates";
     }
 
@@ -85,7 +79,6 @@ public class SettingController {
     public String savePaymentSettings(HttpServletRequest request, RedirectAttributes ra) {
         List<Setting> paymentSettings = settingService.getPaymentSettings();
         updateSettingValueFromForm(request, paymentSettings);
-        ra.addFlashAttribute("message", "Payment settings have been saved");
         return "redirect:/settings#payment";
     }
 

@@ -66,10 +66,10 @@
                                             </td>
                                             <td  class="hideable-column">[[${#dates.format(question.askTime, 'yyyy-MM-dd HH:mm:ss')}]]</td>
                                             <td>
-                                                <a th:unless="${question.approvalStatus == true}" class="text-decoration-none" th:href="@{'/questions/' +${question.id} + '/approved/true'}">
+                                                <a th:unless="${question.approvalStatus == true}" class="text-decoration-none action-link" th:href="@{'/questions/' +${question.id} + '/approved/true'}">
                                                     <i  class="fas fa-circle fa-2x icon-dark"></i>
                                                 </a>
-                                                <a th:if="${question.approvalStatus == true}" class=" text-decoration-none"  th:href="@{'/questions/' +${question.id} + '/approved/false'}">
+                                                <a th:if="${question.approvalStatus == true}" class="text-decoration-none action-link"  th:href="@{'/questions/' +${question.id} + '/approved/false'}">
                                                     <i class="fas fa-check-circle fa-2x icon-green"></i>
                                                 </a>
                                             </td>
@@ -78,7 +78,7 @@
                                                 <i th:unless="${question.answered == true}" class="fas fa-circle fa-2x icon-dark"></i>
                                             </td>
                                             <td>
-                                                <a class="link-question-detail" th:href="@{'/questions/detail/' + ${question.id}}">
+                                                <a class="link-question-detail text-decoration-none" th:href="@{'/questions/detail/' + ${question.id}}">
                                                     <i class="fas fa-2x fa-file-alt icon-green "></i>
                                                 </a>
                                                 &nbsp;

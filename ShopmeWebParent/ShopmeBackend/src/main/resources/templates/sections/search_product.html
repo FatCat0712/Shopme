@@ -4,8 +4,15 @@
 <body>
         <div class="container-fluid">
             <form th:action="@{/sections/search_product}" method="POST" class="form-inline my-2">
-                <input type="text" class="form-control mr-sm-2" name="keyword" placeholder="product name" th:value="${keyword}" required>
-                <input type="submit" class="btn btn-outline-success" value="Search">
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" class="form-control me-sm-2" name="keyword" placeholder="product name" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-outline-success">Search</button>
+                    </div>
+                </div>
+
             </form>
             <div class="row">
                 <th:block  th:each="product : ${listProducts}">

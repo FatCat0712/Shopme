@@ -104,15 +104,6 @@ public class ProductController {
             @AuthenticationPrincipal ShopmeUserDetails loggedUser,
             RedirectAttributes redirectAttributes
     ) throws IOException {
-            String message;
-            if(product.getId() != null) {
-                message = String.format("The product with ID %d has been updated", product.getId());
-            }
-            else {
-                message = "The product has been created";
-            }
-
-             redirectAttributes.addFlashAttribute("message", message);
             if(!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Editor")) {
                 if(loggedUser.hasRole("Salesperson")) {
                     try {
@@ -153,7 +144,6 @@ public class ProductController {
     ) {
         try {
             productService.updateStatus(id, status);
-            redirectAttributes.addFlashAttribute("message", String.format("The product with id %d has been %s successfully",id , status ? "enabled" : "disabled"));
             String referer = request.getHeader("referer");
             return "redirect:" + referer;
         } catch (ProductNotFoundException e) {

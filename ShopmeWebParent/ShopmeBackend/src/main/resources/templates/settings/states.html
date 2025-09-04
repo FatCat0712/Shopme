@@ -5,8 +5,8 @@
 >
 <body>
     <div th:fragment="content" th:remove="tag">
-           <div>
-                <p>Use this page to manage states/provinces which can be chosen by user in the customer registration form. Click Load Country List First</p>
+           <div class="py-2">
+                Use this page to manage states/provinces which can be chosen by user in the customer registration form. Click Load Country List First
            </div>
 
             <div>
@@ -14,22 +14,34 @@
             </div>
 
         <form id="formState">
-                <div class="form-group row">
-                    <label class="col-form-label col-md-2">Selected Country:</label>
-                    <select class="form-control col-md-10"  id="dropDownAllCountries"></select>
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label class="col-form-label">Selected Country:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-control"  id="dropDownAllCountries"></select>
+                    </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-form-label col-md-2">All states/provinces:</label>
-                    <select class="form-control col-md-10" style="height: 300px" size="3" id="dropDownStates"></select>
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label class="col-form-label">All states/provinces:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-control" style="height: 250px" size="3" id="dropDownStates"></select>
+                    </div>
+
                 </div>
 
-                <div class="form-group row">
+                <div class="row mb-3">
                     <div class="col-md-2">
                         <label class="col-form-label" id="labelStateName">State Name:</label>
                     </div>
 
-                    <input type="text" id="fieldStateName" class="form-control col-md-7" required minlength="3" maxlength="45"/>
+                    <div class="col-md-7">
+                        <input type="text" id="fieldStateName" class="form-control" required minlength="3" maxlength="45"/>
+                    </div>
+
 
                     <div class="col-md-3">
                         <input type="button" id="buttonAddState" value="New" class="btn btn-secondary mr-2">

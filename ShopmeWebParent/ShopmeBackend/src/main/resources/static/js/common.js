@@ -8,6 +8,20 @@
         customizeTabs();
     });
 
+    document.addEventListener("load", function() {
+        const hash = window.location.hash;
+        console.log(hash);
+        if(hash) {
+            const tabEl = document.querySelector(`a[data-bs-toggle="tab"][href="${hash}"]`);
+            if(tabEl) {
+                const tab = new bootstrap.Tab(tabEl);
+                tab.show(); // Activate the tab
+            }
+        }
+    });
+
+
+
 
   function customizeDropDownMenu() {
      $(".navbar .dropdown").hover(
@@ -18,6 +32,7 @@
             $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
         }
      );
+
 
      $(".dropdown > a").click(function() {
         location.href = this.href;
