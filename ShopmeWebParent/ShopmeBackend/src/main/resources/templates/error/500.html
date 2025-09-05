@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments :: page_head('Error - ShopmeAdmin', 'none')}">...</head>
-<body>
-        <div class="container-fluid">
-            <div th:replace="~{navigation :: menu}"></div>
-            <div class="m-3">
-                    <h2>Sorry, the server has encountered  an error while processing your request</h2>
+    <body  class="sb-nav-fixed">
+    <div class="container-fluid">
+        <div th:replace="~{navigation :: menu}"></div>
+        <div id="layoutSidenav">
+            <div th:replace="~{navigation :: side-nav }"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4 d-flex flex-column justify-content-center align-items-center flex-grow-1" style="min-height: 100vh;">
+                            <div class="text-center text-muted">
+                                <h3 class="mb-4">Sorry, the server has encountered  an error while processing your request</h3>
+                                <div>
+                                    <img th:src="@{${SUPABASE_URI} + ${SITE_MASCOT}}"/>
+                                </div>
+                            </div>
+                    </div>
+                </main>
             </div>
         </div>
-</body>
+    </div>
+    </body>
 </html>
