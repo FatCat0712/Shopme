@@ -9,19 +9,20 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <div>
-                                <h2>Manage Brands</h2>
-                                <ol class="breadcrumb mb-1">
-                                    <li class="breadcrumb-item">
-                                        <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
-                                    </li>
-                                    <li class="breadcrumb-item">
-                                        <a  th:href="@{/brands}" class="text-decoration-none view-link">Brands</a>
-                                    </li>
-                                </ol>
-                            </div>
+                                    <div class="text-center text-sm-start">
+                                        <h2>Manage Brands</h2>
+                                        <ol class="breadcrumb mb-1 justify-content-center justify-content-sm-start">
+                                            <li class="breadcrumb-item">
+                                                <a th:href="@{/}" class="text-decoration-none view-link">Dashboard</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a  th:href="@{/brands}" class="text-decoration-none view-link">Brands</a>
+                                            </li>
+                                        </ol>
+                                    </div>
 
-                            <div class="d-flex justify-content-between align-items-center">
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
                                 <div>
                                     <a th:href="@{/brands/new}" class="text-decoration-none me-2" title="Create New Brand">
                                         <i class="fas fa-folder-plus fa-2x icon-dark "></i>
