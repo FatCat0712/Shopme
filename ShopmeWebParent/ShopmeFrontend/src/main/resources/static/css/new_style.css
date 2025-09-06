@@ -425,7 +425,7 @@
 .vesitable .owl-nav .owl-prev {
     position: absolute;
     top: -8px;
-    right: 0;
+    right: 88px;
     color: var(--bs-primary);
     padding: 5px 25px;
     border: 1px solid var(--bs-secondary);
@@ -441,7 +441,7 @@
 .vesitable .owl-nav .owl-next {
     position: absolute;
     top: -8px;
-    right: 88px;
+    right: 0;
     color: var(--bs-primary);
     padding: 5px 25px;
     border: 1px solid var(--bs-secondary);
@@ -557,7 +557,7 @@
     display: inline-block;
 }
 
-.pagination a {
+.pagination a{
     color: var(--bs-dark);
     padding: 10px 16px;
     text-decoration: none;

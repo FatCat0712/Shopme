@@ -141,7 +141,7 @@ public class ProductController {
     public String viewProductDetail(HttpServletRequest request, @PathVariable("product_alias") String alias, Model model) {
         try {
             Product product = productService.get(alias);
-            List<Product> listRelatedProducts = productService.listRelatedProductByCategory(product.getCategory().getId());
+            List<Product> listRelatedProducts = productService.listRelatedProductByCategory(product.getCategory().getId(), product.getId());
 
             String cleanedShortDescription = Jsoup.clean(product.getShortDescription(), Safelist.relaxed());
             String cleanedFullDescription = Jsoup.clean(product.getFullDescription(), Safelist.relaxed());

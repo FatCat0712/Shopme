@@ -1,4 +1,12 @@
 
+$(document).ready(function() {
+      $("#askQuestion").on("click", function(e) {
+        $("#questionForm").removeClass("d-none");
+      })
+})
+
+
+
 function submitQuestionCreateForm() {
     let productId = $("#productId").val();
     questionContent = $("#questionContent").val();

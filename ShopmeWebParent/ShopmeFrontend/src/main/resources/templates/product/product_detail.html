@@ -115,7 +115,6 @@
 
                             </div>
                         </div>
-
                 </div>
                     <div class="row">
                         <div class="col-12">
@@ -149,16 +148,35 @@
 
                             </div>
 
+                            <div class="row">
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                                id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review"
+                                                aria-controls="review" aria-selected="true">Reviews</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                                id="nav-question-tab" data-bs-toggle="tab" data-bs-target="#nav-question"
+                                                aria-controls="nav-question" aria-selected="false">Questions</button>
+                                    </div>
+                                </nav>
+
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+                                        <div th:replace="~{product/product_top_reviews :: content}"></div>
+                                    </div>
+                                    <div class="tab-pane" id="nav-question" role="tabpanel" aria-labelledby="nav-question-tab">
+                                        <div th:replace="~{product/product_top_questions :: content}"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
-                    <div th:replace="~{product/product_top_reviews :: content}"></div>
 
-                    <div th:replace="~{product/product_top_questions :: content}"></div>
 
-                    <div th:replace="~{product/images_carousel :: content}">...</div>
 
-                    <div th:replace="~{fragments :: modal_dialog}"></div>
             </div>
                 <div class="col-lg-4 col-xl-3">
                     <div class="row g-4 fruite">
@@ -172,7 +190,7 @@
                                 <ul class="list-unstyled fruite-categorie">
                                     <li th:each="cat : ${product.category.parent.children}">
                                         <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#">[[${cat.name}]]</a>
+                                            <a th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -214,6 +232,10 @@
         </div>
     </div>
 </div>
+
+    <div th:replace="~{product/images_carousel :: content}">...</div>
+
+    <div th:replace="~{fragments :: modal_dialog}"></div>
 
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 

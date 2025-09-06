@@ -170,8 +170,9 @@
         </div>
     </div>
 
-    <a th:fragment="page_link(moduleURL, pageNum, pageLabel)"
-       class="page-link"
+    <a th:fragment="page_link(moduleURL, pageNum, pageLabel, classList)"
+       th:class="${classList}"
+       th:style="${currentPage == pageNum ? 'pointer-events: none;' : ''}"
        th:href="@{${moduleURL} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} +  '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${pageLabel}]]</a>
 
     <div th:fragment="pagination(moduleURL ,entityName)" th:remove="tag">
@@ -183,27 +184,16 @@
             <span>No [[${entityName}]] found</span>
         </div>
 
-
-        <div th:if="${totalPages > 1}">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center flex-wrap">
-                    <li th:class="${currentPage > 1} ? 'page-item' : 'page-item disabled'">
-                        <a th:replace="~{fragments :: page_link(${moduleURL}, 1 , 'First')}"></a>
-                    </li>
-                    <li th:class="${currentPage > 1} ? 'page-item' : 'page-item disabled'">
-                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${currentPage - 1},'Previous')}"></a>
-                    </li>
-                    <li  th:class="${currentPage != i} ? 'page-item' : 'page-item active'" th:each="i : ${#numbers.sequence(1, totalPages)}">
-                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${i},${i})}"></a>
-                    </li>
-                    <li th:class="${currentPage < totalPages} ? 'page-item' : 'page-item disabled'">
-                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${currentPage + 1}, 'Next')}"></a>
-                    </li>
-                    <li  th:class="${currentPage < totalPages} ? 'page-item' : 'page-item disabled'">
-                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${totalPages}, 'Last')}"></a>
-                    </li>
-                </ul>
-            </nav>
+        <div th:if="${totalPages > 1}" th:remove="tag">
+                <div class="pagination d-flex justify-content-center mt-5">
+                        <a th:replace="~{fragments :: page_link(${moduleURL},1 ,'First', ${currentPage > 1} ? 'rounded' : 'rounded disabled')}"></a>
+                        <a th:replace="~{fragments :: page_link(${moduleURL},${currentPage - 1},'Previous',${currentPage > 1} ? 'rounded' : 'rounded disabled')}"></a>
+                        <th:block  th:each="i : ${#numbers.sequence(1, totalPages)}">
+                            <a th:replace="~{fragments :: page_link(${moduleURL}, ${i},${i}, ${currentPage != i} ? 'rounded' : 'rounded active')}"></a>
+                        </th:block>
+                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${currentPage + 1}, 'Next', ${currentPage < totalPages} ? 'rounded' : 'rounded disabled')}"></a>
+                        <a th:replace="~{fragments :: page_link(${moduleURL}, ${totalPages}, 'Last', ${currentPage < totalPages} ? 'rounded' : 'rounded disabled')}"></a>
+                </div>
         </div>
     </div>
 

@@ -28,9 +28,9 @@ public class ProductService {
         return productRepository.listByCategory(categoryId, categoryMatch, pageable);
     }
 
-    public List<Product> listRelatedProductByCategory(Integer categoryId) {
+    public List<Product> listRelatedProductByCategory(Integer categoryId, Integer currentProductId) {
         String categoryMatch = "-" + categoryId + "-";
-        return productRepository.listByCategory(categoryId, categoryMatch);
+        return productRepository.listByCategory(categoryId, categoryMatch, currentProductId);
     }
 
     public Page<Product> listByBrand(int pageNumber, Integer brandId) {

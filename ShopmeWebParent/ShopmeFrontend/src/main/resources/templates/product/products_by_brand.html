@@ -10,34 +10,46 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 
 <body>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md-10 mx-auto">
-                        <div class="d-flex flex-column min-vh-100">
-                            <div th:replace="~{navigation :: header_menu}"></div>
-                            <div th:replace="~{navigation :: search_bar}">...</div>
-                            <div th:replace="~{navigation :: quick_links}">...</div>
-
-                            <main class="flex-fill">
-                                <div>
-                                    <h2>Products by [[${brand.name}]]</h2>
-                                </div>
-
-                                <div class="row">
-                                    <th:block th:each="product : ${listProducts}">
-                                        <div th:replace="~{product/product_fragment :: content}">...</div>
-                                    </th:block>
-                                </div>
-
-
-                                <div th:replace="~{fragments :: pagination('/b/' + ${brand.name} ,'products')}">...</div>
-                            </main>
-
-                            <div th:replace="~{navigation :: footer_menu}">...</div>
-                        </div>
-                    </div>
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <div th:replace="~{navigation :: header_menu}">...</div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row" style="margin-top: 120px;">
+                <div class="col">
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none" th:href="@{/}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none" th:href="@{/}">Brands</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <span>[[${brand.name}]]</span>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
+
+            <div>
+                <h2>Products by [[${brand.name}]]</h2>
+            </div>
+
+            <div class="row">
+                <th:block th:each="product : ${listProducts}">
+                    <div th:replace="~{product/product_fragment :: content}">...</div>
+                </th:block>
+            </div>
+
+
+            <div th:replace="~{fragments :: pagination('/b/' + ${brand.name} ,'products')}">...</div>
+
+        </div>
+    </div>
+    <div th:replace="~{fragments :: footer}">...</div>
 <script type="text/javascript">
     $(".product-detail-rating-star").rating({
         displayOnly: true,

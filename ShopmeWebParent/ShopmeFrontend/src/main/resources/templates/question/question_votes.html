@@ -8,6 +8,7 @@
           </div>
           <div class="d-flex align-items-center">
               <div>
+
                   [[${question.questionContent}]]
               </div>
               <div>
@@ -24,7 +25,7 @@
 
           </div>
           <div class="ml-2">
-            <small>[[${question.asker.fullName}]], <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+            <small><b><i>[[${question.asker.fullName}]]</i></b>, <span th:replace="~{fragments :: format_time(${question.askTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
           </div>
 
         <th:block th:if="${question.answerer != null}">
@@ -35,7 +36,7 @@
                     [[${question.answerContent}]]
                 </div>
                 <div class="ml-2">
-                    <small>[[${question.answerer.fullName}]], <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
+                    <small><b><i>[[${question.answerer.fullName}]]</i></b>, <span th:replace="~{fragments :: format_time(${question.answerTime}, 'yyyy-MM-dd HH:mm:ss')}"></span></small>
                 </div>
         </th:block>
 
