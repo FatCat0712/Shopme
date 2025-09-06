@@ -9,20 +9,24 @@
 </head>
 <body>
     <div th:fragment="quantity_control(quantityValue, productId)">
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link link-minus" th:pid="${productId}" href=""><b>-</b></a>
-                    </li>
-                  <li>
-                      <input type="text" th:value="${quantityValue}" th:id="'quantity' + ${productId}"
-                             onkeydown="return false;" class="form-control text-center" style="width: 55px"/>
-                  </li>
-                  <li class="page-item">
-                        <a class="page-link link-plus" th:pid="${productId}" href=""><b>+</b></a>
-                  </li>
-                </ul>
-            </nav>
+            <div class="input-group quantity" style="width: 100px;">
+                <div class="input-group-btn">
+                    <button class="btn btn-sm rounded-circle bg-light border link-minus" th:pid="${productId}">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input
+                        type="text"
+                        class="form-control form-control-sm text-center border-0"
+                        th:value="${quantityValue}"
+                        th:id="'quantity' + ${productId}"
+                >
+                <div class="input-group-btn">
+                    <button class="btn btn-sm rounded-circle bg-light border link-plus"  th:pid="${productId}">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
     </div>
 </body>
 </html>

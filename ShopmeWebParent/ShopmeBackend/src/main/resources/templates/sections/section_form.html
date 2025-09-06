@@ -43,7 +43,7 @@
                             <div class="spinner"></div>
                         </div>
 
-                        <form th:action="@{/sections/save}" method="post" th:object="${section}" style="max-width: 60%; margin: 0 auto;" onsubmit="return processBeforeSubmit();">
+                        <form th:action="@{/sections/save}" class="col-md-10 mx-auto" method="post" th:object="${section}" onsubmit="return processBeforeSubmit();">
                             <div class="border border-secondary rounded p-3">
                                 <input type="hidden" th:field="*{id}">
                                 <input type="hidden" th:field="*{sectionType}">

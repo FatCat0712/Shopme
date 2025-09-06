@@ -165,13 +165,44 @@ a.text-muted:hover {
     background-color: #fdeaea;
 }
 
-.carousel-item {
-    height: 70vh; /* 80% of viewport height */
+.carousel-dark .carousel-indicators [data-bs-target] {
+  background-color: #fff; /* white dots */
 }
+
+.carousel-item {
+  height: 500px; /* fixed carousel height */
+}
+
 .carousel-item img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+    max-height: 100%;   /* set a fixed height */
+    width: auto;
+    object-fit: contain; /* keeps image aspect ratio */
+    margin: auto;
+}
+
+.thumbnail-carousel .owl-nav .owl-prev,
+.thumbnail-carousel .owl-nav .owl-next {
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff !important;
+      border: none;
+      padding: 10px 15px;
+      font-size: 12px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+}
+
+.thumbnail-carousel .owl-nav .owl-prev {
+  left: -10px;   /* move left arrow */
+}
+
+.thumbnail-carousel .owl-nav .owl-next {
+  right: -10px;  /* move right arrow */
+}
+
+.thumbnail-carousel .owl-nav button:hover {
+  background: #007bff;
 }
 
 

@@ -1,112 +1,242 @@
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
 >
+
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
+
 <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-10 mx-auto">
-                    <div th:replace="~{navigation :: header_menu}">...</div>
-                    <div th:replace="~{navigation :: search_bar}">...</div>
-                    <div th:replace="~{navigation :: quick_links}">...</div>
+            <!-- Spinner Start -->
+            <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+            <!-- Spinner End -->
 
-                        <main class="flex-fill" >
-                            <div th:each="section : ${listSections}">
-                                <div style="font-size: 32px; font-weight: 600">[[${section.heading}]]</div>
-                                <div th:utext="${section.description}"></div>
 
-                                <div th:if="${section.sectionType.name() == 'SELECTED_PRODUCTS'}">
-                                    <div class="row">
-                                        <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
-                                           th:each="section : ${section.sectionProducts}"
-                                           th:href="@{'/p/' + ${product.alias}}"
-                                           th:with="product = ${section.product}"
-                                           target="_blank"
-                                        >
-                                            <div class="text-center">
-                                                <img th:src="@{${product.mainImagePath}}" style="background-color: #F7F7F7; width: 100px;" th:alt="${product.name}"/>
-                                            </div>
-                                            <div>
-                                                <p>[[${product.shortName}]]</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+            <!-- Navbar start -->
+            <div th:replace="~{navigation :: header_menu}">...</div>
+            <!-- Navbar End -->
 
-                                <div th:if="${section.sectionType.name() == 'SELECTED_CATEGORIES'}">
-                                    <div class="row">
-                                        <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
-                                           th:each="section : ${section.sectionCategories}"
-                                           th:href="@{'/c/' + ${cat.alias}}"
-                                           th:with="cat = ${section.category}"
-                                        >
+
+            <!-- Hero Start -->
+            <div th:replace="~{fragments :: banner}">...</div>
+            <!-- Hero End -->
+
+            <div th:each="section : ${listSections}">
+
+                <th:block th:if="${section.sectionType.name() == 'SELECTED_CATEGORIES'}">
+                    <div class="container-fluid fruite py-5">
+                        <div class="container py-5">
+                            <h2 class="mb-4">Trending Categories</h2>
+                            <div class="row align-items-center">
+                                <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
+                                   th:each="section : ${section.sectionCategories}"
+                                   th:href="@{'/c/' + ${cat.alias}}"
+                                   th:with="cat = ${section.category}"
+                                >
+                                    <div class="card d-flex flex-column justify-content-center"  style="min-height: 120px;">
                                             <div>
                                                 <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
                                             </div>
                                             <div>
                                                 <p>[[${cat.name}]]</p>
                                             </div>
-                                        </a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+                <th:block th:if="${section.sectionType.name() == 'TEXT'}">
+                    <div class="container-fluid banner my-5" style="background: linear-gradient(302deg,rgba(148, 187, 233, 0.7) 5%, rgba(238, 174, 202, 0.37) 64%);">
+                        <div class="container py-5">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="py-4">
+                                        <h1 class="display-3 text-primary">[[${section.heading}]]</h1>
+                                        <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
+                                        <div class="mb-4 text-dark" th:utext="${section.description}"></div>
+                                        <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
                                     </div>
                                 </div>
-
-                                <div th:if="${section.sectionType.name() == 'ALL_CATEGORIES'}">
-                                    <div class="row">
-                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                           th:each="cat : ${listCategories}"
-                                           th:href="@{'/c/' + ${cat.alias}}"
-                                        >
-                                            <div>
-                                                <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
-                                            </div>
-                                            <div>
-                                                <p>[[${cat.name}]]</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-
-                                <div th:if="${section.sectionType.name() == 'SELECTED_BRANDS'}">
-                                    <div class="row">
-                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                           th:each="section : ${section.sectionBrands}"
-                                           th:href="@{'/b/' + ${brand.name}}"
-                                           th:with="brand = ${section.brand}"
-                                        >
-                                            <div>
-                                                <img th:src="@{${brand.logoPath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${brand.name}"/>
-                                            </div>
-                                            <div>
-                                                <p>[[${brand.name}]]</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-
-                                <div th:if="${section.sectionType.name() == 'SELECTED_ARTICLES'}">
-                                    <div class="row">
-                                        <a class="col col-sm-4 col-md-3 col-lg-2-4 text-center mb-1 hover-scale text-decoration-none"
-                                           th:each="section : ${section.sectionArticles}"
-                                           th:href="@{'/articles/' + ${article.title}}"
-                                           th:with="article = ${section.article}"
-                                        >
-                                            <div>
-                                                <p>[[${article.title}]]</p>
-                                            </div>
-                                        </a>
+                                <div class="col-lg-6">
+                                    <div class="position-relative">
+                                        <img th:src="@{/images/green_mascot.png}" class="img-fluid w-100 rounded" alt="">
                                     </div>
                                 </div>
                             </div>
-                        </main>
+                        </div>
+                    </div>
+                </th:block>
 
 
-                    <div th:replace="~{navigation :: footer_menu}"></div>
-                </div>
+
+                <th:block th:if="${section.sectionType.name() =='SELECTED_PRODUCTS'}">
+                    <!-- Fruits Shop Start-->
+                    <div class="container-fluid fruite py-5">
+                        <div class="container py-5">
+                            <div class="tab-class text-center">
+                                <div class="row g-4">
+                                    <div class="col-lg-4 text-start">
+                                        <h2>Featured products</h2>
+                                    </div>
+                                    <div class="col-lg-8 text-end">
+                                        <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                                            <li class="nav-item">
+                                                <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                                                    <span class="text-dark" style="width: 130px;">All Products</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                                        <div class="row g-4">
+                                            <div class="col-lg-12">
+                                                <div class="row g-4">
+                                                    <th:block
+                                                            th:each="section : ${section.sectionProducts}"
+                                                              th:with="product = ${section.product}">
+                                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                                            <div class="rounded position-relative fruite-item h-100 d-flex flex-column">
+                                                                <div class="fruite-img" style="heigh: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                                                    <img th:src="@{${product.mainImagePath}}" class="img-fluid w-100 rounded-top" th:alt="${product.name}" style="max-width: 80%; max-height: 80%; object-fit: contain; object-position: contain;">
+                                                                </div>
+                                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom d-flex flex-column flex-grow-1">
+                                                                    <h4 style="font-size: 15px">
+                                                                        <a th:href="@{'/p/' + ${product.alias}}">
+                                                                            [[${product.shortName}]]
+                                                                        </a>
+                                                                    </h4>
+                                                                    <div class="d-flex justify-content-center flex-columns flex-lg-wrap mt-auto">
+                                                                        <p class="text-dark fs-5 fw-bold mb-3"  style="font-size: 15px; text-align: center; width: 100%">
+                                                                            <span th:replace="~{fragments :: format_currency(${product.price})}"></span>
+                                                                        </p>
+                                                                        <form>
+                                                                            <button type="submit"  class="btnAddToCartHomepage btn border border-secondary rounded-pill px-3 text-primary mx-auto">
+                                                                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fruits Shop End-->
+                </th:block>
+
+                <th:block th:if="${section.sectionType.name() == 'ALL_CATEGORIES'}">
+                    <div class="container-fluid fruite py-5">
+                        <div class="container py-5">
+                            <h2 class="mb-4">All Categories</h2>
+                            <div class="row">
+                                <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
+                                   th:each="cat : ${listCategories}"
+                                   th:href="@{'/c/' + ${cat.alias}}"
+                                >
+                                    <div class="card d-flex flex-column justify-content-center" style="min-height: 120px;">
+                                        <div>
+                                            <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
+                                        </div>
+                                        <div>
+                                            <p>[[${cat.name}]]</p>
+                                        </div>
+                                    </div>
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </th:block>
+
+
+
+                <th:block th:if="${section.sectionType.name() == 'SELECTED_BRANDS'}">
+                    <!-- Vesitable Shop Start-->
+                    <div class="container-fluid vesitable py-5">
+                        <div class="container py-5">
+                            <h2 class="mb-0">[[${section.heading}]]</h2>
+                            <div class="owl-carousel vegetable-carousel justify-content-center">
+                                <th:block
+                                        th:each="section : ${section.sectionBrands}"
+                                        th:with="brand = ${section.brand}"
+                                >
+                                    <a class="vesitable-item" th:href="@{'/b/' + ${brand.name}}">
+                                        <div class="border border-primary rounded">
+
+                                            <div class="vesitable-img d-flex justify-content-center align-items-center" style="aspect-ratio:1/1; width:60%; margin:auto; overflow:hidden;">
+                                                <img th:src="@{${brand.logoPath}}" th:alt="${brand.name}" style="width:80%; height:80%; object-fit:contain; display:block; ">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vesitable Shop End -->
+                </th:block>
+
+
+                <th:block th:if="${section.sectionType.name() == 'SELECTED_ARTICLES'}">
+                    <div class="container-fluid featurs py-5">
+                        <div class="container py-5">
+                            <div class="row g-4">
+                                <th:block  th:each="section : ${section.sectionArticles}"
+                                           th:with="article = ${section.article}">
+
+                                        <div class="col-md-6 col-lg-3">
+                                            <a th:href="@{'/articles/a/' + ${article.alias}}">
+                                                <div class="featurs-item text-center rounded bg-light p-4">
+                                                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                                                        <i class="fas fa-book fa-3x text-white"></i>
+                                                    </div>
+                                                    <div class="featurs-content text-center">
+                                                        <h5>[[${article.title}]]</h5>
+                                                        <p class="mb-0">[[${article.alias}]]</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+
             </div>
 
-        </div>
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+            <div th:replace="~{fragments :: footer}">...</div>
+<!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+    <script th:src="@{/lib/lightbox/js/lightbox.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/custom_carousel.js}"  ></script>
+
+
+
+            <!-- Template Javascript -->
+
 </body>
+
 </html>

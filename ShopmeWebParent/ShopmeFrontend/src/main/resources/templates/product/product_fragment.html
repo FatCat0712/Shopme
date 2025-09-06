@@ -30,13 +30,13 @@
         </div>
 
         <div th:fragment="product_price" th:remove="tag">
-            <block th:if="${product.discountPercent <= 0}">
+            <th:block th:if="${product.discountPercent <= 0}">
                 <span>
                         <div th:replace="~{product/product_fragment :: price_fragment(${product.price})}">...</div>
                 </span>
-            </block>
-            <block th:if="${product.discountPercent > 0}">
-                <span style="font-size: larger; color: darkred">
+            </th:block>
+            <th:block th:if="${product.discountPercent > 0}">
+                <span style="font-size: larger; color: darkred; margin-right: 10px;">
                         <div th:replace="~{product/product_fragment :: price_fragment(${product.discountPrice})}">...</div>
                 </span>
                 <del>
@@ -44,7 +44,7 @@
                         <div th:replace="~{product/product_fragment :: price_fragment(${product.price})}">...</div>
                     </span>
                 </del>
-            </block>
+            </th:block>
         </div>
 
         <div th:fragment="price_fragment(productPrice)" th:remove="tag">

@@ -11,65 +11,76 @@
     <script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
 </head>
 
-<body  class="d-flex flex-column min-vh-100">
-<div class="container-fluid d-flex flex-column flex-grow-1">
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar start -->
     <div th:replace="~{navigation :: header_menu}">...</div>
-    <div th:replace="~{navigation :: search_bar}">...</div>
-    <div th:replace="~{navigation :: quick_links}">...</div>
+    <!-- Navbar End -->
 
-    <main class="flex-fill">
-        <div class="row">
-            <div class="col-auto">
-                <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 100px"/>
-            </div>
-            <div class="col-auto">
-                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
-                    <h5>[[${product.name}]]</h5>
-                </a>
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-auto">
+                    <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 100px"/>
+                </div>
+                <div class="col-auto">
+                    <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
+                        <h5>[[${product.name}]]</h5>
+                    </a>
 
-                <div class="row">
-                    <div class="ml-3">
-                        <a th:href="@{'/questions/' + ${product.alias} + '/page/' +  ${currentPage}  + '?sortField=votes&sortDir=desc'}" class="text-decoration-none">Sort by most votes</a>
-                    </div>
-                    <div class="ml-3">
-                        <a th:href="@{'/questions/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=askTime&sortDir=desc'}" class="text-decoration-none">Sort by most recent</a>
+                    <div class="row">
+                        <div class="ml-3">
+                            <a th:href="@{'/questions/' + ${product.alias} + '/page/' +  ${currentPage}  + '?sortField=votes&sortDir=desc'}" class="text-decoration-none">Sort by most votes</a>
+                        </div>
+                        <div class="ml-3">
+                            <a th:href="@{'/questions/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=askTime&sortDir=desc'}" class="text-decoration-none">Sort by most recent</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-       <div th:replace="~{question/question_votes :: content}"></div>
+            <div th:replace="~{question/question_votes :: content}"></div>
 
-        <div class="row ml-2">
-            <div class="col-auto my-auto">
-                <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post">
-                    <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
-                        Ask a question
-                    </button>
+            <div class="row ml-2">
+                <div class="col-auto my-auto">
+                    <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post">
+                        <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
+                            Ask a question
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ml-2 my-2">
+                <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4" method="post">
+                    <div sec:authorize="isAuthenticated()" class="d-flex" >
+                        <div class="w-100">
+                            <input type="hidden" id="productId" th:value="${product.id}">
+                            <textarea class="form-control" id="questionContent" rows="2"  placeholder="Type your question here" required></textarea>
+                        </div>
+                        <div class="my-auto ml-2">
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
+    </div>
 
-        <div class="ml-2 my-2">
-            <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4" method="post">
-                <div sec:authorize="isAuthenticated()" class="d-flex" >
-                    <div class="w-100">
-                        <input type="hidden" id="productId" th:value="${product.id}">
-                        <textarea class="form-control" id="questionContent" rows="2"  placeholder="Type your question here" required></textarea>
-                    </div>
-                    <div class="my-auto ml-2">
-                        <button type="submit" class="btn btn-secondary">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </main>
 
     <div th:replace="~{fragments :: modal_dialog}"></div>
 
 
-    <div th:replace="~{navigation :: footer_menu}"></div>
-</div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+    <div th:replace="~{fragments :: footer}"></div>
 </body>
 <script>
     let csrfHeaderName = "[[${_csrf.headerName}]]";

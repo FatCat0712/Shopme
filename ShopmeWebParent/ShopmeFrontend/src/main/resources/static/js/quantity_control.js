@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $(".link-minus").on("click", function(e) {
-        e.preventDefault();
         let productId = $(this).attr("pid");
         let quantityInput = $("#quantity" + productId);
+          let currentQuantity = parseInt(quantityInput.val());
         let newQuantity = parseInt(quantityInput.val()) - 1;
 
         if(newQuantity > 0) {
@@ -14,10 +14,13 @@ $(document).ready(function () {
     })
 
     $(".link-plus").on("click", function (e) {
-        e.preventDefault();
         let productId = $(this).attr("pid");
         let quantityInput = $("#quantity" + productId);
+        let currentQuantity = parseInt(quantityInput.val());
         let newQuantity = parseInt(quantityInput.val()) + 1;
+
+
+
 
         if(newQuantity > 0 && newQuantity <= 5) {
             quantityInput.val(newQuantity);

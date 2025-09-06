@@ -9,12 +9,19 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer>, CrudRepository<Product, Integer> {
     @Query("SELECT p FROM Product p " +
             "WHERE p.enabled = true AND p.category.id = ?1 " +
             "OR p.category.allParentIDs LIKE %?2% ORDER BY p.name")
     Page<Product> listByCategory(Integer categoryId, String categoryMatch, Pageable pageable);
+
+    @Query("SELECT p FROM Product p " +
+            "WHERE p.enabled = true AND p.category.id = ?1 " +
+            "OR p.category.allParentIDs LIKE %?2% ORDER BY p.name LIMIT 5")
+    List<Product> listByCategory(Integer categoryId, String categoryMatch);
 
     @Query("SELECT p FROM Product p " +
             "WHERE p.enabled = true AND p.brand.id = ?1")

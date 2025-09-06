@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,11 @@ public class ProductService {
         String categoryMatch = "-" + categoryId + "-";
         Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE);
         return productRepository.listByCategory(categoryId, categoryMatch, pageable);
+    }
+
+    public List<Product> listRelatedProductByCategory(Integer categoryId) {
+        String categoryMatch = "-" + categoryId + "-";
+        return productRepository.listByCategory(categoryId, categoryMatch);
     }
 
     public Page<Product> listByBrand(int pageNumber, Integer brandId) {

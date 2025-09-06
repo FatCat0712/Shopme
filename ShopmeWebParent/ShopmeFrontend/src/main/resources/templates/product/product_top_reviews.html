@@ -3,6 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="content"  id="customer-reviews" class="ml-3">
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+
     <h3>Customer Reviews</h3>
     <div class="row">
         <div class="ml-2">
@@ -28,12 +35,6 @@
                         <a class="text-decoration-none" th:href="@{'/write_review/product/' + ${product.id}}">Write your review now</a>
                     </b>
                 </span>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <hr/>
         </div>
     </div>
 

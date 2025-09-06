@@ -26,7 +26,7 @@ public class MainController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(value = {"/",""})
+    @RequestMapping(value = {"/","", "/home"})
     public String viewHomePage(Model model) {
         List<Section> listSections = sectionService.listAll();
         List<Category> listCategories = categoryService.listNoChildrenCategories();
