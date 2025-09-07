@@ -46,7 +46,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <h6 class="text-start">Category List</h6>
                         <div class="row">
                             <div class="col-10">
-                                <select class="form-control" multiple style="height: 200px;" id="categorySelect">
+                                <select class="form-select" multiple="multiple" id="categorySelect">
                                         <th:block th:each="cat : ${categoryList}">
                                             <option th:value="${cat.alias}">[[${cat.name}]]</option>
                                         </th:block>
@@ -89,6 +89,12 @@ xmlns:th="http://www.thymeleaf.org">
         </div>
     </div>
     <div th:replace="~{fragments :: footer}">...</div>
+
+<script>
+    $(document).ready(function() {
+             $('#categorySelect').select2();
+    })
+</script>
 <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

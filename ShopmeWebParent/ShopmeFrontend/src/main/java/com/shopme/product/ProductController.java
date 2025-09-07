@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static com.shopme.product.ProductService.PRODUCTS_PER_PAGE;
+
 @Controller
 public class ProductController {
     private final CategoryService categoryService;
@@ -58,6 +60,36 @@ public class ProductController {
         this.questionVoteService = questionVoteService;
     }
 
+    @GetMapping("/products")
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
+    }
+
+    @GetMapping("/products/page/{pageNum}")
+    public String listByPage(@PathVariable(name = "pageNum") Integer pageNum, Model model) {
+        Page<Product> page = productService.listAll(pageNum);
+
+        List<Product> listProducts = page.getContent();
+        List<Brand> listBrands = brandService.listAll();
+        List<Category> listCategories = categoryService.listAll();
+
+        int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
+        long endCount = startCount + PRODUCTS_PER_PAGE - 1;
+
+
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("listProducts", listProducts);
+        model.addAttribute("listBrands", listBrands);
+        model.addAttribute("listCategories", listCategories);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        return "product/products";
+
+
+    }
+
     @GetMapping("/c/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable(name = "category_alias") String alias, Model model) throws CategoryNotFoundException {
         return  viewCategoryByPage(alias, 1, model);
@@ -80,8 +112,8 @@ public class ProductController {
             int totalPages = page.getTotalPages();
             List<Product> listProducts = page.getContent();
 
-            int startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
-            long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
+            int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
+            long endCount = startCount + PRODUCTS_PER_PAGE - 1;
 
             if(endCount >= totalItems) {
                 endCount = totalItems;
@@ -114,8 +146,8 @@ public class ProductController {
             int totalPages = page.getTotalPages();
             List<Product> listProducts = page.getContent();
 
-            int startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
-            long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
+            int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
+            long endCount = startCount + PRODUCTS_PER_PAGE - 1;
 
             if (endCount >= totalItems) {
                 endCount = totalItems;

@@ -44,6 +44,10 @@ public class BrandService {
         return page;
     }
 
+    public List<Brand> listAll() {
+        return repo.findAll();
+    }
+
 
 
 }

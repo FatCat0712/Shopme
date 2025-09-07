@@ -14,12 +14,17 @@ import java.util.Optional;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    public static final int PRODUCTS_PER_PAGE = 10;
+    public static final int PRODUCTS_PER_PAGE = 12;
     public static final int SEARCH_RESULTS_PER_PAGE = 10;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public Page<Product> listAll(int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum -1, PRODUCTS_PER_PAGE);
+        return productRepository.findAll(pageable);
     }
 
     public Page<Product> listByCategory(int pageNumber, Integer categoryId) {
