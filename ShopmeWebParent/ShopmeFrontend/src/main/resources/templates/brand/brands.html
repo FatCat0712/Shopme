@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments :: page_head(${pageTitle}, 'none')}"></div>
+</head>
+
+<body>
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <div th:replace="~{navigation :: header_menu}">...</div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row" style="margin-top: 120px;">
+                <div class="col">
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none" th:href="@{/}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none" th:href="@{/}">Brands</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div>
+                <h2>Our Associated Brands</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mb-4" id="categoryFilter">
+                        <h5 class="text-start">Categories</h5>
+                        <div class="row text-start">
+                            <th:block th:each="cat : ${first8CategoryList}">
+                                <div class="col-12">
+                                    <input type="checkbox" class="form-check-input" th:value="${cat.alias}">
+                                    <span class="ms-1 form-check-label">[[${cat.name}]]</span>
+                                </div>
+                            </th:block>
+                        </div>
+                        <h6 class="text-start">Category List</h6>
+                        <div class="row">
+                            <div class="col-10">
+                                <select class="form-control" multiple style="height: 200px;" id="categorySelect">
+                                        <th:block th:each="cat : ${categoryList}">
+                                            <option th:value="${cat.alias}">[[${cat.name}]]</option>
+                                        </th:block>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 text-start">
+                            <button class="btn border border-secondary rounded-pill px-3 text-primary mx-auto" id="btnFilter">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <th:block th:each="brand : ${listBrands}">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                <div class="rounded d-flex flex-column card card-hover my-2">
+                                    <a th:href="@{'/b/' + ${brand.name} +'/page/1'}" class="text-decoration-none" th:title="${brand.name}">
+                                        <img th:src="@{${brand.logoPath}}"
+                                             class="card-img-top p-2 mx-auto d-block"
+                                             style="width: 120px; height: 120px; object-fit: contain;"
+                                             th:alt="${brand.name}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+
+                </div>
+                <div th:replace="~{fragments :: pagination('/brands' ,'brands')}">...</div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <div th:replace="~{fragments :: footer}">...</div>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

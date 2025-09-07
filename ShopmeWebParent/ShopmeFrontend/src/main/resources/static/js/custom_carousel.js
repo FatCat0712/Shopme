@@ -38,7 +38,25 @@
                     nav: true,                // show arrows
                     dots: false,              // hide dots below
                     autoWidth: false,          // let images keep natural width
-                    items: 5,                 // how many items to show at once
-                    navText: ["<i class='fas fa-arrow-left'></i>","<i class='fas fa-arrow-right'></i>"]        // customize arrows
+                    items: 4,
+                    navText: ["<i class='fas fa-arrow-left'></i>","<i class='fas fa-arrow-right'></i>"],
+                    responsiveClass: true,
+                    responsive: {
+                        0:{
+                            items:1
+                        },
+                        576:{
+                            items:1
+                        },
+                        768:{
+                            items:2
+                        },
+                        992:{
+                            items:4
+                        },
+                        1200:{
+                            items:5
+                        }
+                    }// customize arrows
                 });
     })

@@ -17,6 +17,18 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    public List<Category> listAll() {
+        return categoryRepository.findAllEnabled();
+    }
+
+    public List<Category> listRemainingCategories() {
+        return categoryRepository.listRemainingCategories();
+    }
+
+    public List<Category> listFirst8Categories() {
+        return categoryRepository.findTop8ByEnabledTrueOrderByIdAsc();
+    }
+
     public List<Category> listNoChildrenCategories() {
         List<Category> listEnabledCategory = categoryRepository.findAllEnabled();
         return listEnabledCategory.stream().filter(category -> category.getChildren() == null || category.getChildren().isEmpty()).toList();

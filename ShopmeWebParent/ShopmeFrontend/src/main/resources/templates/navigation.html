@@ -16,8 +16,8 @@
                     <div class="collapse navbar-collapse bg-white mx-5  my-sm-style" id="navbarCollapse">
                         <div class="navbar-nav w-100 d-none d-xl-flex flex-row justify-content-between ">
                             <div class="d-flex m-3 me-0">
-                                <a th:href="@{/home}" class="nav-item nav-link active">Trang chủ</a>
-                                <a th:href="@{'/products'}" class="nav-item nav-link">Sản phẩm</a>
+                                <a th:href="@{/home}" class="nav-item nav-link active">Homepage</a>
+                                <a th:href="@{'/products'}" class="nav-item nav-link">Products</a>
                             </div>
                             <div class="d-flex m-3 me-0">
                                 <th:block sec:authorize="isAuthenticated()">
@@ -119,8 +119,8 @@
                                     </div>
                                 </th:block>
                                 <th:block sec:authorize="!isAuthenticated()">
-                                    <a th:href="@{'/login'}" class="nav-item nav-link a-login">Đăng nhập</a>
-                                    <a th:href="@{'/register'}" class="nav-item nav-link">Đăng ký</a>
+                                    <a th:href="@{'/login'}" class="nav-item nav-link a-login">Login</a>
+                                    <a th:href="@{'/register'}" class="nav-item nav-link">Register</a>
                                 </th:block>
                             </div>
                         </div>

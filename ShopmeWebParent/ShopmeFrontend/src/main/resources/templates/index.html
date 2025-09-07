@@ -144,9 +144,9 @@
                                    th:each="cat : ${listCategories}"
                                    th:href="@{'/c/' + ${cat.alias}}"
                                 >
-                                    <div class="card d-flex flex-column justify-content-center" style="min-height: 120px;">
+                                    <div class="card d-flex flex-column justify-content-center my-1" style="min-height: 120px;">
                                         <div>
-                                            <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px;" th:alt="${cat.name}"/>
+                                            <img th:src="@{${cat.imagePath}}" style="background-color: #F7F7F7; border-radius: 50%; width: 80px; height: 80px; object-fit: contain" th:alt="${cat.name}"/>
                                         </div>
                                         <div>
                                             <p>[[${cat.name}]]</p>
