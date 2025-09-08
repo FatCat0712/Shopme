@@ -525,7 +525,7 @@
 }
 
 .four_zero_four_bg{
-    background: url(/client/img/dribbble.gif) no-repeat center center;
+    background: url(/images/dribbble.gif) no-repeat center center;
     height: 400px;
     background-position: center;
     background-size: contain;
@@ -605,4 +605,7 @@
     line-height: 35px;
 }
 /*** Footer End ***/
+.active-brand {
+    border: 2px solid var(--bs-primary);
+}
 

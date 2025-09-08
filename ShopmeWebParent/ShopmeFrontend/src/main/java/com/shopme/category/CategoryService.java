@@ -3,10 +3,10 @@ package com.shopme.category;
 import com.shopme.common.entity.Category;
 import com.shopme.common.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -57,6 +57,56 @@ public class CategoryService {
         return  listParents;
     }
 
+    public List<Category> listCategoriesUsedInForm() {
+        Iterable<Category> categories =  (List<Category>)categoryRepository.findRootCategories(Sort.by("name").ascending());
+        List<Category> categoriesUsedInForm = new ArrayList<>();
+
+        for(Category category : categories) {
+            if(category.getParent() == null) {
+                categoriesUsedInForm.add(Category.copyNameAndAlias(category));
+
+                Set<Category> children = sortSubCategories(category.getChildren());
+
+                for (Category subCategory: children) {
+                    categoriesUsedInForm.add(Category.copyNameAndAlias("--" + subCategory.getName(), subCategory.getAlias()));
+                    listSubCategoriesUsedInForm(subCategory, 1, categoriesUsedInForm);
+                }
+            }
+        }
+
+        return categoriesUsedInForm;
+    }
+
+    private void listSubCategoriesUsedInForm(Category parent, int subLevel, List<Category> categoriesUsedInForm) {
+        int newSubLevel = subLevel + 1;
+        Set<Category> children = sortSubCategories(parent.getChildren());
+        for(Category subCategory : children) {
+            String name = "";
+            for(int i = 0; i < newSubLevel; i++) {
+                name += "--";
+            }
+            categoriesUsedInForm.add(Category.copyNameAndAlias(name + subCategory.getName(), subCategory.getAlias()));
+            listSubCategoriesUsedInForm(subCategory, newSubLevel, categoriesUsedInForm);
+        }
+    }
+
+    private SortedSet<Category> sortSubCategories(Set<Category> children) {
+        return sortSubCategories(children, "asc");
+    }
+
+
+    private SortedSet<Category> sortSubCategories(Set<Category> children, String sortDir) {
+        SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
+            @Override
+            public int compare(Category c1, Category c2) {
+                return sortDir.equals("asc" ) ? c1.getName().compareTo(c2.getName()) : c2.getName().compareTo(c1.getName());
+            }
+        });
+
+        sortedChildren.addAll(children);
+
+        return sortedChildren;
+    }
 
 
 }

@@ -62,21 +62,35 @@ public class ProductController {
 
     @GetMapping("/products")
     public String listFirstPage(Model model) {
-        return listByPage(1, model);
+        return "redirect:/products/page/1";
     }
 
     @GetMapping("/products/page/{pageNum}")
-    public String listByPage(@PathVariable(name = "pageNum") Integer pageNum, Model model) {
-        Page<Product> page = productService.listAll(pageNum);
+    public String listByPage(
+            @PathVariable(name = "pageNum") Integer pageNum,
+            ProductCriteriaDTO productCriteriaDTO,
+            HttpServletRequest request,
+            Model model
+    ) {
+        Page<Product> page = productService.listAll(pageNum, productCriteriaDTO);
 
         List<Product> listProducts = page.getContent();
         List<Brand> listBrands = brandService.listAll();
-        List<Category> listCategories = categoryService.listAll();
+        List<Category> listCategories = categoryService.listCategoriesUsedInForm();
 
         int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
         long endCount = startCount + PRODUCTS_PER_PAGE - 1;
 
+        if(endCount > page.getTotalElements()) {
+            endCount = page.getTotalElements();
+        }
 
+
+        String qs = request.getQueryString();
+
+
+
+        model.addAttribute("queryString", qs);
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);
         model.addAttribute("currentPage", pageNum);

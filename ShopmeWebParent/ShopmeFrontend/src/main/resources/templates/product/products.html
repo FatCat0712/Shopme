@@ -42,11 +42,9 @@ xmlns:th="http://www.thymeleaf.org">
                             <div class="row">
                                 <th:block th:each="brand, status: ${listBrands}">
                                     <div class="col-12 col-sm-6" th:classappend="${status.index >= 6 ? 'd-none extra-brand' : ''}">
-                                        <a class="">
-                                            <div class="card mb-3" style="padding: 12px 6px;">
+                                            <div class="card mb-3 brand-box" style="padding: 12px 6px;" th:brandName="${brand.name}">
                                                 <img th:src="${brand.logoPath}" th:alt="${brand.name}" class="mx-auto" style="height: 28px; width: 75.6px; object-fit: contain;"/>
                                             </div>
-                                        </a>
                                     </div>
                                 </th:block>
                                 <a id="toggleBrands" href="#">View more</a>
@@ -60,11 +58,14 @@ xmlns:th="http://www.thymeleaf.org">
                         <div id="categoryFilter" class="mb-3">
                             <h6>Categories</h6>
                             <div class="row">
-                                <select class="form-select" multiple="multiple" id="categorySelect">
-                                    <th:block th:each="cat : ${listCategories}">
-                                        <option th:value="${cat.alias}">[[${cat.name}]]</option>
-                                    </th:block>
-                                </select>
+                                <div class="col-12">
+                                    <select class="form-select" multiple id="categorySelect" >
+                                        <th:block th:each="cat : ${listCategories}">
+                                            <option th:value="${cat.alias}">[[${cat.name}]]</option>
+                                        </th:block>
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
 
@@ -76,7 +77,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <div id="availabilityFilter" class="mb-2">
                             <h6>Availability</h6>
                             <div class="col-12">
-                                <input type="checkbox" class="form-check-input" th:value="inStock">
+                                <input type="checkbox" class="form-check-input" th:value="true">
                                 <span class="ms-1 form-check-label">In Stock</span>
                             </div>
                         </div>
@@ -88,7 +89,7 @@ xmlns:th="http://www.thymeleaf.org">
                         <div id="discountFilter" class="mb-2">
                             <h6>Discount</h6>
                             <div class="col-12">
-                                <input type="checkbox" class="form-check-input" th:value="onSale">
+                                <input type="checkbox" class="form-check-input" th:value="true">
                                 <span class="ms-1 form-check-label">On Sale</span>
                             </div>
                         </div>
@@ -97,7 +98,7 @@ xmlns:th="http://www.thymeleaf.org">
                             <hr/>
                         </div>
 
-                        <div id="ratingFilter">
+                        <div id="ratingFilter" class="mb-3">
                             <h6>Rating</h6>
                             <div class="col-12">
                                 <label class="d-flex align-items-center gap-2">
@@ -126,7 +127,14 @@ xmlns:th="http://www.thymeleaf.org">
                                     <span>5</span>
                                 </label>
 
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-12 col-md-6 text-start">
+                                <button class="btn border border-secondary rounded-pill px-4 text-primary mx-auto" id="btnProductFilter">
+                                    Filter
+                                </button>
                             </div>
                         </div>
 
@@ -194,14 +202,21 @@ xmlns:th="http://www.thymeleaf.org">
                 const currentText = $(this).text();
 
                 $(this).text(currentText === 'View more' ?  'View less' : 'View more');
-
             });
 
-            $(document).ready(function() {
-                     $('#categorySelect').select2();
-            })
-        })
+
+             $('#categorySelect').select2({
+                theme: 'bootstrap-5'
+             });
+
+             $('#brandFilter').on("click", function(e){
+                  const brandBox = $(e.target).closest('.brand-box');
+                  if(brandBox) {
+                       brandBox.toggleClass('active-brand');
+                  }
+             });
+     })
     </script>
-<script th:src="@{/js/main.js}"></script>
+    <script  th:src="@{/js/product_filtering.js}"></script>
 </body>
 </html>

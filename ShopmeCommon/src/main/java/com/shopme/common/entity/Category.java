@@ -67,6 +67,20 @@ public class Category extends IdBasedEntity{
         return copyCategory;
     }
 
+    public static Category copyNameAndAlias(String name, String alias) {
+        Category copyCategory = new Category();
+        copyCategory.setName(name);
+        copyCategory.setAlias(alias);
+        return copyCategory;
+    }
+
+    public static Category copyNameAndAlias(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setName(category.getName());
+        copyCategory.setAlias(category.getAlias());
+        return copyCategory;
+    }
+
     public static Category copyFull(Category category) {
         Category copyCategory = new Category();
         copyCategory.setId(category.getId());
