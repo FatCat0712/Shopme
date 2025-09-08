@@ -20,6 +20,14 @@
                                 <a th:href="@{'/products'}" class="nav-item nav-link">Products</a>
                             </div>
                             <div class="d-flex m-3 me-0">
+                                <div class="search-wrapper">
+                                    <form th:action="@{/search}" class="search-form" method="get">
+                                        <input class="form-control"  type="text" name="keyword" placeholder="Search for something ..."/>
+                                    </form>
+                                    <button type="button" class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-3" id="searchButton">
+                                        <i class="fas fa-search text-primary"></i>
+                                    </button>
+                                </div>
                                 <th:block sec:authorize="isAuthenticated()">
                                     <div class="dropdown my-auto">
                                         <a th:href="@{/cart}" class="position-relative ps-3 me-4 my-xl-auto">
@@ -37,7 +45,7 @@
                                                 <li id="emptyCart" class="emptyCart">
                                                     <div class="row">
                                                         <div class="col-12 d-flex flex-column align-items-center">
-                                                            <img src="/client/img/cart-empty-img.png" style="width: 60%">
+                                                            <img th:src="@{/images/cart-empty-img.png}" style="width: 60%">
                                                             <span>Giỏ hàng đang trống</span>
                                                         </div>
                                                     </div>
@@ -126,6 +134,7 @@
                         </div>
 
                         <div class="navbar-nav w-100 flex-column px-4 d-xl-none">
+
                             <th:block sec:authorize="isAuthenticated()">
                                 <div class="d-flex align-items-center flex-column">
                                     <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
@@ -148,15 +157,15 @@
                             </th:block>
 
                             <th:block sec:authorize="!isAuthenticated()">
-                                <a th:href="@{'/login'}" class="nav-item nav-link a-login">Đăng nhập</a>
-                                <a th:href="@{'/register'}" class="nav-item nav-link">Đăng ký</a>
+                                <a th:href="@{'/login'}" class="nav-item nav-link">Login</a>
+                                <a th:href="@{'/register'}" class="nav-item nav-link">Register</a>
                             </th:block>
                             <div>
                                 <hr class="dropdown-divider">
                             </div>
                             <div>
                                 <form method="post" th:action="@{/logout}">
-                                    <button type="submit" class="btn nav-item nav-link" href="#">Đăng xuất</button>
+                                    <button type="submit" class="btn nav-item nav-link" href="#">Logout</button>
                                 </form>
                             </div>
                         </div>

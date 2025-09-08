@@ -4,20 +4,15 @@
 >
 
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
-
 <body>
             <!-- Spinner Start -->
             <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
                 <div class="spinner-grow text-primary" role="status"></div>
             </div>
             <!-- Spinner End -->
-
-
             <!-- Navbar start -->
             <div th:replace="~{navigation :: header_menu}">...</div>
             <!-- Navbar End -->
-
-
             <!-- Hero Start -->
             <div th:replace="~{fragments :: banner}">...</div>
             <!-- Hero End -->
@@ -232,9 +227,7 @@
     <script th:src="@{/lib/lightbox/js/lightbox.min.js}"></script>
     <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
     <script th:src="@{/js/custom_carousel.js}"  ></script>
-
-
-
+    <script type="text/javascript" th:src="@{/js/highlight_link.js}"></script>
             <!-- Template Javascript -->
 
 </body>

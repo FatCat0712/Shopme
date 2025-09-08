@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
       $("#askQuestion").on("click", function(e) {
-        $("#questionForm").removeClass("d-none");
+           $("#questionForm").toggleClass("d-none");
       })
 })
 
@@ -26,7 +26,6 @@ function sendQuestionCreateRequest(productId, questionContent) {
         data: JSON.stringify(requestBody),
         contentType: 'application/json'
     }).done(function(response) {
-        console.log(response);
         if(response.successful) {
             showModalDialog("Post Question", response.message);
             $("#questionContent").val('');

@@ -22,8 +22,33 @@
     <div th:replace="~{navigation :: header_menu}">...</div>
     <!-- Navbar End -->
 
-    <div class="container-fluid py-5">
-        <div class="container py-5">
+    <div class="container-fluid">
+        <div class="container">
+            <div th:if="${listCategoryParents != null && !#lists.isEmpty(listCategoryParents)}">
+                <div class="row" style="margin-top: 120px;">
+                    <div class="col">
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a class="text-decoration-none" th:href="@{/}">Home</a>
+                                </li>
+                                <th:block th:each="parent : ${listCategoryParents}">
+                                    <li class="breadcrumb-item">
+                                        <a class="text-decoration-none" th:href="@{'/c/' + ${parent.getAlias()}}">[[${parent.name}]]</a>
+                                    </li>
+                                </th:block>
+                                <li class="breadcrumb-item" th:if="${product != null}">
+                                    <a th:href="@{'/p/' + ${product.alias}}">[[${product.shortName}]]</a>
+                                </li>
+                                <li class="breadcrumb-item" th:if="${product != null}">
+                                    Questions
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-auto">
                     <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 100px"/>
@@ -34,37 +59,43 @@
                     </a>
 
                     <div class="row">
-                        <div class="ml-3">
-                            <a th:href="@{'/questions/' + ${product.alias} + '/page/' +  ${currentPage}  + '?sortField=votes&sortDir=desc'}" class="text-decoration-none">Sort by most votes</a>
+                        <div class="col-12 d-flex">
+                            <div>
+                                <a th:href="@{'/questions/' + ${product.alias} + '/page/' +  ${currentPage}  + '?sortField=votes&sortDir=desc'}" class="text-decoration-none">Sort by most votes</a>
+                            </div>
+                            <div class="ms-3">
+                                <a th:href="@{'/questions/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=askTime&sortDir=desc'}" class="text-decoration-none">Sort by most recent</a>
+                            </div>
                         </div>
-                        <div class="ml-3">
-                            <a th:href="@{'/questions/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=askTime&sortDir=desc'}" class="text-decoration-none">Sort by most recent</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
 
             <div th:replace="~{question/question_votes :: content}"></div>
 
-            <div class="row ml-2">
+            <div class="row mt-4 ml-2">
                 <div class="col-auto my-auto">
-                    <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post">
-                        <button sec:authorize="!isAuthenticated()" class="btn btn-secondary" type="submit">
-                            Ask a question
-                        </button>
-                    </form>
+                    <button class="btn btn-secondary" id="askQuestion">
+                        Ask a question
+                    </button>
                 </div>
             </div>
 
-            <div class="ml-2 my-2">
-                <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" class="col-md-4" method="post">
-                    <div sec:authorize="isAuthenticated()" class="d-flex" >
-                        <div class="w-100">
-                            <input type="hidden" id="productId" th:value="${product.id}">
-                            <textarea class="form-control" id="questionContent" rows="2"  placeholder="Type your question here" required></textarea>
+            <div class="ml-2 mt-3">
+                <form th:action="@{/questions/save}" onsubmit="return submitQuestionCreateForm()" method="post" id="questionForm" class="d-none">
+                    <h4 class="mb-3 fw-bold">Leave a Question</h4>
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="border-bottom rounded my-4">
+                                <input type="hidden" id="productId" th:value="${product.id}">
+                                <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Type your question here" spellcheck="false"></textarea>
+                            </div>
                         </div>
-                        <div class="my-auto ml-2">
-                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-start py-3 mb-5">
+                                <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</button>
+                            </div>
                         </div>
                     </div>
                 </form>

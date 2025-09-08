@@ -102,27 +102,27 @@ xmlns:th="http://www.thymeleaf.org">
                             <h6>Rating</h6>
                             <div class="col-12">
                                 <label class="d-flex align-items-center gap-2">
-                                        <input type="radio" name="rating" value="1">
+                                        <input type="radio" name="rating" class="form-check-input" value="1">
                                         <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="1">
                                         <span>1</span>
                                 </label>
                                 <label class="d-flex align-items-center gap-2">
-                                    <input type="radio" name="rating" value="2">
+                                    <input type="radio" name="rating" class="form-check-input" value="2">
                                     <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="2">
                                     <span>2</span>
                                 </label>
                                 <label class="d-flex align-items-center gap-2">
-                                    <input type="radio" name="rating" value="3">
+                                    <input type="radio" name="rating" class="form-check-input" value="3">
                                     <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="3">
                                     <span>3</span>
                                 </label>
                                 <label class="d-flex align-items-center gap-2">
-                                    <input type="radio" name="rating" value="4">
+                                    <input type="radio" name="rating" class="form-check-input" value="4">
                                     <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="4">
                                     <span>4</span>
                                 </label>
                                 <label class="d-flex align-items-center gap-2">
-                                    <input type="radio" name="rating" value="5">
+                                    <input type="radio" name="rating" class="form-check-input" value="5">
                                     <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="5">
                                     <span>5</span>
                                 </label>
@@ -191,32 +191,8 @@ xmlns:th="http://www.thymeleaf.org">
           hoverOnClear: false,
           showCaption: false,
         });
-
-
-        $(document).ready(function(){
-            $("#toggleBrands").on("click", function(){
-               const extras = document.querySelectorAll(".extra-brand");
-
-                extras.forEach(el => el.classList.toggle("d-none"));
-
-                const currentText = $(this).text();
-
-                $(this).text(currentText === 'View more' ?  'View less' : 'View more');
-            });
-
-
-             $('#categorySelect').select2({
-                theme: 'bootstrap-5'
-             });
-
-             $('#brandFilter').on("click", function(e){
-                  const brandBox = $(e.target).closest('.brand-box');
-                  if(brandBox) {
-                       brandBox.toggleClass('active-brand');
-                  }
-             });
-     })
     </script>
+    <script type="text/javascript" th:src="@{/js/highlight_link.js}"></script>
     <script  th:src="@{/js/product_filtering.js}"></script>
 </body>
 </html>

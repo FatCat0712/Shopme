@@ -76,7 +76,7 @@ public class ProductController {
 
         List<Product> listProducts = page.getContent();
         List<Brand> listBrands = brandService.listAll();
-        List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+        List<Category> listCategories = categoryService.listNoChildrenCategories();
 
         int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
         long endCount = startCount + PRODUCTS_PER_PAGE - 1;
@@ -87,8 +87,6 @@ public class ProductController {
 
 
         String qs = request.getQueryString();
-
-
 
         model.addAttribute("queryString", qs);
         model.addAttribute("startCount", startCount);
@@ -195,7 +193,7 @@ public class ProductController {
             product.setShortDescription(cleanedShortDescription);
             product.setFullDescription(cleanedFullDescription);
 
-            List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
+            List<Category> listByCategoryParents =  categoryService.listNoChildrenCategories();
             Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
             Page<Question> listQuestions = questionService.list3MostVotedQuestions(product);
             Integer answeredQuestions = questionService.countOfAnsweredQuestions(product);
@@ -217,7 +215,7 @@ public class ProductController {
                 }
             }
 
-            model.addAttribute("listCategoryParents", listByCategoryParents);
+            model.addAttribute("listCategories", listByCategoryParents);
             model.addAttribute("listReviews", listReviews);
             model.addAttribute("listQuestions", listQuestions);
             model.addAttribute("answeredQuestions", answeredQuestions);
@@ -240,7 +238,10 @@ public class ProductController {
     @GetMapping("/search/page/{pageNum}")
     public String searchByPage(@RequestParam("keyword") String keyword,@PathVariable("pageNum") int pageNum ,Model model) {
             Page<Product> page = productService.search(keyword, pageNum);
+
             List<Product> listResult = page.getContent();
+            List<Brand> listBrands = brandService.listAll();
+            List<Category> listCategories = categoryService.listNoChildrenCategories();
 
             long totalItems = page.getTotalElements();
             int totalPages = page.getTotalPages();
@@ -258,6 +259,8 @@ public class ProductController {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("currentPage", pageNum);
             model.addAttribute("pageTitle", keyword + " - Search Result");
+            model.addAttribute("listBrands", listBrands);
+            model.addAttribute("listCategories", listCategories);
             model.addAttribute("keyword", keyword);
             model.addAttribute("listResult", listResult);
 

@@ -1,6 +1,8 @@
 package com.shopme.review;
 
 import com.shopme.ControllerHelper;
+import com.shopme.category.CategoryService;
+import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.review.Review;
@@ -27,17 +29,20 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ProductService productService;
     private final ControllerHelper controllerHelper;
+    private final CategoryService categoryService;
     private final ReviewVoteService voteService;
     private final String defaultURL = "redirect:/reviews/page/1?sortField=votes&sortDir=desc";
 
     @Autowired
     public ReviewController(
             ReviewService reviewService, ProductService productService,
-                            ControllerHelper controllerHelper, ReviewVoteService voteService
+            ControllerHelper controllerHelper, CategoryService categoryService,
+            ReviewVoteService voteService
     ) {
         this.reviewService = reviewService;
         this.productService = productService;
         this.controllerHelper = controllerHelper;
+        this.categoryService = categoryService;
         this.voteService = voteService;
     }
 
@@ -113,7 +118,7 @@ public class ReviewController {
     ) {
         try {
             Product product = productService.get(productAlias);
-
+            List<Category> listByCategoryParents = categoryService.getCategoryParents(product.getCategory());
             Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
             List<Review> listReviews = page.getContent();
 
@@ -142,6 +147,7 @@ public class ReviewController {
             model.addAttribute("productAlias", productAlias);
             model.addAttribute("sortField", sortField);
             model.addAttribute("sortDir", sortDir);
+            model.addAttribute("listCategoryParents", listByCategoryParents);
             return "review/review_product";
 
         } catch (ProductNotFoundException e) {

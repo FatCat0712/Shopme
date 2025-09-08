@@ -1,4 +1,27 @@
 $(document).ready(function() {
+       $("#toggleBrands").on("click", function(){
+         const extras = document.querySelectorAll(".extra-brand");
+
+          extras.forEach(el => el.classList.toggle("d-none"));
+
+          const currentText = $(this).text();
+
+          $(this).text(currentText === 'View more' ?  'View less' : 'View more');
+      });
+
+
+       $('#categorySelect').select2({
+          theme: 'bootstrap-5'
+       });
+
+       $('#brandFilter').on("click", function(e){
+            const brandBox = $(e.target).closest('.brand-box');
+            if(brandBox) {
+                 brandBox.toggleClass('active-brand');
+            }
+       });
+
+
      $("#btnProductFilter").on("click", function(e) {
             e.preventDefault();
             let brandArr = [];
@@ -83,7 +106,7 @@ $(document).ready(function() {
        if(params.has('category')) {
              const categories = params.get('category').split(',');
             categories.forEach(category => {
-                $('#categoryFilter option[value="' + brand  + '"]').props('selected', true);
+                $('#categoryFilter option[value="' + category  + '"]').prop('selected', true);
             })
        }
 
