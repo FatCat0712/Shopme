@@ -3,7 +3,6 @@ package com.shopme.shoppingcart;
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.product.Product;
-import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,21 +50,17 @@ public class ShoppingCartService {
         return updatedQuantity;
     }
 
-    public float updateQuantity(Integer productId, Integer quantity, Customer customer) throws ProductNotFoundException {
+    public float updateQuantity(Integer productId, Integer quantity, Customer customer) {
         cartRepository.updateQuantity(quantity, customer.getId(), productId);
-
         Optional<Product> product = productRepository.findById(productId);
-        if(product.isPresent()) {
-            Product savedProduct = product.get();
-            return savedProduct.getDiscountPrice() * quantity;
-        }else {
-            throw new ProductNotFoundException("Could not found any product with ID " + product);
-        }
+        Product savedProduct =  product.get();
+        return savedProduct.getDiscountPrice() * quantity;
     }
 
-    public Integer fetchCartQuantityById(Customer customer) {
+    public Integer fetchCartQuantityByCustomer(Customer customer) {
         return cartRepository.sumByCustomerId(customer.getId());
     }
+
 
 
     public void removeProduct(Integer productId, Customer customer) {

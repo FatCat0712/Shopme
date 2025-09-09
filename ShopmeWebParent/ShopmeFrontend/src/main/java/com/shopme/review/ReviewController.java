@@ -7,6 +7,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.product.ProductService;
 import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,7 +61,12 @@ public class ReviewController {
             @RequestParam(name = "keyword", required = false) String keyword,
             Model model
     ) {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+        } catch (CustomerNotFoundException e) {
+            return "error/403";
+        }
         Page<Review> page = reviewService.listByCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
 
         List<Review> listReviews = page.getContent();
@@ -91,15 +97,21 @@ public class ReviewController {
 
     @GetMapping("/review/details/{id}")
     public String viewReview(HttpServletRequest request, @PathVariable(name = "id") Integer id, RedirectAttributes ra, Model model) {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        Customer customer = null;
         try {
-            Review review =reviewService.getByCustomerAndId(customer, id);
-            model.addAttribute("review", review);
-            return "review/review_detail_modal";
-        } catch (ReviewNotFoundException e) {
-            ra.addFlashAttribute("errorMessage", e.getMessage());
-            return defaultURL;
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+            try {
+                Review review =reviewService.getByCustomerAndId(customer, id);
+                model.addAttribute("review", review);
+                return "review/review_detail_modal";
+            } catch (ReviewNotFoundException e) {
+                ra.addFlashAttribute("errorMessage", e.getMessage());
+                return defaultURL;
+            }
+        } catch (CustomerNotFoundException e) {
+           return "error/403";
         }
+
     }
 
     @GetMapping("/ratings/{product_alias}")
@@ -122,7 +134,12 @@ public class ReviewController {
             Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
             List<Review> listReviews = page.getContent();
 
-            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+            Customer customer = null;
+            try {
+                customer = controllerHelper.getAuthenticatetdCustomer(request);
+            } catch (CustomerNotFoundException ignored) {
+
+            }
             if(customer != null) {
                 voteService.markReviewsVotedProductByCustomer(listReviews, product.getId(), customer.getId());
             }
@@ -163,7 +180,12 @@ public class ReviewController {
             model.addAttribute("review", review);
             model.addAttribute("product", product);
 
-            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+            Customer customer = null;
+            try {
+                customer = controllerHelper.getAuthenticatetdCustomer(request);
+            } catch (CustomerNotFoundException e) {
+                return "error/403";
+            }
             boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, productId);
 
             if(customerReviewed) {
@@ -187,7 +209,12 @@ public class ReviewController {
 
     @PostMapping("/post_review")
     public String saveReview(Review review, Model model,@RequestParam(name = "productId") Integer productId, HttpServletRequest request) {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+        } catch (CustomerNotFoundException e) {
+            return "error/403";
+        }
         try {
             Product product = productService.get(productId);
             review.setProduct(product);

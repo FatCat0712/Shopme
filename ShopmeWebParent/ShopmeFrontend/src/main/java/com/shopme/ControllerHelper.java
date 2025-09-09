@@ -1,6 +1,7 @@
 package com.shopme;
 
 import com.shopme.common.entity.Customer;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.customer.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ public class ControllerHelper {
         this.customerService = customerService;
     }
 
-    public Customer getAuthenticatetdCustomer(HttpServletRequest request) {
+    public Customer getAuthenticatetdCustomer(HttpServletRequest request) throws CustomerNotFoundException {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
-        return customerService.findCustomerByEmail(email);
+        Customer customer = customerService.findCustomerByEmail(email);
+        if(customer == null) {
+            throw new CustomerNotFoundException("");
+        }
+        return customer;
     }
 
 }

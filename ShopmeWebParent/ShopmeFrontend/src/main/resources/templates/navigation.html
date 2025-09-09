@@ -41,64 +41,8 @@
                                             [[${session.sum}]]
                                         </span>
                                         </a>
-                                        <ul class="dropdown-menu dropdown-menu--cart p-4" aria-labelledby="dropdownCartLink">
-                                            <th:block  th:if="${#lists.isEmpty(listCartItems)}">
-                                                <li id="emptyCart" class="emptyCart">
-                                                    <div class="row">
-                                                        <div class="col-12 d-flex flex-column align-items-center">
-                                                            <img th:src="@{/images/cart-empty-img.png}" style="width: 60%">
-                                                            <span>Cart is empty</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </th:block>
-                                                <th:block  th:each="item : ${listCartItems}">
-                                                    <li th:with="product = ${item.product}">
-                                                        <div class="row align-items-center" th:data-product-id="${product.id}">
-                                                            <div class="col-sm-2">
-                                                                <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 60px;">
-                                                            </div>
-                                                            <div class="col-sm-10">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div>
-                                                                        <b>
-                                                                            [[${product.shortName}]]
-                                                                        </b>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small><span th:replace="~{fragments :: format_currency(${product.price})}"></span></small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div>
-                                                                        <small>
-                                                                            Brand: [[${product.brand.name}]]
-                                                                        </small>
-                                                                    </div>
-                                                                    <div>
-                                                                        <span class="mx-2">x</span>
-                                                                        <span><small>[[${item.quantity}]]</small></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </th:block>
-
-
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <th:block th:unless="${#lists.isEmpty(listCartItems)}">
-                                                <li class="d-flex justify-content-end">
-                                                    <a class="btn border border-secondary rounded-pill px-3 text-primary" th:href="@{/cart}">
-                                                        Go to cart
-                                                    </a>
-                                                </li>
-                                            </th:block>
-
+                                        <ul class="dropdown-menu dropdown-menu--cart p-4" id="dropdownCartLink">
+                                            <div th:replace="~{cart/cart_fragment :: miniCart}">...</div>
                                         </ul>
                                     </div>
 

@@ -7,6 +7,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.question.Question;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.product.ProductService;
 import com.shopme.question.vote.QuestionVoteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -54,7 +55,12 @@ public class QuestionController {
             @RequestParam(name = "keyword", required = false) String keyword,
             Model model
     ) {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+        } catch (CustomerNotFoundException e) {
+            return "error/403";
+        }
         Page<Question> page  = questionService.listByCustomer(customer, pageNum, sortDir, keyword);
         List<Question> listQuestions = page.getContent();
         long totalItems = page.getTotalElements();
@@ -110,7 +116,12 @@ public class QuestionController {
 
             Page<Question> page = questionService.listByProduct(product, pageNum, sortField, sortDir);
 
-            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+            Customer customer = null;
+            try {
+                customer = controllerHelper.getAuthenticatetdCustomer(request);
+            } catch (CustomerNotFoundException ignored) {
+
+            }
 
 
             List<Question> listQuestions = page.getContent();

@@ -4,6 +4,7 @@ import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.vote.VoteResult;
 import com.shopme.common.entity.vote.VoteType;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.question.QuestionNotFound;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +29,18 @@ public class QuestionVoteRestController {
             @PathVariable(name = "type") String type,
             HttpServletRequest request
     ) {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
-        if(customer == null) {
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+            VoteType voteType = VoteType.valueOf(type.toUpperCase());
+            try {
+                return service.doVote(id, customer, voteType);
+            } catch (QuestionNotFound e) {
+                return VoteResult.fail(e.getMessage());
+            }
+        } catch (CustomerNotFoundException e) {
             return VoteResult.fail("You must login to vote the question");
         }
 
-        VoteType voteType = VoteType.valueOf(type.toUpperCase());
-        try {
-          return service.doVote(id, customer, voteType);
-        } catch (QuestionNotFound e) {
-            return VoteResult.fail(e.getMessage());
-        }
     }
 }

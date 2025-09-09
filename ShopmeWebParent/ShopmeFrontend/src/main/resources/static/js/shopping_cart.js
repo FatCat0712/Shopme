@@ -101,7 +101,8 @@ function removeProduct(link) {
            removeProductHTML(rowNumber);
             updateTotal();
             updateCountNumbers();
-           showModalDialog("Shopping Cart", response);
+             $("#sumCart").text(response.quantity);
+           showModalDialog("Shopping Cart", response.message);
         }).fail(function (response) {
             showErrorModal(response);
         });

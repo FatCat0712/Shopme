@@ -12,6 +12,7 @@ import com.shopme.common.entity.review.Review;
 import com.shopme.common.exception.BrandNotFoundException;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.question.QuestionService;
 import com.shopme.question.vote.QuestionVoteService;
 import com.shopme.review.ReviewService;
@@ -227,6 +228,8 @@ public class ProductController {
             return "product/product_detail";
         } catch (ProductNotFoundException e) {
             return "error/404";
+        } catch (CustomerNotFoundException e) {
+            return "error/403";
         }
     }
 

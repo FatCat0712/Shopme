@@ -4,6 +4,7 @@ import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.vote.VoteResult;
 import com.shopme.common.entity.vote.VoteType;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.review.ReviewNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,17 @@ public class VoteReviewRestController {
             @PathVariable(name = "type") String type,
             HttpServletRequest request
     ) {
-            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
-            if(customer == null) {
-                return VoteResult.fail("You must login to vote the review");
-            }
-            VoteType voteType = VoteType.valueOf(type.toUpperCase());
+        Customer customer = null;
         try {
-           return voteService.doVote(reviewId, customer, voteType);
-        } catch (ReviewNotFoundException e) {
-           return VoteResult.fail(e.getMessage());
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+            VoteType voteType = VoteType.valueOf(type.toUpperCase());
+            try {
+                return voteService.doVote(reviewId, customer, voteType);
+            } catch (ReviewNotFoundException e) {
+                return VoteResult.fail(e.getMessage());
+            }
+        } catch (CustomerNotFoundException e) {
+            return VoteResult.fail("You must login to vote the review");
         }
     }
 }

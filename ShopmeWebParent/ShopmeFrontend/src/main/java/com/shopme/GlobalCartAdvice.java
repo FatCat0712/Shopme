@@ -2,6 +2,7 @@ package com.shopme;
 
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
+import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.customer.CustomerService;
 import com.shopme.shoppingcart.ShoppingCartService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,11 +38,12 @@ public class GlobalCartAdvice {
         Object email = session.getAttribute("email");
         if(email == null) return List.of();
 
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
-        if(customer == null) return List.of();
-
-        List<CartItem> listCartItems = shoppingCartService.listCartItems(customer);
-
-        return listCartItems.isEmpty() ? List.of() : listCartItems;
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+        } catch (CustomerNotFoundException e) {
+            return List.of();
+        }
+        return shoppingCartService.listCartItems(customer);
     }
 }

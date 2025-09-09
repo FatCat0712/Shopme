@@ -129,7 +129,7 @@ public class CheckoutController {
 //        remove all items in shopping cart
         cartService.deleteByCustomer(customer);
 
-        Integer cartQuantity = cartService.fetchCartQuantityById(customer);
+        Integer cartQuantity = cartService.fetchCartQuantityByCustomer(customer);
 
 
         HttpSession session = request.getSession(false);
