@@ -15,7 +15,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css"/>
 
     <!-- Libraries Stylesheet -->
     <link th:href="@{/lib/lightbox/css/lightbox.min.css}" rel="stylesheet">
@@ -30,6 +30,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+    <script th:src="@{/lib/lightbox/js/lightbox.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
     <script type="text/javascript" th:src="@{/js/search_box.js}"></script>
 
@@ -89,8 +92,6 @@
         </div>
     </div>
 
-
-
     <div th:fragment="banner" th:remove="tag">
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container py-5">
@@ -121,6 +122,118 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="filter" th:remove="tag">
+        <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; padding: 10px;">
+            <h2>Filter</h2>
+
+            <div id="brandFilter" class="mb-2">
+                <h6>Brands</h6>
+                <div class="row">
+                    <th:block th:each="brand, status: ${listBrands}">
+                        <div class="col-12 col-sm-6" th:classappend="${status.index >= 6 ? 'd-none extra-brand' : ''}">
+                            <div class="card mb-3 brand-box" style="padding: 12px 6px;" th:brandName="${brand.name}">
+                                <img th:src="${brand.logoPath}" th:alt="${brand.name}" class="mx-auto" style="height: 28px; width: 75.6px; object-fit: contain;"/>
+                            </div>
+                        </div>
+                    </th:block>
+                    <a id="toggleBrands" href="#">View more</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr/>
+            </div>
+
+            <div id="categoryFilter" class="mb-3">
+                <h6>Categories</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <select class="form-select" multiple id="categorySelect" >
+                            <th:block th:each="cat : ${listCategories}">
+                                <option th:value="${cat.alias}">[[${cat.name}]]</option>
+                            </th:block>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <hr/>
+            </div>
+
+
+            <div id="availabilityFilter" class="mb-2">
+                <h6>Availability</h6>
+                <div class="col-12">
+                    <input type="checkbox" class="form-check-input" th:value="true">
+                    <span class="ms-1 form-check-label">In Stock</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr/>
+            </div>
+
+            <div id="discountFilter" class="mb-2">
+                <h6>Discount</h6>
+                <div class="col-12">
+                    <input type="checkbox" class="form-check-input" th:value="true">
+                    <span class="ms-1 form-check-label">On Sale</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr/>
+            </div>
+
+            <div id="ratingFilter" class="mb-3">
+                <h6>Rating</h6>
+                <div class="col-12">
+                    <label class="d-flex align-items-center gap-2">
+                        <input type="radio" name="rating" class="form-check-input" value="1">
+                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="1">
+                        <span>1</span>
+                    </label>
+                    <label class="d-flex align-items-center gap-2">
+                        <input type="radio" name="rating" class="form-check-input" value="2">
+                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="2">
+                        <span>2</span>
+                    </label>
+                    <label class="d-flex align-items-center gap-2">
+                        <input type="radio" name="rating" class="form-check-input" value="3">
+                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="3">
+                        <span>3</span>
+                    </label>
+                    <label class="d-flex align-items-center gap-2">
+                        <input type="radio" name="rating" class="form-check-input" value="4">
+                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="4">
+                        <span>4</span>
+                    </label>
+                    <label class="d-flex align-items-center gap-2">
+                        <input type="radio" name="rating" class="form-check-input" value="5">
+                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" value="5">
+                        <span>5</span>
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <button class="btn border border-secondary rounded-pill px-4 text-primary w-100" id="btnProductFilter">
+                        Filter
+                    </button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <button class="btn border border-secondary rounded-pill px-4 text-primary w-100" id="btnClearFilter">
+                        Clear
+                    </button>
                 </div>
             </div>
         </div>

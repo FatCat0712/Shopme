@@ -92,9 +92,11 @@ xmlns:th="http://www.thymeleaf.org">
 
 <script>
     $(document).ready(function() {
-             $('#categorySelect').select2();
+             $('#categorySelect').select2({
+                theme: 'bootstrap-5'
+             });
     })
 </script>
-<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/brand_filtering.js}"></script>
 </body>
 </html>

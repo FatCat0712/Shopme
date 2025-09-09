@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-        <div th:fragment="content" class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3">
+        <div th:fragment="content" class="col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card h-100 text-center border-0 shadow-sm card-hover">
                 <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark" th:title="${product.name}">
                     <img th:src="@{${product.mainImagePath}}"

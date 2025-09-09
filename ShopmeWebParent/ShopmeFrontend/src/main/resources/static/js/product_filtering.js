@@ -10,8 +10,20 @@ $(document).ready(function() {
       });
 
 
+      $("#btnClearFilter").on("click", function() {
+           const currentUrl = new URL(window.location.href);
+           const searchParams = currentUrl.searchParams;
+           searchParams.delete('brand');
+           searchParams.delete('category');
+           searchParams.delete('inStock');
+           searchParams.delete('onSales');
+           searchParams.delete('rating');
+           window.location.href = currentUrl.toString();
+      })
+
+
        $('#categorySelect').select2({
-          theme: 'bootstrap-5'
+          theme: 'bootstrap-5',
        });
 
        $('#brandFilter').on("click", function(e){
@@ -108,6 +120,8 @@ $(document).ready(function() {
             categories.forEach(category => {
                 $('#categoryFilter option[value="' + category  + '"]').prop('selected', true);
             })
+
+            $('#categorySelect').trigger('change');
        }
 
        if(params.has('inStock')) {

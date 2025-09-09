@@ -193,7 +193,7 @@ public class ProductController {
             product.setShortDescription(cleanedShortDescription);
             product.setFullDescription(cleanedFullDescription);
 
-            List<Category> listByCategoryParents =  categoryService.listNoChildrenCategories();
+            List<Category> listByCategoryParents =  categoryService.getCategoryParents(product.getCategory());
             Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
             Page<Question> listQuestions = questionService.list3MostVotedQuestions(product);
             Integer answeredQuestions = questionService.countOfAnsweredQuestions(product);
@@ -215,7 +215,7 @@ public class ProductController {
                 }
             }
 
-            model.addAttribute("listCategories", listByCategoryParents);
+            model.addAttribute("listCategoryParents", listByCategoryParents);
             model.addAttribute("listReviews", listReviews);
             model.addAttribute("listQuestions", listQuestions);
             model.addAttribute("answeredQuestions", answeredQuestions);
