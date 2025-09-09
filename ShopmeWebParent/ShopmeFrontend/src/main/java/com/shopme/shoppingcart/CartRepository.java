@@ -27,4 +27,8 @@ public interface CartRepository extends CrudRepository<CartItem, Integer> {
     @Modifying
     void deleteByCustomer(Integer customerId);
 
+    @Query("SELECT SUM(c.quantity) FROM CartItem c WHERE c.customer.id = ?1")
+    Integer sumByCustomerId(Integer customerId);
+
+
 }

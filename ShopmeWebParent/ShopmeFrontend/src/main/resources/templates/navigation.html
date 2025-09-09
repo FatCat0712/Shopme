@@ -18,6 +18,7 @@
                             <div class="d-flex m-3 me-0">
                                 <a th:href="@{/home}" class="nav-item nav-link active" id="home">Homepage</a>
                                 <a th:href="@{'/products'}" class="nav-item nav-link">Products</a>
+                                <a th:href="@{'/m/about-us'}" class="nav-item nav-link">About Us</a>
                             </div>
                             <div class="d-flex m-3 me-0">
                                 <div class="search-wrapper">
@@ -41,86 +42,100 @@
                                         </span>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu--cart p-4" aria-labelledby="dropdownCartLink">
-                                            <th:block  th:if="${#lists.isEmpty(listCartDetails)}">
+                                            <th:block  th:if="${#lists.isEmpty(listCartItems)}">
                                                 <li id="emptyCart" class="emptyCart">
                                                     <div class="row">
                                                         <div class="col-12 d-flex flex-column align-items-center">
                                                             <img th:src="@{/images/cart-empty-img.png}" style="width: 60%">
-                                                            <span>Giỏ hàng đang trống</span>
+                                                            <span>Cart is empty</span>
                                                         </div>
                                                     </div>
                                                 </li>
                                             </th:block>
-
-                                            <th:block  th:each="detail : ${listCartDetails}">
-                                                <li th:with="product = ${detail.product}">
-                                                    <div class="row align-items-center" th:data-product-id="${product.id}">
-                                                        <div class="col-sm-2">
-                                                            <img th:src="${product.imagePath}" th:alt="${product.name}" style="width: 60px;">
+                                                <th:block  th:each="item : ${listCartItems}">
+                                                    <li th:with="product = ${item.product}">
+                                                        <div class="row align-items-center" th:data-product-id="${product.id}">
+                                                            <div class="col-sm-2">
+                                                                <img th:src="${product.mainImagePath}" th:alt="${product.name}" style="width: 60px;">
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div>
+                                                                        <b>
+                                                                            [[${product.shortName}]]
+                                                                        </b>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small><span th:replace="~{fragments :: format_currency(${product.price})}"></span></small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div>
+                                                                        <small>
+                                                                            Brand: [[${product.brand.name}]]
+                                                                        </small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span class="mx-2">x</span>
+                                                                        <span><small>[[${item.quantity}]]</small></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-10">
-                                                            <div class="d-flex justify-content-between">
-                                                                <div>
-                                                                    <b>
-                                                                        [[${product.name}]]
-                                                                    </b>
-                                                                </div>
-                                                                <div>
-                                                                    <small><span th:replace="~{client/layout/fragments :: format_currency(${product.price})}"></span></small>
-                                                                    <span class="mx-2">x</span>
-                                                                    <span><small>[[${detail.quantity}]]</small></span>
+                                                    </li>
+                                                </th:block>
 
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div>
-                                                                    <small>
-                                                                        Hãng: [[${product.factory}]]
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </th:block>
 
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <th:block th:unless="${#lists.isEmpty(listCartDetails)}">
+                                            <th:block th:unless="${#lists.isEmpty(listCartItems)}">
                                                 <li class="d-flex justify-content-end">
                                                     <a class="btn border border-secondary rounded-pill px-3 text-primary" th:href="@{/cart}">
-                                                        Đi đến giỏ hàng
+                                                        Go to cart
                                                     </a>
                                                 </li>
                                             </th:block>
 
                                         </ul>
-
                                     </div>
 
                                     <div class="dropdown my-auto">
                                         <a href="#" class="dropdown" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-user fa-2x"></i>
                                         </a>
-                                        <ul class="dropdown-menu dropdown-menu-end p-4" aria-labelledby="dropdownMenuLink">
-                                            <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
-                                                <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                        <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="dropdownMenuLink">
+                                            <li class="d-flex align-items-center flex-column" style="min-width: 200px;">
+                                                <img style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden;"
                                                      th:src="${session.avatar}" />
-                                                <div class="text-center my-3">
-                                                    <span>[[${session.fullName}]]</span>
-                                                </div>
                                             </li>
-                                            <li><a class="dropdown-item nav-item nav-link" href="#">Quản lý tài khoản</a></li>
-                                            <li><a class="dropdown-item nav-item nav-link" th:href="@{/order_history}">Lịch sử mua hàng</a></li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link"th:href="@{/account_details}" sec:authentication="principal.fullName" style="font-weight: 700; padding: 0 15px 5px;"></a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link" style="padding: 0 15px 5px;" th:href="@{/cart}">Your cart</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link" style="padding: 0 15px 5px;" th:href="@{/address_book}">Address Book</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link" style="padding: 0 15px 5px;" th:href="@{/questions}">Questions</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link" style="padding: 0 15px 5px;" th:href="@{/reviews}">Reviews</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item nav-item nav-link" style="padding: 0 15px 5px;" th:href="@{/orders}">Orders</a>
+                                            </li>
+
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li>
                                                 <form method="post" th:action="@{/logout}">
-                                                    <button type="submit" class="dropdown-item nav-item nav-link" href="#">Đăng xuất</button>
+                                                    <button type="submit" class="btn nav-item nav-link" href="#">Logout</button>
                                                 </form>
                                             </li>
                                         </ul>
@@ -222,7 +237,7 @@
                                         <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
                                     </li>
                                     <li class="nav-item mx-2">
-                                        <a class="nav-link" id="logoutLink" href="javascript: document.logoutForm.submit()">Logout</a>
+
                                     </li>
                                 </th:block>
                             </ul>

@@ -1,18 +1,20 @@
 <div th:fragment="content" th:remove="tag">
     <div class="row justify-content-around mt-1 my-4">
-        <div th:replace="~{order/order_status_fragment :: content(${order.processing}, 'processing' ,'fa-spinner')}"></div>
-        <div th:replace="~{order/order_status_fragment :: content(${order.picked}, 'picked' ,'fa-people-carry')}"></div>
-        <div th:replace="~{order/order_status_fragment :: content(${order.shipping}, 'shipping' ,'fa-shipping-fast')}"></div>
-        <div th:replace="~{order/order_status_fragment :: content(${order.delivered}, 'delivered' ,'fa-box-open')}"></div>
-
-
-        <div th:if="${order.returned}">
+        <div class="col">
+            <div th:replace="~{order/order_status_fragment :: content(${order.processing}, 'processing' ,'fa-spinner')}"></div>
+        </div>
+        <div class="col">
+            <div th:replace="~{order/order_status_fragment :: content(${order.picked}, 'picked' ,'fa-people-carry')}"></div>
+        </div>
+       <div class="col">
+           <div th:replace="~{order/order_status_fragment :: content(${order.shipping}, 'shipping' ,'fa-shipping-fast')}"></div>
+       </div>
+       <div class="col">
+           <div th:replace="~{order/order_status_fragment :: content(${order.delivered}, 'delivered' ,'fa-box-open')}"></div>
+       </div>
+        <div th:if="${order.returned}" class="col">
             <div th:replace="~{order/order_status_fragment :: content(${order.returned}, 'returned' ,'fa-undo')}"></div>
         </div>
-
-
-
-
 
     </div>
     <div class="full-details table-responsive">
@@ -52,7 +54,5 @@
                 <p th:text="${track.notes}"></p>
             </li>
         </ul>
-
-
     </div>
 </div>

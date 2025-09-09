@@ -3,128 +3,124 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <div th:replace="~{fragments :: page_head('Reviews', 'none')}">...</div>
-<body  >
+<body >
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <div th:replace="~{navigation :: header_menu}">...</div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-10 mx-auto">
-                <div  class="d-flex flex-column min-vh-100">
-                    <div th:replace="~{navigation :: header_menu}">...</div>
-                    <div th:replace="~{navigation :: quick_links}">...</div>
-
-                    <form th:action="@{${moduleURL} + '/page/1'}" method="get" class="form-inline m-3">
-                        <input type="hidden" name="sortField" th:value="${sortField}">
-                        <input type="hidden" name="sortDir" th:value="${sortDir}">
-                        <div class="input-group">
-                            <label class="col-form-label d-none d-sm-inline-block" for="search" >Filter orders:</label>
-                            <div class="col-auto">
-                                <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
-                            </div>
-                            <button type="submit" value="Search" class="btn btn-primary">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            &nbsp;
-                            <button type="button" class="btn btn-secondary" onclick="clearFilter()">
-                                <i class="fas fa-eraser"></i>
-                            </button>
+        <div class="container">
+            <div class="row" style="margin-top: 100px;">
+                <form th:action="@{${moduleURL} + '/page/1'}" method="get" class="form-inline m-3">
+                    <input type="hidden" name="sortField" th:value="${sortField}">
+                    <input type="hidden" name="sortDir" th:value="${sortDir}">
+                    <div class="input-group">
+                        <label class="col-form-label d-none d-sm-inline-block" for="search" >Filter orders:</label>
+                        <div class="col-auto">
+                            <input type="search" name="keyword" class="form-control" th:value="${keyword}" id="search" th:placeholder="Search..." required>
                         </div>
-                    </form>
+                        <button type="submit" value="Search" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-secondary" onclick="clearFilter()">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                </form>
 
-                    <main class="flex-fill">
-                        <div class="text-center">
-                            <h2>Reviews Posted by me</h2>
-                        </div>
+                <div class="text-center">
+                    <h2>Reviews Posted by me</h2>
+                </div>
 
-                        <div class="full-details table-responsive">
-                            <table class="table table-striped table-bordered">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th class="hideable-column">
-                                        <div th:replace="~{fragments :: column_link('id','ID', 'tag')}"></div>
-                                    </th>
-                                    <th>
-                                        <div th:replace="~{fragments :: column_link('product',Product, 'tag')}"></div>
-                                    </th>
-                                    <th>
-                                        <div th:replace="~{fragments :: column_link('headline','Headline', 'tag')}"></div>
-                                    </th>
-                                    <th>
-                                        <div th:replace="~{fragments :: column_link('rating','Rating', 'tag')}"></div>
-                                    </th>
-                                    <th>
-                                        <div th:replace="~{fragments :: column_link('reviewTime','Review Time', 'tag')}"></div>
-                                    </th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="review : ${listReviews}">
-                                    <td class="hideable-column">[[${review.id}]]</td>
-                                    <td>
-                                        <a class="text-decoration-none" th:href="@{'/p/' + ${review.product.alias}}" target="_blank">
-                                            [[${review.product.shortName}]]
-                                        </a>
-                                    </td>
-                                    <td>[[${review.headline}]]</td>
-                                    <td>
-                                        [[${review.rating}]]
-                                    </td>
-                                    <td>
-                                        [[${review.reviewTime}]]
-                                    </td>
-                                    <td>
+                <div class="full-details table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="hideable-column">
+                                <div th:replace="~{fragments :: column_link('id','ID', 'tag')}"></div>
+                            </th>
+                            <th>
+                                <div th:replace="~{fragments :: column_link('product',Product, 'tag')}"></div>
+                            </th>
+                            <th>
+                                <div th:replace="~{fragments :: column_link('headline','Headline', 'tag')}"></div>
+                            </th>
+                            <th>
+                                <div th:replace="~{fragments :: column_link('rating','Rating', 'tag')}"></div>
+                            </th>
+                            <th>
+                                <div th:replace="~{fragments :: column_link('reviewTime','Review Time', 'tag')}"></div>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="review : ${listReviews}">
+                            <td class="hideable-column">[[${review.id}]]</td>
+                            <td>
+                                <a class="text-decoration-none" th:href="@{'/p/' + ${review.product.alias}}" target="_blank">
+                                    [[${review.product.shortName}]]
+                                </a>
+                            </td>
+                            <td>[[${review.headline}]]</td>
+                            <td>
+                                [[${review.rating}]]
+                            </td>
+                            <td>
+                                [[${review.reviewTime}]]
+                            </td>
+                            <td>
                                     <span>
                                         <a class="fas fa-file-alt fa-2x icon-green link-detail--review" th:href="@{'/review/details/' + ${review.id}}"></a>
                                     </span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                        <div class="less-details">
-                            <div th:each="review : ${listReviews}" class="card mb-3 shadow-sm p-3">
-                                <div  class="row align-items-center g-3">
-                                    <div class="col-auto">
-                                        <span class="text-muted">[[${review.id}]]</span>
+                <div class="less-details">
+                    <div th:each="review : ${listReviews}" class="card mb-3 shadow-sm p-3">
+                        <div  class="row align-items-center g-3">
+                            <div class="col-auto">
+                                <span class="text-muted">[[${review.id}]]</span>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                    <div>
+                                        <a class="text-muted text-decoration-none  link-detail--product" th:href="@{'/products/detail/' + ${review.product.id}}">[[${review.product.shortName}]]</a>
                                     </div>
-
-                                    <div class="col">
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap">
-                                            <div>
-                                                <a class="text-muted text-decoration-none  link-detail--product" th:href="@{'/products/detail/' + ${review.product.id}}">[[${review.product.shortName}]]</a>
-                                            </div>
-                                            <div class="row w-100 mt-3 flex-nowrap justify-content-between">
-                                                <div class="pl-3">
-                                                    [[${review.rating}]] <span class="fa-regular fa-star"></span>
-                                                </div>
-                                                <div class="pr-4">
-                                                    <a class="fas fa-file-alt fa-2x icon-green link-detail--review" th:href="@{'/review/details/' + ${review.id}}"></a>
-                                                </div>
-                                            </div>
-
+                                    <div class="row w-100 mt-3 flex-nowrap justify-content-between">
+                                        <div class="pl-3">
+                                            [[${review.rating}]] <span class="fa-regular fa-star"></span>
+                                        </div>
+                                        <div class="pr-4">
+                                            <a class="fas fa-file-alt fa-2x icon-green link-detail--review" th:href="@{'/review/details/' + ${review.id}}"></a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </main>
-
-                    <div class="modal fade" id="reviewDetailModal">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                            </div>
-                        </div>
                     </div>
-
-                    <div th:replace="~{fragments :: pagination('/reviews' ,'review')}"></div>
-
-
-                    <div th:replace="~{navigation :: footer_menu}"></div>
                 </div>
-            </div>
 
+
+                <div th:replace="~{fragments :: pagination('/reviews' ,'review')}"></div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="reviewDetailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
+    <div th:replace="~{fragments :: footer}"></div>
 
 </body>
 <script type="text/javascript">

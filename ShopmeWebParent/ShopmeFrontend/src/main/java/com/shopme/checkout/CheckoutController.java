@@ -21,6 +21,7 @@ import com.shopme.shoppingcart.ShoppingCartService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -104,7 +105,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/place_order")
-    public String placeOrder(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public String placeOrder(HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException {
         String paymentType = request.getParameter("paymentMethod");
         PaymentMethod paymentMethod = PaymentMethod.valueOf(paymentType);
 
@@ -127,6 +128,16 @@ public class CheckoutController {
 
 //        remove all items in shopping cart
         cartService.deleteByCustomer(customer);
+
+        Integer cartQuantity = cartService.fetchCartQuantityById(customer);
+
+
+        HttpSession session = request.getSession(false);
+        session.setAttribute("sum", cartQuantity);
+
+        model.addAttribute("listCartItems", List.of());
+
+
 
 //        send order confirmation email
         sendOrderConfirmationEmail(request, createdOrder);
@@ -185,7 +196,7 @@ public class CheckoutController {
         String message;
         try {
             if(paypalService.validateOrder(orderId)) {
-                return placeOrder(request);
+                return placeOrder(request, model);
             }
             else {
                 pageTitle = "Checkout Failure";

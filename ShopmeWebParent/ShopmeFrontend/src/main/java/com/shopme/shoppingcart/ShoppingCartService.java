@@ -63,6 +63,10 @@ public class ShoppingCartService {
         }
     }
 
+    public Integer fetchCartQuantityById(Customer customer) {
+        return cartRepository.sumByCustomerId(customer.getId());
+    }
+
 
     public void removeProduct(Integer productId, Customer customer) {
         cartRepository.deleteByCustomerAndProduct(customer.getId(), productId);

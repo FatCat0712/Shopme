@@ -5,17 +5,22 @@ xmlns:th="http://www.thymeleaf.org"
 
 <head th:replace="~{fragments :: page_head('Shopme', 'none')}">...</head>
 <body>
-        <div class="container-fluid">
-                <div th:replace="~{navigation :: header_menu}">...</div>
-                <div th:replace="~{navigation :: quick_links}">...</div>
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <div th:replace="~{navigation :: header_menu}">...</div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row" style="margin-top: 120px;">
                 <div class="text-center border border-secondary rounded m-3 p-3">
-                        <h2>Your order has been completed</h2>
-                        <h4>A confirmation email has been sent to you.</h4>
-                        <h4>Kindly check your email for the detail</h4>
+                    <h2>Your order has been completed</h2>
+                    <h4>A confirmation email has been sent to you.</h4>
+                    <h4>Kindly check your email for the detail</h4>
                 </div>
-
-                <div th:replace="~{navigation :: footer_menu}"></div>
+            </div>
         </div>
+    </div>
+    <div th:replace="~{fragments :: footer}"></div>
 
 
 </body>
