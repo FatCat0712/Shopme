@@ -1,8 +1,9 @@
 package com.shopme.customer;
 
+import com.shopme.SupabaseS3Util;
 import com.shopme.Utility;
-import com.shopme.common.entity.country.Country;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.country.Country;
 import com.shopme.security.CustomerDetails;
 import com.shopme.security.oauth.CustomerOAuth2User;
 import com.shopme.setting.EmailSettingBag;
@@ -18,13 +19,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class CustomerController {
@@ -50,9 +55,36 @@ public class CustomerController {
     }
 
     @PostMapping("/create_customer")
-    public String createCustomer(HttpServletRequest request, Customer customer,  Model model) throws MessagingException, UnsupportedEncodingException {
-        customerService.registerCustomer(customer);
-        sendVerificationEmail(request, customer);
+    public String createCustomer(
+            HttpServletRequest request, @RequestParam(name ="avatar") MultipartFile multipartFile,
+            Customer customer, Model model
+    )
+    {
+        if(!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            customer.setAvatar(fileName);
+            Customer newCustomer = customerService.registerCustomer(customer);
+            String uploadDir = "customer-avatars/" + newCustomer.getId();
+            SupabaseS3Util.removeFolder(uploadDir);
+            try {
+                SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
+            } catch (IOException e) {
+                return "error/500";
+            }
+        }
+        else {
+            if(customer.getAvatar().isEmpty()) {
+                customer.setAvatar(null);
+            }
+           customerService.registerCustomer(customer);
+        }
+
+
+        try {
+            sendVerificationEmail(request, customer);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+           return "error/500";
+        }
         model.addAttribute("pageTitle", "Registration Succeeded");
         return "/register/register_success";
     }
@@ -103,10 +135,32 @@ public class CustomerController {
     }
 
     @PostMapping("/update_account_details")
-    public String updateAccountDetails(Customer customer, HttpServletRequest request, RedirectAttributes ra, Model model) {
+    public String updateAccountDetails(
+            Customer customer,@RequestParam(name = "image", required = false) MultipartFile multipartFile,
+               HttpServletRequest request, RedirectAttributes ra, Model model
+    ) {
         String redirectURL = null;
+        Customer updatedCustomer = null;
         try{
-            Customer updatedCustomer = customerService.update(customer);
+            if(!multipartFile.isEmpty()) {
+                String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+                customer.setAvatar(fileName);
+               updatedCustomer = customerService.update(customer);
+                String uploadDir = "customer-avatars/" + updatedCustomer.getId();
+                SupabaseS3Util.removeFolder(uploadDir);
+                try {
+                    SupabaseS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
+                } catch (IOException e) {
+                   return "error/500";
+                }
+            }
+            else {
+                if(customer.getAvatar().isEmpty()) {
+                    customer.setAvatar(null);
+                }
+                updatedCustomer = customerService.update(customer);
+            }
+
             ra.addFlashAttribute("message", "Your account details have been updated");
             model.addAttribute("customer", updatedCustomer);
             updateNameForAuthenticatedCustomer(customer, request);

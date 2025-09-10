@@ -32,6 +32,14 @@ $(document).ready(function () {
             $(".link-delete-track").each(function (index, element) {
                 $(element).attr("rowNumber", index + 1);
             })
+
+            $("#trackList .order-status").each(function(index, element) {
+                $(element).attr("rowNumber", index + 1);
+            })
+
+            $("#trackList .order-note").each(function(index, element) {
+                $(element).attr("id", 'notes' + (index + 1));
+            })
         }
 
     })
@@ -115,7 +123,7 @@ function generateTrackHtmlCode() {
                                 <label class="col-form-label">Notes:</label>
                             </div>
                             <div  class="col-sm-10">
-                                <textarea rows="2" name="trackNote" id="notes${nextCount}" class="form-control" style="max-width: 300px" required></textarea>
+                                <textarea rows="2" name="trackNote" id="notes${nextCount}" class="form-control order-note" style="max-width: 300px" required></textarea>
                             </div>
                         </div>
                 </div>

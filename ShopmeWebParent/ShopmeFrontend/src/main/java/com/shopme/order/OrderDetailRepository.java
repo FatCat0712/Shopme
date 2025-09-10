@@ -16,4 +16,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
             "AND od.order.customer.id = ?2 " +
             "AND ot.status = ?3")
     Long countByProductAndCustomerAndOrderStatus(Integer productId, Integer customerId, OrderStatus status);
+
+
 }

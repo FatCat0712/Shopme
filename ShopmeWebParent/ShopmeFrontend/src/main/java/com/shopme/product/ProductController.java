@@ -199,7 +199,12 @@ public class ProductController {
             Page<Question> listQuestions = questionService.list3MostVotedQuestions(product);
             Integer answeredQuestions = questionService.countOfAnsweredQuestions(product);
 
-            Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+            Customer customer = null;
+            try {
+                customer = controllerHelper.getAuthenticatetdCustomer(request);
+            } catch (CustomerNotFoundException ignored) {
+
+            }
 
             if(customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
@@ -228,10 +233,9 @@ public class ProductController {
             return "product/product_detail";
         } catch (ProductNotFoundException e) {
             return "error/404";
-        } catch (CustomerNotFoundException e) {
-            return "error/403";
         }
     }
+
 
     @GetMapping("/search")
     public String searchFirstPage(@RequestParam("keyword") String keyword, Model model) {

@@ -10,44 +10,51 @@
     <script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <div th:replace="~{navigation :: header_menu}"></div>
-        <div th:replace="~{navigation :: search_bar}">...</div>
-        <div th:replace="~{navigation :: quick_links}">...</div>
-
-        <div>
-            <h2>
-                Write Product Review
-            </h2>
-        </div>
-
-        <div>
-            <img th:src="@{${review.product.mainImagePath}}" style="width: 200px"/>
-        </div>
-
-        <div>
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <div th:replace="~{navigation :: header_menu}">...</div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row" style="margin-top: 120px;">
                 <div>
-                    <h4>[[${review.product.name}]]</h4>
+                    <h2>
+                        Write Product Review
+                    </h2>
                 </div>
-                <span class="h4 text-success">
+                <div>
+                    <img th:src="@{${review.product.mainImagePath}}" style="width: 200px"/>
+                </div>
+
+                <div>
+                    <div>
+                        <h4>[[${review.product.name}]]</h4>
+                    </div>
+                    <span class="h4 text-success">
                     Your review has been posted!
                 </span>
-        </div>
+                </div>
 
-        <div class="border border-secondary rounded p-3" style="max-width: 600px; margin: 0 auto">
-            <p>
-                <input type="text" th:value="${review.rating}" class="product-rating-star" dir="ltr" data-size="md" data-step="1"/>
-            </p>
-            <p>
-                <input type="text" th:value="${review.headline}" class="form-control" readonly>
-            </p>
-            <p>
-                <textarea th:text="${review.comment}" class="form-control" rows="3" cols="10" readonly></textarea>
-            </p>
-        </div>
+                <div class="border border-secondary rounded p-3" style="max-width: 600px; margin: 0 auto">
+                    <p>
+                        <input type="text" th:value="${review.rating}" class="product-rating-star" dir="ltr" data-size="md" data-step="1"/>
+                    </p>
+                    <p>
+                        <input type="text" th:value="${review.headline}" class="form-control" readonly>
+                    </p>
+                    <p>
+                        <textarea th:text="${review.comment}" class="form-control" rows="3" cols="10" readonly></textarea>
+                    </p>
+                </div>
 
-        <div>&nbsp;</div>
-        <div th:replace="~{navigation :: footer_menu}"></div>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div th:replace="~{fragments :: footer}"></div>
 
 
     </div>

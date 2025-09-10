@@ -67,7 +67,7 @@ public class Brand extends IdBasedEntity {
 
     @Transient
     public String getLogoPath() {
-        if(this.id == null) return "/images/image-thumbnail.png";
+        if(this.id == null) return Constants.SUPABASE_URI + "/default-images/image-thumbnail.png";
         return Constants.SUPABASE_URI + "/brand-logos/" + this.id + "/" + this.logo;
     }
 

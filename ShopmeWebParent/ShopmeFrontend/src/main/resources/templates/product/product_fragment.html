@@ -41,7 +41,9 @@
                 </span>
                 <del>
                     <span>
-                        <div th:replace="~{product/product_fragment :: price_fragment(${product.price})}">...</div>
+                        <small>
+                             <div th:replace="~{product/product_fragment :: price_fragment(${product.price})}">...</div>
+                        </small>
                     </span>
                 </del>
             </th:block>

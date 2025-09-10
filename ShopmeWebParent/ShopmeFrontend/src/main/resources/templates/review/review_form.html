@@ -10,59 +10,65 @@
     <script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <div th:replace="~{navigation :: header_menu}"></div>
-        <div th:replace="~{navigation :: search_bar}">...</div>
-        <div th:replace="~{navigation :: quick_links}">...</div>
-
-        <div>
-            <h2>
-                Write Product Review
-            </h2>
-        </div>
-
-        <div class="text-center">
-            <img th:src="@{${product.mainImagePath}}" style="width: 200px"/>
-        </div>
-
-        <div>
-                <div>
-                    <h4>[[${product.name}]]</h4>
-                </div>
-
-                <div th:if="${customerReviewed}">
-                    <span class="text-success">You already reviewed this product</span>
-                </div>
-
-                <div th:if="${noPreviewPermission}">
-                    <span class="text-danger">You can't review this product because you did not purchase it, or you have not received the product yet</span>
-                </div>
-        </div>
-
-        <form th:if=${customerCanReview} th:action="@{/post_review}" method="post" th:object="${review}" style="max-width: 600px; margin: 0 auto">
-                <div class="border border-secondary rounded p-3">
-                    <input type="hidden" name="productId" th:value="${product.id}">
-                    <p>
-                        <input type="text" th:field="*{rating}" class="product-rating-star" dir="ltr" data-size="md" data-step="1"/>
-                    </p>
-                    <p>
-                        <input type="text" th:field="*{headline}" class="form-control" placeholder="Headline or Summary" required minlength="10" maxlength="128">
-                    </p>
-                    <p>
-                        <textarea th:field="*{comment}" class="form-control" rows="3" cols="10" placeholder="Comment Details" required ></textarea>
-                    </p>
-                    <p>
-                        <input type="submit" value="Post this Review" class="btn btn-primary">
-                    </p>
-                </div>
-        </form>
-
-
-        <div>&nbsp;</div>
-        <div th:replace="~{navigation :: footer_menu}"></div>
-
-
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
     </div>
+    <div th:replace="~{navigation :: header_menu}"></div>
+
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row" style="margin-top: 120px;">
+                <div class="text-center">
+                    <h2>
+                        Write Product Review
+                    </h2>
+                </div>
+
+                <div class="text-center">
+                    <img th:src="@{${product.mainImagePath}}" style="width: 200px"/>
+                </div>
+
+                <div class="text-center">
+                    <div>
+                        <h4>[[${product.name}]]</h4>
+                    </div>
+
+                    <div th:if="${customerReviewed}">
+                        <span class="text-success">You already reviewed this product</span>
+                    </div>
+
+                    <div th:if="${noPreviewPermission}">
+                        <span class="text-danger">You can't review this product because you did not purchase it, or you have not received the product yet</span>
+                    </div>
+                </div>
+
+                <form th:if=${customerCanReview} th:action="@{/post_review}" method="post" th:object="${review}" style="max-width: 600px; margin: 0 auto">
+                    <div class="border border-secondary rounded p-3">
+                        <input type="hidden" name="productId" th:value="${product.id}">
+                        <p class="text-center">
+                            <input type="text" th:field="*{rating}" class="product-rating-star" dir="ltr" data-size="md" data-step="1"/>
+                        </p>
+                        <p>
+                            <input type="text" th:field="*{headline}" class="form-control" placeholder="Headline or Summary" required minlength="10" maxlength="128">
+                        </p>
+                        <p>
+                            <textarea th:field="*{comment}" class="form-control" rows="3" cols="10" placeholder="Comment Details" required ></textarea>
+                        </p>
+                        <p class="text-center">
+                            <input type="submit" value="Post this Review" class="btn btn-primary">
+                        </p>
+                    </div>
+                </form>
+
+
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="~{fragments :: footer}"></div>
     <script type="text/javascript">
         $(".product-rating-star").rating({
             hoverOnClear: false,

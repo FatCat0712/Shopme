@@ -34,6 +34,9 @@ public class Customer extends AbstractAddressWithCountry{
     @Column(name="verification_code", length = 64)
     private String verificationCode;
 
+    @Column(name = "avatar", length = 128)
+    private String avatar;
+
 
     public Customer() {
     }
@@ -60,6 +63,13 @@ public class Customer extends AbstractAddressWithCountry{
         return firstName + " " + lastName;
     }
 
+    @Transient
+    public String getAvatarPath() {
+        if(avatar == null) return Constants.SUPABASE_URI + "/default-images/default-user.png";
+        return Constants.SUPABASE_URI + "/customer-avatars/" + this.id + "/" + this.avatar;
+    }
+
+    @Transient
     public String getDefaultAddress() {
         String address = firstName;
         if(lastName != null && !lastName.isEmpty())  address += " " + lastName;

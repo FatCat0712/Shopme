@@ -62,8 +62,13 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/cart/update_cart_preview")
-    public String updateCartPreview(HttpServletRequest request, Model model) throws CustomerNotFoundException {
-        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+    public String updateCartPreview(HttpServletRequest request, Model model) {
+        Customer customer = null;
+        try {
+            customer = controllerHelper.getAuthenticatetdCustomer(request);
+        } catch (CustomerNotFoundException ignored) {
+
+        }
         HttpSession session = request.getSession(false);
         if(customer != null) {
             List<CartItem> listCartItems = cartService.listCartItems(customer);

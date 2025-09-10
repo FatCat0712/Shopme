@@ -61,8 +61,15 @@ xmlns:th="http://www.thymeleaf.org">
                                                 </table>
                                             </div>
                                             <div th:replace="~{product/product_fragment :: product_price}">...</div>
+                                            <input type="hidden" th:id="'quantity' + ${product.id}" value="1">
                                         </div>
                                     </a>
+                                    <button
+                                            class="mt-2 btn border border-secondary rounded-pill px-3 text-primary mx-auto addToCart"
+                                            th:productId="${product.id}"
+                                    >
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                    </button>
                                 </div>
                             </div>
 
@@ -78,16 +85,26 @@ xmlns:th="http://www.thymeleaf.org">
 
         </div>
     </div>
-    <div th:replace="~{fragments :: footer}">...</div>
+
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <div th:replace="~{fragments :: modal_dialog}"></div>
+    <div th:replace="~{fragments :: footer}">...</div>
+
     <script type="text/javascript">
         $(".product-detail-rating-star").rating({
           displayOnly: true,
           hoverOnClear: false,
           showCaption: false,
         });
+
+        let contextPath = "[[@{/}]]";
+        let csrfHeaderName = "[[${_csrf.headerName}]]";
+        let csrfValue = "[[${_csrf.token}]]";
     </script>
     <script type="text/javascript" th:src="@{/js/highlight_link.js}"></script>
     <script  th:src="@{/js/product_filtering.js}"></script>
+    <script  th:src="@{/js/common_modal.js}"></script>
+    <script  th:src="@{/js/add_to_cart.js}"></script>
 </body>
 </html>

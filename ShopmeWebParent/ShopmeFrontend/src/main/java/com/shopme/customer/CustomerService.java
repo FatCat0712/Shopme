@@ -37,7 +37,7 @@ public class CustomerService{
         return customer == null;
     }
     
-    public void registerCustomer(Customer customer) {
+    public Customer registerCustomer(Customer customer) {
         encodePassword(customer);
         customer.setEnabled(false);
         customer.setCreatedTime(new Date());
@@ -47,7 +47,7 @@ public class CustomerService{
         customer.setVerificationCode(randomCode);
 
 
-        customerRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     public Customer update(Customer customer) throws CustomerNotFoundException {

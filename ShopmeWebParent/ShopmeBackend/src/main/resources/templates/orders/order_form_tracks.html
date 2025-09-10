@@ -12,7 +12,11 @@
                     <input type="hidden" name="trackId" class="hiddenTrackId" th:value="${track.id}">
                     <div class="col-sm-2">
                         <div class="track-count">[[${status.count}]]</div>
-                        <div><a th:unless="${track.status.name() == 'NEW'}" class="fas fa-trash icon-dark link-delete-track" href="" th:rowNumber="${status.count}"></a></div>
+                        <div>
+                            <a th:unless="${track.status.name() == 'NEW'}" class="link-delete-track" href="#" th:rowNumber="${status.count}">
+                                <i class="fa-solid fa-trash icon-dark"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="col-sm-10">
                         <div class="row mb-3">
@@ -38,7 +42,7 @@
                                 <label class="col-form-label">Notes:</label>
                             </div>
                             <div  class="col-sm-10">
-                                <textarea rows="2" name="trackNote" th:id="'notes' + ${status.count}" class="form-control"  th:readonly="${track.status.name() == 'NEW'}" style="max-width: 300px" required>[[${track.notes}]]</textarea>
+                                <textarea rows="2" name="trackNote" th:id="'notes' + ${status.count}" class="form-control order-note"  th:readonly="${track.status.name() == 'NEW'}" style="max-width: 300px" required>[[${track.notes}]]</textarea>
                             </div>
                         </div>
                 </div>

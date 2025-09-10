@@ -16,7 +16,7 @@ xmlns:th="http://www.thymeleaf.org"
                 <div class="text-center">
                     <h2>Your Account Details</h2>
                 </div>
-                <form th:action="@{/update_account_details}" method="post" th:object="${customer}" style="width: 80%; margin: 0 auto 50px auto">
+                <form th:action="@{/update_account_details}" method="post" th:object="${customer}" style="width: 86%; margin: 0 auto 50px auto" enctype="multipart/form-data">
                     <div th:if="${message != null}" class="alert alert-success text-center">
                         [[${message}]]
                     </div>
@@ -105,7 +105,7 @@ xmlns:th="http://www.thymeleaf.org"
                                 <div class="row mb-3">
                                     <label class="col-form-label col-sm-4">Country: </label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" th:field="*{country}">
+                                        <select class="form-select" th:field="*{country}">
                                             <th:block th:each="country : ${listCountries}">
                                                 <option th:value="${country.id}">[[${country.name}]]</option>
                                             </th:block>
@@ -127,6 +127,16 @@ xmlns:th="http://www.thymeleaf.org"
                                         <input  class="form-control" type="text" th:field="*{postalCode}" minlength="2" maxlength="10">
                                     </div>
                                 </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-4 col-form-label">Avatar:</label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" th:field="*{avatar}">
+                                        <input type="file" id="fileImage" name="image" accept="image/png, image/jpeg" class="mb-2">
+                                        <img id="thumbnail" alt="Photos preview" th:src="@{${customer.avatarPath}}" class="img-fluid"/>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -144,6 +154,7 @@ xmlns:th="http://www.thymeleaf.org"
 
 <script type="text/javascript">
         let contextPath = "[[@{/}]]";
+        let MAX_FILE_SIZE = 102400; //100KB
 </script>
 <script th:src="@{/js/common_customer_form.js}"></script>
 </body>

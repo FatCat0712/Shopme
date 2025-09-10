@@ -36,6 +36,7 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
                 session.setAttribute("email", customer.getEmail());
                 Integer cartQuantity = shoppingCartService.fetchCartQuantityByCustomer(customer);
                 session.setAttribute("sum", cartQuantity != null ? cartQuantity : 0);
+                session.setAttribute("avatar", customer.getAvatarPath());
                 customerService.updateAuthenticationType(customer, AuthenticationType.DATABASE);
             }
 
