@@ -132,7 +132,7 @@ i. **Configure Database**
 
 ### - Administrator Site Settings
 
-![Image](app_images/admin_site_settings.jpg)
+![Image](app_images/admin_site_setting.jpg)
 
 ## 9. Contribution
 
