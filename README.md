@@ -100,7 +100,7 @@ i. **Configure Database**
 
 ### - Customer Product Filtering
 
-![Image](app_images/customer_product_filtering.png)
+![Image](app_images/customer_product_filtering.jpg)
 
 ### - Customer Manage Orders
 
