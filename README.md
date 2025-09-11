@@ -120,7 +120,7 @@ i. **Configure Database**
 
 ### - Administrator Manage Customers
 
-![Image](app_images/admin_mangage_customers.jpg)
+![Image](app_images/admin_manage_customers.jpg)
 
 ### - Administrator Manage Products
 
@@ -128,7 +128,7 @@ i. **Configure Database**
 
 ### - Administrator Manage Users 
 
-![Image](app_images/amin_manage_users.jpg)
+![Image](app_images/admin_manage_users.jpg)
 
 ### - Administrator Site Settings
 
