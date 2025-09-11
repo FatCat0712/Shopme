@@ -98,6 +98,10 @@ i. **Configure Database**
 
 ![Image](app_images/customer_checkout.png)
 
+### - Customer Product Filtering
+
+![Image](app_images/customer_product_filtering.png)
+
 ### - Customer Manage Orders
 
 ![Image](app_images/customer_manage_orders.jpg)
