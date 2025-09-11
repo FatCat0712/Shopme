@@ -43,33 +43,35 @@ public class MenuService {
 //        get the menu from database first
         Menu menu = get(menuId);
         MenuType menuType = menu.getMenuType();
-        int position = menu.getPosition();
+        int oldPosition = menu.getPosition();
 
         List<Menu> listMenusWithSameType = repo.listByMenuType(menu.getMenuType());
         int firstPosition = 1;
-        int latestPosition = listMenusWithSameType.size();
+        int lastPosition = listMenusWithSameType.size();
 
+        int newPosition = 0;
         if(action.equals("up")) {
-            position -= 1;
-            if(position < firstPosition) {
+            newPosition = oldPosition - 1;
+            if(newPosition < firstPosition) {
                 throw new InvalidMenuPosition(String.format("The %s menu is already at the first position", menu.getTitle()));
             }
         }
         else if(action.equals("down")) {
-            position += 1;
-            if(position > latestPosition) {
+            newPosition = oldPosition + 1;
+            if(newPosition >lastPosition) {
                 throw new InvalidMenuPosition(String.format("The %s menu is already at the last position", menu.getTitle()));
             }
         }
 
 //        check if there is with the same menuType and updated position exists
-        Menu samePositionMenu = repo.findByMenuTypeAndPosition(menuType, position);
+        Menu samePositionMenu = repo.findByMenuTypeAndPosition(menuType, newPosition);
         if(samePositionMenu != null) {
-            samePositionMenu.setPosition(menu.getPosition());
-            menu.setPosition(position); repo.save(samePositionMenu);
+            samePositionMenu.setPosition(oldPosition);
+            menu.setPosition(newPosition);
+            repo.save(samePositionMenu);
         }
         else {
-            menu.setPosition(position);
+            menu.setPosition(newPosition);
         }
 
         return repo.save(menu);
@@ -82,6 +84,16 @@ public class MenuService {
             try {
                 menu = get(menuId);
                 menu.setEnabled(menuInForm.isEnabled());
+                MenuType oldMenuType = menu.getMenuType();
+                MenuType inFormMenuType = menuInForm.getMenuType();
+                if(!oldMenuType.equals(inFormMenuType)) {
+                    List<Menu> listMenusWithSameType = repo.listByMenuType(menuInForm.getMenuType());
+                    int oldPosition = menu.getPosition();
+                    int newPosition = listMenusWithSameType.size() + 1;
+                    menu.setPosition(newPosition);
+                    menu.setMenuType(inFormMenuType);
+                    repo.updatePositionOfRemainingMenusWithSameType(oldMenuType, oldPosition);
+                }
             } catch (MenuNotFoundException e) {
                 throw new MenuNotFoundException(e.getMessage());
             }
@@ -92,11 +104,11 @@ public class MenuService {
             int newPosition = listMenusWithSameType.size() + 1;
             menu.setPosition(newPosition);
             menu.setEnabled(menuInForm.isEnabled());
+            menu.setMenuType(menuInForm.getMenuType());
         }
 
         menu.setTitle(menuInForm.getTitle());
         menu.setArticle(menuInForm.getArticle());
-        menu.setMenuType(menuInForm.getMenuType());
         String alias = menuInForm.getAlias();
         if(alias.isEmpty()) {
             alias = menuInForm.getTitle().replaceAll(" & ", "-").replaceAll(" ", "-").toLowerCase();;
@@ -106,10 +118,14 @@ public class MenuService {
     }
 
 
+
     public Menu deleteMenu(Integer menuId) throws MenuNotFoundException {
         try {
             Menu menu = get(menuId);
+            int oldPosition = menu.getPosition();
+            MenuType oldMenuType = menu.getMenuType();
             repo.deleteById(menu.getId());
+            repo.updatePositionOfRemainingMenusWithSameType(oldMenuType, oldPosition);
             return menu;
         } catch (MenuNotFoundException e) {
             throw new MenuNotFoundException(e.getMessage());

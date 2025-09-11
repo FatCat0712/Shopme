@@ -21,5 +21,9 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
     @Query("SELECT m FROM Menu m WHERE m.menuType = ?1")
     List<Menu> listByMenuType(MenuType menuType);
 
+    @Query("UPDATE Menu m SET m.position = m.position - 1 WHERE m.menuType = ?1 AND m.position > ?2")
+    @Modifying
+    void updatePositionOfRemainingMenusWithSameType(MenuType menuType, Integer currentPosition);
+
 
 }

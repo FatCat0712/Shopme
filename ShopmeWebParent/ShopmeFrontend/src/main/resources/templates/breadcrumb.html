@@ -13,9 +13,12 @@
                                 <li class="breadcrumb-item">
                                     <a class="text-decoration-none" th:href="@{/}">Home</a>
                                 </li>
+                                <li class="breadcrumb-item">
+                                    <a class="text-decoration-none" th:href="@{/products}">Products</a>
+                                </li>
                                 <th:block th:each="parent : ${listCategoryParents}">
                                     <li class="breadcrumb-item">
-                                        <a class="text-decoration-none" th:href="@{'/c/' + ${parent.getAlias()}}">[[${parent.name}]]</a>
+                                        <a class="text-decoration-none" th:href="@{'/products/page/1?category=' + ${parent.alias} + '&context=category'}">[[${parent.name}]]</a>
                                     </li>
                                 </th:block>
                                 <li class="breadcrumb-item" th:if="${product != null}">

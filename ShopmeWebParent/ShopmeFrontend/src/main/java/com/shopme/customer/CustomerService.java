@@ -98,7 +98,7 @@ public class CustomerService{
         }
     }
 
-    public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode, AuthenticationType authenticationType) {
+    public Customer addNewCustomerUponOAuthLogin(String name, String email, String countryCode, AuthenticationType authenticationType) {
         Customer customer = new Customer();
         customer.setEmail(email);
 
@@ -114,7 +114,7 @@ public class CustomerService{
         customer.setPostalCode("");
         customer.setCountry(countryRepository.findByCode(countryCode));
 
-        customerRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     private void setName(String name, Customer customer) {

@@ -74,10 +74,17 @@ public class ProductService {
         return productRepository.listByCategory(categoryId, categoryMatch, pageable);
     }
 
-    public List<Product> listRelatedProductByCategory(Integer categoryId, Integer currentProductId) {
+    public List<Product> listTop5RelatedProductsByCategoryForDisplaying(Integer categoryId, Integer currentProductId) {
         String categoryMatch = "-" + categoryId + "-";
-        return productRepository.listByCategory(categoryId, categoryMatch, currentProductId);
+        return productRepository.listTop5RelatedProductsByCategoryForDisplaying(categoryId, categoryMatch, currentProductId);
     }
+
+    public List<Product> fetchRelatedProductsByCategoryForMapping(Integer categoryId) {
+        String categoryMatch = "-" + categoryId + "-";
+        return productRepository.fetchRelatedProductsByCategoryForMapping(categoryId, categoryMatch);
+    }
+
+
 
     public Page<Product> listByBrand(int pageNumber, Integer brandId) {
         Pageable pageable = PageRequest.of(pageNumber -1, PRODUCTS_PER_PAGE);

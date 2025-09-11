@@ -15,4 +15,8 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
     @Query("SELECT b FROM Brand b INNER JOIN b.categories c WHERE c.alias IN ?1")
     Page<Brand> findByCategory(List<String> categoryAlias, Pageable pageable);
+
+    @Query("SELECT b FROM Brand b JOIN b.categories c WHERE c.alias = ?1")
+    List<Brand> findByCategory(String alias);
 }
+

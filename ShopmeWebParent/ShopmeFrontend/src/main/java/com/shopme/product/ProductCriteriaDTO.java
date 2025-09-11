@@ -11,4 +11,5 @@ public class ProductCriteriaDTO {
     private String inStock;
     private String onSales;
     private String rating;
+    private String context;
 }

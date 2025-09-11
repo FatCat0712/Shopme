@@ -1,5 +1,6 @@
 package com.shopme.brand;
 
+import com.shopme.common.entity.Category;
 import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.exception.BrandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class BrandService {
             page = repo.findAll(pageable);
         }
         return page;
+    }
+
+    public List<Brand> listBrandsByCategory(Category category) {
+        String alias = category.getAlias();
+        return repo.findByCategory(alias);
     }
 
     public List<Brand> listAll() {

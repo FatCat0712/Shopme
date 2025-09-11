@@ -26,7 +26,7 @@
                             <div class="row align-items-center">
                                 <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
                                    th:each="section : ${section.sectionCategories}"
-                                   th:href="@{'/c/' + ${cat.alias}}"
+                                   th:href="@{'/products/page/1?category=' + ${cat.alias} + '&context=category'}"
                                    th:with="cat = ${section.category}"
                                 >
                                     <div class="card d-flex flex-column justify-content-center"  style="min-height: 120px;">
@@ -139,7 +139,7 @@
                             <div class="row">
                                 <a class="col col-sm-4 col-md-3 col-lg-2 text-center mb-1 hover-scale text-decoration-none"
                                    th:each="cat : ${listCategories}"
-                                   th:href="@{'/c/' + ${cat.alias}}"
+                                   th:href="@{'/products/page/1?category=' + ${cat.alias} + '&context=category'}"
                                 >
                                     <div class="card d-flex flex-column justify-content-center my-1" style="min-height: 120px;">
                                         <div>
@@ -170,7 +170,7 @@
                                         th:each="section : ${section.sectionBrands}"
                                         th:with="brand = ${section.brand}"
                                 >
-                                    <a class="vesitable-item" th:href="@{'/b/' + ${brand.name}}">
+                                    <a class="vesitable-item" th:href="@{'/products/page/1?brand=' + ${brand.name}} + '&context=brand'">
                                         <div class="border border-primary rounded">
 
                                             <div class="vesitable-img d-flex justify-content-center align-items-center" style="aspect-ratio:1/1; width:60%; margin:auto; overflow:hidden;">

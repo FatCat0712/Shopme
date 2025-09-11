@@ -56,29 +56,15 @@
                     </div>
                 </div>
                 <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Shop Info</h4>
-                            <a class="btn-link" href="">About Us</a>
-                            <a class="btn-link" href="">Contact Us</a>
-                            <a class="btn-link" href="">Privacy Policy</a>
-                            <a class="btn-link" href="">Terms & Condition</a>
-                            <a class="btn-link" href="">Return Policy</a>
-                            <a class="btn-link" href="">FAQs & Help</a>
+                            <th:block th:each="menu : ${listFooterMenus}">
+                                <a class="btn-link" th:href="@{'/m/' + ${menu.alias}}">[[${menu.title}]]</a>
+                            </th:block>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="d-flex flex-column text-start footer-item">
-                            <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="">My Account</a>
-                            <a class="btn-link" href="">Shop details</a>
-                            <a class="btn-link" href="">Shopping Cart</a>
-                            <a class="btn-link" href="">Wishlist</a>
-                            <a class="btn-link" href="">Order History</a>
-                            <a class="btn-link" href="">International Orders</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-12 col-sm-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Contact</h4>
                             <p>Address: Somewhere on Earth</p>
@@ -129,7 +115,17 @@
 
     <div th:fragment="filter" th:remove="tag">
         <div style="height: 100vh; overflow-y: auto; overflow-x: hidden; padding: 10px;">
-            <h2>Filter</h2>
+            <h2>
+               <th:block th:if="${selectedCategoryName == null && selectedBrandName == null}">
+                   Filter
+               </th:block>
+                <th:block th:if="${selectedCategoryName != null}">
+                    [[${selectedCategoryName}]]
+                </th:block>
+                <th:block th:if="${selectedBrandName != null}">
+                    [[${selectedBrandName}]]
+                </th:block>
+            </h2>
 
             <div id="brandFilter" class="mb-2">
                 <h6>Brands</h6>
@@ -155,7 +151,7 @@
                     <div class="col-12">
                         <select class="form-select" multiple id="categorySelect" >
                             <th:block th:each="cat : ${listCategories}">
-                                <option th:value="${cat.alias}">[[${cat.name}]]</option>
+                                <option th:value="${cat.alias}" th:selected="${cat.alias == selectedCategoryAlias}">[[${cat.name}]]</option>
                             </th:block>
                         </select>
                     </div>

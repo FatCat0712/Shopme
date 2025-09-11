@@ -13,12 +13,32 @@ $(document).ready(function() {
       $("#btnClearFilter").on("click", function() {
            const currentUrl = new URL(window.location.href);
            const searchParams = currentUrl.searchParams;
-           searchParams.delete('brand');
-           searchParams.delete('category');
-           searchParams.delete('inStock');
-           searchParams.delete('onSales');
-           searchParams.delete('rating');
-           window.location.href = currentUrl.toString();
+
+           if(context === 'category') {
+               searchParams.delete('brand')
+              searchParams.delete('inStock');
+              searchParams.delete('onSales');
+              searchParams.delete('rating');
+              searchParams.delete('discount');
+           }
+           else if(context === 'brand') {
+               searchParams.delete('category');
+            searchParams.delete('inStock');
+            searchParams.delete('onSales');
+            searchParams.delete('rating');
+            searchParams.delete('discount');
+           }
+           else {
+                searchParams.delete('brand');
+                searchParams.delete('category');
+                searchParams.delete('inStock');
+               searchParams.delete('onSales');
+               searchParams.delete('rating');
+               searchParams.delete('discount');
+           }
+
+
+           window.location.href = currentUrl.pathname + (searchParams.toString() ? "?" + searchParams.toString() : "");;
       })
 
 
@@ -71,9 +91,24 @@ $(document).ready(function() {
 
             let criteria = '';
 
-            if(brandArr.length > 0) {
-                criteria += 'brand=' + brandArr.join(',');
+
+
+             if(selectedBrandName) {
+                const paramName = criteria !== '' ? criteria + '&brand=' : 'brand=';
+                criteria = paramName + selectedBrandName;
+            }
+
+              if(brandArr.length > 0) {
+                    const paramName = criteria !== '' ? criteria + '&brand=' : 'brand=';
+                    criteria += 'brand=' + brandArr.join(',');
              }
+
+              if(selectedCategoryAlias) {
+                   const paramName = criteria !== '' ? criteria + '&category=' : 'category=';
+                     criteria = paramName + selectedCategoryAlias;
+              }
+
+
 
              if(categoryArr.length > 0) {
                 const paramName = criteria !== '' ? criteria + '&category=' : 'category=';
@@ -85,6 +120,8 @@ $(document).ready(function() {
                 criteria = paramName + inStock;
              }
 
+
+
               if(onSales !== undefined && onSales !== '') {
                 const paramName = criteria !== '' ? criteria + '&onSales=' : 'onSales=';
                 criteria = paramName + onSales;
@@ -93,6 +130,11 @@ $(document).ready(function() {
               if(rating !== undefined && rating !== '') {
                 const paramName = criteria !== '' ? criteria + '&rating=' : 'rating=';
                 criteria = paramName + rating;
+             }
+
+            if(context !== undefined && context !== '') {
+                const paramName = criteria !== '' ? criteria + '&context=' : 'context=';
+                criteria = paramName + context;
              }
                 //            Update the URL and reload the page
                if(criteria !== '') {

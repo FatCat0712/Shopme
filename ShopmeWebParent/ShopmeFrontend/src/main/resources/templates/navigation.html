@@ -18,7 +18,10 @@
                             <div class="d-flex m-3 me-0">
                                 <a th:href="@{/home}" class="nav-item nav-link active" id="home">Homepage</a>
                                 <a th:href="@{'/products'}" class="nav-item nav-link">Products</a>
-                                <a th:href="@{'/m/about-us'}" class="nav-item nav-link">About Us</a>
+                                <th:block th:each="menu : ${listHeaderMenus}">
+                                        <a class="nav-item nav-link" th:href="@{'/m/' + ${menu.alias}}">[[${menu.title}]]</a>
+                                </th:block>
+
                             </div>
                             <div class="d-flex m-3 me-0">
                                 <div class="search-wrapper mx-2">
@@ -151,49 +154,6 @@
 
     </div>
 
-    <div th:fragment="quick_links" th:remove="none">
-        <div  class="row">
-            <div class="col-md">
-                <th:block sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-                        <input type="submit" />
-                    </form>
-                </th:block>
-                <div>
-                    <nav class="navbar navbar-expand-sm bg-light">
-                        <div class="collapse navbar-collapse  justify-content-center" id="searchNavbar">
-
-                            <ul class="navbar-nav">
-                                <th:block sec:authorize="isAuthenticated()">
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link" th:href="@{/account_details}" sec:authentication="principal.fullName" style="font-weight: 700"></a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link" th:href="@{/address_book}">Address Book</a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link" th:href="@{/questions}">Questions</a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link" th:href="@{/reviews}">Reviews</a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link" th:href="@{/orders}">Orders</a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-                                        <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
-                                    </li>
-                                    <li class="nav-item mx-2">
-
-                                    </li>
-                                </th:block>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div th:fragment="footer_menu">

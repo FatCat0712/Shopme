@@ -73,11 +73,66 @@ public class ProductController {
             HttpServletRequest request,
             Model model
     ) {
-        Page<Product> page = productService.listAll(pageNum, productCriteriaDTO);
+
+        List<Brand> listBrands;
+        Page<Product> page;
+        String context = "";
+        if(productCriteriaDTO.getCategory() != null && productCriteriaDTO.getCategory().split(",").length == 1 && productCriteriaDTO.getContext().equals("category")) {
+            String alias = productCriteriaDTO.getCategory().split(",")[0];
+            Category category = null;
+            try {
+                category = categoryService.getCategory(alias);
+            } catch (CategoryNotFoundException e) {
+                return "error/404";
+            }
+            List<Category> listByCategoryParents =  categoryService.getCategoryParents(category);
+            List<Category> listCategories = categoryService.listNoChildrenCategories();
+            listBrands = brandService.listBrandsByCategory(category);
+            List<Product> listProducts = productService.fetchRelatedProductsByCategoryForMapping(category.getId());
+
+           String[] categoriesAliasArr = listProducts.stream().map(p -> p.getCategory().getAlias()).toArray(String[] :: new);
+
+           String categoriesAlias = String.join(",", categoriesAliasArr);
+
+            productCriteriaDTO.setCategory(categoriesAlias);
+
+            page = productService.listAll(pageNum, productCriteriaDTO);
+
+
+            context = "category";
+            model.addAttribute("listCategoryParents", listByCategoryParents);
+            model.addAttribute("selectedCategoryAlias", category.getAlias());
+            model.addAttribute("selectedCategoryName", category.getName());
+            model.addAttribute("listBrands", listBrands);
+            model.addAttribute("listCategories", listCategories);
+            model.addAttribute("category", category);
+        }
+        else if(productCriteriaDTO.getBrand() != null && productCriteriaDTO.getBrand().split(",").length == 1 && productCriteriaDTO.getContext().equals("brand")) {
+            String brandName = productCriteriaDTO.getBrand();
+            Brand brand = null;
+            try {
+                brand = brandService.findByName(brandName);
+                page = productService.listAll(pageNum, productCriteriaDTO);
+            } catch (BrandNotFoundException e) {
+                return "error/404";
+            }
+            context = "brand";
+            model.addAttribute("selectedBrandName", brandName);
+            model.addAttribute("brand", brand);
+            model.addAttribute("listCategories", brand.getCategories());
+        }
+        else {
+            listBrands = brandService.listAll();
+            List<Category> listCategories = categoryService.listNoChildrenCategories();
+            page = productService.listAll(pageNum, productCriteriaDTO);
+            context = "global";
+            model.addAttribute("listBrands", listBrands);
+            model.addAttribute("listCategories", listCategories);
+        }
+
+
 
         List<Product> listProducts = page.getContent();
-        List<Brand> listBrands = brandService.listAll();
-        List<Category> listCategories = categoryService.listNoChildrenCategories();
 
         int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
         long endCount = startCount + PRODUCTS_PER_PAGE - 1;
@@ -86,7 +141,6 @@ public class ProductController {
             endCount = page.getTotalElements();
         }
 
-
         String qs = request.getQueryString();
 
         model.addAttribute("queryString", qs);
@@ -94,8 +148,7 @@ public class ProductController {
         model.addAttribute("endCount", endCount);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("listProducts", listProducts);
-        model.addAttribute("listBrands", listBrands);
-        model.addAttribute("listCategories", listCategories);
+        model.addAttribute("context", context);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         return "product/products";
@@ -103,90 +156,12 @@ public class ProductController {
 
     }
 
-    @GetMapping("/c/{category_alias}")
-    public String viewCategoryFirstPage(@PathVariable(name = "category_alias") String alias, Model model) throws CategoryNotFoundException {
-        return  viewCategoryByPage(alias, 1, model);
-    }
-
-    @GetMapping("/b/{brand_name}")
-    public String viewBrandFirstPage(@PathVariable(name = "brand_name") String brandName, Model model){
-        return  viewBrandByPage(brandName, 1, model);
-    }
-
-    @GetMapping("/c/{category_alias}/page/{pageNum}")
-    public String viewCategoryByPage(@PathVariable(name = "category_alias") String alias, @PathVariable(name = "pageNum") Integer pageNum,   Model model) {
-        try {
-            Category category = categoryService.getCategory(alias);
-            List<Category> listByCategoryParents =  categoryService.getCategoryParents(category);
-
-            Page<Product> page = productService.listByCategory(pageNum, category.getId());
-
-            long totalItems = page.getTotalElements();
-            int totalPages = page.getTotalPages();
-            List<Product> listProducts = page.getContent();
-
-            int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
-            long endCount = startCount + PRODUCTS_PER_PAGE - 1;
-
-            if(endCount >= totalItems) {
-                endCount = totalItems;
-            }
-
-            model.addAttribute("pageTitle", category.getName());
-            model.addAttribute("listCategoryParents", listByCategoryParents);
-            model.addAttribute("startCount", startCount);
-            model.addAttribute("endCount", endCount);
-            model.addAttribute("totalItems", totalItems);
-            model.addAttribute("totalPages", totalPages);
-            model.addAttribute("currentPage", pageNum);
-            model.addAttribute("listProducts", listProducts);
-            model.addAttribute("category", category);
-
-            return "product/products_by_category";
-        }catch (CategoryNotFoundException e) {
-            return "error/404";
-        }
-    }
-
-    @GetMapping("/b/{brand_name}/page/{pageNum}")
-    public String viewBrandByPage(@PathVariable(name = "brand_name") String brandName, @PathVariable(name = "pageNum") Integer pageNum,   Model model) {
-        try {
-            Brand brand = brandService.findByName(brandName);
-
-            Page<Product> page = productService.listByBrand(pageNum, brand.getId());
-
-            long totalItems = page.getTotalElements();
-            int totalPages = page.getTotalPages();
-            List<Product> listProducts = page.getContent();
-
-            int startCount = (pageNum - 1) * PRODUCTS_PER_PAGE + 1;
-            long endCount = startCount + PRODUCTS_PER_PAGE - 1;
-
-            if (endCount >= totalItems) {
-                endCount = totalItems;
-            }
-
-            model.addAttribute("pageTitle", brand.getName());
-            model.addAttribute("startCount", startCount);
-            model.addAttribute("endCount", endCount);
-            model.addAttribute("totalItems", totalItems);
-            model.addAttribute("totalPages", totalPages);
-            model.addAttribute("currentPage", pageNum);
-            model.addAttribute("listProducts", listProducts);
-            model.addAttribute("brand", brand);
-
-            return "product/products_by_brand";
-        } catch (BrandNotFoundException e) {
-            return "error/404";
-        }
-    }
-
 
     @GetMapping("/p/{product_alias}")
     public String viewProductDetail(HttpServletRequest request, @PathVariable("product_alias") String alias, Model model) {
         try {
             Product product = productService.get(alias);
-            List<Product> listRelatedProducts = productService.listRelatedProductByCategory(product.getCategory().getId(), product.getId());
+            List<Product> listRelatedProducts = productService.listTop5RelatedProductsByCategoryForDisplaying(product.getCategory().getId(), product.getId());
 
             String cleanedShortDescription = Jsoup.clean(product.getShortDescription(), Safelist.relaxed());
             String cleanedFullDescription = Jsoup.clean(product.getFullDescription(), Safelist.relaxed());
@@ -270,8 +245,6 @@ public class ProductController {
             model.addAttribute("listCategories", listCategories);
             model.addAttribute("keyword", keyword);
             model.addAttribute("listResult", listResult);
-
-
             return "product/search_result";
     }
 
