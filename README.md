@@ -84,15 +84,15 @@ i. **Configure Database**
 
 ### - Customer Login
 
-![Image](app_images/customer_login.png)
+![Image](app_images/customer_login.jpg)
 
 ### - Customer Landing Page 
 
-![Image](app_images/customer_landing_page.png)
+![Image](app_images/customer_landing_page.jpg)
 
 ### - Customer Shopping Cart
 
-![Image](app_images/customer_shopping_cart.png)
+![Image](app_images/customer_shopping_cart.jpg)
 
 ### - Customer Check Out
 
@@ -104,7 +104,7 @@ i. **Configure Database**
 
 ### - Administrator Login 
 
-![Image](app_images/admin_login.png)
+![Image](app_images/admin_login.jpg)
 
 ### - Administrator Landing Page
 
@@ -112,27 +112,27 @@ i. **Configure Database**
 
 ### - Administrator Manage Brands 
 
-![Image](app_images/admin_manage_brands.png)
+![Image](app_images/admin_manage_brands.jpg)
 
 ### - Administrator Manage Categories
 
-![Image](app_images/admin_manage_categories.png)
+![Image](app_images/admin_manage_categories.jpg)
 
 ### - Administrator Manage Customers
 
-![Image](app_images/customers.png)
+![Image](app_images/admin_mangage_customers.jpg)
 
 ### - Administrator Manage Products
 
-![Image](app_images/admin_manage_products.png)
+![Image](app_images/admin_manage_products.jpg)
 
 ### - Administrator Manage Users 
 
-![Image](app_images/amin_manage_users.png)
+![Image](app_images/amin_manage_users.jpg)
 
 ### - Administrator Site Settings
 
-![Image](app_images/admin_site_settings.png)
+![Image](app_images/admin_site_settings.jpg)
 
 ## 9. Contribution
 
