@@ -96,11 +96,11 @@ i. **Configure Database**
 
 ### - Customer Check Out
 
-![Image](app_images/customer_checkout.png)
+![Image](app_images/customer_checkout.jpg)
 
 ### - Customer Product Filtering
 
-![Image](app_images/customer_product_filtering.png)
+![Image](app_images/customer_product_filering.png)
 
 ### - Customer Manage Orders
 
