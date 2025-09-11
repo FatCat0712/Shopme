@@ -100,7 +100,7 @@ i. **Configure Database**
 
 ### - Customer Manage Orders
 
-![Image](app_images/customer_manage_orders.png)
+![Image](app_images/customer_manage_orders.jpg)
 
 ### - Administrator Login 
 
@@ -108,7 +108,7 @@ i. **Configure Database**
 
 ### - Administrator Landing Page
 
-![Image](app_images/admin_landing_page.png)
+![Image](app_images/admin_landing_page.jpg)
 
 ### - Administrator Manage Brands 
 
