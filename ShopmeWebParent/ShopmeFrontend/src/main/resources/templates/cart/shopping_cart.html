@@ -87,8 +87,7 @@ xmlns:th="http://www.thymeleaf.org"
                             </div>
                         </div>
                     </div>
-
-                    <div id="sectionEmptyCartMessage" th:class="'mt-3 text-center' + ${#lists.isEmpty(listCartItems) ? '' : ' d-none'}">
+                    <div id="sectionEmptyCartMessage" th:class="'my-4 text-center' + ${#lists.isEmpty(listCartItems) ? '' : ' d-none'}">
                         <h3>You have not chosen any products yet.</h3>
                     </div>
                 </div>
