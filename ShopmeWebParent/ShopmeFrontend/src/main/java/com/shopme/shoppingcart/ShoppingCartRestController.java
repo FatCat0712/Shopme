@@ -1,15 +1,17 @@
 package com.shopme.shoppingcart;
 
 import com.shopme.ControllerHelper;
+import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.product.Product;
+import com.shopme.common.exception.NotEnoughStockException;
 import com.shopme.customer.CustomerNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ShoppingCartRestController {
@@ -47,6 +49,30 @@ public class ShoppingCartRestController {
        return String.valueOf(newSubTotal);
     }
 
+    @GetMapping("/cart/validate")
+    public String validateCart(HttpServletRequest request) throws CustomerNotFoundException, NotEnoughStockException {
+        Customer customer = controllerHelper.getAuthenticatetdCustomer(request);
+        List<CartItem> listCartItems = cartService.listCartItems(customer);
+        boolean isValid = true;
+        Product currentProduct = null;
+        for(CartItem cartItem: listCartItems) {
+            Product product = cartItem.getProduct();
+            if(cartItem.getQuantity() > product.getStockQuantity()) {
+                currentProduct = product;
+               isValid = false;
+               break;
+            }
+        }
+
+        if(!isValid) {
+            return String.format("Only %d items left for %s", currentProduct.getStockQuantity(), currentProduct.getShortName());
+        }
+        else {
+            return "ok";
+        }
+    }
+
+
     @DeleteMapping("/cart/remove/{productId}")
     public ShoppingCartDTO removeProductFromCart(@PathVariable(name = "productId") Integer productId, HttpServletRequest request) throws CustomerNotFoundException {
             HttpSession session = request.getSession(false);
@@ -56,5 +82,7 @@ public class ShoppingCartRestController {
             session.setAttribute("sum", cartSum);
             return new ShoppingCartDTO(cartSum, "The product has been removed from your shopping cart");
     }
+
+
 
 }

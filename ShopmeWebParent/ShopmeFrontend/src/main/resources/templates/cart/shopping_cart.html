@@ -69,7 +69,7 @@ xmlns:th="http://www.thymeleaf.org"
                             </div>
                             <div class="mt-2">
                                 <div th:if="${shippingSupported == true}">
-                                    <form th:action="@{/checkout}">
+                                    <form th:action="@{/checkout}" onsubmit="return validateCartItem(event, this);">
                                         <button type="submit" class="btn btn-danger p-2">Proceed checkout</button>
                                     </form>
                                 </div>
@@ -105,6 +105,21 @@ xmlns:th="http://www.thymeleaf.org"
         let decimalDigits = "[[${DECIMAL_DIGITS}]]";
         let decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
         let thousandsPointType= "[[${THOUSAND_POINT_TYPE}]]";
+
+        function validateCartItem(event, form) {
+            event.preventDefault();
+             let url = contextPath + "cart/validate";
+             $.get(url, function(response) {
+                 if(response === "ok") {
+                    form.submit();
+                 }
+                 else {
+                     showWarningModal(response);
+                 }
+            });
+            return false;
+        }
+
 
 </script>
 <script th:src="@{/js/jquery.number.min.js}"></script>

@@ -10,6 +10,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.ShippingRate;
 import com.shopme.common.entity.order.Order;
 import com.shopme.common.entity.order.PaymentMethod;
+import com.shopme.common.exception.NotEnoughStockException;
 import com.shopme.customer.CustomerService;
 import com.shopme.order.OrderService;
 import com.shopme.setting.CurrencySettingBag;
@@ -123,26 +124,32 @@ public class CheckoutController {
         List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
-//        store order information into database
-        Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
+        try {
+            //        store order information into database
+            Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
 
 //        remove all items in shopping cart
-        cartService.deleteByCustomer(customer);
+            cartService.deleteByCustomer(customer);
 
-        Integer cartQuantity = cartService.fetchCartQuantityByCustomer(customer);
+            Integer cartQuantity = cartService.fetchCartQuantityByCustomer(customer);
 
 
-        HttpSession session = request.getSession(false);
-        session.setAttribute("sum", cartQuantity);
+            HttpSession session = request.getSession(false);
+            session.setAttribute("sum", cartQuantity);
 
-        model.addAttribute("listCartItems", List.of());
+            model.addAttribute("listCartItems", List.of());
 
 
 
 //        send order confirmation email
-        sendOrderConfirmationEmail(request, createdOrder);
+            sendOrderConfirmationEmail(request, createdOrder);
 
-        return "checkout/order_completed";
+            return "checkout/order_completed";
+        }catch (NotEnoughStockException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "checkout";
+        }
+
     }
 
     private void sendOrderConfirmationEmail(HttpServletRequest request, Order createdOrder) throws MessagingException, UnsupportedEncodingException {

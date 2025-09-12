@@ -6,7 +6,9 @@ import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.*;
 import com.shopme.common.entity.product.Product;
+import com.shopme.common.exception.NotEnoughStockException;
 import com.shopme.common.exception.OrderNotFoundException;
+import com.shopme.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,16 +25,17 @@ import java.util.Set;
 @Transactional
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
 
     public static int ORDER_PER_PAGE  = 5;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
-
-    public Order createOrder(Customer customer, Address address, List<CartItem> cartItems, PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
+    public Order createOrder(Customer customer, Address address, List<CartItem> cartItems, PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) throws NotEnoughStockException {
             Order newOrder = new Order();
 
             newOrder.setOrderTime(new Date());
@@ -63,13 +66,15 @@ public class OrderService {
             Set<OrderDetail> orderDetails =  newOrder.getOrderDetails();
 
             for(CartItem cartItem : cartItems) {
-                Product product = cartItem.getProduct();
+                Product currentProduct = cartItem.getProduct();
+               currentProduct.decreaseStock(cartItem.getQuantity());
+                Product updatedProduct = productRepository.save(currentProduct);
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrder(newOrder);
-                orderDetail.setProduct(product);
+                orderDetail.setProduct(updatedProduct);
                 orderDetail.setQuantity(cartItem.getQuantity());
-                orderDetail.setUnitPrice(product.getDiscountPrice());
-                orderDetail.setProductCost(product.getCost() * cartItem.getQuantity());
+                orderDetail.setUnitPrice(updatedProduct.getDiscountPrice());
+                orderDetail.setProductCost(updatedProduct.getCost() * cartItem.getQuantity());
                 orderDetail.setSubtotal(cartItem.getSubTotal());
                 orderDetail.setShippingCost(cartItem.getShippingCost());
                 orderDetails.add(orderDetail);

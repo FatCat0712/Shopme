@@ -19,9 +19,6 @@ $(document).ready(function () {
         let currentQuantity = parseInt(quantityInput.val());
         let newQuantity = parseInt(quantityInput.val()) + 1;
 
-
-
-
         if(newQuantity > 0 && newQuantity <= 5) {
             quantityInput.val(newQuantity);
         }

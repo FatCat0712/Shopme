@@ -65,7 +65,7 @@ xmlns:th="http://www.thymeleaf.org">
                     <div class="row">
                         <th:block th:each="product : ${listProducts}">
                             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
-                                <div class="card h-100 text-center border-0 shadow-sm card-hover pb-2">
+                                <div class="card h-100 text-center border-0 shadow-sm card-hover pb-2 position-relative">
                                     <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark" th:title="${product.name}">
                                         <img th:src="@{${product.mainImagePath}}"
                                              class="card-img-top p-2 mx-auto d-block"
@@ -90,11 +90,28 @@ xmlns:th="http://www.thymeleaf.org">
                                         </div>
                                     </a>
                                     <button
-                                            class="btn border border-secondary rounded-pill px-3 text-primary mx-auto addToCart"
+                                            class="btn border border-secondary rounded-pill px-3 text-primary mx-auto addToCart" th:classappend="${product.inStock == false ? 'disabled' : ''}"
                                             th:productId="${product.id}"
                                     >
                                         <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                     </button>
+                                    <th:block th:if="${product.inStock == false}">
+                                        <div class="product-label__out-of-stock">
+                                            Out Of Stock
+                                        </div>
+                                    </th:block>
+
+                                    <th:block th:if="${product.discountPercent > 0}">
+                                        <div class="product-label__discount">
+                                        <span class="product-label__discount-percent">
+                                             [[${product.discountPercent}]]%
+                                        </span>
+                                            <span class="product-label__discount-label">
+                                             OFF
+                                        </span>
+                                        </div>
+                                    </th:block>
+
                                 </div>
                             </div>
 

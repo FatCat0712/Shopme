@@ -4,6 +4,7 @@ import com.shopme.common.entity.brand.Brand;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Constants;
 import com.shopme.common.entity.IdBasedEntity;
+import com.shopme.common.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,9 @@ public class Product extends IdBasedEntity {
     private Date updatedTime;
 
     private boolean enabled;
+
+    @Column(name = "stock_quantity")
+    private int stockQuantity;
 
    @Column(name = "in_stock")
     private boolean inStock;
@@ -106,6 +110,14 @@ public class Product extends IdBasedEntity {
     public void addDetail(int id, String name, String value) {
         ProductDetail productDetail = new ProductDetail(id, name, value, this);
         this.details.add(productDetail);
+    }
+
+    public void decreaseStock(int amount) throws NotEnoughStockException {
+        if(amount > stockQuantity) {
+            throw  new NotEnoughStockException("Not enough stock for product: " + name);
+        }
+        stockQuantity -= amount;
+        inStock = stockQuantity > 0;
     }
 
     public boolean containsImageName(String name) {
