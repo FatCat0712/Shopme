@@ -248,6 +248,22 @@ public class ProductController {
             return "product/search_result";
     }
 
+    @GetMapping("/search_preview")
+    public String searchProducts(@RequestParam(name = "keyword") String keyword, Model model) {
+        List<ProductDTO> listProducts = productService.search(keyword).stream().map(product ->
+                new ProductDTO(
+                        product.getMainImagePath(), product.getAlias(), product.getShortName(),
+                        product.getBrand().getName() ,product.getPrice(), product.getDiscountPercent() ,
+                        product.getDiscountPrice()
+                )
+        ).toList();
+
+        model.addAttribute("previewKeyword", keyword);
+        model.addAttribute("listProducts", listProducts);
+        return "navigation :: search_results";
+
+    }
+
 
 
 

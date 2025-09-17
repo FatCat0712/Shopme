@@ -38,6 +38,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
             "MATCH(name, short_description, full_description) AGAINST(?1)", nativeQuery = true)
      Page<Product> search(String keyword, Pageable pageable);
 
+    @Query(value = "SELECT * FROM products p WHERE p.enabled = true AND " +
+            "MATCH(name, short_description, full_description) AGAINST(?1)", nativeQuery = true)
+    List<Product> search(String keyword);
+
     @Query("UPDATE Product p " +
             "SET p.reviewCount = (SELECT COUNT(r.id) FROM Review r WHERE r.product.id = ?1), " +
             "p.averageRating = (SELECT COALESCE(AVG(r.rating),0) FROM Review r WHERE r.product.id = ?1) " +

@@ -114,4 +114,8 @@ public class ProductService {
          return productRepository.search(keyword, pageable);
     }
 
+    public List<Product> search(String keyword) {
+        return productRepository.search(keyword);
+    }
+
 }

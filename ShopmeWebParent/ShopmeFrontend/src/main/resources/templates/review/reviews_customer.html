@@ -82,25 +82,27 @@
 
                 <div class="less-details">
                     <div th:each="review : ${listReviews}" class="card mb-3 shadow-sm p-3">
-                        <div  class="row align-items-center g-3">
-                            <div class="col-auto">
+                        <div  class="row align-items-center g-2">
+                            <div class="col-1">
                                 <span class="text-muted">[[${review.id}]]</span>
                             </div>
 
-                            <div class="col">
+                            <div class="col-11">
                                 <div class="d-flex justify-content-between align-items-start flex-wrap">
                                     <div>
                                         <a class="text-muted text-decoration-none  link-detail--product" th:href="@{'/products/detail/' + ${review.product.id}}">[[${review.product.shortName}]]</a>
                                     </div>
-                                    <div class="row w-100 mt-3 flex-nowrap justify-content-between">
-                                        <div class="pl-3">
+                                    <div class="w-100 d-flex mt-3 flex-nowrap justify-content-between">
+                                        <div>
                                             [[${review.rating}]] <span class="fa-regular fa-star"></span>
                                         </div>
-                                        <div class="pr-4">
-                                            <a class="fas fa-file-alt fa-2x icon-green link-detail--review" th:href="@{'/review/details/' + ${review.id}}"></a>
+                                        <div>
+                                            <a class="link-detail--review" th:href="@{'/review/details/' + ${review.id}}">
+                                                <i class="fas fa-file-alt fa-2x icon-green"></i>
+                                            </a>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
